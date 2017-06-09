@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="Cp1252"?>
+
+<gMB:GpromsProject xmlns:gMB="http://www.psenterprise.com/gMB" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.psenterprise.com/gMB http://www.psenterprise.com/gPJ.xsd" version="7" gMB_Version="3.5.1" gMB_Build="54826" fileExtension=".gPJ" hashValue="99aa5caa0c7bca62d385ce8d11cd84c3dec0fad2584908dd5081152891d64117">
+    <Properties>
+        <BooleanProperty name="LibraryProject">false</BooleanProperty>
+        <BooleanProperty name="DisplayEmptyGroups">true</BooleanProperty>
+        <StringProperty name="CreatedBy">unknown</StringProperty>
+        <DateProperty name="CreatedDate">1970-01-01T00:00:00Z</DateProperty>
+        <StringProperty name="ModifiedBy">pieters</StringProperty>
+        <DateProperty name="ModifiedDate">2012-06-01T17:07:54Z</DateProperty>
+        <StringProperty name="Password"></StringProperty>
+        <StringProperty name="License"></StringProperty>
+    </Properties>
+    <ImageCache>
+        <Image res="defaultModelIcon"/>
+    </ImageCache>
+    <ModelReferenceCache>
+    </ModelReferenceCache>
+    <Group name="Variable Types">
+        <Properties>
+            <StringProperty name="CreatedBy">unknown</StringProperty>
+            <DateProperty name="CreatedDate">1970-01-01T00:00:00Z</DateProperty>
+            <StringProperty name="ModifiedBy">unknown</StringProperty>
+            <DateProperty name="ModifiedDate">1970-01-01T00:00:00Z</DateProperty>
+            <StringProperty name="Password"></StringProperty>
+            <StringProperty name="License"></StringProperty>
+        </Properties>
+        <VariableTypeEntity name="Length">
+            <Properties>
+                <StringProperty name="CreatedBy">unknown</StringProperty>
+                <DateProperty name="CreatedDate">1970-01-01T00:00:00Z</DateProperty>
+                <StringProperty name="ModifiedBy">unknown</StringProperty>
+                <DateProperty name="ModifiedDate">1970-01-01T00:00:00Z</DateProperty>
+                <StringProperty name="Password"></StringProperty>
+                <StringProperty name="License"></StringProperty>
+                <BooleanProperty name="Win32LineSeparation">false</BooleanProperty>
+            </Properties>
+            <DefaultValue>1.5</DefaultValue>
+            <MinValue>-100000.0</MinValue>
+            <MaxValue>100000.0</MaxValue>
+            <Units>m</Units>
+        </VariableTypeEntity>
+        <VariableTypeEntity name="Mass">
+            <Properties>
+                <StringProperty name="CreatedBy">unknown</StringProperty>
+                <DateProperty name="CreatedDate">1970-01-01T00:00:00Z</DateProperty>
+                <StringProperty name="ModifiedBy">unknown</StringProperty>
+                <DateProperty name="ModifiedDate">1970-01-01T00:00:00Z</DateProperty>
+                <StringProperty name="Password"></StringProperty>
+                <StringProperty name="License"></StringProperty>
+                <BooleanProperty name="Win32LineSeparation">false</BooleanProperty>
+            </Properties>
+            <DefaultValue>1.0</DefaultValue>
+            <MinValue>-100000.0</MinValue>
+            <MaxValue>100000.0</MaxValue>
+            <Units>kg</Units>
+        </VariableTypeEntity>
+        <VariableTypeEntity name="MassFlowrate">
+            <Properties>
+                <StringProperty name="CreatedBy">unknown</StringProperty>
+                <DateProperty name="CreatedDate">1970-01-01T00:00:00Z</DateProperty>
+                <StringProperty name="ModifiedBy">unknown</StringProperty>
+                <DateProperty name="ModifiedDate">1970-01-01T00:00:00Z</DateProperty>
+                <StringProperty name="Password"></StringProperty>
+                <StringProperty name="License"></StringProperty>
+                <BooleanProperty name="Win32LineSeparation">false</BooleanProperty>
+            </Properties>
+            <DefaultValue>0.1</DefaultValue>
+            <MinValue>-100000.0</MinValue>
+            <MaxValue>100000.0</MaxValue>
+            <Units>kg/s</Units>
+        </VariableTypeEntity>
+    </Group>
+    <Group name="Stream Types">
+        <Properties>
+            <StringProperty name="CreatedBy">unknown</StringProperty>
+            <DateProperty name="CreatedDate">1970-01-01T00:00:00Z</DateProperty>
+            <StringProperty name="ModifiedBy">unknown</StringProperty>
+            <DateProperty name="ModifiedDate">1970-01-01T00:00:00Z</DateProperty>
+            <StringProperty name="Password"></StringProperty>
+            <StringProperty name="License"></StringProperty>
+        </Properties>
+    </Group>
+    <Group name="Connection Types">
+        <Properties>
+            <StringProperty name="CreatedBy">simonl</StringProperty>
+            <DateProperty name="CreatedDate">2007-08-21T19:39:59Z</DateProperty>
+            <StringProperty name="ModifiedBy">simonl</StringProperty>
+            <DateProperty name="ModifiedDate">2007-08-21T19:39:59Z</DateProperty>
+            <StringProperty name="Password"></StringProperty>
+            <StringProperty name="License"></StringProperty>
+        </Properties>
+    </Group>
+    <Group name="Models">
+        <Properties>
+            <StringProperty name="CreatedBy">unknown</StringProperty>
+            <DateProperty name="CreatedDate">1970-01-01T00:00:00Z</DateProperty>
+            <StringProperty name="ModifiedBy">unknown</StringProperty>
+            <DateProperty name="ModifiedDate">1970-01-01T00:00:00Z</DateProperty>
+            <StringProperty name="Password"></StringProperty>
+            <StringProperty name="License"></StringProperty>
+        </Properties>
+        <ModelEntity name="BufferTank" type="psenterprise.gpromskit.models.ModelEntity" version="7" UnitNameShown="true" UnitModelShown="true">
+            <Properties>
+                <StringProperty name="CreatedBy">unknown</StringProperty>
+                <DateProperty name="CreatedDate">1970-01-01T00:00:00Z</DateProperty>
+                <StringProperty name="ModifiedBy">pieters</StringProperty>
+                <DateProperty name="ModifiedDate">2012-06-01T13:28:45Z</DateProperty>
+                <StringProperty name="Password"></StringProperty>
+                <StringProperty name="License"></StringProperty>
+                <BooleanProperty name="Win32LineSeparation">false</BooleanProperty>
+                <StringProperty name="DefaultTab">topology</StringProperty>
+                <StringProperty name="DefaultCaseTab">reports</StringProperty>
+                <BooleanProperty name="DisplayedInPalette">true</BooleanProperty>
+                <BooleanProperty name="IncludeInitialisationProcedure">true</BooleanProperty>
+            </Properties>
+            <Icon>-199773695</Icon>
+            <FlowsheetLayers DefaultLayer="Default">
+                <Layer name="Default" visible="true" printed="true"/>
+            </FlowsheetLayers>
+            <UMS><![CDATA[]]></UMS>
+            <Body><![CDATA[  PARAMETER
+    Density             AS REAL
+    CrossSectionalArea  AS REAL
+    Alpha               AS REAL
+
+    FO                  AS FOREIGN_OBJECT
+
+  VARIABLE
+    HoldUp              AS Mass
+    FlowIn, FlowOut     AS MassFlowrate
+    Height              AS Length
+
+SET
+
+
+  EQUATION
+
+    # Mass balance
+    $HoldUp = FlowIn - FlowOut ;
+
+    # Relation between liquid level and holdup
+    Holdup = CrossSectionalArea * Height * Density ;
+
+    # Relation between pressure drop and flow 
+    FlowOut = Alpha * SQRT ( Height ) ;
+]]></Body>
+        </ModelEntity>
+    </Group>
+    <Group name="Tasks">
+        <Properties>
+            <StringProperty name="CreatedBy">unknown</StringProperty>
+            <DateProperty name="CreatedDate">1970-01-01T00:00:00Z</DateProperty>
+            <StringProperty name="ModifiedBy">unknown</StringProperty>
+            <DateProperty name="ModifiedDate">1970-01-01T00:00:00Z</DateProperty>
+            <StringProperty name="Password"></StringProperty>
+            <StringProperty name="License"></StringProperty>
+        </Properties>
+    </Group>
+    <Group name="Processes">
+        <Properties>
+            <StringProperty name="CreatedBy">unknown</StringProperty>
+            <DateProperty name="CreatedDate">1970-01-01T00:00:00Z</DateProperty>
+            <StringProperty name="ModifiedBy">unknown</StringProperty>
+            <DateProperty name="ModifiedDate">1970-01-01T00:00:00Z</DateProperty>
+            <StringProperty name="Password"></StringProperty>
+            <StringProperty name="License"></StringProperty>
+        </Properties>
+        <ProcessEntity name="SimulateTank" type="psenterprise.gpromskit.models.ProcessEntity" version="1">
+            <Properties>
+                <StringProperty name="CreatedBy">unknown</StringProperty>
+                <DateProperty name="CreatedDate">1970-01-01T00:00:00Z</DateProperty>
+                <StringProperty name="ModifiedBy">pieters</StringProperty>
+                <DateProperty name="ModifiedDate">2012-06-01T14:56:44Z</DateProperty>
+                <StringProperty name="Password"></StringProperty>
+                <StringProperty name="License"></StringProperty>
+                <BooleanProperty name="Win32LineSeparation">false</BooleanProperty>
+                <BooleanProperty name="IncludeUnitSpecifications">true</BooleanProperty>
+                <BooleanProperty name="IncludeInitialisationProcedure">false</BooleanProperty>
+            </Properties>
+            <Body><![CDATA[#-----------------------------------------------------------------------------
+# Process Description
+#-----------------------------------------------------------------------------
+
+  UNIT # Equipment items
+    T101 AS BufferTank
+
+  SET # Parameter values
+    T101.FO                 := "SimpleEventFOI::dummy";
+    T101.CrossSectionalArea := 1    ; # m2
+    T101.Density            := 1000 ; # kg/m3
+    T101.Alpha              := T101.FO.Real__AlphaFO();
+
+  ASSIGN # Degrees of freedom
+    T101.FlowIn := T101.FO.FlowInFO ;
+
+  INITIAL # Initial conditions
+    T101.Height = T101.FO.Real__HeightFO() ;
+    
+  SOLUTIONPARAMETERS
+    gPLOT := ON
+    ReportingInterval := 60.0
+    IdentityElimination := OFF
+    
+
+  SCHEDULE # Operating procedure
+    CONTINUE FOR 600
+]]></Body>
+        </ProcessEntity>
+    </Group>
+    <Group name="Experiments">
+        <Properties>
+            <StringProperty name="CreatedBy">unknown</StringProperty>
+            <DateProperty name="CreatedDate">1970-01-01T00:00:00Z</DateProperty>
+            <StringProperty name="ModifiedBy">unknown</StringProperty>
+            <DateProperty name="ModifiedDate">1970-01-01T00:00:00Z</DateProperty>
+            <StringProperty name="Password"></StringProperty>
+            <StringProperty name="License"></StringProperty>
+        </Properties>
+        <Group name="... performed">
+            <Properties>
+                <StringProperty name="CreatedBy">simonl</StringProperty>
+                <DateProperty name="CreatedDate">2007-08-21T19:39:59Z</DateProperty>
+                <StringProperty name="ModifiedBy">simonl</StringProperty>
+                <DateProperty name="ModifiedDate">2007-08-21T19:39:59Z</DateProperty>
+                <StringProperty name="Password"></StringProperty>
+                <StringProperty name="License"></StringProperty>
+            </Properties>
+        </Group>
+        <Group name="... to be designed">
+            <Properties>
+                <StringProperty name="CreatedBy">simonl</StringProperty>
+                <DateProperty name="CreatedDate">2007-08-21T19:39:59Z</DateProperty>
+                <StringProperty name="ModifiedBy">simonl</StringProperty>
+                <DateProperty name="ModifiedDate">2007-08-21T19:39:59Z</DateProperty>
+                <StringProperty name="Password"></StringProperty>
+                <StringProperty name="License"></StringProperty>
+            </Properties>
+        </Group>
+    </Group>
+    <Group name="Experiment Designs">
+        <Properties>
+            <StringProperty name="CreatedBy">simonl</StringProperty>
+            <DateProperty name="CreatedDate">2007-08-21T19:39:59Z</DateProperty>
+            <StringProperty name="ModifiedBy">simonl</StringProperty>
+            <DateProperty name="ModifiedDate">2007-08-21T19:39:59Z</DateProperty>
+            <StringProperty name="Password"></StringProperty>
+            <StringProperty name="License"></StringProperty>
+        </Properties>
+    </Group>
+    <Group name="Parameter Estimations">
+        <Properties>
+            <StringProperty name="CreatedBy">unknown</StringProperty>
+            <DateProperty name="CreatedDate">1970-01-01T00:00:00Z</DateProperty>
+            <StringProperty name="ModifiedBy">unknown</StringProperty>
+            <DateProperty name="ModifiedDate">1970-01-01T00:00:00Z</DateProperty>
+            <StringProperty name="Password"></StringProperty>
+            <StringProperty name="License"></StringProperty>
+        </Properties>
+    </Group>
+    <Group name="Optimisations">
+        <Properties>
+            <StringProperty name="CreatedBy">unknown</StringProperty>
+            <DateProperty name="CreatedDate">1970-01-01T00:00:00Z</DateProperty>
+            <StringProperty name="ModifiedBy">pieters</StringProperty>
+            <DateProperty name="ModifiedDate">2012-06-01T17:07:54Z</DateProperty>
+            <StringProperty name="Password"></StringProperty>
+            <StringProperty name="License"></StringProperty>
+        </Properties>
+    </Group>
+    <Group name="Saved Variable Sets">
+        <Properties>
+            <StringProperty name="CreatedBy">unknown</StringProperty>
+            <DateProperty name="CreatedDate">1970-01-01T00:00:00Z</DateProperty>
+            <StringProperty name="ModifiedBy">unknown</StringProperty>
+            <DateProperty name="ModifiedDate">1970-01-01T00:00:00Z</DateProperty>
+            <StringProperty name="Password"></StringProperty>
+            <StringProperty name="License"></StringProperty>
+        </Properties>
+    </Group>
+    <Group name="Miscellaneous Files">
+        <Properties>
+            <StringProperty name="CreatedBy">unknown</StringProperty>
+            <DateProperty name="CreatedDate">1970-01-01T00:00:00Z</DateProperty>
+            <StringProperty name="ModifiedBy">unknown</StringProperty>
+            <DateProperty name="ModifiedDate">1970-01-01T00:00:00Z</DateProperty>
+            <StringProperty name="Password"></StringProperty>
+            <StringProperty name="License"></StringProperty>
+        </Properties>
+    </Group>
+</gMB:GpromsProject>

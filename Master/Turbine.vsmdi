@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<TestLists xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <TestList name="SinterConfig2Tests" id="83cf42e0-c75c-4544-b49d-609aef070d16" parentListId="8c43106b-9dc1-4907-a29f-aa66a61bf5b6">
+    <TestLinks>
+      <TestLink id="e6a4d2b6-9d3f-4005-694b-94394fa4f5a1" name="JSONConfigTest" storage="consumerunittests\bin\debug\consumerunittests.dll" type="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestElement, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.ObjectModel, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+    </TestLinks>
+  </TestList>
+  <TestList name="Lists of Tests" id="8c43106b-9dc1-4907-a29f-aa66a61bf5b6">
+    <RunConfiguration id="e8542b11-8171-4a13-86cf-839179cfa9d9" name="Local" storage="local.testsettings" type="Microsoft.VisualStudio.TestTools.Common.TestRunConfiguration, Microsoft.VisualStudio.QualityTools.Common, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  </TestList>
+  <TestList name="exceltests" id="b55fa86d-c79c-4455-a57a-3af42e62d0e5" parentListId="fbc5a81b-3f66-4e09-8acd-de4cc92fd5b2" />
+  <TestList name="units" id="be1e55fa-7645-48a1-9f37-cfa889cbb149" parentListId="8c43106b-9dc1-4907-a29f-aa66a61bf5b6" />
+  <TestList name="ExcelSinterTests" id="fbc5a81b-3f66-4e09-8acd-de4cc92fd5b2" parentListId="8c43106b-9dc1-4907-a29f-aa66a61bf5b6">
+    <Description>Excel Sinter Integration Tests</Description>
+    <TestLinks>
+      <TestLink id="15776428-81bf-abd5-23b7-525030e79756" name="ExcelSinterTest_1" storage="sinterregressiontests\bin\debug\sinterregressiontests.dll" type="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestElement, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.ObjectModel, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+      <TestLink id="33d3d812-f0c3-4e72-19e1-b9a86495f3be" name="ExcelSinterTest_2" storage="sinterregressiontests\bin\debug\sinterregressiontests.dll" type="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestElement, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.ObjectModel, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+    </TestLinks>
+  </TestList>
+</TestLists>

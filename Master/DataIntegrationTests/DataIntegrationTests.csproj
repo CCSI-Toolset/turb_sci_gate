@@ -1,0 +1,141 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{AA8A6EB5-F01C-4A7E-AFF6-713BC5D9CA13}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Turbine.Data.Test</RootNamespace>
+    <AssemblyName>DataIntegrationTests</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework">
+      <HintPath>..\..\SharedDatabaseArchitecture\packages\EntityFramework.6.1.1\lib\net40\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\..\SharedDatabaseArchitecture\packages\EntityFramework.6.1.1\lib\net40\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Practices.ServiceLocation">
+      <HintPath>..\..\SharedDatabaseArchitecture\packages\CommonServiceLocator.1.0\lib\NET35\Microsoft.Practices.ServiceLocation.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity">
+      <HintPath>..\..\SharedDatabaseArchitecture\packages\Unity.2.1.505.2\lib\NET35\Microsoft.Practices.Unity.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity.Configuration">
+      <HintPath>..\..\SharedDatabaseArchitecture\packages\Unity.2.1.505.2\lib\NET35\Microsoft.Practices.Unity.Configuration.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity.Interception">
+      <HintPath>..\..\SharedDatabaseArchitecture\packages\Unity.Interception.2.1.505.2\lib\NET35\Microsoft.Practices.Unity.Interception.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity.Interception.Configuration">
+      <HintPath>..\..\SharedDatabaseArchitecture\packages\Unity.Interception.2.1.505.2\lib\NET35\Microsoft.Practices.Unity.Interception.Configuration.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\SharedDatabaseArchitecture\packages\Newtonsoft.Json.6.0.4\lib\net40\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <CodeAnalysisDependentAssemblyPaths Condition=" '$(VS100COMNTOOLS)' != '' " Include="$(VS100COMNTOOLS)..\IDE\PrivateAssemblies">
+      <Visible>False</Visible>
+    </CodeAnalysisDependentAssemblyPaths>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AppTestConsumerContext.cs" />
+    <Compile Include="AppTestContext.cs" />
+    <Compile Include="DataContractTest.cs" />
+    <Compile Include="DataTestScenario.cs" />
+    <Compile Include="EntityModelTest.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="SimulationServiceTest.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.Config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Turbine.Consumer.Contract.Behaviors\Turbine.Consumer.Contract.Behaviors.csproj">
+      <Project>{0866f140-3bd7-4aa3-9b1c-7096b6721d99}</Project>
+      <Name>Turbine.Consumer.Contract.Behaviors</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Turbine.Consumer.Data.Contract.Behaviors\Turbine.Consumer.Data.Contract.Behaviors.csproj">
+      <Project>{F992559E-6820-4341-A489-1AF82F9FC8A5}</Project>
+      <Name>Turbine.Consumer.Data.Contract.Behaviors</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Turbine.Data.Contract.Behaviors\Turbine.Data.Contract.Behaviors.csproj">
+      <Project>{F6E67385-2EBD-412A-A31C-9920610EEA1E}</Project>
+      <Name>Turbine.Data.Contract.Behaviors</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Turbine.Data.Serialize\Turbine.Data.Serialize.csproj">
+      <Project>{FCC0496B-3C87-4030-8630-2A3A08181408}</Project>
+      <Name>Turbine.Data.Serialize</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Turbine.Lite.Web.Resources\Turbine.Lite.Web.Resources.csproj">
+      <Project>{abcce275-0025-4532-8f4a-75b22e3c6241}</Project>
+      <Name>Turbine.Lite.Web.Resources</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Turbine.Producer.Data.Contract.Behaviors\Turbine.Producer.Data.Contract.Behaviors.csproj">
+      <Project>{8608F337-91A1-4260-8A2D-CE7EF0CA45B8}</Project>
+      <Name>Turbine.Producer.Data.Contract.Behaviors</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Turbine.Producer\Turbine.Producer.csproj">
+      <Project>{BCB53D56-20A1-49F9-A9C0-49229529C77C}</Project>
+      <Name>Turbine.Producer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Turbine.Web\Turbine.Web.csproj">
+      <Project>{06490331-48AF-4DBE-AEA0-75BF65868B90}</Project>
+      <Name>Turbine.Web</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

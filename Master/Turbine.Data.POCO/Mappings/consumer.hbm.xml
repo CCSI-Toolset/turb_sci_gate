@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
+                   assembly="Turbine.Data.POCO"
+                   namespace="Turbine.Data.POCO.Domain">
+  <class name="JobConsumer" table="Consumers">
+    <id name="Id">
+      <generator class="guid"/>
+    </id>
+
+    <property name="hostname"/>
+    <property name="memory"/>
+    <property name="cores"/>
+    <property name="cpu"/>
+    <property name="ami"/>
+    <property name="image"/>
+    <property name="instance"/>
+    <property name="status"/>
+  </class>
+  
+</hibernate-mapping>

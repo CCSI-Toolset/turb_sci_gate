@@ -1,0 +1,97 @@
+{
+  "title": "VdV",
+  "description": "Test",
+  "aspenfile": "VdV_Reactor.acmf",
+  "author": "JM",
+  "date": "1/14/2015",
+  "filetype": "sinterconfig",
+  "version": 0.2,
+  "settings": {
+    "homotopy": {
+      "type": "int",
+      "default": 0,
+      "description": "Simulation specific setting: homotopy"
+    },
+    "printlevel": {
+      "type": "int",
+      "default": 0,
+      "description": "Simulation specific setting: printlevel"
+    },
+    "RunMode": {
+      "type": "string",
+      "default": "Dynamic",
+      "description": "Simulation specific setting: RunMode"
+    },
+    "Snapshot": {
+      "type": "string",
+      "default": "",
+      "description": "Simulation specific setting: Snapshot"
+    },
+    "TimeSeries": {
+      "type": "double[1]",
+      "default": [
+        0.0
+      ],
+      "description": "Simulation specific setting: TimeSeries"
+    },
+    "TimeUnits": {
+      "type": "string",
+      "default": "Hours",
+      "description": "Simulation specific setting: TimeUnits"
+    },
+    "MinStepSize": {
+      "type": "double",
+      "default": 0.001,
+      "description": "Simulation specific setting: MinStepSize"
+    }
+  },
+  "dynamic-inputs": {
+    "Ca_Feed": {
+      "path": [
+        "VdVR.Feed.Ca"
+      ],
+      "type": "double",
+      "default": 10.0,
+      "description": "Concentration of A",
+      "units": "kmol/m3"
+    },
+    "F_Feed": {
+      "path": [
+        "VdVR.Feed.F"
+      ],
+      "type": "double",
+      "default": 3600.0,
+      "description": "Volumetric Flowrate",
+      "units": "m3/hr"
+    },
+    "Volume": {
+      "path": [
+        "VdVR.V"
+      ],
+      "type": "double",
+      "default": 100.0,
+      "description": "Reactor Volume",
+      "units": "m3"
+    }
+  },
+  "dynamic-outputs": {
+    "Ca_Product": {
+      "path": [
+        "VdVR.Prod.Ca"
+      ],
+      "type": "double",
+      "default": 3.0817342233753582,
+      "description": "Concentration of A",
+      "units": "kmol/m3"
+    },
+    "Cb_Product": {
+      "path": [
+        "VdVR.Prod.Cb"
+      ],
+      "type": "double",
+      "default": 1.1329905232997639,
+      "description": "Concentration of B",
+      "units": "kmol/m3"
+    }
+  }
+}

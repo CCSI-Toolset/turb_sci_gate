@@ -1,0 +1,703 @@
+{
+  "title": "New BFB Model", 
+  "description": "3x ads, 2x rgn; updated solid heat exchanger", 
+  "aspenfile": "BFB_v6.3_Process_SS_total_opt_no_trim_mod.acmf", 
+  "author": "Andrew Lee (updated)", 
+  "date": "8/27/2015", 
+  "filetype": "sinterconfig", 
+  "version": 0.2, 
+  "settings": {
+    "homotopy": {
+      "type": "int", 
+      "default": 0, 
+      "description": "Simulation specific setting: homotopy"
+    }, 
+    "printlevel": {
+      "type": "int", 
+      "default": 2, 
+      "description": "Simulation specific setting: printlevel"
+    }, 
+    "RunMode": {
+      "type": "string", 
+      "default": "Steady State", 
+      "description": "Simulation specific setting: RunMode"
+    }, 
+    "Snapshot": {
+      "type": "string", 
+      "default": "", 
+      "description": "Simulation specifc setting: Snapshot"
+    }, 
+    "Script": {
+      "type": "string", 
+      "default": "", 
+      "description": "Simulation specific setting: Script"
+    }
+  }, 
+  "inputs": {
+    "adsDt": {
+      "path": [
+        "adsDt"
+      ], 
+      "type": "double", 
+      "default": 12.7672078, 
+      "description": "Adsorption units diameter", 
+      "units": "m", 
+      "min": 10.0, 
+      "max": 15.0
+    }, 
+    "adsdx": {
+      "path": [
+        "adsdx"
+      ], 
+      "type": "double", 
+      "default": 0.0473516727, 
+      "description": "Adsorption units HX tubes diameter", 
+      "units": "m", 
+      "min": 0.0127, 
+      "max": 0.075
+    }, 
+    "adslhx": {
+      "path": [
+        "adslhx"
+      ], 
+      "type": "double", 
+      "default": 0.04, 
+      "description": "Adsorption units HX tubes spacing", 
+      "units": "m", 
+      "min": 0.04, 
+      "max": 0.2
+    }, 
+    "adsN": {
+      "path": [
+        "adsN"
+      ], 
+      "type": "double", 
+      "default": 6, 
+      "description": "Number of parallel adsorption trains", 
+      "units": "", 
+      "min": 6, 
+      "max": 6
+    }, 
+    "BFBadsB.Lb": {
+      "path": [
+        "BFBadsB.Lb"
+      ], 
+      "type": "double", 
+      "default": 0.75, 
+      "description": "Bottom adsorber bed depth", 
+      "units": "m", 
+      "min": 0.75, 
+      "max": 2.0
+    }, 
+    "BFBadsM.Lb": {
+      "path": [
+        "BFBadsM.Lb"
+      ], 
+      "type": "double", 
+      "default": 1.23179266, 
+      "description": "Middle adsorber bed Depth", 
+      "units": "m", 
+      "min": 0.75, 
+      "max": 2.0
+    }, 
+    "BFBadsT.Lb": {
+      "path": [
+        "BFBadsT.Lb"
+      ], 
+      "type": "double", 
+      "default": 1.0641462, 
+      "description": "Top adsorber bed depth", 
+      "units": "m", 
+      "min": 0.75, 
+      "max": 2
+    }, 
+    "BFBrgnB.Lb": {
+      "path": [
+        "BFBrgnB.Lb"
+      ], 
+      "type": "double", 
+      "default": 4.94627107, 
+      "description": "Bottom regenerator bed depth", 
+      "units": "m", 
+      "min": 2.0, 
+      "max": 9.0
+    }, 
+    "BFBrgnT.Lb": {
+      "path": [
+        "BFBrgnT.Lb"
+      ], 
+      "type": "double", 
+      "default": 3.57964563, 
+      "description": "Top regenerator bed depth", 
+      "units": "m", 
+      "min": 2.0, 
+      "max": 6.0
+    }, 
+    "GHXfg.A_exch": {
+      "path": [
+        "GHXfg.A_exch"
+      ], 
+      "type": "double", 
+      "default": 15662.4926, 
+      "description": "Flue gass cooler area", 
+      "units": "C", 
+      "min": 10000, 
+      "max": 17000
+    }, 
+    "SHX.Alean1": {
+      "path": [
+        "SHX.Alean1"
+      ], 
+      "type": "double", 
+      "default": 63213.3304, 
+      "description": "Lean cross hx area", 
+      "units": "m2", 
+      "min": 60000, 
+      "max": 140000
+    }, 
+    "SHX.Arich": {
+      "path": [
+        "SHX.Arich"
+      ], 
+      "type": "double", 
+      "default": 82818.264, 
+      "description": "Rich cross hx area", 
+      "units": "m2", 
+      "min": 60000, 
+      "max": 140000
+    }, 
+    "rgnDt": {
+      "path": [
+        "rgnDt"
+      ], 
+      "type": "double", 
+      "default": 9.69962416, 
+      "description": "Regeneration units diameter", 
+      "units": "m", 
+      "min": 8.0, 
+      "max": 12.0
+    }, 
+    "rgndx": {
+      "path": [
+        "rgndx"
+      ], 
+      "type": "double", 
+      "default": 0.075, 
+      "description": "Regeneration units HX tubes diameter", 
+      "units": "m", 
+      "min": 0.0127, 
+      "max": 0.075
+    }, 
+    "rgnlhx": {
+      "path": [
+        "rgnlhx"
+      ], 
+      "type": "double", 
+      "default": 0.04, 
+      "description": "Regeneration units HX tubes spacing", 
+      "units": "m", 
+      "min": 0.04, 
+      "max": 0.2
+    }, 
+    "rgnN": {
+      "path": [
+        "rgnN"
+      ], 
+      "type": "double", 
+      "default": 4, 
+      "description": "Number of parallel regeneration trains", 
+      "units": "", 
+      "min": 4, 
+      "max": 4
+    }, 
+    "IG_F_solids": {
+      "path": [
+        "F_solids"
+      ], 
+      "type": "double", 
+      "default": 7383458.33, 
+      "description": "Total solids flow all trains to adorbers", 
+      "units": "kg/hr", 
+      "min": 6500000, 
+      "max": 12000000
+    },
+    "IG_GHXfg.HXIn.F": {
+      "path": [
+        "GHXfg.HXIn.F"
+      ], 
+      "type": "double", 
+      "default": 134024.561, 
+      "description": "Flue gas cooler cooling water flow rate", 
+      "units": "kmol/hr", 
+      "min": 100000, 
+      "max": 160000
+    }, 
+    "IG_SHX.DTAL1": {
+      "path": [
+        "SHX.DTAL1"
+      ], 
+      "type": "double", 
+      "default": -10.0, 
+      "description": "Temparature approach solids cross-hx", 
+      "units": "C", 
+      "min": -22.0, 
+      "max": -10.0
+    }, 
+    "IG_BFBrgnB.GasIn.F": {
+      "path": [
+        "BFBrgnB.GasIn.F"
+      ], 
+      "type": "double", 
+      "default": 1309.68215, 
+      "description": "Molar flow rate", 
+      "units": "kmol/hr", 
+      "min": 450, 
+      "max": 3000
+    },
+    "IG_removalCO2_slack": {
+      "path": [
+        "removalCO2_slack"
+      ], 
+      "type": "double", 
+      "default": 0.0, 
+      "description": "slack variable to allow less than 90% capture", 
+      "units": "", 
+      "min": 0, 
+      "max": 0.9
+    },
+    "IG_vmf_slack": {
+      "path": [
+        "vmf_slack"
+      ], 
+      "type": "double", 
+      "default": 0.0, 
+      "description": "slack variable to allow lower than min fluidization velocity in rng", 
+      "units": "", 
+      "min": 0, 
+      "max": 1
+    }, 
+    "IG_steam_slack": {
+      "path": [
+        "steam_slack"
+      ], 
+      "type": "double", 
+      "default": 0.0, 
+      "description": "slack variable to allow more than max amount of steam use", 
+      "units": "", 
+      "min": 0, 
+      "max": 1000000
+    },
+    "IG_slugrb_slack": {
+      "path": [
+        "slugrb_slack"
+      ], 
+      "type": "double", 
+      "default": 0.0, 
+      "description": "slack variable to allow violation of the no slug flow constraint", 
+      "units": "", 
+      "min": 0, 
+      "max": 1
+    },
+    "UQ_fg_flow": {
+      "path": [
+        "UQ_fg_flow"
+      ], 
+      "type": "double", 
+      "default": 1.0, 
+      "description": "UQ factor", 
+      "units": "", 
+      "min": 0.80, 
+      "max": 1.05
+    },
+    "UQ_lang": {
+      "path": [
+        "UQ_lang"
+      ], 
+      "type": "double", 
+      "default": 1.0, 
+      "description": "UQ factor for Lang cap cost factor", 
+      "units": "", 
+      "min": 1.0, 
+      "max": 1.2
+    }, 
+    "logA1": {
+      "path": [
+        "logA1"
+      ], 
+      "type": "double", 
+      "default": -0.754907, 
+      "description": "UQ factor", 
+      "units": "", 
+      "min": -1.5, 
+      "max": 0.365
+    }, 
+    "logA2": {
+      "path": [
+        "logA2"
+      ], 
+      "type": "double", 
+      "default": -1.04049, 
+      "description": "UQ factor", 
+      "units": "", 
+      "min": -5.0, 
+      "max": 5.0
+    }, 
+    "logA3": {
+      "path": [
+        "logA3"
+      ], 
+      "type": "double", 
+      "default": 2.15227, 
+      "description": "UQ factor", 
+      "units": "", 
+      "min": -1.9, 
+      "max": 5.0
+    }, 
+    "E1": {
+      "path": [
+        "E1"
+      ], 
+      "type": "double", 
+      "default": 29622.8, 
+      "description": "UQ factor", 
+      "units": "", 
+      "min": 2.49e4, 
+      "max": 3.68e4
+    }, 
+    "E2": {
+      "path": [
+        "E2"
+      ], 
+      "type": "double", 
+      "default": 83173.5, 
+      "description": "UQ factor", 
+      "units": "", 
+      "min": 3.0e4, 
+      "max": 1.2e5
+    }, 
+    "E3": {
+      "path": [
+        "E3"
+      ], 
+      "type": "double", 
+      "default": 27522.5, 
+      "description": "UQ factor", 
+      "units": "", 
+      "min": 1.00e4, 
+      "max": 6.67e4
+    }, 
+    "dH1": {
+      "path": [
+        "dH1"
+      ], 
+      "type": "double", 
+      "default": -72580.3, 
+      "description": "UQ factor", 
+      "units": "", 
+      "min": -7.282e4, 
+      "max": -7.236e4
+    }, 
+    "dH2": {
+      "path": [
+        "dH2"
+      ], 
+      "type": "double", 
+      "default": -77079.0, 
+      "description": "UQ factor", 
+      "units": "", 
+      "min": -1.5e5, 
+      "max": -4.0e4
+    }, 
+    "dH3": {
+      "path": [
+        "dH3"
+      ], 
+      "type": "double", 
+      "default": -109691.0, 
+      "description": "UQ factor", 
+      "units": "", 
+      "min": -1.1e5, 
+      "max": -1.085e5
+    }, 
+    "dS1": {
+      "path": [
+        "dS1"
+      ], 
+      "type": "double", 
+      "default": -141.425, 
+      "description": "UQ factor", 
+      "units": "", 
+      "min": -142.04, 
+      "max": -140.76
+    }, 
+    "dS2": {
+      "path": [
+        "dS2"
+      ], 
+      "type": "double", 
+      "default": -216.244, 
+      "description": "UQ factor", 
+      "units": "", 
+      "min": -300, 
+      "max": -100
+    }, 
+    "dS3": {
+      "path": [
+        "dS3"
+      ], 
+      "type": "double", 
+      "default": -281.255, 
+      "description": "UQ factor", 
+      "units": "", 
+      "min": -282.64, 
+      "max": -278.01
+    }, 
+    "nv": {
+      "path": [
+        "nv"
+      ], 
+      "type": "double", 
+      "default": 1900.46, 
+      "description": "UQ factor", 
+      "units": "", 
+      "min": 1873.5, 
+      "max": 1929.0
+    }
+  }, 
+  "outputs": {
+    "removalH2O": {
+      "path": [
+        "removalH2O"
+      ], 
+      "type": "double", 
+      "default": 0.0, 
+      "description": "Fraction of water removed form the flue gas", 
+      "units": ""
+    }, 
+    "removalCO2": {
+      "path": [
+        "removalCO2"
+      ], 
+      "type": "double", 
+      "default": 0.0, 
+      "description": "Fraction of CO2 removed from the flue gas", 
+      "units": ""
+    }, 
+    "Cost_coe": {
+      "path": [
+        "Cost_coe"
+      ], 
+      "type": "double", 
+      "default": 0.0, 
+      "description": "Cost of electricity $/MWhr", 
+      "units": ""
+    }, 
+    "Cost_coe_obj": {
+      "path": [
+        "Cost_coe_obj"
+      ], 
+      "type": "double", 
+      "default": 0.0, 
+      "description": "Cost of electricity $/MWhr + slack penalty", 
+      "units": ""
+    }, 
+    "removalCO2_slack": {
+      "path": [
+        "removalCO2_slack"
+      ], 
+      "type": "double", 
+      "default": 0.0, 
+      "description": "slack variable to allow less than 90% capture", 
+      "units": ""
+    },
+    "vmf_slack": {
+      "path": [
+        "vmf_slack"
+      ], 
+      "type": "double", 
+      "default": 0.0, 
+      "description": "slack variable to allow lower than min fluidization velocity in rng", 
+      "units": ""
+    }, 
+    "steam_slack": {
+      "path": [
+        "steam_slack"
+      ], 
+      "type": "double", 
+      "default": 0.0, 
+      "description": "slack variable to allow more than max amount of steam use", 
+      "units": ""
+    }, 
+    "slugrb_slack": {
+      "path": [
+        "slugrb_slack"
+      ], 
+      "type": "double", 
+      "default": 0.0, 
+      "description": "slack variable to allow violation of the no slug flow constraint", 
+      "units": ""
+    },
+    "slugrt_slack": {
+      "path": [
+        "slugrt_slack"
+      ], 
+      "type": "double", 
+      "default": 0.0, 
+      "description": "slack variable to allow violation of the no slug flow constraint", 
+      "units": ""
+    },
+    "slugab_slack": {
+      "path": [
+        "slugab_slack"
+      ], 
+      "type": "double", 
+      "default": 0.0, 
+      "description": "slack variable to allow violation of the no slug flow constraint", 
+      "units": ""
+    },
+    "slugam_slack": {
+      "path": [
+        "slugam_slack"
+      ], 
+      "type": "double", 
+      "default": 0.0, 
+      "description": "slack variable to allow violation of the no slug flow constraint", 
+      "units": ""
+    },
+    "slugat_slack": {
+      "path": [
+        "slugat_slack"
+      ], 
+      "type": "double", 
+      "default": 0.0, 
+      "description": "slack variable to allow violation of the no slug flow constraint", 
+      "units": ""
+    },
+    "shx_inv_slack": {
+      "path": [
+        "shx_inv_slack"
+      ], 
+      "type": "double", 
+      "default": 0.0, 
+      "description": "slack variable for dTar greater than 5 C", 
+      "units": ""
+    },
+    "GHXfg.DTA": {
+      "path": [
+        "GHXfg.DTA"
+      ], 
+      "type": "double", 
+      "default": 0, 
+      "description": "Flue gas cooler approach T", 
+      "units": "C"
+    }, 
+    "GHXfg.HXIn.F": {
+      "path": [
+        "GHXfg.HXIn.F"
+      ], 
+      "type": "double", 
+      "default": 39330, 
+      "description": "Flue gas cooler cooling water flow rate", 
+      "units": "kmol/hr"
+    }, 
+    "SHX.DTAL1": {
+      "path": [
+        "SHX.DTAL1"
+      ], 
+      "type": "double", 
+      "default": 0, 
+      "description": "Temparature approach solids cross-hx", 
+      "units": "C"
+    }, 
+    "SHX.DTAL2": {
+      "path": [
+        "SHX.DTAL2"
+      ], 
+      "type": "double", 
+      "default": 0, 
+      "description": "Temparature approach solids cross-hx", 
+      "units": "C"
+    }, 
+    "rgnSF": {
+      "path": [
+        "rgnSF"
+      ], 
+      "type": "double", 
+      "default": 0.08, 
+      "description": "Regeneration section recirculation gas split fraction", 
+      "units": ""
+    }, 
+    "F_solids": {
+      "path": [
+        "F_solids"
+      ], 
+      "type": "double", 
+      "default": 6750000, 
+      "description": "Total solids flow all trains to adorbers", 
+      "units": "kg/hr"
+    }, 
+    "SolidIn.Fm": {
+      "path": [
+        "BFBadsT.SolidIn.Fm"
+      ], 
+      "type": "double", 
+      "default": 535303, 
+      "description": "Mass flow rate of solid into top adsorber", 
+      "units": "kg/hr"
+    }, 
+    "steam.F": {
+      "path": [
+        "SINJ.steam.F"
+      ], 
+      "type": "double", 
+      "default": 649, 
+      "description": "Regenerator steam injection flow rate", 
+      "units": "kmol/hr"
+    }, 
+    "BFBrgnB.GasIn.F": {
+      "path": [
+        "BFBrgnB.GasIn.F"
+      ], 
+      "type": "double", 
+      "default": 487.6299646628267, 
+      "description": "Molar flow rate", 
+      "units": "kmol/hr"
+    },
+    "Cost_toc": {
+      "path": [
+        "Cost_toc"
+      ], 
+      "type": "double", 
+      "default": 0.0, 
+      "description": "Capital Cost ($)", 
+      "units": ""
+    },
+    "Cost_op_var": {
+      "path": [
+        "Cost_op_var"
+      ], 
+      "type": "double", 
+      "default": 0.0, 
+      "description": "Operating cost variable ($)", 
+      "units": ""
+    },
+    "Cost_op_fixed": {
+      "path": [
+        "Cost_op_fixed"
+      ], 
+      "type": "double", 
+      "default": 0.0, 
+      "description": "Operating cost fixed ($)", 
+      "units": ""
+    },
+    "Cost_net_power": {
+      "path": [
+        "Cost_net_power"
+      ], 
+      "type": "double", 
+      "default": 461514.4827456136, 
+      "description": "Net power output with capture", 
+      "units": "kW"
+    }
+  }
+}

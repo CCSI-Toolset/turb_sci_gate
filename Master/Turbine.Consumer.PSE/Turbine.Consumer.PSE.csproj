@@ -1,0 +1,87 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{0DA4FD41-7031-420B-832C-8BFEAA9D5A3D}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Turbine.Consumer.PSE</RootNamespace>
+    <AssemblyName>Turbine.Consumer.PSE</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\SharedDatabaseArchitecture\packages\Newtonsoft.Json.6.0.4\lib\net40\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="GPromsSinterConsumer.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Sinter\Sinter.csproj">
+      <Project>{7AA14B52-B1B5-4B84-A884-48F0E6710AC4}</Project>
+      <Name>Sinter</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Turbine.Consumer.Contract.Behaviors\Turbine.Consumer.Contract.Behaviors.csproj">
+      <Project>{0866F140-3BD7-4AA3-9B1C-7096B6721D99}</Project>
+      <Name>Turbine.Consumer.Contract.Behaviors</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Turbine.Consumer.Contract\Turbine.Consumer.Contract.csproj">
+      <Project>{B0EEF272-C513-4C91-98DB-045AF4A6672C}</Project>
+      <Name>Turbine.Consumer.Contract</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Turbine.Consumer.Data.Contract.Behaviors\Turbine.Consumer.Data.Contract.Behaviors.csproj">
+      <Project>{F992559E-6820-4341-A489-1AF82F9FC8A5}</Project>
+      <Name>Turbine.Consumer.Data.Contract.Behaviors</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Turbine.Consumer\Turbine.Consumer.csproj">
+      <Project>{20973A51-D353-4F60-802C-7AD3A50989F2}</Project>
+      <Name>Turbine.Consumer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Turbine.Data.Contract.Behaviors\Turbine.Data.Contract.Behaviors.csproj">
+      <Project>{F6E67385-2EBD-412A-A31C-9920610EEA1E}</Project>
+      <Name>Turbine.Data.Contract.Behaviors</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

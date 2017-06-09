@@ -1,0 +1,897 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi"
+     xmlns:util="http://schemas.microsoft.com/wix/UtilExtension"
+     xmlns:sql="http://schemas.microsoft.com/wix/SqlExtension"
+     xmlns:iis="http://schemas.microsoft.com/wix/IIsExtension">
+
+  <!--
+    Turbine Gateway Cloud Installer
+  -->
+  
+  <Product Id="705219c0-a505-4774-b2a4-d8409bf06e33"
+           UpgradeCode="34ec9ecd-5c0c-4b51-9bee-b1a62d3173a7"
+           Name="TurbineCloudGateway" 
+           Language="1033" 
+           Version="0.5.1.0"
+           Manufacturer="Lawrence Berkeley National Lab" 
+           >
+
+    <Package InstallerVersion="200" Compressed="yes" />
+    <Media Id="1" Cabinet="media1.cab" EmbedCab="yes" />
+    <!-- license -->
+    <WixVariable Id="WixUILicenseRtf" Value="..\..\..\..\CCSI_TE_LICENSE.rtf" />
+    
+    <!-- <UIRef Id="WixUI_FeatureTree"/> -->
+    <UIRef Id="MyWebUI" />
+    <!-- pull in all properties from fragment -->
+    <PropertyRef Id="PROP.NET_FRAMEWORK_4"/>
+  
+    <!--#################################################
+        #   Directory 
+        #################################################-->
+    
+    <Directory Id="TARGETDIR" Name="SourceDir">
+      <Directory Id="ProgramFilesFolder">
+        <Directory Id="Turbine" Name="Turbine">
+          <Directory Id="DIR.INSTALL_LOCATION" Name="Gateway">
+            <Directory Id="DIR.Logs" Name="Logs"/>
+            <Directory Id="DIR.Data" Name="Data"/>
+            
+            <Directory Id="DIR.Orchestrator" Name="Orchestrator">
+              <Directory Id="DIR.Orchestrator.Tasks" Name="Tasks">
+                <Directory Id="DIR.Orchestrator.Scripts"/>
+              </Directory>    
+            </Directory>
+            
+            <Directory Id="DIR.Bin" Name="Bin">
+              <Directory Id="DIR.Bin.AWS"/>
+              <Directory Id="DIR.Bin.Common"/>
+              <!--
+              <Directory Id="DIR.Bin.PSE"/>
+              -->
+              <Directory Id="DIR.Bin.Clients"/>
+              <Directory Id="DIR.Bin.Utility"/>
+              <Directory Id="DIR.Bin.Turbine.Admin"/>
+              <Directory Id="DIR.Bin.ExcelClients"/>
+            </Directory>
+
+            <Directory Id="DIR.Consumer" Name="Consumer">
+              <Directory Id="DIR.Consumer.Tasks" Name="Tasks">
+                <Directory Id="DIR.Consumer.Scripts"/>
+              </Directory>
+            </Directory>
+            
+            <Directory Id="DIR.Web.Site" Name="WebSite">
+              <Directory Id="DIR.Web" Name="WebApplication">
+                <Directory Id="DIR.Web.Bin" Name="bin">
+                  <Directory Id="DIR.Web.Bin.Common"/>
+                  <Directory Id="DIR.Web.Bin.Cloud"/>
+                </Directory>
+              </Directory>
+            </Directory>
+          </Directory>
+        </Directory>
+      </Directory>
+    </Directory>
+    
+    <DirectoryRef Id="DIR.Bin.AWS">
+      <Component Id="CMP.Common.AWSSDK.DLL" Guid="">
+        <File Id="FILE.AWSSDK.DLL" Source="bin\$(var.Configuration)\application\$(var.Configuration)\AWSSDK.dll" KeyPath="yes"/>
+      </Component>
+    </DirectoryRef>
+
+    <DirectoryRef Id="DIR.Web">
+      <Component Id="CMP.Web" Guid="6E58EFD2-6EF8-4B78-999D-C677D53DD66C" KeyPath="yes">
+        <iis:WebAppPool Id="WAP.Id" Name="TurbineAppPool" 
+                        ManagedPipelineMode="integrated" 
+                        ManagedRuntimeVersion="v4.0">
+        </iis:WebAppPool>
+
+        <iis:WebSite Id="WS.Secure" Description="Turbine Secure Web Site"
+                     AutoStart="yes" StartOnInstall="yes" ConfigureIfExists="no"
+                     Directory="DIR.Web.Site">
+          <iis:WebAddress Id="AllUnassigned" Port="8080" Secure="yes"/>
+          <iis:WebVirtualDir Id="WebVirutalDir.Turbine" Alias="Turbine" Directory="DIR.Web">
+            <iis:WebApplication Id="Turbine.Web.App" Name="Turbine Web Application" WebAppPool="WAP.Id"/>
+          </iis:WebVirtualDir>
+          <iis:WebDirProperties Id="Turbine.Web.Dir.Properties.1" 
+                                AnonymousAccess="yes" 
+                                BasicAuthentication="no"
+                                DigestAuthentication="no" 
+                                WindowsAuthentication="no"/>
+        </iis:WebSite>
+
+        <!--
+        <iis:Certificate Id="CERT.Turbine" 
+                         Name="TurbineHostCert" 
+                         StoreName="personal" 
+                         Request="no"
+                         StoreLocation="localMachine"
+                         Overwrite="yes"
+                         PFXPassword="certTest"
+                  />
+         -->
+      </Component>
+    
+      <Component Id="CMP.Web.Config"  Guid="9606E288-FFDA-441B-9048-A73398A23049">
+        <File Id="FILE.ClusterWebConfigId"
+              Name="Web.config"
+              Source="bin\$(var.Configuration)\application\Web\Web.config"
+              KeyPath="yes" Vital="yes"/>
+        <util:XmlFile Id="WebConfigSetLogFile" Action="setValue" Permanent="yes" File="[#FILE.ClusterWebConfigId]"
+             ElementPath="/configuration/system.diagnostics/trace/listeners/add[\[]@name='turbineLogListener'[\]]"
+             Name="initializeData"
+             Value="[DIR.Logs]TurbineCloudWebApp.log" />
+        <util:XmlFile Id="WebConfigSetConnStr" Action="setValue" Permanent="yes" File="[#FILE.ClusterWebConfigId]"
+             ElementPath="/configuration/connectionStrings/add[\[]@name='TurbineModelContainer'[\]]" 
+             Name="connectionString"
+             Value="metadata=res://*/TurbineDataModel.csdl|res://*/TurbineDataModel.ssdl|res://*/TurbineDataModel.msl;provider=System.Data.SqlClient;provider connection string=&quot;Data Source=[PROP.SQLSERVER];Initial Catalog=[PROP.DATABASE];User ID=[PROP.SQL_LOGIN];Password=[PROP.SQL_PASSWORD];Persist Security Info=True;MultipleActiveResultSets=True;&quot;" />
+      </Component>
+
+      <Component Id="CMP.Web.Global" Guid="DAC990A6-FF63-4E7C-ADE5-55574F9ECC41">
+        <File Id="WebGLobalFile" Source="bin\$(var.Configuration)\application\Web\Global.asax" KeyPath="yes"/>
+      </Component>
+    </DirectoryRef>
+    
+    <ComponentGroup Id="CG.Turbine.ConsumerTasks">
+      <ComponentRef Id="CMP.Consumer"/>
+      <ComponentRef Id="CMP.Consumer.Scripts"/>
+      <ComponentRef Id="CMP.Consumer.Scripts.Consumer_Cleaner"/>
+      <ComponentRef Id="CMP.Consumer.Scripts.Setup"/>
+      <ComponentRef Id="CMP.Consumer.Tasks"/>
+      <ComponentRef Id="CMP.Consumer.Tasks.Consumer_Cleaner"/>
+      <ComponentRef Id="CMP.Consumer.Task.AWSSDKDLL"/>
+    </ComponentGroup>
+
+    <DirectoryRef Id="DIR.Consumer">
+      
+      <Component Id="CMP.Consumer" Guid="8D2CD783-35D5-426B-85F8-8E39ABE682A7" KeyPath="yes">
+        <CreateFolder/>
+        <RemoveFile Id="RF.Consumer" Name="*.*" On="uninstall" />
+      </Component>
+
+    </DirectoryRef>
+
+    <!--
+    <DirectoryRef Id="DIR.Bin.PSE">
+      <Component Id="CMP.Turbine.Consumer.PSE.DLL" Guid="">
+        <File Id="FILE.Turbine.Consumer.PSE.DLL"
+              Source="bin\$(var.Configuration)\application\$(var.Configuration)\Turbine.Consumer.PSE.dll" KeyPath="yes"/>    
+      </Component>
+      <Component Id="CMP.PSESinterDLL" Guid="">
+          <File Id="PSESinterDllId" Source="bin\$(var.Configuration)\application\$(var.Configuration)\PSESinter.dll" KeyPath="yes"/>
+      </Component>
+      <?ifdef Debug ?>
+      <Component Id="CMP.PSESinterPDB" Guid="">
+          <File Id="PSESinterPdbId" Source="bin\$(var.Configuration)\application\$(var.Configuration)\PSESinter.pdb" KeyPath="yes"/>
+      </Component>
+      <?endif?>
+    </DirectoryRef>
+    -->
+
+    
+    <DirectoryRef Id="DIR.Consumer.Scripts">
+
+      <Component Id="CMP.Consumer.Scripts" Guid="DBC1EF0D-2509-4F70-8932-B60780C01062" KeyPath="yes">
+        <CreateFolder/>
+        <RemoveFile Id="RF.Consumer.Scripts" Name="*.*" On="uninstall" />
+      </Component>
+
+      <Component Id="CMP.Consumer.Scripts.Consumer_Cleaner" Guid="43CE4F77-D3E0-4888-8E7C-8E4B641F33FF">
+        <File Id="FILE.Consumer.Scripts.Consumer_Cleaner"
+              Source="bin\$(var.Configuration)\application\Orchestrator\scripts\turbine_consumer_cleanup.ps1" KeyPath="yes"/>
+      </Component>
+
+      <Component Id="CMP.Consumer.Scripts.Setup" Guid="FD1B5F3C-79BE-43E2-9C0A-1B0804FC6C40">
+        <File Id="FILE.Consumer.Scripts.Setup"
+              Source="bin\$(var.Configuration)\application\Orchestrator\scripts\setup.ps1" KeyPath="yes">
+
+        </File>
+
+      </Component>
+
+    </DirectoryRef>
+
+    <DirectoryRef Id="DIR.Consumer.Tasks">
+
+      <Component Id="CMP.Consumer.Tasks" Guid="5BCFE248-4C97-4CCA-9BD1-BCBFA27A9756" KeyPath="yes">
+        <CreateFolder/>
+        <RemoveFile Id="RF.Consumer.Tasks" Name="*.*" On="uninstall" />
+      </Component>
+
+
+      <Component Id="CMP.Consumer.Tasks.Consumer_Cleaner" Guid="AE438F44-2356-402A-8A1A-AEEB78D45FBF">
+        <File Id="FILE.Consumer.Tasks.Consumer_Cleaner"
+              Source="bin\$(var.Configuration)\application\Orchestrator\tasks\turbine_consumer_cleaner.xml" KeyPath="yes"/>
+
+        <util:XmlFile Id="XMLFILE.Consumer.Tasks.Consumer_Cleaner" Action="setValue" Permanent="yes"
+                      File="[#FILE.Consumer.Tasks.Consumer_Cleaner]"
+                      ElementPath="/Task/Actions/Exec/WorkingDirectory"
+                      Value="[DIR.Consumer.Tasks]" />
+
+      </Component>
+
+      <Component Id="CMP.Consumer.Task.AWSSDKDLL" Guid="BBAA7BCE-DECD-4070-B7E5-F0312C1830E6">
+        <File Id="FILE.AWSSDKDllWebId" Source="bin\$(var.Configuration)\application\$(var.Configuration)\AWSSDK.dll" KeyPath="yes"/>
+      </Component>
+      
+    </DirectoryRef>
+    
+    <ComponentGroup Id="CG.Turbine.Orchestrator">
+      <ComponentRef Id="CMP.Orchestrator"/>
+      <ComponentRef Id="CMP.Orchestrator.Scripts"/>
+      <ComponentRef Id="CMP.Orchestrator.Scripts.AutoScale.SQS"/>
+      <ComponentRef Id="CMP.Orchestrator.Scripts.Consumer_Sweeper"/>
+      <ComponentRef Id="CMP.Orchestrator.Scripts.JobSetup_Sweeper"/>
+      <ComponentRef Id="CMP.Orchestrator.Scripts.JobRun_Sweeper"/>
+      <ComponentRef Id="CMP.Orchestrator.Scripts.Setup"/>
+      <ComponentRef Id="CMP.Orchestrator.Scripts.AWSSDKDLL"/>
+
+
+      <ComponentRef Id="CMP.Orchestrator.Tasks"/>
+      <ComponentRef Id="CMP.Orchestrator.Tasks.AutoScale.SQS"/>
+      <ComponentRef Id="CMP.Orchestrator.Tasks.Job_Run_Sweeper"/>
+      <ComponentRef Id="CMP.Orchestrator.Tasks.Job_Setup_Sweeper"/>
+      <ComponentRef Id="CMP.Orchestrator.Tasks.Consumer_Sweeper"/>
+
+      
+    </ComponentGroup>
+
+    <ComponentGroup Id="CG.Turbine.S3Logger">
+      <ComponentRef Id="CMP.Logger.Scripts.S3LogUploader"/>
+      <ComponentRef Id="CMP.Logger.Tasks.S3LogUploader"/>
+    </ComponentGroup>
+
+    <DirectoryRef Id="DIR.Orchestrator">
+
+      <Component Id="CMP.Orchestrator" Guid="DDB6CBEF-2158-428B-A5BB-224605261697" KeyPath="yes">
+        <CreateFolder/>
+        <RemoveFile Id="RF.Orchestrator" Name="*.*" On="uninstall" />
+      </Component>
+      
+    </DirectoryRef>
+
+    <DirectoryRef Id="DIR.Orchestrator.Scripts">
+
+      <Component Id="CMP.Orchestrator.Scripts" Guid="25A38A08-D4CD-4F1A-921C-283CE1CC7CAC" KeyPath="yes">
+        <CreateFolder/>
+        <RemoveFile Id="RF.Orchestrator.Scripts" Name="*.*" On="uninstall" />
+      </Component>
+      
+      <Component Id="CMP.Orchestrator.Scripts.AutoScale.SQS" Guid="8FA7FF92-3089-49B6-B0D1-A03A51E8059A">
+        <File Id="FILE.Orchestrator.Scripts.AutoScale.SQS"
+              Source="bin\$(var.Configuration)\application\Orchestrator\scripts\autoscale_sqs_orchestrator.ps1" KeyPath="yes"/>
+      </Component>
+      
+      <Component Id="CMP.Orchestrator.Scripts.Setup" Guid="">
+        <File Id="FILE.Orchestrator.Scripts.Setup"
+              Source="bin\$(var.Configuration)\application\Orchestrator\scripts\setup.ps1" KeyPath="yes">
+        
+        </File>
+      </Component>
+
+      <Component Id="CMP.Orchestrator.Scripts.Consumer_Sweeper" Guid="B2BCC935-2943-42BA-BBBE-00C6D497BCC4">
+        <File Id="FILE.Orchestrator.Scripts.Consumer_Sweeper"
+              Source="bin\$(var.Configuration)\application\Orchestrator\scripts\consumer_sweeper.ps1" KeyPath="yes"/>
+      </Component>
+
+      <Component Id="CMP.Orchestrator.Scripts.JobSetup_Sweeper" Guid="06DA100F-4C68-46EA-91A9-53B5DED58351">
+        <File Id="FILE.Orchestrator.Scripts.JobSetup_Sweeper"
+              Source="bin\$(var.Configuration)\application\Orchestrator\scripts\job_sweeper.ps1" KeyPath="yes"/>
+      </Component>
+
+      <Component Id="CMP.Orchestrator.Scripts.JobRun_Sweeper" Guid="FF73E04B-F092-41C5-94C4-993A4A3EB9C9">
+        <File Id="FILE.Orchestrator.Scripts.JobRun_Sweeper"
+              Source="bin\$(var.Configuration)\application\Orchestrator\scripts\job_run_sweeper.ps1" KeyPath="yes"/>
+      </Component>
+
+      <Component Id="CMP.Orchestrator.Scripts.AWSSDKDLL" Guid="98C91635-F1C7-4604-846A-2C38D179C87F">
+        <File Id="FILE.Orchestrator.AWSSDKDLL" Source="bin\$(var.Configuration)\application\$(var.Configuration)\AWSSDK.dll" KeyPath="yes"/>
+      </Component>
+
+      <Component Id="CMP.Logger.Scripts.S3LogUploader" Guid="07F8F9AB-9C31-423D-8F61-18E21D52924C">
+        <File Id="FILE.Orchestrator.Scripts.S3LogUploader"
+              Source="bin\$(var.Configuration)\application\Orchestrator\scripts\turbine_log_upload_s3.ps1" KeyPath="yes"/>
+      </Component>
+      
+    </DirectoryRef>
+
+    <DirectoryRef Id="DIR.Orchestrator.Tasks">
+
+      <Component Id="CMP.Orchestrator.Tasks" Guid="042855E6-994B-47F9-A474-A797E7EE11E6" KeyPath="yes">
+        <CreateFolder/>
+        <RemoveFile Id="RF.Orchestrator.Tasks" Name="*.*" On="uninstall" />
+      </Component>
+
+      
+      <Component Id="CMP.Orchestrator.Tasks.AutoScale.SQS" Guid="4B787018-CB30-4E52-ADAB-AB4785712FAF">
+        <File Id="FILE.Orchestrator.Tasks.AutoScale.SQS"
+              Source="bin\$(var.Configuration)\application\Orchestrator\tasks\turbine_autoscale_sqs.xml" KeyPath="yes"/>
+
+        <util:XmlFile Id="XMLFILE.Orchestrator.Tasks.AutoScale.SQS" Action="setValue" Permanent="yes"
+                      File="[#FILE.Orchestrator.Tasks.AutoScale.SQS]"
+                      ElementPath="/Task/Actions/Exec/WorkingDirectory"
+                      Value="[DIR.Orchestrator.Tasks]" />
+
+      </Component>
+
+      <Component Id="CMP.Orchestrator.Tasks.Job_Run_Sweeper" Guid="08E065B9-CEC3-4097-89BC-91134019DE08">
+        <File Id="FILE.Orchestrator.Tasks.Job_Run_Sweeper"
+              Source="bin\$(var.Configuration)\application\Orchestrator\tasks\turbine_db_jobs_run_sweeper.xml" KeyPath="yes"/>
+
+        <util:XmlFile Id="XMLFILE.Orchestrator.Tasks.Job_Run_Sweeper" Action="setValue" Permanent="yes"
+                      File="[#FILE.Orchestrator.Tasks.Job_Run_Sweeper]"
+                      ElementPath="/Task/Actions/Exec/WorkingDirectory"
+                      Value="[DIR.Orchestrator.Tasks]" />
+
+      </Component>
+
+      <Component Id="CMP.Orchestrator.Tasks.Job_Setup_Sweeper" Guid="47B582C8-0A1F-495E-9934-3A41294D5D3C">
+        <File Id="FILE.Orchestrator.Tasks.Job_Setup_Sweeper"
+              Source="bin\$(var.Configuration)\application\Orchestrator\tasks\turbine_db_jobs_setup_sweeper.xml" KeyPath="yes"/>
+
+        <util:XmlFile Id="XMLFILE.Orchestrator.Tasks.Job_Setup_Sweeper" Action="setValue" Permanent="yes"
+                      File="[#FILE.Orchestrator.Tasks.Job_Setup_Sweeper]"
+                      ElementPath="/Task/Actions/Exec/WorkingDirectory"
+                      Value="[DIR.Orchestrator.Tasks]" />
+
+      </Component>
+
+      <Component Id="CMP.Orchestrator.Tasks.Consumer_Sweeper" Guid="F83B8D2C-DE4F-437A-88D7-AFE6BDC8B610">
+        <File Id="FILE.Orchestrator.Tasks.Consumer_Sweeper"
+              Source="bin\$(var.Configuration)\application\Orchestrator\tasks\turbine_db_consumer_sweeper.xml" KeyPath="yes"/>
+
+        <util:XmlFile Id="XMLFILE.Orchestrator.Tasks.Consumer_Sweeper" Action="setValue" Permanent="yes"
+                      File="[#FILE.Orchestrator.Tasks.Consumer_Sweeper]"
+                      ElementPath="/Task/Actions/Exec/WorkingDirectory"
+                      Value="[DIR.Orchestrator.Tasks]" />
+
+      </Component>
+      
+      <Component Id="CMP.Logger.Tasks.S3LogUploader" Guid="6042A9D2-B669-4353-B32F-6BCEAC0E7822">
+        <File Id="FILE.Logger.Tasks.S3LogUploader"
+              Source="bin\$(var.Configuration)\application\Orchestrator\tasks\turbine_log_upload_s3.xml" KeyPath="yes"/>
+      </Component>
+      
+    </DirectoryRef>
+
+    <DirectoryRef Id="DIR.Bin">
+
+      <Component Id="CMP.Bin" Guid="BB672CA5-EB25-44BB-8F2E-9B4B06B9D130" KeyPath="yes">
+        <CreateFolder/>
+        <RemoveFile Id="RF.Bin" Name="*.*" On="uninstall" />
+      </Component>
+
+      <Component Id="CMP.Database.Create" Guid="4E4A30F6-454D-491F-B6E7-0D8948F38A04">
+        <!--
+        <util:User Id="SQLUser" Name="[PROP.SQL_LOGIN]" Password="[PROP.SQL_PASSWORD]"/>
+        -->
+        <!-- need to have write/read access to SQL User account..-->
+        <!--
+        <sql:SqlDatabase Id="SqlDatabase"
+                         Database="[PROP.DATABASE]"
+                         Server="[PROP.SQLSERVER]"
+                         CreateOnInstall="yes"
+                         DropOnInstall="no"
+                         DropOnUninstall="yes"
+                         ContinueOnError="no">
+          <sql:SqlScript Id="SCRIPT.CreateDatabase"  
+                         Sequence="1"
+                         BinaryKey="BIN.CreateTables"
+                         ExecuteOnInstall="yes"/>
+          <sql:SqlString Id="SQL.SQLSTRING.Login" 
+                         Sequence="2"
+                         SQL="CREATE LOGIN [PROP.SQL_LOGIN] WITH PASSWORD='[PROP.SQL_PASSWORD]'"
+                         ContinueOnError="yes"
+                         ExecuteOnInstall="yes"/>
+          <sql:SqlString Id="SQL.SQLSTRING.User"
+                         Sequence="3"
+                         SQL="CREATE USER [PROP.SQL_USERID] FOR LOGIN [PROP.SQL_LOGIN]"
+                         ContinueOnError="yes"
+                         ExecuteOnInstall="yes"/>
+          <sql:SqlString Id="SQL.SQLSTRING.RoleReader"
+                         Sequence="4"
+                         SQL="sp_addrolemember 'db_datareader', '[PROP.SQL_USERID]'"
+                         ContinueOnError="no"
+                         ExecuteOnInstall="yes"/>
+          <sql:SqlString Id="SQL.SQLSTRING.RoleWriter"
+                         Sequence="5"
+                         SQL="sp_addrolemember 'db_datawriter', '[PROP.SQL_USERID] '"
+                         ContinueOnError="no"
+                         ExecuteOnInstall="yes"/>
+          <sql:SqlString Id="SQL.SQLSTRING.Table_Applications_gPROMS"
+                         Sequence="6"
+                         SQL="INSERT INTO dbo.Applications VALUES ('gPROMS', '0.1', null);
+INSERT INTO dbo.InputFileTypes VALUES ( newid(), 'configuration', 1, 'text/plain', 'gPROMS');
+INSERT INTO dbo.InputFileTypes VALUES ( newid(), 'model', 1, 'text/plain', 'gPROMS');"
+                         ContinueOnError="no"
+                         ExecuteOnInstall="yes"/>
+          <sql:SqlString Id="SQL.SQLSTRING.Table_Applications_AspenPlus"
+                         Sequence="7"
+                         SQL="          
+INSERT INTO dbo.Applications VALUES ('AspenPlus', '0.1', null);
+INSERT INTO dbo.InputFileTypes VALUES ( newid(), 'aspenfile', 1, 'text/plain', 'AspenPlus');
+INSERT INTO dbo.InputFileTypes VALUES ( newid(), 'configuration', 1, 'text/plain', 'AspenPlus');"
+                         ContinueOnError="no"
+                         ExecuteOnInstall="yes"/>
+          <sql:SqlString Id="SQL.SQLSTRING.Table_Applications_ACM"
+                         Sequence="8"
+                         SQL="    
+INSERT INTO dbo.Applications VALUES ('ACM', '0.1', null);
+INSERT INTO dbo.InputFileTypes VALUES ( newid(), 'aspenfile', 1, 'text/plain', 'ACM');
+INSERT INTO dbo.InputFileTypes VALUES ( newid(), 'configuration', 1, 'text/plain', 'ACM');
+INSERT INTO dbo.InputFileTypes VALUES ( newid(), 'any', 0, 'application/octet-stream', 'ACM');"
+                         ContinueOnError="no"
+                         ExecuteOnInstall="yes"/>
+          <sql:SqlString Id="SQL.SQLSTRING.Table_Applications_EXCEL"
+                         Sequence="9"
+                         SQL="    
+INSERT INTO dbo.Applications VALUES ('excel', '0.1', null);
+INSERT INTO dbo.InputFileTypes VALUES ( newid(), 'spreadsheet', 1, 'text/plain', 'excel');
+INSERT INTO dbo.InputFileTypes VALUES ( newid(), 'configuration', 1, 'text/plain', 'excel');"
+                         ContinueOnError="no"
+                         ExecuteOnInstall="yes"/>
+          <sql:SqlString Id="SQL.SQLSTRING.Table_User"
+                         Sequence="10"
+                         SQL="
+INSERT INTO dbo.Users VALUES ('[PROP.TURBINE_USER]','[PROP.TURBINE_PASSWORD]');"
+                         ContinueOnError="no"
+                         ExecuteOnInstall="yes"/>
+          <sql:SqlString Id="SQL.SQLSTRING.SQL_MIXED_MODE"
+                        Sequence="11"
+                        SQL="
+EXEC xp_instance_regwrite 
+    N'HKEY_LOCAL_MACHINE', 
+    N'Software\Microsoft\MSSQLServer\MSSQLServer', 
+    N'LoginMode', 
+    REG_DWORD, 
+    2;"
+                        ExecuteOnInstall="yes"
+                        ContinueOnError="no"/>
+
+        </sql:SqlDatabase>
+        -->
+        <!-- NOTE: Validation Fails Unless CreateFolder -->
+        <CreateFolder/>
+      </Component>
+    </DirectoryRef>
+    <DirectoryRef Id="DIR.Bin.Clients">
+      <!-- Component: CONSUMERS 
+      -->
+      <Component Id="CMP.AspenSinterConsumerWindowsService" Guid="3611D749-F2FC-46BA-80CC-523D34F7E714">
+        <File Id="AspenSinterConsumerWindowsServiceId"
+              Source="bin\$(var.Configuration)\application\$(var.Configuration)\AspenSinterConsumerWindowsService.exe" KeyPath="yes"/>
+
+        <ServiceInstall Id="InstallAspenSinterConsumerWindowsService"
+                        Name="AspenConsumer"
+                        DisplayName="Turbine Aspen Consumer"
+                        Start="auto"
+                        ErrorControl="normal"
+                        Interactive="yes"
+                        Type="ownProcess"
+                        Vital="yes">
+          <util:ServiceConfig
+            ServiceName="AspenConsumer"
+            FirstFailureActionType="restart"
+            SecondFailureActionType="restart"
+            ThirdFailureActionType="reboot"
+            RestartServiceDelayInSeconds="60"
+            />
+        </ServiceInstall>
+      </Component>
+
+      <Component Id="CMP.AspenSinterConsumerWindowsService.Config"
+                 Guid="4AACD8DD-075B-468F-A7E4-4DEBC7E4F5FE">
+        <File Id="AspenSinterConsumerWindowsServiceConfigId"
+            Name="AspenSinterConsumerWindowsService.exe.config"
+            Source="bin\$(var.Configuration)\application\$(var.Configuration)\AspenSinterConsumerWindowsService.exe.config"
+            KeyPath="yes" Vital="yes"/>
+        <util:XmlFile
+            Id="AspenSinterConsumerWindowsServiceConfigSetBaseDir"
+            Action="setValue" Permanent="yes"
+            Sequence="1"
+            File="[#AspenSinterConsumerWindowsServiceConfigId]"
+            ElementPath="/configuration/userSettings/AspenSinterConsumerWindowsService.Properties.Settings/setting[\[]@name='BaseDirectory'[\]]/value"
+            Value="[DIR.Data]" />
+        <util:XmlFile
+            Id="AspenSinterConsumerWindowsServiceConfigSetLogFile"
+            Action="setValue" Permanent="yes"
+            Sequence="2"
+            File="[#AspenSinterConsumerWindowsServiceConfigId]"
+            ElementPath="/configuration/system.diagnostics/trace/listeners/add[\[]@name='SinterConsumerLogListener'[\]]"
+            Name="initializeData"
+            Value="[DIR.Logs]AspenSinterConsumerWindowsServiceLog.txt" />
+        
+        <!-- TODO: ONLY SPECIFY IF AWS IS SELECTED AS INSTALL OPTION -->
+        <util:XmlFile
+            Id="AspenSinterConsumerWindowsServiceConfigSetLogSQS"
+            Action="setValue" Permanent="yes"
+            Sequence="3"
+            File="[#AspenSinterConsumerWindowsServiceConfigId]"
+            ElementPath="/configuration/system.diagnostics/trace/listeners/add[\[]@name='SQSLogListener'[\]]"
+            Name="initializeData"
+            Value="[AWS_LOG_QUEUE]" />
+        
+        <util:XmlFile
+            Id="AspenSinterConsumerWindowsServiceConfigSetConnStr"
+            Action="setValue" Permanent="yes"
+            Sequence="4"
+            File="[#AspenSinterConsumerWindowsServiceConfigId]"
+            ElementPath="/configuration/connectionStrings/add[\[]@name='TurbineModelContainer'[\]]"
+            Name="connectionString"
+            Value="metadata=res://*/TurbineDataModel.csdl|res://*/TurbineDataModel.ssdl|res://*/TurbineDataModel.msl;provider=System.Data.SqlClient;provider connection string=&quot;Data Source=[PROP.SQLSERVER];Initial Catalog=[PROP.DATABASE];User ID=[PROP.SQL_LOGIN];Password=[PROP.SQL_PASSWORD];Persist Security Info=True;MultipleActiveResultSets=True;&quot;" />
+
+        <util:XmlFile
+            Id="AspenSinterConsumerWindowsServiceConfigSetRegion"
+            Action="setValue" Permanent="yes"
+            Sequence="5"
+            File="[#AspenSinterConsumerWindowsServiceConfigId]"
+            ElementPath="/configuration/unity/container[\[]@name='aws'[\]]/register[\[]@type='IAWSConsumerContext'[\]]/property[\[]@name='Region'[\]]"
+            Name="value"
+            Value="[AWS_REGION]" />
+        <util:XmlFile
+            Id="AspenSinterConsumerWindowsServiceConfigSetBucket"
+            Action="setValue" Permanent="yes"
+            Sequence="8"
+            File="[#AspenSinterConsumerWindowsServiceConfigId]"
+            ElementPath="/configuration/unity/container[\[]@name='aws'[\]]/register[\[]@type='IAWSConsumerContext'[\]]/property[\[]@name='Bucket'[\]]"
+            Name="value"
+            Value="[AWS_BUCKET]" />
+        <util:XmlFile
+            Id="AspenSinterConsumerWindowsServiceConfigSetAccessKey"
+            Action="setValue" Permanent="yes"
+            Sequence="9"
+            File="[#AspenSinterConsumerWindowsServiceConfigId]"
+            ElementPath="/configuration/unity/container[\[]@name='aws'[\]]/register[\[]@type='IAWSConsumerContext'[\]]/property[\[]@name='AccessKey'[\]]"
+            Name="value"
+            Value="[AWS_ACCESS_KEY]" />
+        <util:XmlFile
+            Id="AspenSinterConsumerWindowsServiceConfigSetSecretKey"
+            Action="setValue" Permanent="yes"
+            Sequence="10"
+            File="[#AspenSinterConsumerWindowsServiceConfigId]"
+            ElementPath="/configuration/unity/container[\[]@name='aws'[\]]/register[\[]@type='IAWSConsumerContext'[\]]/property[\[]@name='SecretKey'[\]]"
+            Name="value"
+            Value="[AWS_SECRET_KEY]" />
+        
+        <util:XmlFile
+            Id="AspenSinterConsumerWindowsServiceConfigSetRegionX"
+            Action="setValue" Permanent="yes"
+            Sequence="11"
+            File="[#AspenSinterConsumerWindowsServiceConfigId]"
+            ElementPath="/configuration/unity/container[\[]@name='consumer.aws.properties'[\]]/register[\[]@type='IAWSConsumerContext'[\]]/property[\[]@name='Region'[\]]"
+            Name="value"
+            Value="[AWS_REGION]" />
+        <util:XmlFile
+            Id="AspenSinterConsumerWindowsServiceConfigSetBucketX"
+            Action="setValue" Permanent="yes"
+            Sequence="12"
+            File="[#AspenSinterConsumerWindowsServiceConfigId]"
+            ElementPath="/configuration/unity/container[\[]@name='consumer.aws.properties'[\]]/register[\[]@type='IAWSConsumerContext'[\]]/property[\[]@name='Bucket'[\]]"
+            Name="value"
+            Value="[AWS_BUCKET]" />
+        <util:XmlFile
+            Id="AspenSinterConsumerWindowsServiceConfigSetAccessKeyX"
+            Action="setValue" Permanent="yes"
+            Sequence="13"
+            File="[#AspenSinterConsumerWindowsServiceConfigId]"
+            ElementPath="/configuration/unity/container[\[]@name='consumer.aws.properties'[\]]/register[\[]@type='IAWSConsumerContext'[\]]/property[\[]@name='AccessKey'[\]]"
+            Name="value"
+            Value="[AWS_ACCESS_KEY]" />
+        <util:XmlFile
+            Id="AspenSinterConsumerWindowsServiceConfigSetSecretKeyX"
+            Action="setValue" Permanent="yes"
+            Sequence="14"
+            File="[#AspenSinterConsumerWindowsServiceConfigId]"
+            ElementPath="/configuration/unity/container[\[]@name='consumer.aws.properties'[\]]/register[\[]@type='IAWSConsumerContext'[\]]/property[\[]@name='SecretKey'[\]]"
+            Name="value"
+            Value="[AWS_SECRET_KEY]" />
+        
+      </Component>
+
+      <Component Id="CMP.AspenSinterConsumerConsole" Guid="7044F1FF-258E-4156-B434-6262D4390D32">
+        <File Id="AspenSinterConsumerConsoleId" Source="bin\$(var.Configuration)\application\$(var.Configuration)\AspenSinterConsumerConsole.exe" KeyPath="yes"/>
+      </Component>
+      <Component Id="CMP.DummyConsumerConsole" Guid="84130890-8400-4E15-9D8D-92629D0D60AD">
+        <File Id="DummyConsumerConsoleId" Source="bin\$(var.Configuration)\application\$(var.Configuration)\DummyConsumerConsole.exe" KeyPath="yes"/>
+      </Component>
+      <Component Id="CMP.SinterConsumerConsole" Guid="569943DC-BE75-43E6-ACC9-FBD596CFCE00">
+        <File Id="SinterConsumerConsoleId" Source="bin\$(var.Configuration)\application\$(var.Configuration)\Turbine.Consumer.Console.dll" KeyPath="yes"/>
+      </Component>
+      
+      <Component Id="CMP.AspenSinterConsumerConsole.CONFIG"  Guid="01F58807-2E5D-4BEC-AF58-5B808D9A7D66">
+        <File Id="AspenSinterConsumerConsoleConfigId"
+            Name="AspenSinterConsumerConsole.exe.config"
+            Source="bin\$(var.Configuration)\application\$(var.Configuration)\AspenSinterConsumerConsole.exe.config"
+            KeyPath="yes" Vital="yes"/>
+        <util:XmlFile Id="XMLFile.AspenAppConfigSetBaseDir" Action="setValue" Permanent="yes"
+            File="[#AspenSinterConsumerConsoleConfigId]"
+            ElementPath="/configuration/userSettings/Turbine.Console.Properties.Settings/setting[\[]@name='BaseDirectory'[\]]/value"
+            Value="[DIR.Data]" />
+        <util:XmlFile Id="XMLFile.AspenAppConfigSetConnStr" Action="setValue" Permanent="yes"
+            File="[#AspenSinterConsumerConsoleConfigId]"
+            ElementPath="/configuration/connectionStrings/add[\[]@name='TurbineModelContainer'[\]]" Name="connectionString"
+            Value="metadata=res://*/TurbineDataModel.csdl|res://*/TurbineDataModel.ssdl|res://*/TurbineDataModel.msl;provider=System.Data.SqlClient;provider connection string=&quot;Data Source=[PROP.SQLSERVER];Initial Catalog=[PROP.DATABASE];User ID=[PROP.SQL_LOGIN];Password=[PROP.SQL_PASSWORD];Persist Security Info=True;MultipleActiveResultSets=True;&quot;" />
+      </Component>
+
+      <Component Id="CMP.Dummy.Config"  Guid="33318310-C88A-4B02-89A5-7B4E737D7E61">
+        <File Id="DummyConsumerConsoleConfigId"
+              Name="DummyConsumerConsole.exe.config"
+              Source="bin\$(var.Configuration)\application\$(var.Configuration)\DummyConsumerConsole.exe.config"
+              KeyPath="yes" Vital="yes"/>
+        <util:XmlFile Id="DummyAppConfigSetBaseDir" Action="setValue" Permanent="yes" File="[#DummyConsumerConsoleConfigId]"
+             ElementPath="/configuration/userSettings/DummyConsumerConsole.Properties.Settings/setting[\[]@name='BaseDirectory'[\]]/value"
+             Value="[DIR.Data]" />
+        <util:XmlFile Id="DummyAppConfigSetConnStr" Action="setValue" Permanent="yes" File="[#DummyConsumerConsoleConfigId]"
+             ElementPath="/configuration/connectionStrings/add[\[]@name='TurbineModelContainer'[\]]" Name="connectionString"
+             Value="metadata=res://*/TurbineDataModel.csdl|res://*/TurbineDataModel.ssdl|res://*/TurbineDataModel.msl;provider=System.Data.SqlClient;provider connection string=&quot;Data Source=[PROP.SQLSERVER];Initial Catalog=[PROP.DATABASE];User ID=[PROP.SQL_LOGIN];Password=[PROP.SQL_PASSWORD];Persist Security Info=True;MultipleActiveResultSets=True;&quot;" />
+      </Component>
+
+      <?ifdef Debug ?>
+
+      <?endif?>
+
+    </DirectoryRef>
+    
+    <!--
+    FEATURES
+    -->
+    <Feature Id="Feature.Consumers"
+     Title="Gateway Consumers (Aspen,gPROMS,Excel)"
+     Description="Consumer components (workers) and utilities."
+     Level="3">
+
+      <Feature Id="Feature.ConsumerScheduledTasks"
+           Title="Consumer Scheduled Tasks"
+           Description="Periodically deletes working directories to free space"
+           Level="5">
+        <ComponentGroupRef Id="Product.Generated" />
+      </Feature>
+      <Feature Id="Feature.S3Logger"
+           Title="S3 Log Uploader"
+           Description="Periodically upLoads Logs up to a S3 Bucket"
+           Level="5">
+        <ComponentGroupRef Id="CG.Turbine.S3Logger"/>
+        <ComponentGroupRef Id="Product.Generated" />
+      </Feature>
+      
+      <Feature Id="Feature.ExcelConsumer"
+               Title="Excel 2010 Consumer"
+               Description="Excel 2010 Consumer executes spreadsheets"
+               Level="2">
+        <ComponentGroupRef Id="CG.Turbine.Common"/>
+        <ComponentGroupRef Id="CG.Turbine.ExcelSinterConsumer"/>
+        <ComponentGroupRef Id="Product.Generated" />
+      </Feature>
+      
+      <Feature Id="Feature.AspenConsumer"
+               Title="AspenConsumer"
+               Description="Aspen Consumer Windows server that executes AspenPlus or ACM simulations submitted to the gateway/database specified in properties."
+               Level="2">
+        <ComponentRef Id="CMP.Common.AWSSDK.DLL"/>
+        <ComponentGroupRef Id="CG.Turbine.Common"/>
+        <ComponentGroupRef Id="CG.Turbine.AspenSinterConsumer"/>
+        <ComponentGroupRef Id="CG.Turbine.ConsumerTasks"/>
+
+        <!-- Note: The following ComponentGroupRef is required to pull in generated 
+        authoring from project references. -->
+        <ComponentGroupRef Id="Product.Generated" />
+      </Feature>
+
+    </Feature>
+
+    <Feature Id="Feature.Gateway"
+             Title="Core Gateway Components"
+             Description="Core gateway components that should be installed once (single tier or multiple tier deployments)"
+             Level="3">
+      
+      <Feature Id="Feature.Database"
+               Title="Database"
+               Description="Shared Database"
+               Level="3">
+        <ComponentGroupRef Id="CG.Turbine.Common"/>
+        <ComponentGroupRef Id="CG.Turbine.Database"/>
+        <!-- Note: The following ComponentGroupRef is required to pull in generated 
+        authoring from project references. -->
+        <ComponentGroupRef Id="Product.Generated" />
+      
+        <!--
+          <Condition Message="SQL SERVER MUST BE SET TO MIXED MODE:  PROP.SQL_SERVER_DEFAULT=[PROP.SQL_SERVER_DEFAULT], PROP.SQL_SERVER_DEFAULT64=[PROP.SQL_SERVER_DEFAULT64]">
+      Installed OR PROP.SQL_SERVER_DEFAULT = "#2" OR PROP.SQL_SERVER_DEFAULT64 = "#2"
+    </Condition>
+    -->
+
+      
+      </Feature>
+
+      <Feature Id="Feature.Web"
+           Title="Web API"
+           Description="RESTful HTTP API Web Producer"
+           Level="3">
+        <ComponentGroupRef Id="CG.Turbine.Common"/>
+        <ComponentGroupRef Id="CG.Turbine.Web.App"/>
+        <!-- Note: The following ComponentGroupRef is required to pull in generated 
+        authoring from project references. -->
+        <ComponentGroupRef Id="Product.Generated" />
+      </Feature>
+
+      <Feature Id="Feature.Orchestrator"
+           Title="AWS Orchestrator"
+           Description="Set of Windows Tasks that maintain the database and SQS Queues and AWS Functionality"
+           Level="2">
+        
+        <ComponentGroupRef Id="CG.Turbine.Common"/>
+        <ComponentGroupRef Id="CG.Turbine.Orchestrator"/>
+
+        <!-- Note: The following ComponentGroupRef is required to pull in generated 
+        authoring from project references. -->
+        <ComponentGroupRef Id="Product.Generated" />
+        <?ifdef Debug ?>
+        <?endif?>
+      </Feature>
+    </Feature>
+
+    <Feature Id="Feature.Utilities"
+             Title="Utilities"
+             Description="tools not required for gateway deployments"
+             Level="5">
+      <Feature Id="Feature.ConsoleSinter"
+               Title="Console Sinter"
+               Description="Console tool for running Sinter directly"
+               Level="5">
+        <ComponentGroupRef Id="CG.Turbine.Common"/>
+      </Feature>
+    </Feature>
+
+    <!--  
+    CONDITIONS:
+    
+    When using EC2Config to install these CA's fail (Windows Installer Error 1603 or 1722) when executed after InstallFinalize.  impersonate
+    does not work.  Setting Return to ignore allows the installer to complete, but the task will not be available and the MSI is not registered..
+    
+    -->
+    <Condition Message="Require Windows 2008 Server or higher">
+      <![CDATA[Installed OR VersionNT >= 600]]>
+    </Condition>
+
+    <CustomAction Id="CA.INSTALL.AUTOSCALE_SQS" 
+                  Execute="commit" 
+                  Directory="DIR.Orchestrator.Tasks"
+                  ExeCommand="&quot;[SystemFolder]SCHTASKS.EXE&quot; /CREATE /XML turbine_autoscale_sqs.xml /TN TurbineAutoscaleSQS"
+                  />
+    <CustomAction Id="CA.INSTALL.CONSUMER_CLEANER"
+                  Execute="commit"
+                  Directory="DIR.Consumer.Tasks"
+                  ExeCommand="&quot;[SystemFolder]SCHTASKS.EXE&quot; /CREATE /XML turbine_consumer_cleaner.xml /TN TurbineConsumerCleaner"
+                  />
+    <CustomAction Id="CA.INSTALL.CONSUMER_SWEEPER"
+                  Execute="commit"
+                  Directory="DIR.Orchestrator.Tasks"
+                  ExeCommand="&quot;[SystemFolder]SCHTASKS.EXE&quot; /CREATE /XML turbine_db_consumer_sweeper.xml /TN TurbineConsumerSweeper"
+                  />
+    <CustomAction Id="CA.INSTALL.JOB_RUN_SWEEPER"
+                  Execute="commit"
+                  Directory="DIR.Orchestrator.Tasks"
+                  ExeCommand="&quot;[SystemFolder]SCHTASKS.EXE&quot; /CREATE /XML turbine_db_jobs_run_sweeper.xml /TN TurbineJobRunSweeper"
+                  />
+    <CustomAction Id="CA.INSTALL.JOB_SUBMIT_SWEEPER"
+                  Execute="commit"
+                  Directory="DIR.Orchestrator.Tasks"
+                  ExeCommand="&quot;[SystemFolder]SCHTASKS.EXE&quot; /CREATE /XML turbine_db_jobs_setup_sweeper.xml /TN TurbineJobSetupSweeper"
+                  />
+
+    <CustomAction Id="CA.INSTALL.S3Logger"
+                  Execute="commit"
+                  Directory="DIR.Orchestrator.Tasks"
+                  ExeCommand="&quot;[SystemFolder]SCHTASKS.EXE&quot; /CREATE /XML turbine_log_upload_s3.xml /TN TurbineS3Logger"
+                  />
+    
+    <!--
+    <CustomAction Id="CA.CREATE.SETUP_SCRIPT"
+                  Execute="commit"
+                  Directory="DIR.Orchestrator.Tasks"
+                  ExeCommand="&quot;C:\WINDOWS\system32\WindowsPowerShell\v1.0\powershell.exe&quot; "
+                  />
+    
+    $SUBMIT_QUEUE = "https://us-west-1.queue.amazonaws.com/754323349409/SubmitRequestQueue"
+
+    -->
+
+    <!--#################################################
+        #   Installation Sequence
+        #################################################-->
+
+    <InstallUISequence>
+      <!-- Database -->
+      <Custom Action="CA.CHECK.SQL_LOGIN" After="ProgressDlg">
+        <![CDATA[NOT Installed AND PROP.SQL_LOGIN = ""]]>
+      </Custom>
+      <Custom Action="CA.CHECK.SQL_PASSWORD" After="CA.CHECK.SQL_LOGIN">
+        <![CDATA[NOT Installed AND PROP.SQL_PASSWORD = ""]]>
+      </Custom>
+
+      <!-- Web Login -->
+      <Custom Action="CA.CHECK.TURBINE_USER" After="CA.CHECK.SQL_PASSWORD">
+        <![CDATA[NOT Installed AND (&Feature.Database = 3) AND PROP.TURBINE_USER = ""]]>
+      </Custom>
+      <Custom Action="CA.CHECK.TURBINE_PASSWORD" After="CA.CHECK.TURBINE_USER">
+        <![CDATA[NOT Installed AND (&Feature.Database = 3) AND PROP.TURBINE_PASSWORD = ""]]>
+      </Custom>
+
+      <Custom Action="CA.SetSecurityToken.1" Before="CA.DATABASE_WARNING">
+        <![CDATA[NOT Installed AND (&Feature.Database = 3)]]>
+      </Custom>
+      <Custom Action="CA.SetSecurityToken.2" After="CA.SetSecurityToken.1">
+        <![CDATA[NOT Installed AND (&Feature.Database = 3)]]>
+      </Custom>
+
+      <!-- Database -->
+      <Custom Action="CA.CHECK.SQL_SERVER_DEFAULT_INSTANCE" After="CA.CHECK.SQL_PASSWORD">
+        <![CDATA[NOT Installed AND (&Feature.Database = 3) AND (PROP.SQL_SERVER_DEFAULT = "" AND PROP.SQL_SERVER_DEFAULT64 = "")]]>
+      </Custom>
+
+      <Custom Action="CA.DATABASE_WARNING" After="CA.CHECK.SQL_SERVER_DEFAULT_INSTANCE">
+        <![CDATA[NOT Installed AND (&Feature.Database = 3)]]>
+      </Custom>
+
+      <Custom Action="CA.CHECK.EXCEL" After="CA.DATABASE_WARNING">
+        <![CDATA[NOT Installed AND (&Feature.ExcelConsumer = 3) AND NOT (PROP.MSOFFICE_EXCEL OR PROP.MSOFFICE_EXCEL64)]]>
+      </Custom>
+
+    </InstallUISequence>    
+    
+    <InstallExecuteSequence>
+      <!-- CONSUMER TASK/SCRIPT -->
+      <Custom Action="CA.INSTALL.CONSUMER_CLEANER" After="InstallInitialize">
+        <![CDATA[NOT Installed AND (&Feature.ConsumerScheduledTasks > 2)]]>
+      </Custom>
+      
+      <!-- Database -->
+      <!--
+      <Custom Action="CA.INSTALL.SQL_SERVER" After="CostFinalize">
+        <![CDATA[&Feature.Database > 2]]> 
+      </Custom>     
+      
+      <Custom Action="CA.CHECK.SQL_SERVER" After="CostInitialize" >
+        <![CDATA[&Feature.Database > 2]]> 
+      </Custom>          
+      -->
+      
+      <!-- ORCHESTRATOR TASK/SCRIPTS -->
+      <Custom Action="CA.INSTALL.AUTOSCALE_SQS" After="InstallInitialize">
+        <![CDATA[&Feature.Orchestrator > 2]]>
+      </Custom>
+      <Custom Action="CA.INSTALL.CONSUMER_SWEEPER" After="InstallInitialize">
+        <![CDATA[&Feature.Orchestrator > 2]]>
+      </Custom>
+      <Custom Action="CA.INSTALL.JOB_RUN_SWEEPER" After="InstallInitialize">
+        <![CDATA[&Feature.Orchestrator > 2]]>
+      </Custom>
+      <Custom Action="CA.INSTALL.JOB_SUBMIT_SWEEPER" After="InstallInitialize">
+        <![CDATA[&Feature.Orchestrator > 2]]>
+      </Custom>
+      <Custom Action="CA.INSTALL.S3Logger" After="InstallInitialize">
+        <![CDATA[&Feature.S3Logger > 2]]>
+      </Custom>      
+    </InstallExecuteSequence>
+
+    <Property Id="PROP.SQL_USERID" Value="uturbine"/>
+    <Property Id="PROP.SQL_LOGIN" Value="uturbineX"/>
+    <Property Id="PROP.SQL_PASSWORD" Value="X3n0F0b3"/>
+    <Property Id="PROP.TURBINE_USER"/>
+    <Property Id="PROP.TURBINE_PASSWORD"/>
+    
+    <!-- Properties That must be set by user -->
+    <!-- Consumer Windows Service:  AWS Context -->
+    <Property Id="AWS_REGION" Value="REPLACE"/>
+    <Property Id="AWS_BUCKET" Value="REPLACE"/>
+    <Property Id="AWS_ACCESS_KEY" Value="REPLACE"/>
+    <Property Id="AWS_SECRET_KEY" Value="REPLACE"/>
+    <Property Id="AWS_LOG_QUEUE" Value="REPLACE"/>
+    <!--
+    <Condition Message ="Ochestrator Requires PROP.AMI to be specified">
+      <![CDATA[Installed OR ( Level >= 4 OR ADDLOCAL >< FEATURE.ORCHESTRATOR ) ]]>
+    </Condition>
+    -->
+  </Product>
+</Wix>

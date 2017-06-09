@@ -1,0 +1,173 @@
+{
+  "title": "Simple Excel Sinter Test",
+  "description": "A simple test for Excel Sinter.  It calculates BMI.",
+  "spreadsheet": "exceltest.xlsm",
+  "author": "Jim Leek",
+  "date": "2012-05-04",
+  "filetype": "sinterconfig",
+  "version": 0.2,
+  "settings": {
+    "macro": {
+      "type": "string",
+      "default": "RunSinter",
+      "description": "The name of the macro to run"
+    }
+  },
+  "inputs": {
+    "height.jim": {
+      "path": [
+        "height$C$2"
+      ],
+      "type": "double",
+      "default": 74.0,
+      "description": "Jim's Height in inches",
+      "units": null,
+      "min": 70.0,
+      "max": 78.0
+    },
+    "weight.jim": {
+      "path": [
+        "weight$C$2",
+        "weight$F$6"
+      ],
+      "type": "double",
+      "default": 167.0,
+      "description": "Jim's Weight in pounds",
+      "units": null,
+      "min": 160.0,
+      "max": 170.0
+    },
+    "height.joe": {
+      "path": [
+        "height$C$3"
+      ],
+      "type": "double",
+      "default": 24.0,
+      "description": "Joe's Height in inches",
+      "units": null,
+      "min": 20.0,
+      "max": 30.0
+    },
+    "weight.joe": {
+      "path": [
+        "weight$C$3"
+      ],
+      "type": "double",
+      "default": 100.0,
+      "description": "Joe's Weight in pounds",
+      "units": null,
+      "min": 80.0,
+      "max": 200.0
+    },
+    "height.mama": {
+      "path": [
+        "height$C$4"
+      ],
+      "type": "double",
+      "default": 63.0,
+      "description": "Yo Mama's Height in inches",
+      "units": null,
+      "min": 60.0,
+      "max": 70.0
+    },
+    "weight.mama": {
+      "path": [
+        "weight$C$4"
+      ],
+      "type": "double",
+      "default": 200.0,
+      "description": "Yo Mama's Weight in pounds",
+      "units": null,
+      "min": 160.0,
+      "max": 240.0
+    },
+    "height.vector": {
+      "path": [
+        "height$A$6"
+      ],
+      "type": "double[3]",
+      "default": [
+        2.0,
+        3.0,
+        4.0
+      ],
+      "description": "Just 3 numbers to multiply",
+      "units": null,
+      "min": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "max": [
+        5.0,
+        5.0,
+        5.0
+      ]
+    },
+    "weight.vector": {
+      "path": [
+        "weight$A$6"
+      ],
+      "type": "double[3]",
+      "default": [
+        1.0,
+        3.0,
+        5.0
+      ],
+      "description": "Just 3 numbers to multiply",
+      "units": null,
+      "min": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "max": [
+        5.0,
+        5.0,
+        5.0
+      ]
+    }
+  },
+  "outputs": {
+    "BMI.jim": {
+      "path": [
+        "BMI$C$2"
+      ],
+      "type": "double",
+      "default": 21.439189189189189,
+      "description": "Jim's BMI",
+      "units": null
+    },
+    "BMI.joe": {
+      "path": [
+        "BMI$C$3"
+      ],
+      "type": "double",
+      "default": 122.0486111111111,
+      "description": "Joe's BMI",
+      "units": null
+    },
+    "BMI.mama": {
+      "path": [
+        "BMI$C$4"
+      ],
+      "type": "double",
+      "default": 35.424540186444951,
+      "description": "Yo Mama's BMI",
+      "units": null
+    },
+    "BMI.vector": {
+      "path": [
+        "BMI$A$6"
+      ],
+      "type": "double[3]",
+      "default": [
+        2.0,
+        9.0,
+        20.0
+      ],
+      "description": "The result of multiplication",
+      "units": null
+    }
+  }
+}

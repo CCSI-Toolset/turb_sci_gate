@@ -1,0 +1,242 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{879FD991-DEE4-49CB-B7B0-A6A54A8C4C32}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>SinterIntegrationTest</RootNamespace>
+    <AssemblyName>SinterIntegrationTest</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+    <ReferencePath>$(ProgramFiles)\Common Files\microsoft shared\VSTT\$(VisualStudioVersion)\UITestExtensionPackages</ReferencePath>
+    <IsCodedUITest>False</IsCodedUITest>
+    <TestProjectType>UnitTest</TestProjectType>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Interop.AspenCustomModelerLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=e6742d51acbe1950, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+      <HintPath>$(MSBuildProgramFiles32)\AspenTech\Aspen Custom Modeler V8.4\Examples\SSMeth\Interop.AspenCustomModelerLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\TurbineLite\packages\Newtonsoft.Json.8.0.2\lib\net40\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Sinter">
+      <HintPath>$(MSBuildProgramFiles32)\CCSI\SimSinter\Sinter.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.ServiceModel.DomainServices.EntityFramework, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+  </ItemGroup>
+  <Choose>
+    <When Condition="('$(VisualStudioVersion)' == '10.0' or '$(VisualStudioVersion)' == '') and '$(TargetFrameworkVersion)' == 'v3.5'">
+      <ItemGroup>
+        <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+      </ItemGroup>
+    </When>
+    <Otherwise>
+      <ItemGroup>
+        <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework" />
+      </ItemGroup>
+    </Otherwise>
+  </Choose>
+  <ItemGroup>
+    <Compile Include="InMemorySinterConsumerGProms.cs" />
+    <Compile Include="InMemoryJobGProms_BufferTank_FO.cs" />
+    <Compile Include="InMemoryJobACM_BFBv6_3.cs" />
+    <Compile Include="InMemoryJobACM_BFBCap.cs" />
+    <Compile Include="InMemoryJobACM_VdV_Dynamic.cs" />
+    <Compile Include="InMemorySinterConsumerAspenPlusMonitor.cs" />
+    <Compile Include="InMemorySinterConsumerAspenPlus.cs" />
+    <Compile Include="InMemoryJobACM.cs" />
+    <Compile Include="InMemoryJobAspenPlus.cs" />
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="SystemContext.cs" />
+    <Compile Include="InMemorySinterConsumer.cs" />
+    <Compile Include="ConsumerRegistrationContract.cs" />
+    <Compile Include="ConsumerContext.cs" />
+    <Compile Include="InMemoryJob.cs" />
+    <Compile Include="InMemoryProcess.cs" />
+    <Compile Include="ConsumerJobContract.cs" />
+    <Compile Include="JobQueue.cs" />
+    <Compile Include="SimSinter_v8_4_Test.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Turbine.Consumer.AspenTech\Turbine.Consumer.AspenTech.csproj">
+      <Project>{21d3c04f-6fc7-40f7-9f78-4d35cf9b0783}</Project>
+      <Name>Turbine.Consumer.AspenTech</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Turbine.Consumer.Contract.Behaviors\Turbine.Consumer.Contract.Behaviors.csproj">
+      <Project>{0866f140-3bd7-4aa3-9b1c-7096b6721d99}</Project>
+      <Name>Turbine.Consumer.Contract.Behaviors</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Turbine.Consumer.Data.Contract.Behaviors\Turbine.Consumer.Data.Contract.Behaviors.csproj">
+      <Project>{f992559e-6820-4341-a489-1af82f9fc8a5}</Project>
+      <Name>Turbine.Consumer.Data.Contract.Behaviors</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Turbine.Consumer.GProms\Turbine.Consumer.GProms.csproj">
+      <Project>{0ee769e3-7c0f-431a-a40a-bd97111a4aff}</Project>
+      <Name>Turbine.Consumer.GProms</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Turbine.Consumer.SimSinter\Turbine.Consumer.SimSinter.csproj">
+      <Project>{55421127-33da-4f08-b99c-ceaf790c694e}</Project>
+      <Name>Turbine.Consumer.SimSinter</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Turbine.Consumer\Turbine.Consumer.csproj">
+      <Project>{20973a51-d353-4f60-802c-7ad3a50989f2}</Project>
+      <Name>Turbine.Consumer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Turbine.Data.Contract.Behaviors\Turbine.Data.Contract.Behaviors.csproj">
+      <Project>{f6e67385-2ebd-412a-a31c-9920610eea1e}</Project>
+      <Name>Turbine.Data.Contract.Behaviors</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Turbine.Data.Entities\Turbine.Data.Entities.csproj">
+      <Project>{3ea3a2a9-ed28-4cdd-84be-11a65b68834f}</Project>
+      <Name>Turbine.Data.Entities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Turbine.Data.Serialize\Turbine.Data.Serialize.csproj">
+      <Project>{fcc0496b-3c87-4030-8630-2a3a08181408}</Project>
+      <Name>Turbine.Data.Serialize</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Turbine.DataEF6.Contract\Turbine.DataEF6.Contract.csproj">
+      <Project>{3ff93c52-d576-4e80-81a4-aebfd7f1f4fc}</Project>
+      <Name>Turbine.DataEF6.Contract</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Turbine.DataEF6\Turbine.DataEF6.csproj">
+      <Project>{7c0fa46a-937d-44e0-ad71-d96f383fa4ca}</Project>
+      <Name>Turbine.DataEF6</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="models\BFBv6_3_new\AM_BFB_v6.3_Process_SS_total_opt_no_trim_mod\snapshot.bak">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="models\BFBv6_3_new\BFBv6_3_new.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="models\BFBv6_3_new\BFB_v6.3_Process_SS_total_opt_no_trim_mod.acmf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="models\BFBv6_3_new\OUU_paper2_design_test_02.foqus">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="models\BFB_Cap\BFB_cap_ouu.foqus" />
+    <None Include="models\BFB_Cap\BFB_cap_ouu_test_input.json" />
+    <None Include="models\BFB_Cap\BFB_cap_ouu_test_output.json" />
+    <None Include="models\BFB_Cap\BFB_OUU_COE.acmf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="models\BFB_Cap\BFB_OUU_COE_opt.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="models\BFB_Cap\BFB_OUU_COE_sim.json" />
+    <None Include="models\BFB_Cap\steam_correlation.xlsx" />
+    <None Include="models\BufferTank_FO\BufferTank_FO.gENCRYPT">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="models\BufferTank_FO\BufferTank_FO.gPJ">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="models\BufferTank_FO\BufferTank_FO.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="models\BufferTank_FO\BufferTank_inputs.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="models\Hybrid_v0.51_rev1.1_UQ_0809.acmf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="models\Hybrid_v0.51_rev1.1_UQ_0809_sinter.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="models\mea-abs-sinter.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="models\mea-abs.bkp">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="models\VdV_Reactor\VdV_Reactor.acmf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="models\VdV_Reactor\VdV_Reactor_Dynamic_Config.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="models\VdV_Reactor\VdV_Reactor_Dynamic_Input.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="models\BFB_Cap\test_procedure.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup />
+  <Choose>
+    <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
+      <ItemGroup>
+        <Reference Include="Microsoft.VisualStudio.QualityTools.CodedUITestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+          <Private>False</Private>
+        </Reference>
+        <Reference Include="Microsoft.VisualStudio.TestTools.UITest.Common, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+          <Private>False</Private>
+        </Reference>
+        <Reference Include="Microsoft.VisualStudio.TestTools.UITest.Extension, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+          <Private>False</Private>
+        </Reference>
+        <Reference Include="Microsoft.VisualStudio.TestTools.UITesting, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+          <Private>False</Private>
+        </Reference>
+      </ItemGroup>
+    </When>
+  </Choose>
+  <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

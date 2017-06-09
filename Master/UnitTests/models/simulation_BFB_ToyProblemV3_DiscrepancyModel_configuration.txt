@@ -1,0 +1,3447 @@
+{
+  "title": "BFB_ToyProblem_Discrepancy",
+  "description": "Single-stage bubbling fluidized bed model with embedded kinetic and equilibrium discrepancy. Based on new reality function post-CCSI Fall'13 Meeting.",
+  "aspenfile": "BFBv5.2.2toyModel2_PMv5.0.acmf",
+  "author": "Priyadarshi Mahapatra",
+  "date": "1/7/2014",
+  "filetype": "sinterconfig",
+  "version": 0.2,
+  "settings": {
+    "homotopy": {
+      "type": "int",
+      "default": 1,
+      "description": "Simulation specific setting: homotopy"
+    },
+    "printlevel": {
+      "type": "int",
+      "default": 0,
+      "description": "Simulation specific setting: printlevel"
+    }
+  },
+  "inputs": {
+    "dH": {
+      "path": [
+        "BFBads.dH"
+      ],
+      "type": "double",
+      "default": -104920,
+      "description": "Heat of Reaction for Carbamate Formation",
+      "units": "",
+      "min": -150000.0,
+      "max": -50000.0
+    },
+    "dS": {
+      "path": [
+        "BFBads.dS"
+      ],
+      "type": "double",
+      "default": -231.06,
+      "description": "Reaction Entropy for Carbamate Formation",
+      "units": "",
+      "min": -350.0,
+      "max": -150.0
+    },
+    "Ex": {
+      "path": [
+        "BFBads.Ex"
+      ],
+      "type": "double",
+      "default": 66002,
+      "description": "Activation Energy for Carbamate Formation",
+      "units": "",
+      "min": 40000.0,
+      "max": 90000.0
+    },
+    "Zx": {
+      "path": [
+        "BFBads.Zx"
+      ],
+      "type": "double",
+      "default": 3.7841,
+      "description": "Arrhenius Constant for Carbamate Formation",
+      "units": "",
+      "min": 2.0,
+      "max": 5.0
+    },
+    "nv": {
+      "path": [
+        "BFBads.nv"
+      ],
+      "type": "double",
+      "default": 1910.4,
+      "description": "Amine Loading of Sorbent",
+      "units": "",
+      "min": 1000.0,
+      "max": 4000.0
+    },
+    "BetaKe1": {
+      "path": [
+        "BFBads.BetaKe(1)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Equilibrium-Discrepancy Coefficient for Term-1",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "BetaKe2": {
+      "path": [
+        "BFBads.BetaKe(2)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Equilibrium-Discrepancy Coefficient for Term-2",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "BetaKe3": {
+      "path": [
+        "BFBads.BetaKe(3)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Equilibrium-Discrepancy Coefficient for Term-3",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "BetaKe4": {
+      "path": [
+        "BFBads.BetaKe(4)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Equilibrium-Discrepancy Coefficient for Term-4",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "BetaKe5": {
+      "path": [
+        "BFBads.BetaKe(5)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Equilibrium-Discrepancy Coefficient for Term-5",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "BetaKe6": {
+      "path": [
+        "BFBads.BetaKe(6)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Equilibrium-Discrepancy Coefficient for Term-6",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "BetaKe7": {
+      "path": [
+        "BFBads.BetaKe(7)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Equilibrium-Discrepancy Coefficient for Term-7",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "BetaKe8": {
+      "path": [
+        "BFBads.BetaKe(8)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Equilibrium-Discrepancy Coefficient for Term-8",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "BetaKe9": {
+      "path": [
+        "BFBads.BetaKe(9)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Equilibrium-Discrepancy Coefficient for Term-9",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "BetaKe10": {
+      "path": [
+        "BFBads.BetaKe(10)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Equilibrium-Discrepancy Coefficient for Term-10",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "BetaKe11": {
+      "path": [
+        "BFBads.BetaKe(11)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Equilibrium-Discrepancy Coefficient for Term-11",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "BetaKe12": {
+      "path": [
+        "BFBads.BetaKe(12)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Equilibrium-Discrepancy Coefficient for Term-12",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "BetaKe13": {
+      "path": [
+        "BFBads.BetaKe(13)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Equilibrium-Discrepancy Coefficient for Term-13",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "BetaKe14": {
+      "path": [
+        "BFBads.BetaKe(14)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Equilibrium-Discrepancy Coefficient for Term-14",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "BetaKe15": {
+      "path": [
+        "BFBads.BetaKe(15)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Equilibrium-Discrepancy Coefficient for Term-15",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "BetaKe16": {
+      "path": [
+        "BFBads.BetaKe(16)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Equilibrium-Discrepancy Coefficient for Term-16",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "BetaKe17": {
+      "path": [
+        "BFBads.BetaKe(17)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Equilibrium-Discrepancy Coefficient for Term-17",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "BetaKe18": {
+      "path": [
+        "BFBads.BetaKe(18)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Equilibrium-Discrepancy Coefficient for Term-18",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "BetaKe19": {
+      "path": [
+        "BFBads.BetaKe(19)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Equilibrium-Discrepancy Coefficient for Term-19",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "BetaKe20": {
+      "path": [
+        "BFBads.BetaKe(20)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Equilibrium-Discrepancy Coefficient for Term-20",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "BetaKe21": {
+      "path": [
+        "BFBads.BetaKe(21)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Equilibrium-Discrepancy Coefficient for Term-21",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "BetaKe22": {
+      "path": [
+        "BFBads.BetaKe(22)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Equilibrium-Discrepancy Coefficient for Term-22",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "BetaKe23": {
+      "path": [
+        "BFBads.BetaKe(23)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Equilibrium-Discrepancy Coefficient for Term-23",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "BetaKe24": {
+      "path": [
+        "BFBads.BetaKe(24)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Equilibrium-Discrepancy Coefficient for Term-24",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "BetaKe25": {
+      "path": [
+        "BFBads.BetaKe(25)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Equilibrium-Discrepancy Coefficient for Term-25",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "BetaKe26": {
+      "path": [
+        "BFBads.BetaKe(26)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Equilibrium-Discrepancy Coefficient for Term-26",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "BetaKe27": {
+      "path": [
+        "BFBads.BetaKe(27)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Equilibrium-Discrepancy Coefficient for Term-27",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "BetaKe28": {
+      "path": [
+        "BFBads.BetaKe(28)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Equilibrium-Discrepancy Coefficient for Term-28",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "BetaKe29": {
+      "path": [
+        "BFBads.BetaKe(29)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Equilibrium-Discrepancy Coefficient for Term-29",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "BetaKe30": {
+      "path": [
+        "BFBads.BetaKe(30)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Equilibrium-Discrepancy Coefficient for Term-30",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "BetaKe31": {
+      "path": [
+        "BFBads.BetaKe(31)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Equilibrium-Discrepancy Coefficient for Term-31",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "BetaKe32": {
+      "path": [
+        "BFBads.BetaKe(32)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Equilibrium-Discrepancy Coefficient for Term-32",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "BetaKe33": {
+      "path": [
+        "BFBads.BetaKe(33)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Equilibrium-Discrepancy Coefficient for Term-33",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "BetaKe34": {
+      "path": [
+        "BFBads.BetaKe(34)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Equilibrium-Discrepancy Coefficient for Term-34",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "BetaKe35": {
+      "path": [
+        "BFBads.BetaKe(35)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Equilibrium-Discrepancy Coefficient for Term-35",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "BetaKe36": {
+      "path": [
+        "BFBads.BetaKe(36)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Equilibrium-Discrepancy Coefficient for Term-36",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "BetaKe37": {
+      "path": [
+        "BFBads.BetaKe(37)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Equilibrium-Discrepancy Coefficient for Term-37",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "BetaKe38": {
+      "path": [
+        "BFBads.BetaKe(38)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Equilibrium-Discrepancy Coefficient for Term-38",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "BetaKe39": {
+      "path": [
+        "BFBads.BetaKe(39)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Equilibrium-Discrepancy Coefficient for Term-39",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "BetaKe40": {
+      "path": [
+        "BFBads.BetaKe(40)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Equilibrium-Discrepancy Coefficient for Term-40",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "BetaKe41": {
+      "path": [
+        "BFBads.BetaKe(41)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Equilibrium-Discrepancy Coefficient for Term-41",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "BetaKe42": {
+      "path": [
+        "BFBads.BetaKe(42)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Equilibrium-Discrepancy Coefficient for Term-42",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "BetaKe43": {
+      "path": [
+        "BFBads.BetaKe(43)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Equilibrium-Discrepancy Coefficient for Term-43",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "BetaKe44": {
+      "path": [
+        "BFBads.BetaKe(44)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Equilibrium-Discrepancy Coefficient for Term-44",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "BetaKe45": {
+      "path": [
+        "BFBads.BetaKe(45)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Equilibrium-Discrepancy Coefficient for Term-45",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "BetaKe46": {
+      "path": [
+        "BFBads.BetaKe(46)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Equilibrium-Discrepancy Coefficient for Term-46",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "BetaKe47": {
+      "path": [
+        "BFBads.BetaKe(47)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Equilibrium-Discrepancy Coefficient for Term-47",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "BetaKe48": {
+      "path": [
+        "BFBads.BetaKe(48)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Equilibrium-Discrepancy Coefficient for Term-48",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "BetaKe49": {
+      "path": [
+        "BFBads.BetaKe(49)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Equilibrium-Discrepancy Coefficient for Term-49",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "BetaKe50": {
+      "path": [
+        "BFBads.BetaKe(50)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Equilibrium-Discrepancy Coefficient for Term-50",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "BetaKe51": {
+      "path": [
+        "BFBads.BetaKe(51)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Equilibrium-Discrepancy Coefficient for Term-51",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "BetaKe52": {
+      "path": [
+        "BFBads.BetaKe(52)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Equilibrium-Discrepancy Coefficient for Term-52",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "BetaKe53": {
+      "path": [
+        "BFBads.BetaKe(53)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Equilibrium-Discrepancy Coefficient for Term-53",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "BetaKe54": {
+      "path": [
+        "BFBads.BetaKe(54)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Equilibrium-Discrepancy Coefficient for Term-54",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "BetaKe55": {
+      "path": [
+        "BFBads.BetaKe(55)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Equilibrium-Discrepancy Coefficient for Term-55",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "BetaKe56": {
+      "path": [
+        "BFBads.BetaKe(56)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Equilibrium-Discrepancy Coefficient for Term-56",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "BetaKe57": {
+      "path": [
+        "BFBads.BetaKe(57)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Equilibrium-Discrepancy Coefficient for Term-57",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "BetaKe58": {
+      "path": [
+        "BFBads.BetaKe(58)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Equilibrium-Discrepancy Coefficient for Term-58",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "BetaKe59": {
+      "path": [
+        "BFBads.BetaKe(59)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Equilibrium-Discrepancy Coefficient for Term-59",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "BetaKe60": {
+      "path": [
+        "BFBads.BetaKe(60)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Equilibrium-Discrepancy Coefficient for Term-60",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "BetaKe61": {
+      "path": [
+        "BFBads.BetaKe(61)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Equilibrium-Discrepancy Coefficient for Term-61",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "BetaKe62": {
+      "path": [
+        "BFBads.BetaKe(62)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Equilibrium-Discrepancy Coefficient for Term-62",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "BetaKe63": {
+      "path": [
+        "BFBads.BetaKe(63)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Equilibrium-Discrepancy Coefficient for Term-63",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "BetaKe64": {
+      "path": [
+        "BFBads.BetaKe(64)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Equilibrium-Discrepancy Coefficient for Term-64",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "BetaKe65": {
+      "path": [
+        "BFBads.BetaKe(65)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Equilibrium-Discrepancy Coefficient for Term-65",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "BetaKe66": {
+      "path": [
+        "BFBads.BetaKe(66)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Equilibrium-Discrepancy Coefficient for Term-66",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "BetaKe67": {
+      "path": [
+        "BFBads.BetaKe(67)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Equilibrium-Discrepancy Coefficient for Term-67",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "BetaKe68": {
+      "path": [
+        "BFBads.BetaKe(68)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Equilibrium-Discrepancy Coefficient for Term-68",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "BetaKe69": {
+      "path": [
+        "BFBads.BetaKe(69)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Equilibrium-Discrepancy Coefficient for Term-69",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "BetaKe70": {
+      "path": [
+        "BFBads.BetaKe(70)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Equilibrium-Discrepancy Coefficient for Term-70",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "BetaKe71": {
+      "path": [
+        "BFBads.BetaKe(71)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Equilibrium-Discrepancy Coefficient for Term-71",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "BetaKe72": {
+      "path": [
+        "BFBads.BetaKe(72)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Equilibrium-Discrepancy Coefficient for Term-72",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "BetaKe73": {
+      "path": [
+        "BFBads.BetaKe(73)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Equilibrium-Discrepancy Coefficient for Term-73",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "BetaKe74": {
+      "path": [
+        "BFBads.BetaKe(74)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Equilibrium-Discrepancy Coefficient for Term-74",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "BetaKe75": {
+      "path": [
+        "BFBads.BetaKe(75)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Equilibrium-Discrepancy Coefficient for Term-75",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "BetaKe76": {
+      "path": [
+        "BFBads.BetaKe(76)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Equilibrium-Discrepancy Coefficient for Term-76",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "Betak1": {
+      "path": [
+        "BFBads.Betak(1)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Kinetic-Discrepancy Coefficient for Term-1",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "Betak2": {
+      "path": [
+        "BFBads.Betak(2)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Kinetic-Discrepancy Coefficient for Term-2",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "Betak3": {
+      "path": [
+        "BFBads.Betak(3)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Kinetic-Discrepancy Coefficient for Term-3",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "Betak4": {
+      "path": [
+        "BFBads.Betak(4)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Kinetic-Discrepancy Coefficient for Term-4",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "Betak5": {
+      "path": [
+        "BFBads.Betak(5)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Kinetic-Discrepancy Coefficient for Term-5",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "Betak6": {
+      "path": [
+        "BFBads.Betak(6)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Kinetic-Discrepancy Coefficient for Term-6",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "Betak7": {
+      "path": [
+        "BFBads.Betak(7)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Kinetic-Discrepancy Coefficient for Term-7",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "Betak8": {
+      "path": [
+        "BFBads.Betak(8)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Kinetic-Discrepancy Coefficient for Term-8",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "Betak9": {
+      "path": [
+        "BFBads.Betak(9)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Kinetic-Discrepancy Coefficient for Term-9",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "Betak10": {
+      "path": [
+        "BFBads.Betak(10)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Kinetic-Discrepancy Coefficient for Term-10",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "Betak11": {
+      "path": [
+        "BFBads.Betak(11)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Kinetic-Discrepancy Coefficient for Term-11",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "Betak12": {
+      "path": [
+        "BFBads.Betak(12)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Kinetic-Discrepancy Coefficient for Term-12",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "Betak13": {
+      "path": [
+        "BFBads.Betak(13)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Kinetic-Discrepancy Coefficient for Term-13",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "Betak14": {
+      "path": [
+        "BFBads.Betak(14)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Kinetic-Discrepancy Coefficient for Term-14",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "Betak15": {
+      "path": [
+        "BFBads.Betak(15)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Kinetic-Discrepancy Coefficient for Term-15",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "Betak16": {
+      "path": [
+        "BFBads.Betak(16)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Kinetic-Discrepancy Coefficient for Term-16",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "Betak17": {
+      "path": [
+        "BFBads.Betak(17)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Kinetic-Discrepancy Coefficient for Term-17",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "Betak18": {
+      "path": [
+        "BFBads.Betak(18)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Kinetic-Discrepancy Coefficient for Term-18",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "Betak19": {
+      "path": [
+        "BFBads.Betak(19)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Kinetic-Discrepancy Coefficient for Term-19",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "Betak20": {
+      "path": [
+        "BFBads.Betak(20)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Kinetic-Discrepancy Coefficient for Term-20",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "Betak21": {
+      "path": [
+        "BFBads.Betak(21)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Kinetic-Discrepancy Coefficient for Term-21",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "Betak22": {
+      "path": [
+        "BFBads.Betak(22)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Kinetic-Discrepancy Coefficient for Term-22",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "Betak23": {
+      "path": [
+        "BFBads.Betak(23)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Kinetic-Discrepancy Coefficient for Term-23",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "Betak24": {
+      "path": [
+        "BFBads.Betak(24)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Kinetic-Discrepancy Coefficient for Term-24",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "Betak25": {
+      "path": [
+        "BFBads.Betak(25)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Kinetic-Discrepancy Coefficient for Term-25",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "Betak26": {
+      "path": [
+        "BFBads.Betak(26)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Kinetic-Discrepancy Coefficient for Term-26",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "Betak27": {
+      "path": [
+        "BFBads.Betak(27)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Kinetic-Discrepancy Coefficient for Term-27",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "Betak28": {
+      "path": [
+        "BFBads.Betak(28)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Kinetic-Discrepancy Coefficient for Term-28",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "Betak29": {
+      "path": [
+        "BFBads.Betak(29)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Kinetic-Discrepancy Coefficient for Term-29",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "Betak30": {
+      "path": [
+        "BFBads.Betak(30)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Kinetic-Discrepancy Coefficient for Term-30",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "Betak31": {
+      "path": [
+        "BFBads.Betak(31)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Kinetic-Discrepancy Coefficient for Term-31",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "Betak32": {
+      "path": [
+        "BFBads.Betak(32)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Kinetic-Discrepancy Coefficient for Term-32",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "Betak33": {
+      "path": [
+        "BFBads.Betak(33)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Kinetic-Discrepancy Coefficient for Term-33",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "Betak34": {
+      "path": [
+        "BFBads.Betak(34)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Kinetic-Discrepancy Coefficient for Term-34",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "Betak35": {
+      "path": [
+        "BFBads.Betak(35)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Kinetic-Discrepancy Coefficient for Term-35",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "Betak36": {
+      "path": [
+        "BFBads.Betak(36)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Kinetic-Discrepancy Coefficient for Term-36",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "Betak37": {
+      "path": [
+        "BFBads.Betak(37)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Kinetic-Discrepancy Coefficient for Term-37",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "Betak38": {
+      "path": [
+        "BFBads.Betak(38)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Kinetic-Discrepancy Coefficient for Term-38",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "Betak39": {
+      "path": [
+        "BFBads.Betak(39)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Kinetic-Discrepancy Coefficient for Term-39",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "Betak40": {
+      "path": [
+        "BFBads.Betak(40)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Kinetic-Discrepancy Coefficient for Term-40",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "Betak41": {
+      "path": [
+        "BFBads.Betak(41)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Kinetic-Discrepancy Coefficient for Term-41",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "Betak42": {
+      "path": [
+        "BFBads.Betak(42)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Kinetic-Discrepancy Coefficient for Term-42",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "Betak43": {
+      "path": [
+        "BFBads.Betak(43)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Kinetic-Discrepancy Coefficient for Term-43",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "Betak44": {
+      "path": [
+        "BFBads.Betak(44)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Kinetic-Discrepancy Coefficient for Term-44",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "Betak45": {
+      "path": [
+        "BFBads.Betak(45)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Kinetic-Discrepancy Coefficient for Term-45",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "Betak46": {
+      "path": [
+        "BFBads.Betak(46)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Kinetic-Discrepancy Coefficient for Term-46",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "Betak47": {
+      "path": [
+        "BFBads.Betak(47)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Kinetic-Discrepancy Coefficient for Term-47",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "Betak48": {
+      "path": [
+        "BFBads.Betak(48)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Kinetic-Discrepancy Coefficient for Term-48",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "Betak49": {
+      "path": [
+        "BFBads.Betak(49)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Kinetic-Discrepancy Coefficient for Term-49",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "Betak50": {
+      "path": [
+        "BFBads.Betak(50)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Kinetic-Discrepancy Coefficient for Term-50",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "Betak51": {
+      "path": [
+        "BFBads.Betak(51)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Kinetic-Discrepancy Coefficient for Term-51",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "Betak52": {
+      "path": [
+        "BFBads.Betak(52)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Kinetic-Discrepancy Coefficient for Term-52",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "Betak53": {
+      "path": [
+        "BFBads.Betak(53)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Kinetic-Discrepancy Coefficient for Term-53",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "Betak54": {
+      "path": [
+        "BFBads.Betak(54)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Kinetic-Discrepancy Coefficient for Term-54",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "Betak55": {
+      "path": [
+        "BFBads.Betak(55)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Kinetic-Discrepancy Coefficient for Term-55",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "Betak56": {
+      "path": [
+        "BFBads.Betak(56)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Kinetic-Discrepancy Coefficient for Term-56",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "Betak57": {
+      "path": [
+        "BFBads.Betak(57)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Kinetic-Discrepancy Coefficient for Term-57",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "Betak58": {
+      "path": [
+        "BFBads.Betak(58)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Kinetic-Discrepancy Coefficient for Term-58",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "Betak59": {
+      "path": [
+        "BFBads.Betak(59)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Kinetic-Discrepancy Coefficient for Term-59",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "Betak60": {
+      "path": [
+        "BFBads.Betak(60)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Kinetic-Discrepancy Coefficient for Term-60",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "Betak61": {
+      "path": [
+        "BFBads.Betak(61)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Kinetic-Discrepancy Coefficient for Term-61",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "Betak62": {
+      "path": [
+        "BFBads.Betak(62)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Kinetic-Discrepancy Coefficient for Term-62",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "Betak63": {
+      "path": [
+        "BFBads.Betak(63)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Kinetic-Discrepancy Coefficient for Term-63",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "Betak64": {
+      "path": [
+        "BFBads.Betak(64)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Kinetic-Discrepancy Coefficient for Term-64",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "Betak65": {
+      "path": [
+        "BFBads.Betak(65)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Kinetic-Discrepancy Coefficient for Term-65",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "Betak66": {
+      "path": [
+        "BFBads.Betak(66)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Kinetic-Discrepancy Coefficient for Term-66",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "Betak67": {
+      "path": [
+        "BFBads.Betak(67)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Kinetic-Discrepancy Coefficient for Term-67",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "Betak68": {
+      "path": [
+        "BFBads.Betak(68)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Kinetic-Discrepancy Coefficient for Term-68",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "Betak69": {
+      "path": [
+        "BFBads.Betak(69)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Kinetic-Discrepancy Coefficient for Term-69",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "Betak70": {
+      "path": [
+        "BFBads.Betak(70)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Kinetic-Discrepancy Coefficient for Term-70",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "Betak71": {
+      "path": [
+        "BFBads.Betak(71)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Kinetic-Discrepancy Coefficient for Term-71",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "Betak72": {
+      "path": [
+        "BFBads.Betak(72)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Kinetic-Discrepancy Coefficient for Term-72",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "Betak73": {
+      "path": [
+        "BFBads.Betak(73)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Kinetic-Discrepancy Coefficient for Term-73",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "Betak74": {
+      "path": [
+        "BFBads.Betak(74)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Kinetic-Discrepancy Coefficient for Term-74",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "Betak75": {
+      "path": [
+        "BFBads.Betak(75)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Kinetic-Discrepancy Coefficient for Term-75",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "Betak76": {
+      "path": [
+        "BFBads.Betak(76)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Kinetic-Discrepancy Coefficient for Term-76",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "Betak77": {
+      "path": [
+        "BFBads.Betak(77)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Kinetic-Discrepancy Coefficient for Term-77",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "Betak78": {
+      "path": [
+        "BFBads.Betak(78)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Kinetic-Discrepancy Coefficient for Term-78",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "Betak79": {
+      "path": [
+        "BFBads.Betak(79)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Kinetic-Discrepancy Coefficient for Term-79",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "Betak80": {
+      "path": [
+        "BFBads.Betak(80)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Kinetic-Discrepancy Coefficient for Term-80",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "Betak81": {
+      "path": [
+        "BFBads.Betak(81)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Kinetic-Discrepancy Coefficient for Term-81",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "Betak82": {
+      "path": [
+        "BFBads.Betak(82)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Kinetic-Discrepancy Coefficient for Term-82",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "Betak83": {
+      "path": [
+        "BFBads.Betak(83)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Kinetic-Discrepancy Coefficient for Term-83",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "Betak84": {
+      "path": [
+        "BFBads.Betak(84)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Kinetic-Discrepancy Coefficient for Term-84",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "Betak85": {
+      "path": [
+        "BFBads.Betak(85)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Kinetic-Discrepancy Coefficient for Term-85",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "Betak86": {
+      "path": [
+        "BFBads.Betak(86)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Kinetic-Discrepancy Coefficient for Term-86",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "Betak87": {
+      "path": [
+        "BFBads.Betak(87)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Kinetic-Discrepancy Coefficient for Term-87",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "Betak88": {
+      "path": [
+        "BFBads.Betak(88)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Kinetic-Discrepancy Coefficient for Term-88",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "Betak89": {
+      "path": [
+        "BFBads.Betak(89)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Kinetic-Discrepancy Coefficient for Term-89",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "Betak90": {
+      "path": [
+        "BFBads.Betak(90)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Kinetic-Discrepancy Coefficient for Term-90",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "Betak91": {
+      "path": [
+        "BFBads.Betak(91)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Kinetic-Discrepancy Coefficient for Term-91",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "Betak92": {
+      "path": [
+        "BFBads.Betak(92)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Kinetic-Discrepancy Coefficient for Term-92",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "Betak93": {
+      "path": [
+        "BFBads.Betak(93)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Kinetic-Discrepancy Coefficient for Term-93",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "Betak94": {
+      "path": [
+        "BFBads.Betak(94)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Kinetic-Discrepancy Coefficient for Term-94",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "Betak95": {
+      "path": [
+        "BFBads.Betak(95)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Kinetic-Discrepancy Coefficient for Term-95",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "Betak96": {
+      "path": [
+        "BFBads.Betak(96)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Kinetic-Discrepancy Coefficient for Term-96",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "Betak97": {
+      "path": [
+        "BFBads.Betak(97)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Kinetic-Discrepancy Coefficient for Term-97",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "Betak98": {
+      "path": [
+        "BFBads.Betak(98)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Kinetic-Discrepancy Coefficient for Term-98",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "Betak99": {
+      "path": [
+        "BFBads.Betak(99)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Kinetic-Discrepancy Coefficient for Term-99",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "Betak100": {
+      "path": [
+        "BFBads.Betak(100)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Kinetic-Discrepancy Coefficient for Term-100",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "Betak101": {
+      "path": [
+        "BFBads.Betak(101)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Kinetic-Discrepancy Coefficient for Term-101",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "Betak102": {
+      "path": [
+        "BFBads.Betak(102)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Kinetic-Discrepancy Coefficient for Term-102",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "Betak103": {
+      "path": [
+        "BFBads.Betak(103)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Kinetic-Discrepancy Coefficient for Term-103",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "Betak104": {
+      "path": [
+        "BFBads.Betak(104)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Kinetic-Discrepancy Coefficient for Term-104",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "Betak105": {
+      "path": [
+        "BFBads.Betak(105)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Kinetic-Discrepancy Coefficient for Term-105",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "Betak106": {
+      "path": [
+        "BFBads.Betak(106)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Kinetic-Discrepancy Coefficient for Term-106",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "Betak107": {
+      "path": [
+        "BFBads.Betak(107)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Kinetic-Discrepancy Coefficient for Term-107",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "Betak108": {
+      "path": [
+        "BFBads.Betak(108)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Kinetic-Discrepancy Coefficient for Term-108",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "Betak109": {
+      "path": [
+        "BFBads.Betak(109)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Kinetic-Discrepancy Coefficient for Term-109",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "Betak110": {
+      "path": [
+        "BFBads.Betak(110)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Kinetic-Discrepancy Coefficient for Term-110",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "Betak111": {
+      "path": [
+        "BFBads.Betak(111)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Kinetic-Discrepancy Coefficient for Term-111",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "Betak112": {
+      "path": [
+        "BFBads.Betak(112)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Kinetic-Discrepancy Coefficient for Term-112",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "Betak113": {
+      "path": [
+        "BFBads.Betak(113)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Kinetic-Discrepancy Coefficient for Term-113",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "Betak114": {
+      "path": [
+        "BFBads.Betak(114)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Kinetic-Discrepancy Coefficient for Term-114",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "Betak115": {
+      "path": [
+        "BFBads.Betak(115)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Kinetic-Discrepancy Coefficient for Term-115",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "Betak116": {
+      "path": [
+        "BFBads.Betak(116)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Kinetic-Discrepancy Coefficient for Term-116",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "Betak117": {
+      "path": [
+        "BFBads.Betak(117)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Kinetic-Discrepancy Coefficient for Term-117",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "Betak118": {
+      "path": [
+        "BFBads.Betak(118)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Kinetic-Discrepancy Coefficient for Term-118",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "Betak119": {
+      "path": [
+        "BFBads.Betak(119)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Kinetic-Discrepancy Coefficient for Term-119",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "Betak120": {
+      "path": [
+        "BFBads.Betak(120)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Kinetic-Discrepancy Coefficient for Term-120",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "Betak121": {
+      "path": [
+        "BFBads.Betak(121)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Kinetic-Discrepancy Coefficient for Term-121",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "Betak122": {
+      "path": [
+        "BFBads.Betak(122)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Kinetic-Discrepancy Coefficient for Term-122",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "Betak123": {
+      "path": [
+        "BFBads.Betak(123)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Kinetic-Discrepancy Coefficient for Term-123",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "Betak124": {
+      "path": [
+        "BFBads.Betak(124)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Kinetic-Discrepancy Coefficient for Term-124",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "Betak125": {
+      "path": [
+        "BFBads.Betak(125)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Kinetic-Discrepancy Coefficient for Term-125",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "Betak126": {
+      "path": [
+        "BFBads.Betak(126)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Kinetic-Discrepancy Coefficient for Term-126",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "Betak127": {
+      "path": [
+        "BFBads.Betak(127)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Kinetic-Discrepancy Coefficient for Term-127",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "Betak128": {
+      "path": [
+        "BFBads.Betak(128)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Kinetic-Discrepancy Coefficient for Term-128",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "Betak129": {
+      "path": [
+        "BFBads.Betak(129)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Kinetic-Discrepancy Coefficient for Term-129",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "Betak130": {
+      "path": [
+        "BFBads.Betak(130)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Kinetic-Discrepancy Coefficient for Term-130",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "Betak131": {
+      "path": [
+        "BFBads.Betak(131)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Kinetic-Discrepancy Coefficient for Term-131",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "Betak132": {
+      "path": [
+        "BFBads.Betak(132)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Kinetic-Discrepancy Coefficient for Term-132",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "Betak133": {
+      "path": [
+        "BFBads.Betak(133)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Kinetic-Discrepancy Coefficient for Term-133",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "Betak134": {
+      "path": [
+        "BFBads.Betak(134)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Kinetic-Discrepancy Coefficient for Term-134",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "Betak135": {
+      "path": [
+        "BFBads.Betak(135)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Kinetic-Discrepancy Coefficient for Term-135",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "Betak136": {
+      "path": [
+        "BFBads.Betak(136)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Kinetic-Discrepancy Coefficient for Term-136",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "Betak137": {
+      "path": [
+        "BFBads.Betak(137)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Kinetic-Discrepancy Coefficient for Term-137",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "Betak138": {
+      "path": [
+        "BFBads.Betak(138)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Kinetic-Discrepancy Coefficient for Term-138",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "Betak139": {
+      "path": [
+        "BFBads.Betak(139)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Kinetic-Discrepancy Coefficient for Term-139",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "Betak140": {
+      "path": [
+        "BFBads.Betak(140)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Kinetic-Discrepancy Coefficient for Term-140",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "Betak141": {
+      "path": [
+        "BFBads.Betak(141)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Kinetic-Discrepancy Coefficient for Term-141",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "Betak142": {
+      "path": [
+        "BFBads.Betak(142)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Kinetic-Discrepancy Coefficient for Term-142",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "Betak143": {
+      "path": [
+        "BFBads.Betak(143)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Kinetic-Discrepancy Coefficient for Term-143",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "Betak144": {
+      "path": [
+        "BFBads.Betak(144)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Kinetic-Discrepancy Coefficient for Term-144",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "Betak145": {
+      "path": [
+        "BFBads.Betak(145)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Kinetic-Discrepancy Coefficient for Term-145",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "Betak146": {
+      "path": [
+        "BFBads.Betak(146)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Kinetic-Discrepancy Coefficient for Term-146",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "Betak147": {
+      "path": [
+        "BFBads.Betak(147)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Kinetic-Discrepancy Coefficient for Term-147",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "Betak148": {
+      "path": [
+        "BFBads.Betak(148)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Kinetic-Discrepancy Coefficient for Term-148",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "Betak149": {
+      "path": [
+        "BFBads.Betak(149)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Kinetic-Discrepancy Coefficient for Term-149",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "Betak150": {
+      "path": [
+        "BFBads.Betak(150)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Kinetic-Discrepancy Coefficient for Term-150",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "Betak151": {
+      "path": [
+        "BFBads.Betak(151)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Kinetic-Discrepancy Coefficient for Term-151",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "Betak152": {
+      "path": [
+        "BFBads.Betak(152)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Kinetic-Discrepancy Coefficient for Term-152",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "Betak153": {
+      "path": [
+        "BFBads.Betak(153)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Kinetic-Discrepancy Coefficient for Term-153",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "Betak154": {
+      "path": [
+        "BFBads.Betak(154)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Kinetic-Discrepancy Coefficient for Term-154",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "Betak155": {
+      "path": [
+        "BFBads.Betak(155)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Kinetic-Discrepancy Coefficient for Term-155",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "Betak156": {
+      "path": [
+        "BFBads.Betak(156)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Kinetic-Discrepancy Coefficient for Term-156",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "Betak157": {
+      "path": [
+        "BFBads.Betak(157)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Kinetic-Discrepancy Coefficient for Term-157",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "Betak158": {
+      "path": [
+        "BFBads.Betak(158)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Kinetic-Discrepancy Coefficient for Term-158",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "Betak159": {
+      "path": [
+        "BFBads.Betak(159)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Kinetic-Discrepancy Coefficient for Term-159",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "Betak160": {
+      "path": [
+        "BFBads.Betak(160)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Kinetic-Discrepancy Coefficient for Term-160",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "Betak161": {
+      "path": [
+        "BFBads.Betak(161)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Kinetic-Discrepancy Coefficient for Term-161",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "Betak162": {
+      "path": [
+        "BFBads.Betak(162)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Kinetic-Discrepancy Coefficient for Term-162",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "Betak163": {
+      "path": [
+        "BFBads.Betak(163)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Kinetic-Discrepancy Coefficient for Term-163",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "Betak164": {
+      "path": [
+        "BFBads.Betak(164)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Kinetic-Discrepancy Coefficient for Term-164",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "Betak165": {
+      "path": [
+        "BFBads.Betak(165)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Kinetic-Discrepancy Coefficient for Term-165",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "Betak166": {
+      "path": [
+        "BFBads.Betak(166)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Kinetic-Discrepancy Coefficient for Term-166",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "Betak167": {
+      "path": [
+        "BFBads.Betak(167)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Kinetic-Discrepancy Coefficient for Term-167",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "Betak168": {
+      "path": [
+        "BFBads.Betak(168)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Kinetic-Discrepancy Coefficient for Term-168",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "Betak169": {
+      "path": [
+        "BFBads.Betak(169)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Kinetic-Discrepancy Coefficient for Term-169",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "Betak170": {
+      "path": [
+        "BFBads.Betak(170)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Kinetic-Discrepancy Coefficient for Term-170",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "Betak171": {
+      "path": [
+        "BFBads.Betak(171)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Kinetic-Discrepancy Coefficient for Term-171",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "Betak172": {
+      "path": [
+        "BFBads.Betak(172)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Kinetic-Discrepancy Coefficient for Term-172",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "Betak173": {
+      "path": [
+        "BFBads.Betak(173)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Kinetic-Discrepancy Coefficient for Term-173",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "Betak174": {
+      "path": [
+        "BFBads.Betak(174)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Kinetic-Discrepancy Coefficient for Term-174",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "Betak175": {
+      "path": [
+        "BFBads.Betak(175)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Kinetic-Discrepancy Coefficient for Term-175",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    },
+    "Betak176": {
+      "path": [
+        "BFBads.Betak(176)"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Kinetic-Discrepancy Coefficient for Term-176",
+      "units": "",
+      "min": -9999.0,
+      "max": 9999.0
+    }
+  },
+  "outputs": {
+    "removal": {
+      "path": [
+        "BFBads.removal"
+      ],
+      "type": "double",
+      "default": 0.32014898078158782,
+      "description": "removal",
+      "units": ""
+    },
+    "ND": {
+      "path": [
+        "BFBads.ND"
+      ],
+      "type": "int",
+      "default": 100,
+      "description": "ND",
+      "units": ""
+    },
+    "dl": {
+      "path": [
+        "BFBads.dl"
+      ],
+      "type": "double",
+      "default": 0.02,
+      "description": "dl",
+      "units": "m"
+    },
+    "us": {
+      "path": [
+        "BFBads.us.Value"
+      ],
+      "type": "double[100]",
+      "default": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "description": "Value",
+      "units": "m/s"
+    },
+    "rhos": {
+      "path": [
+        "BFBads.rhos"
+      ],
+      "type": "double",
+      "default": 454.0,
+      "description": "rhos",
+      "units": "kg/m3"
+    },
+    "we": {
+      "path": [
+        "BFBads.we.Value"
+      ],
+      "type": "double[100]",
+      "default": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "description": "Value",
+      "units": "mol/kg solid"
+    },
+    "P": {
+      "path": [
+        "BFBads.P.Value"
+      ],
+      "type": "double[100]",
+      "default": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "description": "Value",
+      "units": "bar"
+    },
+    "ye": {
+      "path": [
+        "BFBads.ye(\"CO2\").Value"
+      ],
+      "type": "double[100]",
+      "default": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "description": "Value",
+      "units": "kmol/kmol"
+    },
+    "Tse": {
+      "path": [
+        "BFBads.Tse.Value"
+      ],
+      "type": "double[100]",
+      "default": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "description": "Value",
+      "units": "degC"
+    },
+    "SIType": {
+      "path": [
+        "BFBads.SIType"
+      ],
+      "type": "string",
+      "default": "Bottom",
+      "description": "SIType",
+      "units": ""
+    }
+  }
+}

@@ -1,0 +1,100 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{64B6F95A-2E6A-4CBD-B888-293EEEE35936}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Turbine.Producer.Hybrid.Data.Contract</RootNamespace>
+    <AssemblyName>Turbine.Producer.Hybrid.Data.Contract</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AWSSDK">
+      <HintPath>..\packages\AWSSDK.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="HybridJobProducerContract.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Turbine.Consumer.Contract.Behaviors\Turbine.Consumer.Contract.Behaviors.csproj">
+      <Project>{0866F140-3BD7-4AA3-9B1C-7096B6721D99}</Project>
+      <Name>Turbine.Consumer.Contract.Behaviors</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Turbine.Data.Contract.Behaviors\Turbine.Data.Contract.Behaviors.csproj">
+      <Project>{F6E67385-2EBD-412A-A31C-9920610EEA1E}</Project>
+      <Name>Turbine.Data.Contract.Behaviors</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Turbine.Data.Contract\Turbine.Data.Contract.csproj">
+      <Project>{23C17385-1DB9-4A0E-8630-8479940BCD37}</Project>
+      <Name>Turbine.Data.Contract</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Turbine.Data\Turbine.Data.csproj">
+      <Project>{6F28D4CB-DB06-4C50-9AAE-512BADE44824}</Project>
+      <Name>Turbine.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Turbine.Orchestrator.AWS.Data.Contract.Messages\Turbine.Orchestrator.AWS.Data.Contract.Messages.csproj">
+      <Project>{DEA4C6C2-DC5B-4857-9DDA-0115557E15B9}</Project>
+      <Name>Turbine.Orchestrator.AWS.Data.Contract.Messages</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Turbine.Orchestrator.AWS.Data.Contract\Turbine.Orchestrator.AWS.Data.Contract.csproj">
+      <Project>{5B8FBC7A-1C63-40A0-ABC4-A103A5818A13}</Project>
+      <Name>Turbine.Orchestrator.AWS.Data.Contract</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Turbine.Producer.AWS\Turbine.Producer.AWS.csproj">
+      <Project>{A1301050-3DBA-4377-B27B-AC942F89FE23}</Project>
+      <Name>Turbine.Producer.AWS</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Turbine.Producer.Data.Contract.Behaviors\Turbine.Producer.Data.Contract.Behaviors.csproj">
+      <Project>{8608F337-91A1-4260-8A2D-CE7EF0CA45B8}</Project>
+      <Name>Turbine.Producer.Data.Contract.Behaviors</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Turbine.Producer.Data.Contract\Turbine.Producer.Data.Contract.csproj">
+      <Project>{28696500-01A1-49A1-B149-010CE2A34C71}</Project>
+      <Name>Turbine.Producer.Data.Contract</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Turbine.Producer\Turbine.Producer.csproj">
+      <Project>{BCB53D56-20A1-49F9-A9C0-49229529C77C}</Project>
+      <Name>Turbine.Producer</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

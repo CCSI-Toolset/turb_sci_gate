@@ -1,0 +1,6 @@
+$DATABASE = "turbineStandAloneMS10"
+$USER = "uturbine"
+$PASS = "X3n0F0b3"
+$SERVER = "dudley.lbl.gov"
+$USERTEST = "uturbinetest"
+$PASSTEST = "F@DzF@D3"

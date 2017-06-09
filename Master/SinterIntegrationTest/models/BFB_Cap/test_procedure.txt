@@ -1,0 +1,30 @@
+* Add the acm simulation
+
+turbine_simulation_create BFB_OUU_COE_opt ACM turbine.cfg
+turbine_simulation_update -r configuration BFB_OUU_COE_opt BFB_OUU_COE_opt.json turbine.cfg
+turbine_simulation_update -r aspenfile BFB_OUU_COE_opt BFB_OUU_COE.acmf turbine.cfg
+
+
+* Add the foqus application to the TurbineLite DB for some reson this prints error but it works fine.
+
+foqus --addTurbineApp foqus
+
+* Add the FOQUS simulation
+
+turbine_simulation_create testFoqus01 foqus turbine.cfg
+turbine_simulation_update -r configuration testFoqus01 BFB_cap_ouu.foqus turbine.cfg
+
+* Start the consumer
+
+foqus --consumer
+
+* Add the jobs
+
+turbine_session_create turbine.cfg
+turbine_session_append b27be727-3788-4de0-8c40-dc230fedba9f BFB_cap_ouu_test_input.json turbine.cfg
+turbine_session_start b27be727-3788-4de0-8c40-dc230fedba9f turbine.cfg
+
+* Get results
+
+turbine_session_get_results b27be727-3788-4de0-8c40-dc230fedba9f turbine.cfg > BFB_cap_ouu_test_output.json
+

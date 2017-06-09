@@ -1,0 +1,117 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{ABCCE275-0025-4532-8F4A-75B22E3C6241}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Turbine.Lite.Web.Resources</RootNamespace>
+    <AssemblyName>Turbine.Lite.Web.Resources</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework">
+      <HintPath>..\..\TurbineLite\packages\EntityFramework.6.1.3\lib\net40\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\..\TurbineLite\packages\EntityFramework.6.1.3\lib\net40\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\TurbineLite\packages\Newtonsoft.Json.8.0.2\lib\net40\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.ServiceModel.Web" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ApplicationResource.cs" />
+    <Compile Include="BaseResource.cs" />
+    <Compile Include="ConsumerResource.cs" />
+    <Compile Include="Contracts\ProducerProcessContract.cs" />
+    <Compile Include="Contracts\ProducerSessionContract.cs" />
+    <Compile Include="Contracts\AuthorizationError.cs" />
+    <Compile Include="Contracts\DataMarshall.cs" />
+    <Compile Include="Contracts\InvalidStateChangeException.cs" />
+    <Compile Include="Contracts\ProducerJobContract.cs" />
+    <Compile Include="Contracts\ProducerSimulationContract.cs" />
+    <Compile Include="JobResource.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="QueryParameters.cs" />
+    <Compile Include="SessionResource.cs" />
+    <Compile Include="SimulationResource.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Turbine.Data.Contract.Behaviors\Turbine.Data.Contract.Behaviors.csproj">
+      <Project>{f6e67385-2ebd-412a-a31c-9920610eea1e}</Project>
+      <Name>Turbine.Data.Contract.Behaviors</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Turbine.Data.Entities\Turbine.Data.Entities.csproj">
+      <Project>{3ea3a2a9-ed28-4cdd-84be-11a65b68834f}</Project>
+      <Name>Turbine.Data.Entities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Turbine.Data.Serialize\Turbine.Data.Serialize.csproj">
+      <Project>{fcc0496b-3c87-4030-8630-2a3a08181408}</Project>
+      <Name>Turbine.Data.Serialize</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Turbine.DataEF6\Turbine.DataEF6.csproj">
+      <Project>{7c0fa46a-937d-44e0-ad71-d96f383fa4ca}</Project>
+      <Name>Turbine.DataEF6</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Turbine.Producer.Data.Contract.Behaviors\Turbine.Producer.Data.Contract.Behaviors.csproj">
+      <Project>{8608f337-91a1-4260-8a2d-ce7ef0ca45b8}</Project>
+      <Name>Turbine.Producer.Data.Contract.Behaviors</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Turbine.Producer\Turbine.Producer.csproj">
+      <Project>{bcb53d56-20a1-49f9-a9c0-49229529c77c}</Project>
+      <Name>Turbine.Producer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Turbine.Web\Turbine.Web.csproj">
+      <Project>{06490331-48af-4dbe-aea0-75bf65868b90}</Project>
+      <Name>Turbine.Web</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,43 @@
+[
+  {
+    "title": "Outputs from Dynamic Test",
+    "description": "Outputs from Dynamic Test",
+    "aspenfile": "BFB.acmf",
+    "author": "Jinliang Ma",
+    "date": "2014-05-29",
+    "filetype": "sinteroutputs",
+    "version": 0.2,
+    "inputs": {
+      "homotopy": {
+        "value": 0,
+        "units": null
+      },
+      "printlevel": {
+        "value": 0,
+        "units": null
+      },
+      "ADSA.Sorbin.F": {
+        "value": 0.93,
+        "units": ""
+      }
+    },
+    "outputs": {
+      "ADSA.SorbOut.F": {
+        "value": 1.4642343006447478,
+        "units": ""
+      },
+      "CO2Removal": {
+        "value": 0.87764539519582552,
+        "units": ""
+      },
+      "ADSA.GasOut.F": {
+        "value": 5683.0518213481073,
+        "units": "kmol/hr"
+      },
+      "status": {
+        "units": "",
+        "value": 0
+      }
+    }
+  }
+]

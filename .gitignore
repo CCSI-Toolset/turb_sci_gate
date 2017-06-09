@@ -1,0 +1,12 @@
+*.dll
+*.exe
+*.msi
+*.ncb
+*.opensdf
+*.sdf
+*.suo
+*.user
+CodeAnalyst/
+Debug/
+Release/
+ipch/

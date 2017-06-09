@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
+                   assembly="Turbine.Data.POCO"
+                   namespace="Turbine.Data.POCO.Domain">
+  <class name="Message" table="Messages">
+    <id name="Id">
+      <generator class="guid"/>
+    </id>
+
+    <property name="value"/>
+    <many-to-one name="job" class="Job" column="jobid"/>
+  </class>
+  
+</hibernate-mapping>

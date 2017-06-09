@@ -1,0 +1,1 @@
+<%@ Application Codebehind="Global.asax.cs" Inherits="AWSWebApplication.Global" Language="C#" %>

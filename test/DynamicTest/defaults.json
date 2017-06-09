@@ -1,0 +1,16 @@
+[
+  {
+    "Input": {
+      "homotopy": 0,
+      "RunModel" : "Dyanmic",
+      "Snapshot" : "TestSnap1",
+      "Timeseries" : [101.4, 106.4, 110.4],
+      "printlevel": 0,
+      "ADSA.Sorbin.F": 0.93
+    }
+    "Dynamic-Input": {
+      "ADSA.Sorbin.F": [0.93, 0.94, 0.95, 0.96]
+    }
+
+  }
+]

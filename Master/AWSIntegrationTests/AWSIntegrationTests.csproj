@@ -1,0 +1,120 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{882E1422-86A7-4FAD-A43B-30BE4C74B7C8}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>AWSIntegrationTests</RootNamespace>
+    <AssemblyName>AWSIntegrationTests</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AWSSDK, Version=1.3.15.0, Culture=neutral, PublicKeyToken=cd2d24cd2bace800, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\AWSSDK.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.ServiceLocation, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft Unity Application Block 2.1\Bin\Microsoft.Practices.ServiceLocation.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity, Version=2.1.505.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft Unity Application Block 2.1\Bin\Microsoft.Practices.Unity.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity.Configuration, Version=2.1.505.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft Unity Application Block 2.1\Bin\Microsoft.Practices.Unity.Configuration.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity.Interception, Version=2.1.505.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft Unity Application Block 2.1\Bin\Microsoft.Practices.Unity.Interception.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity.Interception.Configuration, Version=2.1.505.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft Unity Application Block 2.1\Bin\Microsoft.Practices.Unity.Interception.Configuration.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="System" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <CodeAnalysisDependentAssemblyPaths Condition=" '$(VS100COMNTOOLS)' != '' " Include="$(VS100COMNTOOLS)..\IDE\PrivateAssemblies">
+      <Visible>False</Visible>
+    </CodeAnalysisDependentAssemblyPaths>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UnitTest1.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\AspenSinterConsumerConsole\AspenSinterConsumerConsole.csproj">
+      <Project>{19A9B3B9-DC75-4A2D-B2AE-C0ABE17EC426}</Project>
+      <Name>AspenSinterConsumerConsole</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Turbine.AWS.Message\Turbine.AWS.Messages.csproj">
+      <Project>{68AF8410-FCF6-4A51-A2BE-62C6C8B9B781}</Project>
+      <Name>Turbine.AWS.Messages</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Turbine.Consumer.AWS.Data.Contract.Messages\Turbine.Consumer.AWS.Data.Contract.Messages.csproj">
+      <Project>{3D09FF6D-3BF3-4124-AFEA-0629D2021AD5}</Project>
+      <Name>Turbine.Consumer.AWS.Data.Contract.Messages</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Turbine.Consumer.AWS.Data.Contract\Turbine.Consumer.AWS.Data.Contract.csproj">
+      <Project>{3D11468F-9134-4657-84A0-CCE92CEE6254}</Project>
+      <Name>Turbine.Consumer.AWS.Data.Contract</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Turbine.Consumer.Data.Contract.Behaviors\Turbine.Consumer.Data.Contract.Behaviors.csproj">
+      <Project>{F992559E-6820-4341-A489-1AF82F9FC8A5}</Project>
+      <Name>Turbine.Consumer.Data.Contract.Behaviors</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Turbine.Consumer.Data.Contract\Turbine.Consumer.Data.Contract.csproj">
+      <Project>{8DA31E80-621E-4247-A0D8-533303CD0C7C}</Project>
+      <Name>Turbine.Consumer.Data.Contract</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Turbine.Orchestrator.AWS.Data.Contract.Messages\Turbine.Orchestrator.AWS.Data.Contract.Messages.csproj">
+      <Project>{DEA4C6C2-DC5B-4857-9DDA-0115557E15B9}</Project>
+      <Name>Turbine.Orchestrator.AWS.Data.Contract.Messages</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Turbine.Orchestrator.AWS.Data.Contract\Turbine.Orchestrator.AWS.Data.Contract.csproj">
+      <Project>{5B8FBC7A-1C63-40A0-ABC4-A103A5818A13}</Project>
+      <Name>Turbine.Orchestrator.AWS.Data.Contract</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.Config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

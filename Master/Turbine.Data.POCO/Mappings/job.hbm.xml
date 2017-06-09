@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
+                   assembly="Turbine.Data.POCO"
+                   namespace="Turbine.Data.POCO.Domain">
+  <class name="Job" table="Jobs">
+    <id name="Id">
+      <generator class="native"/>
+    </id>
+    <property name="state">
+      <column name="State"/>
+    </property>
+    
+    <property name="create">
+      <column name="[Create]"/>
+    </property>
+
+    <property name="submit">
+      <column name="Submit"/>
+    </property>
+
+    <property name="setup">
+      <column name="Setup"/>
+    </property>
+
+    <property name="running">
+      <column name="Running"/>
+    </property>
+
+    <property name="finished">
+      <column name="Finished"/>
+    </property>
+
+    <property name="initialize">
+      <column name="Initialize"/>
+    </property>
+    
+    <many-to-one name="simulation" class="Simulation" column="SimulationId"/>
+    <many-to-one name="user" class="User" column="UserId"/>
+    <many-to-one name="session" class="Session" column="Session_guid"/>
+    <many-to-one name="consumer" class="JobConsumer" column="JobConsumer_guid"/>
+    <many-to-one name="process" class ="SinterProcess" column="process_Id"/>
+  </class>
+  
+</hibernate-mapping>

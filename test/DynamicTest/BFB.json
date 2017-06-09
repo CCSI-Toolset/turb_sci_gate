@@ -1,0 +1,61 @@
+{
+  "title": "Dynamic Test",
+  "description": "This is a model of the Bubbling Fluidized Bed we use for testing the ACM Dynamic features",
+  "aspenfile": "BFB.acmf",
+  "author": "Jinliang Ma",
+  "date": "5/29/2014",
+  "filetype": "sinterconfig",
+  "version": 0.2,
+  "settings": {
+    "homotopy": {
+      "type": "int",
+      "default": 0,
+      "description": "Simulation specific setting: homotopy"
+    },
+    "printlevel": {
+      "type": "int",
+      "default": 0,
+      "description": "Simulation specific setting: printlevel"
+    }
+  },
+  "inputs": {
+    "ADSA.Sorbin.F": {
+      "path": [
+        "ADSA.SorbIn.F"
+      ],
+      "type": "double",
+      "default": 0.93,
+      "description": "Sorbent flowing into the top BFB",
+      "units": ""
+    }
+  },
+  "outputs": {
+    "ADSA.SorbOut.F": {
+      "path": [
+        "ADSA.SorbOut.F"
+      ],
+      "type": "double",
+      "default": 0.0,
+      "description": "Sorbent Flowing out of the top BFB",
+      "units": ""
+    },
+    "CO2Removal": {
+      "path": [
+        "CO2Removal"
+      ],
+      "type": "double",
+      "default": 0.87764539519582552,
+      "description": "Carbon Capture percentage",
+      "units": ""
+    },
+    "ADSA.GasOut.F": {
+      "path": [
+        "ADSA.GasOut.F"
+      ],
+      "type": "double",
+      "default": 5683.0518213481073,
+      "description": "FlueGas Outflow rate",
+      "units": "kmol/hr"
+    }
+  }
+}
