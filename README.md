@@ -20,3 +20,16 @@ TBD
 * Josh Boverhof 
 
 See also the list of [contributors](https://github.com/CCSI-Toolset/turb_sci_date/contributors) who participated in this project.
+
+## Versioning
+
+We use [SemVer](http://semver.org/) for versioning. For the versions available, 
+see the [tags on this repository](https://github.com/CCSI-Toolset/turb_sci_gate/tags). 
+
+## License
+
+See [LICENSE.md](LICENSE.md) file for details
+
+## Copyright Notice
+
+TBD
