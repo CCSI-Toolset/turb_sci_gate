@@ -17,7 +17,7 @@
     <Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine"/>
     <Media Id="1" Cabinet="media1.cab" EmbedCab="yes" />
     <!-- license -->
-    <WixVariable Id="WixUILicenseRtf" Value="..\..\..\..\CCSI_TE_LICENSE.rtf" />
+    <WixVariable Id="WixUILicenseRtf" Value="..\..\..\..\LICENSE.md" />
 
 
     <UIRef Id="WixUI_FeatureTree" />
