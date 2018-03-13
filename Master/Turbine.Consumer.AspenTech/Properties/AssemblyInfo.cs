@@ -10,7 +10,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("Turbine.Consumer.Aspen")]
-[assembly: AssemblyCopyright("Copyright ©  2013")]
+[assembly: AssemblyCopyright("Copyright DOE Carbon Capture Simulation Initiative (CCSI)")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

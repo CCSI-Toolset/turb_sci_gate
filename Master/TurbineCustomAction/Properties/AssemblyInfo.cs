@@ -9,7 +9,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyCompany("Microsoft")]
 [assembly: AssemblyProduct("TurbineCustomAction")]
-[assembly: AssemblyCopyright("Copyright © Microsoft 2014")]
+[assembly: AssemblyCopyright("Copyright DOE Carbon Capture Simulation Initiative (CCSI)")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

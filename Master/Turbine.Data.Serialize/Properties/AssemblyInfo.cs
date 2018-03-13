@@ -10,7 +10,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Microsoft")]
 [assembly: AssemblyProduct("Turbine.Data.Serialize")]
-[assembly: AssemblyCopyright("Copyright © Microsoft 2011")]
+[assembly: AssemblyCopyright("Copyright DOE Carbon Capture Simulation Initiative (CCSI)")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

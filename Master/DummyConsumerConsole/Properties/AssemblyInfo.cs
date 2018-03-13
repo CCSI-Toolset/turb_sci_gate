@@ -10,7 +10,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Berkeley Water Center")]
 [assembly: AssemblyProduct("DummyConsumerConsole")]
-[assembly: AssemblyCopyright("Copyright © Berkeley Water Center 2011")]
+[assembly: AssemblyCopyright("Copyright DOE Carbon Capture Simulation Initiative (CCSI)")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
