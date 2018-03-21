@@ -4,7 +4,7 @@
 #    Simple tie-in for autoscaling for shared-database architectures.
 #
 # Author: Joshua Boverhof
-# See Copyright
+# See LICENSE.md for License and Copyright details
 #
 Add-Type -Path "AWSSDK.dll"
 $ErrorActionPreference='Stop'

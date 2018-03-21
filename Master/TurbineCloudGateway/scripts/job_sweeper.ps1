@@ -3,7 +3,7 @@
 #    Finds jobs in database that are being processed by JobConsumers that ARE NOT in status 'up', 
 #    and moves them back to 'submit'.
 # Author: Joshua Boverhof
-# See Copyright
+# See LICENSE.md for License and Copyright details
 
 Add-Type -Path "AWSSDK.dll"
 

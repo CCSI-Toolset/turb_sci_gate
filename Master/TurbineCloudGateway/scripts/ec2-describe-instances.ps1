@@ -1,7 +1,7 @@
 #
 # File:  ec2-describe-instances.ps1
 # Author: Joshua Boverhof
-# See Copyright
+# See LICENSE.md for License and Copyright details
 
 Add-Type -Path "AWSSDK.dll"
 

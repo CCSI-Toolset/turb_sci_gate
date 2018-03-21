@@ -1,7 +1,7 @@
 #
 # File:  setup.ps1
 # Author: Joshua Boverhof
-# See Copyright
+# See LICENSE.md for License and Copyright details
 #
 #  TODO: WRITE this from installer
 
