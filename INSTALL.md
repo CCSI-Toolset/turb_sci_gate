@@ -8,8 +8,8 @@ Turbine Science Gateway
 ** conda install git
 
 * Install turb_client
-  >pip install git+https://jrboverhof%40lbl.gov:Y0L%40T3ng0@github.com/CCSI-Toolset/turb_client@master
-  >pip install git+https://jrboverhof%40lbl.gov:Y0L%40T3ng0@github.com/CCSI-Toolset/foqus@master
+  >pip install git+https://github.com/CCSI-Toolset/turb_client@master
+  >pip install git+https://$USERNAME:$PASSWORD@github.com/CCSI-Toolset/foqus@master
 
 * Install SQL Compact 4.0 x64 ( MUST INSTALL 64 bit on x64 platform )
 * Install SimSinterInstaller.msi
