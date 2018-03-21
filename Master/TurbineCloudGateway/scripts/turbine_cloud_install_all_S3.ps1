@@ -2,7 +2,7 @@
 # File:  turbine_cloud_install_all_S3.ps1
 #
 # Author: Joshua Boverhof
-# See Copyright
+# See LICENSE.md for License and Copyright details
 
 Add-Type -Path "AWSSDK.dll"
 . .\setup.ps1

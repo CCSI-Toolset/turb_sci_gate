@@ -1,7 +1,7 @@
 #
 # File:  push_submit_queue.ps1
 # Author: Joshua Boverhof
-# See Copyright
+# See LICENSE.md for License and Copyright details
 
 Add-Type -Path "AWSSDK.dll"
 . .\setup.ps1

@@ -8,7 +8,7 @@
 #   $SECURITY_GROUP_FILTER="instance.group-id"
 #
 # Author: Joshua Boverhof
-# See Copyright
+# See LICENSE.md for License and Copyright details
 #
 Add-Type -Path "AWSSDK.dll"
 

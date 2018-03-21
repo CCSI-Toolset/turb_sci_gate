@@ -4,7 +4,7 @@
 #    against database dbo.JobConsumer table rows where status is 'up'.  Turns any JobConsumers to 'down'
 #    that don't match discovered processId.
 # Author: Joshua Boverhof
-# See Copyright
+# See LICENSE.md for License and Copyright details
 
 #$ErrorActionPreference='Stop'
 $ErrorActionPreference='SilentlyContinue'
