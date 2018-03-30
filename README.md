@@ -1,5 +1,5 @@
 # Turbine Science Gateway
-This is a meta-project from which several Turbine related Windows projects are built to be used with the [CCSI foqus framework](../../foqus).
+This is a meta-project from which several Turbine related Windows projects are built to be used with the [CCSI foqus framework](../../../foqus).
 
 Turbine is batching execution environment and web API to run scientific software, for example Aspen, ACM and AspenPlus.
 
