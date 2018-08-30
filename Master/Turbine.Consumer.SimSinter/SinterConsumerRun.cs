@@ -644,6 +644,13 @@ namespace Turbine.Consumer.SimSinter
                     Debug.WriteLine(String.Format("Warm-up complete and successful.  Reseting Sim for real run {0}", job.Id),
                         "SinterConsumer.Run");
                 }
+                else if (stest.runStatus == sinter.sinter_AppError.si_SIMULATION_WARNING)
+                {
+                    stest.recvOutputsFromSim();
+                    job.Message("Warm-up with warnings.  Reseting Sim for real run.");
+                    Debug.WriteLine(String.Format("Warm-up with warnings.  Reseting Sim for real run {0}", job.Id),
+                        "SinterConsumer.Run");
+                }
                 else
                 {
                     job.Message("Warm-up complete and failed.  Reseting Sim for real run.");
@@ -711,14 +718,21 @@ namespace Turbine.Consumer.SimSinter
                     {
                         stest.recvOutputsFromSim();
                         job.Message("Real Run was complete and successful.");
-                        Debug.WriteLine(String.Format("Real Run was complete and successful. Job Id: {0}    ", job.Id),
+                        Debug.WriteLine(String.Format("Real Run was complete and successful. Job Id: {0}", job.Id),
+                            "SinterConsumer.Run");
+                    }
+                    else if (stest.runStatus == sinter.sinter_AppError.si_SIMULATION_WARNING)
+                    {
+                        stest.recvOutputsFromSim();
+                        job.Message("Real Run was completed with warning.");
+                        Debug.WriteLine(String.Format("Real Run was completed with warning. Job Id: {0}", job.Id),
                             "SinterConsumer.Run");
                     }
                     else
                     {
-                        job.Message("Real Run was complete and failed.");
-                        Debug.WriteLine(String.Format("Real Run was complete and failed. Job Id: {0}", job.Id),
-                            "SinterConsumer.Run");
+                        job.Message(String.Format("Real Run failed, runStatus={0}", stest.runStatus));
+                        Debug.WriteLine(String.Format("Real Run was complete and failed. Job Id: {0}, runStatus={1}", 
+                            job.Id, stest.runStatus), "SinterConsumer.Run");
                     }
                 }
                 running = false;
@@ -791,7 +805,8 @@ namespace Turbine.Consumer.SimSinter
             JObject outputDict;
             try
             {
-                if (stest.runStatus == sinter.sinter_AppError.si_OKAY)
+                if (stest.runStatus == sinter.sinter_AppError.si_OKAY || 
+                    stest.runStatus == sinter.sinter_AppError.si_SIMULATION_WARNING)
                 {
                     var superDict = stest.getOutputs();
                     outputDict = (JObject)superDict["outputs"];
@@ -801,7 +816,8 @@ namespace Turbine.Consumer.SimSinter
                 }
                 else
                 {
-                    Debug.WriteLine("Sinter runstatus is not si_OKAY to retrieve outputs.", "SinterConsumer.DoFinalize");
+                    Debug.WriteLine(String.Format("Sinter runstatus={0}, did not retrieve outputs.", stest.runStatus), 
+                        "SinterConsumer.DoFinalize");
                 }
             }
             catch (Exception ex)
@@ -851,10 +867,11 @@ namespace Turbine.Consumer.SimSinter
                     //sim.terminate();
                 }
             }
-            //else if (stest.runStatus == sinter.sinter_AppError.si_SIMULATION_WARNING)
-            //{
-            //  job.Error(String.Join(",", stest.warningsBasic()));
-            //}
+            else if (stest.runStatus == sinter.sinter_AppError.si_SIMULATION_WARNING)
+            {
+                job.Message(String.Join(",", stest.warningsBasic()));
+                job.Success();
+            }
             else if (stest.runStatus == sinter.sinter_AppError.si_COM_EXCEPTION)
             {
                 Debug.WriteLine("Error: si_COM_EXCEPTION", "SinterConsumerRun.DoFinalize");
