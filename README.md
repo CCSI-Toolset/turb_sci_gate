@@ -7,8 +7,6 @@ This repository contains the code and Visual Studio solutions for building the f
 * TurbineLite: Windows service Turbine Web API and file database
 * SharedDataArchetecture: IIS Turbine Web API and SQL server database.
 
-Note: This product is also part of the [FOQUS Bundle](../../../FOQUS_bundle)
-
 ## Getting Started
 
 See installation and user guide documents in the [documentation](./docs) subdirectory.
