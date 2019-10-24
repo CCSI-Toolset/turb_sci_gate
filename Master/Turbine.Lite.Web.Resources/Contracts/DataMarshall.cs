@@ -72,14 +72,6 @@ namespace Turbine.Lite.Web.Resources.Contracts
                 {
                     var query = db.Simulations.OrderByDescending(c => c.Create);
 
-                    var provider = System.Security.Cryptography.MD5CryptoServiceProvider.Create();
-                    /*byte[] hash = provider.ComputeHash(data);
-                    var comparer = StringComparer.OrdinalIgnoreCase;
-                    var sb = new StringBuilder();
-                    foreach (byte b in hash)
-                        sb.Append(b.ToString("X2"));
-                    string hval = sb.ToString();*/
-
                     foreach (var entity in query)
                     {
                         Debug.WriteLine(String.Format("ENTITY {0}: {1}", entity.Name, entity.Id));

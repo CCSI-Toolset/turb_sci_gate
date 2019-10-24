@@ -162,7 +162,8 @@ namespace Turbine.Lite.Web.Resources.Contracts
         {
             //string owner = Container.GetAppContext().UserName;
             Debug.WriteLine("UpdateInput", this.GetType().Name);
-            var provider = System.Security.Cryptography.MD5CryptoServiceProvider.Create();
+            //var provider = System.Security.Cryptography.MD5CryptoServiceProvider.Create();
+            var provider = System.Security.Cryptography.SHA1CryptoServiceProvider.Create();
             byte[] hash = provider.ComputeHash(data);
             var comparer = StringComparer.OrdinalIgnoreCase;
             var sb = new StringBuilder();
