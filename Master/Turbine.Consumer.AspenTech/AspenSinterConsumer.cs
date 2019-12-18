@@ -99,7 +99,7 @@ namespace Turbine.Consumer.AspenTech
 
             foreach (SimpleFile sf in input_files)
             {
-                if (sf.name == "configuration" || sf.name == "aspenfile" || sf.name == aspenfilename)
+                if (sf.name == "configuration" || sf.name == "aspenfile")
                     continue;
                 cacheFile = Path.Combine(cacheDir, sf.name);
                 filepath = Path.Combine(job.Process.WorkingDirectory, sf.name);
@@ -118,7 +118,7 @@ namespace Turbine.Consumer.AspenTech
                 }
                 try
                 {
-                    File.Copy(cacheFile, filepath);
+                    File.Copy(cacheFile, filepath, true);
                 }
                 catch (DirectoryNotFoundException)
                 {
