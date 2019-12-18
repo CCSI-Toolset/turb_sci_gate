@@ -55,10 +55,7 @@ namespace Turbine.Consumer.Console
         static void OnExit(int retCode)
         {
             Debug.WriteLine("Unregister Consumer");
-            //IConsumerRegistrationContract cc = AppUtility.GetConsumerRegistrationContract();
             cc.UnRegister();
-            //System.Console.Write("[return]");
-            //System.Console.ReadLine();
             Environment.Exit(retCode);
         }
 
@@ -72,7 +69,6 @@ namespace Turbine.Consumer.Console
         {
             int minutes = 0;
             int failures = 0;
-            //IConsumerRegistrationContract cc = AppUtility.GetConsumerRegistrationContract();
             while (failures < 10)
             {
                 try
@@ -104,22 +100,17 @@ namespace Turbine.Consumer.Console
         {
             Debug.WriteLine("SinterCosnumerConsole : Running");
             int timeSleepInterval = 1000;
-            //int iterations = 60 * 30;
-            //int setupIterations = 60 * 10;
-            //int postInitIterations = 60 + setupIterations;
             bool finish = false;
             String dir = AppUtility.GetAppContext().BaseWorkingDirectory;
             IConsumerContext consumerCtx = AppUtility.GetConsumerContext();
+
             // Register as a consumer, else can't use JobContract
             cc = AppUtility.GetConsumerRegistrationContract();
             consumerRun = AppUtility.GetConsumerRunContract();
             consumerMonitor = AppUtility.GetConsumerMonitorContract();
-
             consumerMonitor.setConsumerRun(consumerRun);
-
             cc.Register(consumerRun);
 
-            //consumer = AppUtility.GetConsumerRunContract();
             // Run KeepAlive task
             var ktask = new Task<bool>(() => KeepAlive());
             ktask.Start();
@@ -133,7 +124,6 @@ namespace Turbine.Consumer.Console
 
                     stop = true;
                     cancelKeyPressed = true;
-                    //consumer.CleanUp();
                     Debug.WriteLine("Exit Unregister Consumer ", "SinterConsumerConsole");
                     try
                     {

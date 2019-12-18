@@ -99,7 +99,7 @@ namespace Turbine.Consumer.AspenTech
 
             foreach (SimpleFile sf in input_files)
             {
-                if (sf.name == "configuration" || sf.name == "aspenfile")
+                if (sf.name == "configuration" || sf.name == "aspenfile" || sf.name == aspenfilename)
                     continue;
                 cacheFile = Path.Combine(cacheDir, sf.name);
                 filepath = Path.Combine(job.Process.WorkingDirectory, sf.name);
