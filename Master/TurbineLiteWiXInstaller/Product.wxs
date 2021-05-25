@@ -10,7 +10,7 @@
            UpgradeCode="2a7184f4-0ed0-4c49-bb53-2824bf4b14e8"
            Name="TurbineLite"
            Language="1033"
-           Version="0.6.1.0"
+           Version="2.1.0.0"
            Manufacturer="Lawrence Berkeley National Lab"
            >
 
@@ -36,15 +36,13 @@
             <Directory Id="DIR.Logs" Name="Logs"/>
             <Directory Id="DIR.Data" Name="Data">
               <Directory Id="DIR.Data.AspenConsumer" Name="AspenTech"/>
-              <Directory Id="DIR.Data.AspenConsumer7.3" Name="AspenTech_7.3"/>
               <Directory Id="DIR.Data.GPromsConsumer" Name="GProms"/>
               <Directory Id="DIR.Data.Excel" Name="Excel"/>
             </Directory>
             <Directory Id="DIR.Bin" Name="Clients">
               <Directory Id="DIR.Bin.Excel"/>
               <Directory Id="DIR.Bin.SimSinterGProms"/>
-              <Directory Id="DIR.Bin.SimSinterAspen8.4"/>
-              <Directory Id="DIR.Bin.SimSinterAspen7.3"/>
+              <Directory Id="DIR.Bin.SimSinterAspen"/>
             </Directory>
             <Directory Id="DIR.Services" Name="Services">
               <Directory Id="DIR.TurbineWebAPI" Name="WebAPI">
@@ -67,21 +65,14 @@
         <RemoveFile Id="RF.Data.AspenConsumer" Name="*.*" On="uninstall" />
       </Component>
     </DirectoryRef>
-
-    <DirectoryRef Id="DIR.Data.AspenConsumer7.3">
-      <Component Id="CMP.Data.AspenConsumer73" Guid="CB227738-66FF-4342-A506-B32E398E28D3" KeyPath="yes">
-        <CreateFolder/>
-        <RemoveFile Id="RF.Data.AspenConsumer73" Name="*.*" On="uninstall" />
-      </Component>
-    </DirectoryRef>
-
+    <!--
     <DirectoryRef Id="DIR.Data.GPromsConsumer">
       <Component Id="CMP.Data.GPromsConsumer" Guid="BC0C022C-C3B1-4759-B4C3-8BBB1D2BF8A3" KeyPath="yes">
         <CreateFolder/>
         <RemoveFile Id="RF.Data.GPromsConsumer" Name="*.*" On="uninstall" />
       </Component>
     </DirectoryRef>
-
+    -->
     <DirectoryRef Id="DIR.Data.Excel">
       <Component Id="CMP.Data.Excel" Guid="068B0D13-CAA3-428F-96DB-DBEA5282C93C" KeyPath="yes">
         <CreateFolder/>
@@ -203,144 +194,7 @@
       <?endif?>
     </DirectoryRef>
 
-    <DirectoryRef Id="DIR.Bin.SimSinterAspen7.3">
-
-      <Component Id="CMP.Bin.Turbine.Consumer.AspenTech73.DLL" Guid="">
-        <File Id="File.Bin.FILE.Turbine.Consumer.AspenTech73.DLL"
-              Source="..\..\Master\Turbine.Consumer.AspenTech7.3\bin\$(var.Configuration)\Turbine.Consumer.AspenTech73.dll" KeyPath="yes"/>
-      </Component>
-
-      <Component Id="CMP.AspenSinter73ConsumerWindowsService" Guid="">
-        <File Id="FILE.AspenSinter73ConsumerWindowsService"
-              Source="..\..\Master\AspenSinter73ConsumerWindowsService\bin\$(var.Configuration)\AspenSinter73ConsumerWindowsService.exe" KeyPath="yes"/>
-
-        <ServiceInstall Id="SERVICEINSTALL.AspenSinter73ConsumerWindowsService"
-                        Name="Aspen73Consumer"
-                        DisplayName="Turbine Aspen73 Consumer"
-                        Start="demand"
-                        ErrorControl="normal"
-                        Interactive="yes"
-                        Type="ownProcess"
-                        Vital="yes">
-          <util:ServiceConfig
-            ServiceName="Aspen73Consumer"
-            FirstFailureActionType="restart"
-            SecondFailureActionType="restart"
-            ThirdFailureActionType="restart"
-            RestartServiceDelayInSeconds="60"
-            />
-          <ServiceDependency Id="TurbineWebAPIService"/>
-        </ServiceInstall>
-        <ServiceControl Id="SERVICECONTROL.AspenSinter73ConsumerWindowsService"
-                Name="Aspen73Consumer"
-                Remove="both"
-                Stop="both"
-                Wait="yes">
-        </ServiceControl>
-      </Component>
-
-      <Component Id="CMP.AspenSinter73ConsumerWindowsService.CONFIG"
-                 Guid="">
-        <File Id="FILE.AspenSinter73ConsumerWindowsService.Config"
-            Name="AspenSinter73ConsumerWindowsService.exe.config"
-            Source="aspen73/AspenSinter73ConsumerWindowsService.exe.config"
-            KeyPath="yes" Vital="yes"/>
-        <util:XmlFile
-            Id="AspenSinter73ConsumerWindowsServiceConfigSetBaseDir"
-            Action="setValue" Permanent="yes"
-            Sequence="1"
-            File="[#FILE.AspenSinter73ConsumerWindowsService.Config]"
-            ElementPath="/configuration/userSettings/AspenSinter73ConsumerWindowsService.Properties.Settings/setting[\[]@name='BaseDirectory'[\]]/value"
-            Value="[DIR.Data.AspenConsumer]" />
-        <util:XmlFile
-            Id="AspenSinter73ConsumerWindowsServiceConfigSetLogFile"
-            Action="setValue" Permanent="yes"
-            Sequence="2"
-            File="[#FILE.AspenSinter73ConsumerWindowsService.Config]"
-            ElementPath="/configuration/system.diagnostics/trace/listeners/add[\[]@name='Sinter73ConsumerLogListener'[\]]"
-            Name="initializeData"
-            Value="[DIR.Logs]AspenSinter73ConsumerWindowsServiceLog.txt" />
-        <util:XmlFile
-            Id="AspenSinter73ConsumerWindowsServiceConfigSetConnStr"
-            Action="setValue" Permanent="yes"
-            Sequence="3"
-            File="[#FILE.AspenSinter73ConsumerWindowsService.Config]"
-            ElementPath="/configuration/connectionStrings/add[\[]@name='TurbineCompactDatabase'[\]]"
-            Name="connectionString"
-            Value="Data Source=[DIR.Data]TurbineCompactDatabase.sdf" />
-        <util:XmlFile
-          Id="XMLFILE.Bin.AspenSinter73ConsumerWS.3"
-          Action="setValue" Permanent="yes"
-          Sequence="4"
-          File="[#FILE.AspenSinter73ConsumerWindowsService.Config]"
-          ElementPath="/configuration/runtime/assemblyBinding/dependentAssembly/codeBase[\[]@href='SINTER_HREF'[\]]"
-          Name="href"
-          Value="FILE://[ProgramFilesFolder]CCSI\SimSinter_Aspen7.3\Sinter_Aspen7.3.dll"/>
-        <util:XmlFile
-          Id="XMLFILE.Bin.AspenSinter73ConsumerWS.6"
-          Action="setValue" Permanent="yes"
-          Sequence="5"
-          File="[#FILE.AspenSinter73ConsumerWindowsService.Config]"
-          ElementPath="/configuration/runtime/assemblyBinding/dependentAssembly/codeBase[\[]@href='ACMACESS_HREF'[\]]"
-          Name="href"
-          Value="FILE://[ProgramFilesFolder]CCSI\SimSinter_Aspen7.3\ACMAccess_Aspen7.3.dll"/>
-      </Component>
-
-      <Component Id="CMP.Bin.AspenSinter73ConsumerConsole" Guid="">
-        <File Id="File.Bin.AspenSinter73ConsumerConsoleId"
-              Source="..\..\Master\AspenSinter73ConsumerConsole\bin\$(var.Configuration)\AspenSinter73ConsumerConsole.exe" KeyPath="yes"/>
-      </Component>
-
-      <Component Id="CMP.Bin.AspenSinter73ConsumerConsole.CONFIG"  Guid="">
-        <File Id="FILE.Bin.AspenSinter73ConsumerConsole.CONFIG"
-            Name="AspenSinter73ConsumerConsole.exe.config"
-            Source="aspen73/AspenSinter73ConsumerConsole.exe.config"
-            KeyPath="yes" Vital="yes"/>
-
-        <util:XmlFile
-            Id="XMLFILE.Bin.AspenSinter73ConsumerConsole.1"
-            Action="setValue" Permanent="yes"
-            Sequence="1"
-            File="[#FILE.Bin.AspenSinter73ConsumerConsole.CONFIG]"
-            ElementPath="/configuration/connectionStrings/add[\[]@name='TurbineCompactDatabase'[\]]"
-            Name="connectionString"
-            Value="Data Source=[DIR.Data]TurbineCompactDatabase.sdf" />
-
-        <util:XmlFile
-          Id="XMLFILE.Bin.AspenSinter73ConsumerConsole.3"
-          Action="setValue" Permanent="yes"
-          Sequence="2"
-          File="[#FILE.Bin.AspenSinter73ConsumerConsole.CONFIG]"
-          ElementPath="/configuration/runtime/assemblyBinding/dependentAssembly/codeBase[\[]@href='SINTER_HREF'[\]]"
-          Name="href"
-          Value="FILE://[ProgramFilesFolder]CCSI\SimSinter_Aspen7.3\Sinter_Aspen7.3.dll"/>
-        <util:XmlFile
-          Id="XMLFILE.Bin.AspenSinter73ConsumerConsole.6"
-          Action="setValue" Permanent="yes"
-          Sequence="3"
-          File="[#FILE.Bin.AspenSinter73ConsumerConsole.CONFIG]"
-          ElementPath="/configuration/runtime/assemblyBinding/dependentAssembly/codeBase[\[]@href='ACMACESS_HREF'[\]]"
-          Name="href"
-          Value="FILE://[ProgramFilesFolder]CCSI\SimSinter_Aspen7.3\ACMAccess_Aspen7.3.dll"/>
-
-      </Component>
-
-      <!-- DEBUG SECTION 
-      -->
-      <?ifdef Debug ?>
-      <Component Id="CMP.Bin.AspenSinter73ConsumeConsole.PDB" Guid="">
-        <File Id="File.Bin.AspenSinter73ConsumerConsoleId.PDB"
-              Source="..\..\Master\AspenSinter73ConsumerConsole\bin\$(var.Configuration)\AspenSinter73ConsumerConsole.pdb" KeyPath="yes"/>
-      </Component>
-      <Component Id="CMP.Bin.Turbine.Consumer.AspenTech73.PDB" Guid="">
-        <File Id="File.Bin.FILE.Turbine.Consumer.AspenTech73.PDB"
-              Source="..\..\Master\Turbine.Consumer.AspenTech7.3\bin\$(var.Configuration)\Turbine.Consumer.AspenTech73.pdb" KeyPath="yes"/>
-      </Component>
-      <?endif?>
-
-    </DirectoryRef>
-
-    <DirectoryRef Id="DIR.Bin.SimSinterAspen8.4">
+    <DirectoryRef Id="DIR.Bin.SimSinterAspen">
 
       <Component Id="CMP.Bin.Turbine.Consumer.AspenTech.DLL" Guid="">
         <File Id="File.Bin.FILE.Turbine.Consumer.AspenTech.DLL"
@@ -463,7 +317,7 @@
       <?endif?>
     </DirectoryRef>
 
-    
+    <!--
     <DirectoryRef Id="DIR.Bin.SimSinterGProms">
 
       <Component Id="CMP.Bin.Turbine.Consumer.GProms.DLL" Guid="">
@@ -569,8 +423,6 @@
           Value="FILE://[ProgramFilesFolder]CCSI\SimSinter\Sinter.dll"/>
       </Component>
 
-      <!-- DEBUG SECTION 
-      -->
       <?ifdef Debug ?>
       <Component Id="CMP.Bin.GPromsSinterConsumerConsole.PDB" Guid="">
         <File Id="File.Bin.GPromsSinterConsumerConsoleId.PDB"
@@ -586,7 +438,7 @@
       </Component>
       <?endif?>
     </DirectoryRef>
-    
+    -->
 
     <DirectoryRef Id="DIR.Bin">
       <!--
@@ -904,31 +756,6 @@
                       Type="raw" />
     </Property>
 
-    <Property Id="PROP.SIM_SINTER7.3">
-      <RegistrySearch Id="RS.SIM_SINTER7.3"
-                      Root="HKLM"
-                      Key="SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\{A1447B84-C6FE-41F0-AA53-3057F0E9EB18}"
-                      Win64="no"
-                      Name="DisplayName"
-                      Type="raw" />
-    </Property>
-
-    <Property Id="PROP.SIM_SINTER7.3_MAJOR">
-      <RegistrySearch Id="RS.SIM_SINTER7.3_MAJOR"
-                      Root="HKLM"
-                      Key="SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\{A1447B84-C6FE-41F0-AA53-3057F0E9EB18}"
-                      Win64="no"
-                      Name="VersionMajor"
-                      Type="raw" />
-    </Property>
-    <Property Id="PROP.SIM_SINTER7.3_MINOR">
-      <RegistrySearch Id="RS.SIM_SINTER7.3_MINOR"
-                      Root="HKLM"
-                      Key="SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\{A1447B84-C6FE-41F0-AA53-3057F0E9EB18}"
-                      Win64="no"
-                      Name="VersionMinor"
-                      Type="raw" />
-    </Property>
     <!--
     <Property Id="PROP.SIM_SINTER_CODEBASE">
       <RegistrySearch Id="RS.SIM_SINTER_CODEBASE" Root="HKCR" Key="HKEY_CLASSES_ROOT\Wow6432Node\CLSID\{030B3D0E-4E1B-3292-8C72-5AEC484009C8}\InprocServer32\1.3.0.0"
@@ -998,8 +825,8 @@
       Installed OR ( PROP.SIM_SINTER7.3 = "SimSinter_Aspen7.3" AND PROP.SIM_SINTER7.3_MAJOR = "#1" AND PROP.SIM_SINTER7.3_MINOR > "#3")
     </Condition>
     -->
-    <Condition Message="SimSinter and/or SimSinter_Aspen7.3 Version 1.4 must be installed">
-      Installed OR ( PROP.SIM_SINTER = "SimSinter" AND PROP.SIM_SINTER_MAJOR = "#1" AND PROP.SIM_SINTER_MINOR > "#3") OR ( PROP.SIM_SINTER7.3 = "SimSinter_Aspen7.3" AND PROP.SIM_SINTER7.3_MAJOR = "#1" AND PROP.SIM_SINTER7.3_MINOR > "#3")
+    <Condition Message="Missing Dependency: Install SimSinter ( 2.1 &lt;= version &lt; 3.0 )">
+      Installed OR ( PROP.SIM_SINTER = "SimSinter" AND PROP.SIM_SINTER_MAJOR = "#2" AND PROP.SIM_SINTER_MINOR > "#0")
     </Condition>
 
 
@@ -1026,48 +853,28 @@
       <ComponentGroupRef Id="CG.TurbineLite.WebAPI"/>
     </Feature>
 
-    <Feature Id="AspenTech8.4" Title="Turbine AspenTech v8.4 Consumers"
-               Description="AspenTech v8.4 Process Engineering (ACM,AspenPlus)"
+    <Feature Id="AspenTech" Title="Turbine AspenTech Consumers"
+               Description="AspenTech Process Engineering (ACM,AspenPlus)"
                Level="0">
 
-      <Feature Id="AspenTech8.4WindowsService" Title="Turbine AspenTech v8.4 Windows Service Consumers"
-                 Description="AspenTech v8.4 Process Engineering (ACM,AspenPlus) Windows Service"
+      <Feature Id="AspenTechWindowsService" Title="Turbine AspenTech Windows Service Consumers"
+                 Description="AspenTech Process Engineering (ACM,AspenPlus) Windows Service"
                  Level="1">
-        <ComponentGroupRef Id="CG.Turbine.AspenTech8.4.WindowsService"/>
+        <ComponentGroupRef Id="CG.Turbine.AspenTech.WindowsService"/>
 
       </Feature>
 
       <ComponentGroupRef Id="CG.Turbine.Directories"/>
       <ComponentGroupRef Id="CG.Turbine.Bin"/>
-      <ComponentGroupRef Id="CG.Turbine.AspenTech8.4"/>
+      <ComponentGroupRef Id="CG.Turbine.AspenTech"/>
 
       <Condition Level="1">
-        Installed OR ( PROP.SIM_SINTER = "SimSinter" AND PROP.SIM_SINTER_MAJOR = "#1" AND PROP.SIM_SINTER_MINOR > "#3")
+        Installed OR ( PROP.SIM_SINTER = "SimSinter" AND PROP.SIM_SINTER_MAJOR = "#2" AND PROP.SIM_SINTER_MINOR > "#0")
       </Condition>
 
     </Feature>
 
-    <Feature Id="AspenTech7.3" Title="Turbine AspenTech v7.3 Consumers"
-               Description="AspenTech v7.3 Process Engineering (ACM,AspenPlus)"
-               Level="0">
-
-      <Feature Id="AspenTech7.3WindowsService" Title="Turbine AspenTech v7.3 Windows Service Consumers"
-                 Description="AspenTech v7.3 Process Engineering (ACM,AspenPlus) Windows Service"
-                 Level="1">
-        <ComponentGroupRef Id="CG.Turbine.AspenTech7.3.WindowsService"/>
-
-      </Feature>
-
-      <ComponentGroupRef Id="CG.Turbine.Directories"/>
-      <ComponentGroupRef Id="CG.Turbine.Bin"/>
-      <ComponentGroupRef Id="CG.Turbine.AspenTech7.3"/>
-
-      <Condition Level="1">
-        Installed OR ( PROP.SIM_SINTER7.3 = "SimSinter_Aspen7.3" AND PROP.SIM_SINTER7.3_MAJOR = "#1" AND PROP.SIM_SINTER7.3_MINOR > "#3")
-      </Condition>
-
-    </Feature>
-
+    <!--
     <Feature Id="GProms" Title="Turbine GProms Consumers"
                Description="GProms Process Engineering"
                Level="0">
@@ -1088,7 +895,8 @@
       </Condition>
 
     </Feature>
-
+    -->
+    
     <Feature Id="Excel"
              Title="Turbine Excel 2010 Consumer"
              Description="MS Office Excel 2010 Consumer executes spreadsheets"
@@ -1104,10 +912,10 @@
       <ComponentGroupRef Id="CG.Turbine.Directories"/>
       <ComponentGroupRef Id="CG.Turbine.Bin"/>
       <ComponentGroupRef Id="CG.Turbine.Excel"/>
-      <ComponentGroupRef Id="CG.Turbine.AspenTech8.4"/>
+      <ComponentGroupRef Id="CG.Turbine.AspenTech"/>
 
       <Condition Level="1">
-        Installed OR ( PROP.SIM_SINTER = "SimSinter" AND PROP.SIM_SINTER_MAJOR = "#1" AND PROP.SIM_SINTER_MINOR > "#3")
+        Installed OR ( PROP.SIM_SINTER = "SimSinter" AND PROP.SIM_SINTER_MAJOR = "#2" AND PROP.SIM_SINTER_MINOR > "#0")
       </Condition>
 
     </Feature>
@@ -1189,25 +997,7 @@
   </Fragment>
 
   <Fragment>
-    <ComponentGroup Id="CG.Turbine.AspenTech7.3">
-      <ComponentRef Id="CMP.Bin.Turbine.Consumer.AspenTech73.DLL"/>
-      <ComponentRef Id="CMP.Data.AspenConsumer73"/>
-      <ComponentRef Id="CMP.Bin.AspenSinter73ConsumerConsole" />
-      <ComponentRef Id="CMP.Bin.AspenSinter73ConsumerConsole.CONFIG"/>
-      <?ifdef Debug ?>
-      <ComponentRef Id="CMP.Bin.AspenSinter73ConsumeConsole.PDB"/>
-      <ComponentRef Id="CMP.Bin.Turbine.Consumer.AspenTech73.PDB"/>
-      <?endif?>
-    </ComponentGroup>
-
-    <ComponentGroup Id="CG.Turbine.AspenTech7.3.WindowsService">
-      <ComponentRef Id="CMP.AspenSinter73ConsumerWindowsService"/>
-      <ComponentRef Id="CMP.AspenSinter73ConsumerWindowsService.CONFIG"/>
-    </ComponentGroup>
-
-  </Fragment>
-  <Fragment>
-    <ComponentGroup Id="CG.Turbine.AspenTech8.4">
+    <ComponentGroup Id="CG.Turbine.AspenTech">
       <ComponentRef Id="CMP.Bin.Turbine.Consumer.AspenTech.DLL"/>
       <ComponentRef Id="CMP.Bin.Turbine.Consumer.SimSinter.DLL"/>
       <ComponentRef Id="CMP.Data.AspenConsumer"/>
@@ -1220,7 +1010,7 @@
       <?endif?>
     </ComponentGroup>
 
-    <ComponentGroup Id="CG.Turbine.AspenTech8.4.WindowsService">
+    <ComponentGroup Id="CG.Turbine.AspenTech.WindowsService">
       <ComponentRef Id="CMP.AspenSinterConsumerWindowsService"/>
       <ComponentRef Id="CMP.AspenSinterConsumerWindowsService.CONFIG"/>
       <?ifdef Debug ?>
