@@ -18,7 +18,7 @@ using Turbine.Consumer.SimSinter;
 using Turbine.Consumer.Contract.Behaviors;
 using CommandLine;
 using CommandLine.Text;
-
+using Sinter;
 
 namespace Turbine.Console
 {
