@@ -11,9 +11,14 @@ This repository contains the code and Visual Studio solutions for building the f
 
 See installation and user guide documents in the [documentation](./docs) subdirectory.
 
+## Supported Software
+- AspenTech v8.4 to v10
+- MS Excel 2010
+`NOTE: higher versions may work but haven't been tested`
+
 ## Authors
 
-* Josh Boverhof 
+* Joshua Boverhof - LBNL
 
 See also the list of [contributors](../../contributors) who participated in this project.
 

@@ -68,21 +68,12 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="aspen73\AspenSinter73ConsumerConsole.exe.config" />
-    <Content Include="aspen73\AspenSinter73ConsumerWindowsService.exe.config" />
-    <Content Include="aspen73\AspenSinterConsumerConsole.exe.config" />
-    <Content Include="aspen73\AspenSinterConsumerWindowsService.exe.config" />
-    <Content Include="aspen73\ExcelSinterConsumerConsole.exe.config" />
-    <Content Include="aspen73\ExcelSinterConsumerWindowsService.exe.config" />
     <Content Include="AspenSinterConsumerConsole.exe.config" />
     <Content Include="AspenSinterConsumerWindowsService.exe.config" />
     <Content Include="GPromsSinterConsumerWindowsService.exe.config" />
     <Content Include="GPromsSinterConsumerConsole.exe.config" />
     <Content Include="ExcelSinterConsumerWindowsService.exe.config" />
     <Content Include="ExcelSinterConsumerConsole.exe.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="aspen73" />
   </ItemGroup>
   <Import Project="$(WixTargetsPath)" />
   <!--

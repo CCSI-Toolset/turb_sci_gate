@@ -10,7 +10,7 @@
            UpgradeCode="2a7184f4-0ed0-4c49-bb53-2824bf4b14e8"
            Name="TurbineLite"
            Language="1033"
-           Version="0.6.1.0"
+           Version="2.3.0.0"
            Manufacturer="Lawrence Berkeley National Lab"
            >
 
@@ -36,15 +36,13 @@
             <Directory Id="DIR.Logs" Name="Logs"/>
             <Directory Id="DIR.Data" Name="Data">
               <Directory Id="DIR.Data.AspenConsumer" Name="AspenTech"/>
-              <Directory Id="DIR.Data.AspenConsumer7.3" Name="AspenTech_7.3"/>
               <Directory Id="DIR.Data.GPromsConsumer" Name="GProms"/>
               <Directory Id="DIR.Data.Excel" Name="Excel"/>
             </Directory>
             <Directory Id="DIR.Bin" Name="Clients">
               <Directory Id="DIR.Bin.Excel"/>
               <Directory Id="DIR.Bin.SimSinterGProms"/>
-              <Directory Id="DIR.Bin.SimSinterAspen8.4"/>
-              <Directory Id="DIR.Bin.SimSinterAspen7.3"/>
+              <Directory Id="DIR.Bin.SimSinterAspen"/>
             </Directory>
             <Directory Id="DIR.Services" Name="Services">
               <Directory Id="DIR.TurbineWebAPI" Name="WebAPI">
@@ -66,22 +64,15 @@
         <CreateFolder/>
         <RemoveFile Id="RF.Data.AspenConsumer" Name="*.*" On="uninstall" />
       </Component>
-    </DirectoryRef>
-
-    <!-- DirectoryRef Id="DIR.Data.AspenConsumer7.3">
-      <Component Id="CMP.Data.AspenConsumer73" Guid="CB227738-66FF-4342-A506-B32E398E28D3" KeyPath="yes">
-        <CreateFolder/>
-        <RemoveFile Id="RF.Data.AspenConsumer73" Name="*.*" On="uninstall" />
-      </Component>
-    </DirectoryRef-->
-
+    </Directory
+    <!--
     <DirectoryRef Id="DIR.Data.GPromsConsumer">
       <Component Id="CMP.Data.GPromsConsumer" Guid="BC0C022C-C3B1-4759-B4C3-8BBB1D2BF8A3" KeyPath="yes">
         <CreateFolder/>
         <RemoveFile Id="RF.Data.GPromsConsumer" Name="*.*" On="uninstall" />
       </Component>
     </DirectoryRef>
-
+    -->
     <DirectoryRef Id="DIR.Data.Excel">
       <Component Id="CMP.Data.Excel" Guid="068B0D13-CAA3-428F-96DB-DBEA5282C93C" KeyPath="yes">
         <CreateFolder/>
@@ -339,6 +330,8 @@
     </DirectoryRef-->
 
     <DirectoryRef Id="DIR.Bin.SimSinterAspen8.4">
+    <DirectoryRef Id="DIR.Bin.SimSinterAspen">
+
 
       <Component Id="CMP.Bin.Turbine.Consumer.AspenTech.DLL" Guid="">
         <File Id="File.Bin.FILE.Turbine.Consumer.AspenTech.DLL"
@@ -461,7 +454,7 @@
       <?endif?>
     </DirectoryRef>
 
-    
+    <!--
     <DirectoryRef Id="DIR.Bin.SimSinterGProms">
 
       <Component Id="CMP.Bin.Turbine.Consumer.GProms.DLL" Guid="">
@@ -567,8 +560,6 @@
           Value="FILE://[ProgramFilesFolder]CCSI\SimSinter\Sinter.dll"/>
       </Component>
 
-      <!-- DEBUG SECTION 
-      -->
       <?ifdef Debug ?>
       <Component Id="CMP.Bin.GPromsSinterConsumerConsole.PDB" Guid="">
         <File Id="File.Bin.GPromsSinterConsumerConsoleId.PDB"
@@ -584,7 +575,7 @@
       </Component>
       <?endif?>
     </DirectoryRef>
-    
+    -->
 
     <DirectoryRef Id="DIR.Bin">
       <!--
@@ -902,31 +893,6 @@
                       Type="raw" />
     </Property>
 
-    <Property Id="PROP.SIM_SINTER7.3">
-      <RegistrySearch Id="RS.SIM_SINTER7.3"
-                      Root="HKLM"
-                      Key="SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\{A1447B84-C6FE-41F0-AA53-3057F0E9EB18}"
-                      Win64="no"
-                      Name="DisplayName"
-                      Type="raw" />
-    </Property>
-
-    <Property Id="PROP.SIM_SINTER7.3_MAJOR">
-      <RegistrySearch Id="RS.SIM_SINTER7.3_MAJOR"
-                      Root="HKLM"
-                      Key="SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\{A1447B84-C6FE-41F0-AA53-3057F0E9EB18}"
-                      Win64="no"
-                      Name="VersionMajor"
-                      Type="raw" />
-    </Property>
-    <Property Id="PROP.SIM_SINTER7.3_MINOR">
-      <RegistrySearch Id="RS.SIM_SINTER7.3_MINOR"
-                      Root="HKLM"
-                      Key="SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\{A1447B84-C6FE-41F0-AA53-3057F0E9EB18}"
-                      Win64="no"
-                      Name="VersionMinor"
-                      Type="raw" />
-    </Property>
     <!--
     <Property Id="PROP.SIM_SINTER_CODEBASE">
       <RegistrySearch Id="RS.SIM_SINTER_CODEBASE" Root="HKCR" Key="HKEY_CLASSES_ROOT\Wow6432Node\CLSID\{030B3D0E-4E1B-3292-8C72-5AEC484009C8}\InprocServer32\1.3.0.0"
@@ -1049,23 +1015,24 @@
                Description="AspenTech v7.3 Process Engineering (ACM,AspenPlus)"
                Level="0">
 
-      <Feature Id="AspenTech7.3WindowsService" Title="Turbine AspenTech v7.3 Windows Service Consumers"
-                 Description="AspenTech v7.3 Process Engineering (ACM,AspenPlus) Windows Service"
+      <Feature Id="AspenTechWindowsService" Title="Turbine AspenTech Windows Service Consumers"
+                 Description="AspenTech Process Engineering (ACM,AspenPlus) Windows Service"
                  Level="1">
-        <ComponentGroupRef Id="CG.Turbine.AspenTech7.3.WindowsService"/>
+        <ComponentGroupRef Id="CG.Turbine.AspenTech.WindowsService"/>
 
       </Feature>
 
       <ComponentGroupRef Id="CG.Turbine.Directories"/>
       <ComponentGroupRef Id="CG.Turbine.Bin"/>
-      <ComponentGroupRef Id="CG.Turbine.AspenTech7.3"/>
+      <ComponentGroupRef Id="CG.Turbine.AspenTech"/>
 
       <Condition Level="1">
-        Installed OR ( PROP.SIM_SINTER7.3 = "SimSinter_Aspen7.3" AND PROP.SIM_SINTER7.3_MAJOR = "#1" AND PROP.SIM_SINTER7.3_MINOR > "#3")
+        Installed OR ( PROP.SIM_SINTER = "SimSinter" AND PROP.SIM_SINTER_MAJOR = "#2" AND PROP.SIM_SINTER_MINOR > "#0")
       </Condition>
 
     </Feature-->
 
+    <!--
     <Feature Id="GProms" Title="Turbine GProms Consumers"
                Description="GProms Process Engineering"
                Level="0">
@@ -1086,7 +1053,8 @@
       </Condition>
 
     </Feature>
-
+    -->
+    
     <Feature Id="Excel"
              Title="Turbine Excel 2010 Consumer"
              Description="MS Office Excel 2010 Consumer executes spreadsheets"
@@ -1102,7 +1070,7 @@
       <ComponentGroupRef Id="CG.Turbine.Directories"/>
       <ComponentGroupRef Id="CG.Turbine.Bin"/>
       <ComponentGroupRef Id="CG.Turbine.Excel"/>
-      <ComponentGroupRef Id="CG.Turbine.AspenTech8.4"/>
+      <ComponentGroupRef Id="CG.Turbine.AspenTech"/>
 
       <Condition Level="1">
         Installed OR ( PROP.SIM_SINTER = "SimSinter" AND PROP.SIM_SINTER_MAJOR = "#2" AND PROP.SIM_SINTER_MINOR >= "#1")
@@ -1218,7 +1186,7 @@
       <?endif?>
     </ComponentGroup>
 
-    <ComponentGroup Id="CG.Turbine.AspenTech8.4.WindowsService">
+    <ComponentGroup Id="CG.Turbine.AspenTech.WindowsService">
       <ComponentRef Id="CMP.AspenSinterConsumerWindowsService"/>
       <ComponentRef Id="CMP.AspenSinterConsumerWindowsService.CONFIG"/>
       <?ifdef Debug ?>
