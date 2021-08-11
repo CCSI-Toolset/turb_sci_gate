@@ -64,7 +64,7 @@
         <CreateFolder/>
         <RemoveFile Id="RF.Data.AspenConsumer" Name="*.*" On="uninstall" />
       </Component>
-    </Directory
+    </DirectoryRef>
     <!--
     <DirectoryRef Id="DIR.Data.GPromsConsumer">
       <Component Id="CMP.Data.GPromsConsumer" Guid="BC0C022C-C3B1-4759-B4C3-8BBB1D2BF8A3" KeyPath="yes">
@@ -329,7 +329,6 @@
 
     </DirectoryRef-->
 
-    <DirectoryRef Id="DIR.Bin.SimSinterAspen8.4">
     <DirectoryRef Id="DIR.Bin.SimSinterAspen">
 
 
@@ -940,32 +939,14 @@
     <Condition Message="Require .NET 4.0 Full installation (Found partial .NET 4.0: [PROP.NET_FRAMEWORK_4_VERSION])">
       Installed OR PROP.NET_FRAMEWORK_4 = "#1"
     </Condition>
-    <!--
-    <Condition Message="CCSIUnits must be installed">
-      Installed OR PROP.CCSIUNITS_PRODUCT = "CCSIUnits" OR PROP.CCSIUNITS_PRODUCT64 = "CCSIUnits"
-    </Condition>
 
-    <Condition Message="CCSIUnits version 131072 must be installed">
-      Installed OR PROP.CCSIUNITS_VERSION = "#131072" OR PROP.CCSIUNITS_VERSION64 = "#131072"
-    </Condition>
-    -->
     <Condition Message="Installation requires SQL Server Compact 4.0 ( 32bit=[PROP.SQL_SERVER_COMPACT.VERSION] OR 64bit=[PROP.SQL_SERVER_COMPACT64.VERSION] )">
       Installed OR ( <![CDATA[PROP.SQL_SERVER_COMPACT.VERSION << "4.0"]]>  OR <![CDATA[PROP.SQL_SERVER_COMPACT64.VERSION << "4.0"]]> )
     </Condition>
 
-    <!--
-    <Condition Message="SimSinter Version 1.4 must be installed ( Found MAJOR[PROP.SIM_SINTER_MAJOR], MINOR [PROP.SIM_SINTER_MINOR] ) ">
-      Installed OR ( PROP.SIM_SINTER = "SimSinter" AND PROP.SIM_SINTER_MAJOR = "#1" AND PROP.SIM_SINTER_MINOR > "#3")
-    </Condition>
-
-    <Condition Message="SimSinter_Aspen7.3 Version 1.4 must be installed ( Found MAJOR[PROP.SIM_SINTER7.3_MAJOR], MINOR [PROP.SIM_SINTER7.3_MINOR] ) ">
-      Installed OR ( PROP.SIM_SINTER7.3 = "SimSinter_Aspen7.3" AND PROP.SIM_SINTER7.3_MAJOR = "#1" AND PROP.SIM_SINTER7.3_MINOR > "#3")
-    </Condition>
-    -->
     <Condition Message="SimSinter Version >= 2.1 must be installed ( Found MAJOR[PROP.SIM_SINTER_MAJOR].[PROP.SIM_SINTER_MINOR] ) ">
       Installed OR ( PROP.SIM_SINTER = "SimSinter" AND PROP.SIM_SINTER_MAJOR = "#2" AND PROP.SIM_SINTER_MINOR >= "#1")
     </Condition>
-
 
     <!--
     <Condition Message="Installation requires AspenTech Engineering ( AspenPlus=[PROP.ASPENTECH_ASPENPLUS] and ACM=[PROP.ASPENTECH_ACM] )">
@@ -990,29 +971,8 @@
       <ComponentGroupRef Id="CG.TurbineLite.WebAPI"/>
     </Feature>
 
-    <Feature Id="AspenTech8.4" Title="Turbine AspenTech v8.4 Consumers"
-               Description="AspenTech v8.4 Process Engineering (ACM,AspenPlus)"
-               Level="0">
-
-      <Feature Id="AspenTech8.4WindowsService" Title="Turbine AspenTech v8.4 Windows Service Consumers"
-                 Description="AspenTech v8.4 Process Engineering (ACM,AspenPlus) Windows Service"
-                 Level="1">
-        <ComponentGroupRef Id="CG.Turbine.AspenTech8.4.WindowsService"/>
-
-      </Feature>
-
-      <ComponentGroupRef Id="CG.Turbine.Directories"/>
-      <ComponentGroupRef Id="CG.Turbine.Bin"/>
-      <ComponentGroupRef Id="CG.Turbine.AspenTech8.4"/>
-
-      <Condition Level="1">
-        Installed OR ( PROP.SIM_SINTER = "SimSinter" AND PROP.SIM_SINTER_MAJOR = "#1" AND PROP.SIM_SINTER_MINOR > "#3")
-      </Condition>
-
-    </Feature>
-
-    <!--Feature Id="AspenTech7.3" Title="Turbine AspenTech v7.3 Consumers"
-               Description="AspenTech v7.3 Process Engineering (ACM,AspenPlus)"
+    <Feature Id="AspenTech" Title="Turbine AspenTech Consumers"
+               Description="AspenTech Process Engineering (ACM,AspenPlus)"
                Level="0">
 
       <Feature Id="AspenTechWindowsService" Title="Turbine AspenTech Windows Service Consumers"
@@ -1027,34 +987,11 @@
       <ComponentGroupRef Id="CG.Turbine.AspenTech"/>
 
       <Condition Level="1">
-        Installed OR ( PROP.SIM_SINTER = "SimSinter" AND PROP.SIM_SINTER_MAJOR = "#2" AND PROP.SIM_SINTER_MINOR > "#0")
-      </Condition>
-
-    </Feature-->
-
-    <!--
-    <Feature Id="GProms" Title="Turbine GProms Consumers"
-               Description="GProms Process Engineering"
-               Level="0">
-
-      <Feature Id="GPromsWindowsService" Title="Turbine GProms Windows Service Consumers"
-                 Description="GProms Process Engineering GProms Windows Service"
-                 Level="1">
-        <ComponentGroupRef Id="CG.Turbine.GProms.WindowsService"/>
-
-      </Feature>
-
-      <ComponentGroupRef Id="CG.Turbine.Directories"/>
-      <ComponentGroupRef Id="CG.Turbine.Bin"/>
-      <ComponentGroupRef Id="CG.Turbine.GProms"/>
-
-      <Condition Level="1">
         Installed OR ( PROP.SIM_SINTER = "SimSinter" AND PROP.SIM_SINTER_MAJOR = "#2" AND PROP.SIM_SINTER_MINOR >= "#1")
       </Condition>
 
     </Feature>
-    -->
-    
+
     <Feature Id="Excel"
              Title="Turbine Excel 2010 Consumer"
              Description="MS Office Excel 2010 Consumer executes spreadsheets"
@@ -1173,7 +1110,7 @@
 
   </Fragment-->
   <Fragment>
-    <ComponentGroup Id="CG.Turbine.AspenTech8.4">
+    <ComponentGroup Id="CG.Turbine.AspenTech">
       <ComponentRef Id="CMP.Bin.Turbine.Consumer.AspenTech.DLL"/>
       <ComponentRef Id="CMP.Bin.Turbine.Consumer.SimSinter.DLL"/>
       <ComponentRef Id="CMP.Data.AspenConsumer"/>
