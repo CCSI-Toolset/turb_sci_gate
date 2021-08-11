@@ -996,8 +996,8 @@
       Installed OR ( PROP.SIM_SINTER7.3 = "SimSinter_Aspen7.3" AND PROP.SIM_SINTER7.3_MAJOR = "#1" AND PROP.SIM_SINTER7.3_MINOR > "#3")
     </Condition>
     -->
-    <Condition Message="SimSinter and/or SimSinter_Aspen7.3 Version 1.4 must be installed">
-      Installed OR ( PROP.SIM_SINTER = "SimSinter" AND PROP.SIM_SINTER_MAJOR = "#1" AND PROP.SIM_SINTER_MINOR > "#3") OR ( PROP.SIM_SINTER7.3 = "SimSinter_Aspen7.3" AND PROP.SIM_SINTER7.3_MAJOR = "#1" AND PROP.SIM_SINTER7.3_MINOR > "#3")
+    <Condition Message="SimSinter Version >= 2.1 must be installed ( Found MAJOR[PROP.SIM_SINTER_MAJOR].[PROP.SIM_SINTER_MINOR] ) ">
+      Installed OR ( PROP.SIM_SINTER = "SimSinter" AND PROP.SIM_SINTER_MAJOR = "#2" AND PROP.SIM_SINTER_MINOR >= "#1")
     </Condition>
 
 
@@ -1082,7 +1082,7 @@
       <ComponentGroupRef Id="CG.Turbine.GProms"/>
 
       <Condition Level="1">
-        Installed OR ( PROP.SIM_SINTER = "SimSinter" AND PROP.SIM_SINTER_MAJOR = "#1" AND PROP.SIM_SINTER_MINOR > "#3")
+        Installed OR ( PROP.SIM_SINTER = "SimSinter" AND PROP.SIM_SINTER_MAJOR = "#2" AND PROP.SIM_SINTER_MINOR >= "#1")
       </Condition>
 
     </Feature>
@@ -1105,7 +1105,7 @@
       <ComponentGroupRef Id="CG.Turbine.AspenTech8.4"/>
 
       <Condition Level="1">
-        Installed OR ( PROP.SIM_SINTER = "SimSinter" AND PROP.SIM_SINTER_MAJOR = "#1" AND PROP.SIM_SINTER_MINOR > "#3")
+        Installed OR ( PROP.SIM_SINTER = "SimSinter" AND PROP.SIM_SINTER_MAJOR = "#2" AND PROP.SIM_SINTER_MINOR >= "#1")
       </Condition>
 
     </Feature>
