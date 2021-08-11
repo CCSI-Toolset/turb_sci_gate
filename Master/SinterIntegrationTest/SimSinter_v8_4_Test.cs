@@ -267,52 +267,52 @@ namespace SinterIntegrationTest
             Debug.WriteLine(JsonConvert.SerializeObject(myDict));
         }
 
-        [TestMethod]
-        public void SinterGPROMSTest()
-        {
-            IDictionary<string, object> output;
-            IConsumerRun run = (IConsumerRun)new InMemorySinterConsumerGProms();
-            Assert.IsFalse(run.IsEngineRunning);
-            Assert.IsFalse(run.IsSimulationInitializing);
-            Assert.IsFalse(run.IsSimulationOpened);
-            // set job before calling Run
-            ((InMemorySinterConsumerGProms)run).job = new InMemoryJobGProms_BufferTank_FO();
-            //Newtonsoft.Json.Linq.JObject inputsD = JObject.Parse("{\"inputs\": { \"ProcessName\": \"SimulateTank_sinter\", \"password\": \"BufferTank_FO\", \"AlphaFO\": 0.8,\"SingleReal\": 0.0,\"SingleInt\": 11,\"ArrayInt\": [12,12],\"FlowInFO\": 14.0,\"Mass\": [1.0,2.0,3.0,4.0,5.0],\"HeightFO\": 7.5,\"singleSelector\": \"apple\",\"arraySelector\": [\"red\",\"red\",\"red\"]}}");
-            Newtonsoft.Json.Linq.JObject inputsD = new JObject();
-            Dictionary<String, Object> dd = new Dictionary<string, object>();
-            foreach (var v in inputsD)
-            {
-                //Debug.WriteLine("VALUE: " + v);
-                dd[v.Key] = v.Value;
-            }
-            ((InMemorySinterConsumerGProms)run).job.Process.Input = dd;
-            try
-            {
-                Assert.IsTrue(run.Run());
-                //Assert.IsTrue(run.IsSimulationOpened);
+        //[TestMethod]
+        //public void SinterGPROMSTest()
+        //{
+        //    IDictionary<string, object> output;
+        //    IConsumerRun run = (IConsumerRun)new InMemorySinterConsumerGProms();
+        //    Assert.IsFalse(run.IsEngineRunning);
+        //    Assert.IsFalse(run.IsSimulationInitializing);
+        //    Assert.IsFalse(run.IsSimulationOpened);
+        //    // set job before calling Run
+        //    ((InMemorySinterConsumerGProms)run).job = new InMemoryJobGProms_BufferTank_FO();
+        //    //Newtonsoft.Json.Linq.JObject inputsD = JObject.Parse("{\"inputs\": { \"ProcessName\": \"SimulateTank_sinter\", \"password\": \"BufferTank_FO\", \"AlphaFO\": 0.8,\"SingleReal\": 0.0,\"SingleInt\": 11,\"ArrayInt\": [12,12],\"FlowInFO\": 14.0,\"Mass\": [1.0,2.0,3.0,4.0,5.0],\"HeightFO\": 7.5,\"singleSelector\": \"apple\",\"arraySelector\": [\"red\",\"red\",\"red\"]}}");
+        //    Newtonsoft.Json.Linq.JObject inputsD = new JObject();
+        //    Dictionary<String, Object> dd = new Dictionary<string, object>();
+        //    foreach (var v in inputsD)
+        //    {
+        //        //Debug.WriteLine("VALUE: " + v);
+        //        dd[v.Key] = v.Value;
+        //    }
+        //    ((InMemorySinterConsumerGProms)run).job.Process.Input = dd;
+        //    try
+        //    {
+        //        Assert.IsTrue(run.Run());
+        //        //Assert.IsTrue(run.IsSimulationOpened);
 
-                IJobConsumerContract job = ((InMemorySinterConsumerGProms)run).job;
-                Assert.IsTrue(job.IsSuccess());
-                output = job.Process.Output;
-                Assert.IsNotNull(output);
+        //        IJobConsumerContract job = ((InMemorySinterConsumerGProms)run).job;
+        //        Assert.IsTrue(job.IsSuccess());
+        //        output = job.Process.Output;
+        //        Assert.IsNotNull(output);
 
-                foreach (KeyValuePair<string, object> kv in output)
-                {
-                    Debug.WriteLine(String.Format("{0} : {1}", kv.Key, kv.Value));
-                }
-            }
-            finally
-            {
-                Debug.WriteLine("Attempt Cleanup");
-                run.CleanUp();
-            }
+        //        foreach (KeyValuePair<string, object> kv in output)
+        //        {
+        //            Debug.WriteLine(String.Format("{0} : {1}", kv.Key, kv.Value));
+        //        }
+        //    }
+        //    finally
+        //    {
+        //        Debug.WriteLine("Attempt Cleanup");
+        //        run.CleanUp();
+        //    }
 
-            Object d;
-            output.TryGetValue("status", out d);
-            JObject statusD = (JObject)d;
-            JToken status = statusD.GetValue("value");
-            Assert.AreEqual<int>(status.Value<int>(), 0);
-        }
+        //    Object d;
+        //    output.TryGetValue("status", out d);
+        //    JObject statusD = (JObject)d;
+        //    JToken status = statusD.GetValue("value");
+        //    Assert.AreEqual<int>(status.Value<int>(), 0);
+        //}
 
         [TestMethod]
         public void TestACM_BFBv6_3_new_Defaults()

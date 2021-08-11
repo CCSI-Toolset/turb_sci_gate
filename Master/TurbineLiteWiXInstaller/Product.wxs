@@ -68,12 +68,12 @@
       </Component>
     </DirectoryRef>
 
-    <DirectoryRef Id="DIR.Data.AspenConsumer7.3">
+    <!-- DirectoryRef Id="DIR.Data.AspenConsumer7.3">
       <Component Id="CMP.Data.AspenConsumer73" Guid="CB227738-66FF-4342-A506-B32E398E28D3" KeyPath="yes">
         <CreateFolder/>
         <RemoveFile Id="RF.Data.AspenConsumer73" Name="*.*" On="uninstall" />
       </Component>
-    </DirectoryRef>
+    </DirectoryRef-->
 
     <DirectoryRef Id="DIR.Data.GPromsConsumer">
       <Component Id="CMP.Data.GPromsConsumer" Guid="BC0C022C-C3B1-4759-B4C3-8BBB1D2BF8A3" KeyPath="yes">
@@ -203,7 +203,7 @@
       <?endif?>
     </DirectoryRef>
 
-    <DirectoryRef Id="DIR.Bin.SimSinterAspen7.3">
+    <!--DirectoryRef Id="DIR.Bin.SimSinterAspen7.3">
 
       <Component Id="CMP.Bin.Turbine.Consumer.AspenTech73.DLL" Guid="">
         <File Id="File.Bin.FILE.Turbine.Consumer.AspenTech73.DLL"
@@ -325,8 +325,6 @@
 
       </Component>
 
-      <!-- DEBUG SECTION 
-      -->
       <?ifdef Debug ?>
       <Component Id="CMP.Bin.AspenSinter73ConsumeConsole.PDB" Guid="">
         <File Id="File.Bin.AspenSinter73ConsumerConsoleId.PDB"
@@ -338,7 +336,7 @@
       </Component>
       <?endif?>
 
-    </DirectoryRef>
+    </DirectoryRef-->
 
     <DirectoryRef Id="DIR.Bin.SimSinterAspen8.4">
 
@@ -1047,7 +1045,7 @@
 
     </Feature>
 
-    <Feature Id="AspenTech7.3" Title="Turbine AspenTech v7.3 Consumers"
+    <!--Feature Id="AspenTech7.3" Title="Turbine AspenTech v7.3 Consumers"
                Description="AspenTech v7.3 Process Engineering (ACM,AspenPlus)"
                Level="0">
 
@@ -1066,7 +1064,7 @@
         Installed OR ( PROP.SIM_SINTER7.3 = "SimSinter_Aspen7.3" AND PROP.SIM_SINTER7.3_MAJOR = "#1" AND PROP.SIM_SINTER7.3_MINOR > "#3")
       </Condition>
 
-    </Feature>
+    </Feature-->
 
     <Feature Id="GProms" Title="Turbine GProms Consumers"
                Description="GProms Process Engineering"
@@ -1188,7 +1186,7 @@
 
   </Fragment>
 
-  <Fragment>
+  <!--Fragment>
     <ComponentGroup Id="CG.Turbine.AspenTech7.3">
       <ComponentRef Id="CMP.Bin.Turbine.Consumer.AspenTech73.DLL"/>
       <ComponentRef Id="CMP.Data.AspenConsumer73"/>
@@ -1205,7 +1203,7 @@
       <ComponentRef Id="CMP.AspenSinter73ConsumerWindowsService.CONFIG"/>
     </ComponentGroup>
 
-  </Fragment>
+  </Fragment-->
   <Fragment>
     <ComponentGroup Id="CG.Turbine.AspenTech8.4">
       <ComponentRef Id="CMP.Bin.Turbine.Consumer.AspenTech.DLL"/>

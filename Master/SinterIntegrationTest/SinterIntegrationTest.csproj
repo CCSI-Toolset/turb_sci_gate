@@ -35,11 +35,17 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Interop.AspenCustomModelerLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=e6742d51acbe1950, processorArchitecture=x86">
-      <SpecificVersion>False</SpecificVersion>
+    <COMReference Include="AspenCustomModelerLibrary">
+      <Guid>{E85043BB-0E9D-11D3-82C4-00104B468DE2}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
       <EmbedInteropTypes>True</EmbedInteropTypes>
-      <HintPath>$(MSBuildProgramFiles32)\AspenTech\Aspen Custom Modeler V8.4\Examples\SSMeth\Interop.AspenCustomModelerLibrary.dll</HintPath>
-    </Reference>
+    </COMReference>
+  </ItemGroup>
+  <ItemGroup>
     <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\TurbineLite\packages\Newtonsoft.Json.8.0.2\lib\net40\Newtonsoft.Json.dll</HintPath>
