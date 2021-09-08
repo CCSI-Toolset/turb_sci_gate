@@ -152,6 +152,14 @@
           ElementPath="/configuration/runtime/assemblyBinding/dependentAssembly/codeBase[\[]@href='SINTER_HREF'[\]]"
           Name="href"
           Value="FILE://[ProgramFilesFolder]CCSI\SimSinter\Sinter.dll"/>
+        <util:XmlFile
+          Id="XMLFILE.Bin.ExcelSinterWindowsService.5"
+          Action="setValue" Permanent="yes"
+          Sequence="5"
+          File="[#FILE.Bin.ExcelSinterWindowsService.CONFIG]"
+          ElementPath="/configuration/runtime/assemblyBinding/dependentAssembly/codeBase[\[]@href='VARIABLETREE_HREF'[\]]"
+          Name="href"
+          Value="FILE://[ProgramFilesFolder]CCSI\SimSinter\VariableTree.dll"/>
       </Component>
 
       <Component Id="CMP.ExcelConsole.EXE" Guid="9D26C7AD-FFA8-4C25-BBAA-C8937DABE59A">
@@ -180,6 +188,14 @@
           ElementPath="/configuration/runtime/assemblyBinding/dependentAssembly/codeBase[\[]@href='SINTER_HREF'[\]]"
           Name="href"
           Value="FILE://[ProgramFilesFolder]CCSI\SimSinter\Sinter.dll"/>
+        <util:XmlFile
+          Id="XMLFILE.Bin.ExcelSinterConsumerConsole.3"
+          Action="setValue" Permanent="yes"
+          Sequence="3"
+          File="[#FILE.Bin.ExcelSinterConsumerConsole.CONFIG]"
+          ElementPath="/configuration/runtime/assemblyBinding/dependentAssembly/codeBase[\[]@href='VARIABLETREE_HREF'[\]]"
+          Name="href"
+          Value="FILE://[ProgramFilesFolder]CCSI\SimSinter\VariableTree.dll"/>
       </Component>
 
       <?ifdef Debug ?>
@@ -403,6 +419,14 @@
           ElementPath="/configuration/runtime/assemblyBinding/dependentAssembly/codeBase[\[]@href='SINTER_HREF'[\]]"
           Name="href"
           Value="FILE://[ProgramFilesFolder]CCSI\SimSinter\Sinter.dll"/>
+        <util:XmlFile
+          Id="XMLFILE.Bin.AspenSinterConsumerWS.4"
+          Action="setValue" Permanent="yes"
+          Sequence="5"
+          File="[#FILE.AspenSinterConsumerWindowsService.Config]"
+          ElementPath="/configuration/runtime/assemblyBinding/dependentAssembly/codeBase[\[]@href='VARIABLETREE_HREF'[\]]"
+          Name="href"
+          Value="FILE://[ProgramFilesFolder]CCSI\SimSinter\VariableTree.dll"/>
       </Component>
 
       <Component Id="CMP.Bin.AspenSinterConsumerConsole" Guid="7044F1FF-258E-4156-B434-6262D4390D32">
@@ -433,6 +457,14 @@
           ElementPath="/configuration/runtime/assemblyBinding/dependentAssembly/codeBase[\[]@href='SINTER_HREF'[\]]"
           Name="href"
           Value="FILE://[ProgramFilesFolder]CCSI\SimSinter\Sinter.dll"/>
+        <util:XmlFile
+          Id="XMLFILE.Bin.AspenSinterConsumerConsole.4"
+          Action="setValue" Permanent="yes"
+          Sequence="3"
+          File="[#FILE.Bin.AspenSinterConsumerConsole.CONFIG]"
+          ElementPath="/configuration/runtime/assemblyBinding/dependentAssembly/codeBase[\[]@href='VARIABLETREE_HREF'[\]]"
+          Name="href"
+          Value="FILE://[ProgramFilesFolder]CCSI\SimSinter\VariableTree.dll"/>
       </Component>
 
       <!-- DEBUG SECTION 
