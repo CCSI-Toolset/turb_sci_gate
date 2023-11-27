@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Microsoft.Practices.Unity;
-using Microsoft.Practices.Unity.Configuration;
+using Unity;
+using Unity.Configuration;
 using Turbine.Data.Contract.Behaviors;
 using Turbine.Consumer.Data.Contract.Behaviors;
 using Turbine.Consumer.Contract.Behaviors;
+using Microsoft.Practices.Unity.Configuration;
+using System.Configuration;
 
 namespace Turbine.Consumer
 {
@@ -17,7 +19,8 @@ namespace Turbine.Consumer
         public static IUnityContainer container = new UnityContainer();
         static AppUtility()
         {
-            container.LoadConfiguration("consumer");
+            var section = (UnityConfigurationSection)ConfigurationManager.GetSection("unity");
+            section.Configure(container, "consumer");
         }
         public static IContext GetAppContext()
         {
