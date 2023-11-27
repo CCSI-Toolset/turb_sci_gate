@@ -92,10 +92,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Master\Turbine.Consumer.AspenTech7.3\Turbine.Consumer.AspenTech7.3.csproj">
-      <Project>{83d745cc-2ca4-4b15-be02-b57af5550d86}</Project>
-      <Name>Turbine.Consumer.AspenTech7.3</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\Master\Turbine.Consumer.Contract.Behaviors\Turbine.Consumer.Contract.Behaviors.csproj">
       <Project>{0866f140-3bd7-4aa3-9b1c-7096b6721d99}</Project>
       <Name>Turbine.Consumer.Contract.Behaviors</Name>
