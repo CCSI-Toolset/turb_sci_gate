@@ -1,215 +1,151 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi"
-     xmlns:util="http://schemas.microsoft.com/wix/UtilExtension"
-     xmlns:sql="http://schemas.microsoft.com/wix/SqlExtension"
-     xmlns:iis="http://schemas.microsoft.com/wix/IIsExtension">
+﻿<Wix xmlns="http://wixtoolset.org/schemas/v4/wxs" xmlns:util="http://wixtoolset.org/schemas/v4/wxs/util">
 
   <!--#################################################
         #   CustomActions
         #################################################-->
   <Fragment>
    
-    <CustomAction Id="CA.CHECK.SQL_LOGIN"
-                  Execute="immediate"
-                  Error="Empty Login">
+    <CustomAction Id="CA.CHECK.SQL_LOGIN" Execute="immediate" Error="Empty Login">
     </CustomAction>
-    <CustomAction Id="CA.CHECK.SQL_PASSWORD"
-                  Execute="immediate"
-                  Error="Empty Password">
+    <CustomAction Id="CA.CHECK.SQL_PASSWORD" Execute="immediate" Error="Empty Password">
     </CustomAction>
-    <CustomAction Id="CA.CHECK.TURBINE_USER"
-                  Execute="immediate"
-                  Error="Empty Turbine User">
+    <CustomAction Id="CA.CHECK.TURBINE_USER" Execute="immediate" Error="Empty Turbine User">
     </CustomAction>
-    <CustomAction Id="CA.CHECK.TURBINE_PASSWORD"
-                  Execute="immediate"
-                  Error="Empty Turbine Password">
+    <CustomAction Id="CA.CHECK.TURBINE_PASSWORD" Execute="immediate" Error="Empty Turbine Password">
     </CustomAction>
-    <CustomAction Id="CA.CHECK.SQL_SERVER_DEFAULT_INSTANCE"
-                  Execute="immediate"
-                  Error="Database Feature:   Require SQL Server as default instance (MSSQLSERVER), DEBUG PROP.SQL_SERVER_DEFAULT  '[PROP.SQL_SERVER_DEFAULT]', PROP.SQL_SERVER_DEFAULT64 '[PROP.SQL_SERVER_DEFAULT64]'">
+    <CustomAction Id="CA.CHECK.SQL_SERVER_DEFAULT_INSTANCE" Execute="immediate" Error="Database Feature:   Require SQL Server as default instance (MSSQLSERVER), DEBUG PROP.SQL_SERVER_DEFAULT  '[PROP.SQL_SERVER_DEFAULT]', PROP.SQL_SERVER_DEFAULT64 '[PROP.SQL_SERVER_DEFAULT64]'">
     </CustomAction>
 
-    <CustomAction Id="CA.CHECK.EXCEL"
-                  Execute="immediate"
-                  Error="Microsoft Excel 2010 (version 14) must be installed">
+    <CustomAction Id="CA.CHECK.EXCEL" Execute="immediate" Error="Microsoft Excel 2010 (version 14) must be installed">
     </CustomAction>
 
-    <CustomAction Id="CA.CHECK.GPROMS"
-                  Execute="immediate"
-                  Error="GProms Engineering must be installed">
+    <CustomAction Id="CA.CHECK.GPROMS" Execute="immediate" Error="GProms Engineering must be installed">
     </CustomAction>
 
-    <CustomAction Id="CA.CHECK.ASPENTECH"
-                  Execute="immediate"
-                  Error="AspenTech 7.3 Engineering must be installed">
+    <CustomAction Id="CA.CHECK.ASPENTECH" Execute="immediate" Error="AspenTech 7.3 Engineering must be installed">
     </CustomAction>
 
-    <CustomAction Id="CA.DATABASE_WARNING" Script="vbscript"
-                  Execute="immediate">
-      <![CDATA[
-          msgbox "WARNING: Installing the Database Feature will change SQL Server default instance to Mixed mode authentication"
-
-        ]]>
-    </CustomAction>
+    <CustomAction Id="CA.DATABASE_WARNING" Script="vbscript" Execute="immediate" ScriptSourceFile="C:\Users\Administrator\Source\Repos\turb_sci_gate\Master\TurbineSetupLibrary\CA.DATABASE_WARNING.vbs" />
   </Fragment>
   
   <Fragment>
     <Binary Id="BIN.CustomAction.DLL" src="..\TurbineCustomAction\bin\$(var.Configuration)\TurbineCustomAction.CA.dll" />
 
-    <CustomAction Id="CA.SetSecurityToken.2" 
-                  Return="check" 
-                  Execute="immediate"  
-                  BinaryKey="BIN.CustomAction.DLL" 
-                  HideTarget="no"
-                  DllEntry="SetSecurityToken" />
+    <CustomAction Id="CA.SetSecurityToken.2" Return="check" Execute="immediate" HideTarget="no" DllEntry="SetSecurityToken" BinaryRef="BIN.CustomAction.DLL" />
     
-    <CustomAction Id="CA.SetSecurityToken.1"
-              Property="PASSWORD"
-              Value="[PROP.TURBINE_PASSWORD]"
-/>
+    <CustomAction Id="CA.SetSecurityToken.1" Property="PASSWORD" Value="[PROP.TURBINE_PASSWORD]" />
   </Fragment>
   
   <Fragment>
     <Property Id="PROP.NET_FRAMEWORK_4">
-      <RegistrySearch Id="RS.NET_FRAMEWORK_4" Root="HKLM" Key="SOFTWARE\Microsoft\NET Framework Setup\NDP\v4\Full"
-                      Name="Install" Type="raw" />
+      <RegistrySearch Id="RS.NET_FRAMEWORK_4" Root="HKLM" Key="SOFTWARE\Microsoft\NET Framework Setup\NDP\v4\Full" Name="Install" Type="raw" />
     </Property>
 
     <Property Id="PROP.NET_FRAMEWORK_4_VERSION">
-      <RegistrySearch Id="RS.NET_FRAMEWORK_4_VERSION" Root="HKLM" Key="SOFTWARE\Microsoft\NET Framework Setup\NDP\v4\Full"
-                      Name="Version" Type="raw" />
+      <RegistrySearch Id="RS.NET_FRAMEWORK_4_VERSION" Root="HKLM" Key="SOFTWARE\Microsoft\NET Framework Setup\NDP\v4\Full" Name="Version" Type="raw" />
     </Property>
 
     <Property Id="PROP.WINDOWS_AUTHENTICATION">
-      <RegistrySearch Id="RS.WINDOWS_AUTHENTICATION" Root="HKLM" Key="SOFTWARE\Microsoft\InetStp\Components"
-                     Win64="no" Name="WindowsAuthentication" Type="raw" />
+      <RegistrySearch Id="RS.WINDOWS_AUTHENTICATION" Root="HKLM" Key="SOFTWARE\Microsoft\InetStp\Components" Name="WindowsAuthentication" Type="raw" Bitness="always32" />
     </Property>
 
     <Property Id="PROP.WINDOWS_AUTHENTICATION64">
-      <RegistrySearch Id="RS.WINDOWS_AUTHENTICATION64" Root="HKLM" Key="SOFTWARE\Microsoft\InetStp\Components"
-                      Win64="yes" Name="WindowsAuthentication" Type="raw" />
+      <RegistrySearch Id="RS.WINDOWS_AUTHENTICATION64" Root="HKLM" Key="SOFTWARE\Microsoft\InetStp\Components" Name="WindowsAuthentication" Type="raw" Bitness="always64" />
     </Property>
 
     <Property Id="PROP.CCSIUNITS_PRODUCT">
-      <RegistrySearch Id="RS.CCSIUNITS" Root="HKCR" Key="Installer\Products\DDB77435891961746B0CF0C607889BA7"
-                      Win64="no" Name="ProductName" Type="raw" />
+      <RegistrySearch Id="RS.CCSIUNITS" Root="HKCR" Key="Installer\Products\DDB77435891961746B0CF0C607889BA7" Name="ProductName" Type="raw" Bitness="always32" />
     </Property>
 
     <Property Id="PROP.CCSIUNITS_VERSION">
-      <RegistrySearch Id="RS.CCSIUNITS_VERSION" Root="HKCR" Key="Installer\Products\DDB77435891961746B0CF0C607889BA7"
-                     Win64="no" Name="VERSION" Type="raw" />
+      <RegistrySearch Id="RS.CCSIUNITS_VERSION" Root="HKCR" Key="Installer\Products\DDB77435891961746B0CF0C607889BA7" Name="VERSION" Type="raw" Bitness="always32" />
     </Property>
     
     <Property Id="PROP.PSE">
-      <RegistrySearch Id="RS.PSE_GProductCount" Root="HKLM" Key="SOFTWARE\PSE\gPROMS-core_3.6.0.54865"
-                     Win64="no" Name="gProductCount" Type="raw" />
+      <RegistrySearch Id="RS.PSE_GProductCount" Root="HKLM" Key="SOFTWARE\PSE\gPROMS-core_3.6.0.54865" Name="gProductCount" Type="raw" Bitness="always32" />
     </Property>
     <Property Id="PROP.PSE_X64">
-      <RegistrySearch Id="RS.PSE_GProductCount_64" Root="HKLM" Key="SOFTWARE\PSE\gPROMS-core_3.6.0.54865"
-                     Win64="yes" Name="gProductCount" Type="raw" />
+      <RegistrySearch Id="RS.PSE_GProductCount_64" Root="HKLM" Key="SOFTWARE\PSE\gPROMS-core_3.6.0.54865" Name="gProductCount" Type="raw" Bitness="always64" />
     </Property>
 
     <Property Id="PROP.CCSIUNITS_PRODUCT64">
-      <RegistrySearch Id="RS.CCSIUNITS64" Root="HKCR" Key="Installer\Products\DDB77435891961746B0CF0C607889BA7"
-                      Win64="yes" Name="ProductName" Type="raw" />
+      <RegistrySearch Id="RS.CCSIUNITS64" Root="HKCR" Key="Installer\Products\DDB77435891961746B0CF0C607889BA7" Name="ProductName" Type="raw" Bitness="always64" />
     </Property>
 
     <Property Id="PROP.CCSIUNITS_VERSION64">
-      <RegistrySearch Id="RS.CCSIUNITS_VERSION64" Root="HKCR" Key="Installer\Products\DDB77435891961746B0CF0C607889BA7"
-                     Win64="yes" Name="VERSION" Type="raw" />
+      <RegistrySearch Id="RS.CCSIUNITS_VERSION64" Root="HKCR" Key="Installer\Products\DDB77435891961746B0CF0C607889BA7" Name="VERSION" Type="raw" Bitness="always64" />
     </Property>
 
     <Property Id="PROP.ASPENTECH">
-      <RegistrySearch Id="RS.ASPENTECH" Root="HKCR" Key="Installer\Products\8360B3AF8E59E5B46B8123D90C12AB41"
-                      Name="ProductName" Type="raw" Win64="no"/>
+      <RegistrySearch Id="RS.ASPENTECH" Root="HKCR" Key="Installer\Products\8360B3AF8E59E5B46B8123D90C12AB41" Name="ProductName" Type="raw" Bitness="always32" />
     </Property>
     <Property Id="PROP.ASPENTECH64">
-      <RegistrySearch Id="RS.ASPENTECH64" Root="HKCR" Key="Installer\Products\8360B3AF8E59E5B46B8123D90C12AB41"
-                      Name="ProductName" Type="raw" Win64="yes"/>
+      <RegistrySearch Id="RS.ASPENTECH64" Root="HKCR" Key="Installer\Products\8360B3AF8E59E5B46B8123D90C12AB41" Name="ProductName" Type="raw" Bitness="always64" />
     </Property>
 
     <Property Id="PROP.ASPENTECH_VERSION">
-      <RegistrySearch Id="RS.ASPENTECH_VERSION" Root="HKCR" Key="Installer\Products\8360B3AF8E59E5B46B8123D90C12AB41"
-                      Name="Version" Type="raw" Win64="no"/>
+      <RegistrySearch Id="RS.ASPENTECH_VERSION" Root="HKCR" Key="Installer\Products\8360B3AF8E59E5B46B8123D90C12AB41" Name="Version" Type="raw" Bitness="always32" />
     </Property>
     <Property Id="PROP.ASPENTECH_VERSION64">
-      <RegistrySearch Id="RS.ASPENTECH_VERSION64" Root="HKCR" Key="Installer\Products\8360B3AF8E59E5B46B8123D90C12AB41"
-                      Name="Version" Type="raw" Win64="yes"/>
+      <RegistrySearch Id="RS.ASPENTECH_VERSION64" Root="HKCR" Key="Installer\Products\8360B3AF8E59E5B46B8123D90C12AB41" Name="Version" Type="raw" Bitness="always64" />
     </Property>
 
     <Property Id="PROP.GPROMS">
-      <RegistrySearch Id="RS.GPROMS" Root="HKCR" Key="Installer\Products\8360B3AF8E59E5B46B8123D90C12AB41"
-                      Name="ProductName" Type="raw" Win64="no"/>
+      <RegistrySearch Id="RS.GPROMS" Root="HKCR" Key="Installer\Products\8360B3AF8E59E5B46B8123D90C12AB41" Name="ProductName" Type="raw" Bitness="always32" />
     </Property>
     <Property Id="PROP.GPROMS64">
-      <RegistrySearch Id="RS.GPROMS64" Root="HKCR" Key="Installer\Products\8360B3AF8E59E5B46B8123D90C12AB41"
-                      Name="ProductName" Type="raw" Win64="yes"/>
+      <RegistrySearch Id="RS.GPROMS64" Root="HKCR" Key="Installer\Products\8360B3AF8E59E5B46B8123D90C12AB41" Name="ProductName" Type="raw" Bitness="always64" />
     </Property>
     
     <Property Id="PROP.IIS_MAJOR_VERSION">
-      <RegistrySearch Id="RS.IISVERSION" Root="HKLM" Key="SOFTWARE\Microsoft\InetStp"
-                      Name="MajorVersion" Type="raw" />
+      <RegistrySearch Id="RS.IISVERSION" Root="HKLM" Key="SOFTWARE\Microsoft\InetStp" Name="MajorVersion" Type="raw" />
     </Property>
 
     <Property Id="PROP.IIS_MINOR_VERSION">
-      <RegistrySearch Id="RS.IISMINORVERSION" Root="HKLM" Key="SOFTWARE\Microsoft\InetStp"
-                      Name="MinorVersion" Type="raw" />
+      <RegistrySearch Id="RS.IISMINORVERSION" Root="HKLM" Key="SOFTWARE\Microsoft\InetStp" Name="MinorVersion" Type="raw" />
     </Property>
 
 
     <Property Id="PROP.TEST.SQLSERVER64">
-      <RegistrySearch Id="RS.SQLSERVER64" Root="HKLM" 
-                      Key="SOFTWARE\Microsoft\Microsoft SQL Server"
-                      Name="InstalledInstances" Type="raw" Win64="yes"/>
+      <RegistrySearch Id="RS.SQLSERVER64" Root="HKLM" Key="SOFTWARE\Microsoft\Microsoft SQL Server" Name="InstalledInstances" Type="raw" Bitness="always64" />
     </Property>
 
     <Property Id="PROP.TEST.SQLSERVER">
-      <RegistrySearch Id="RS.SQLSERVER" Root="HKLM" 
-                      Key="SOFTWARE\Microsoft\Microsoft SQL Server"
-                      Name="InstalledInstances" Type="raw" Win64="no"/>
+      <RegistrySearch Id="RS.SQLSERVER" Root="HKLM" Key="SOFTWARE\Microsoft\Microsoft SQL Server" Name="InstalledInstances" Type="raw" Bitness="always32" />
     </Property>
 
     <Property Id="PROP.SQL_SERVER_DEFAULT">
-      <RegistrySearch Id="RS.SQL_SERVER_DEFAULT" Root="HKLM" 
-                      Key="Software\microsoft\Microsoft SQL Server\Instance Names\SQL"
-                      Win64="no" Name="MSSQLSERVER" Type="raw" >
+      <RegistrySearch Id="RS.SQL_SERVER_DEFAULT" Root="HKLM" Key="Software\microsoft\Microsoft SQL Server\Instance Names\SQL" Name="MSSQLSERVER" Type="raw" Bitness="always32">
       </RegistrySearch>
     </Property>
 
     <Property Id="PROP.SQL_SERVER_DEFAULT64">
-      <RegistrySearch Id="RS.SQL_SERVER_DEFAULT64" Root="HKLM" 
-                      Key="Software\microsoft\Microsoft SQL Server\Instance Names\SQL"
-                      Win64="yes" Name="MSSQLSERVER" Type="raw" />
+      <RegistrySearch Id="RS.SQL_SERVER_DEFAULT64" Root="HKLM" Key="Software\microsoft\Microsoft SQL Server\Instance Names\SQL" Name="MSSQLSERVER" Type="raw" Bitness="always64" />
     </Property>
 
      <!-- MS EXCEL 2010 (version 14.0) -->
     <Property Id="PROP.MSOFFICE_EXCEL64">
       <!--SOFTWARE\Wow6432Node\Microsoft\Office\14.0\Excel\InstallRoot -->
-      <RegistrySearch Id="RS.MICROSOFT_OFFICE_EXCEL64" Root="HKLM"
-                      Key="SOFTWARE\Microsoft\Office\14.0\Excel\InstallRoot"
-                      Win64="yes" Name="Path" Type="raw" />
+      <RegistrySearch Id="RS.MICROSOFT_OFFICE_EXCEL64" Root="HKLM" Key="SOFTWARE\Microsoft\Office\14.0\Excel\InstallRoot" Name="Path" Type="raw" Bitness="always64" />
     </Property>
     <Property Id="PROP.MSOFFICE_EXCEL">
-      <RegistrySearch Id="RS.MICROSOFT_OFFICE_EXCEL" Root="HKLM"
-                      Key="SOFTWARE\Microsoft\Office\14.0\Excel\InstallRoot"
-                      Win64="no" Name="Path" Type="raw" />
+      <RegistrySearch Id="RS.MICROSOFT_OFFICE_EXCEL" Root="HKLM" Key="SOFTWARE\Microsoft\Office\14.0\Excel\InstallRoot" Name="Path" Type="raw" Bitness="always32" />
     </Property>
     
 
     <!-- set property to Data directory -->
-    <Property Id="PROP.WORKING.DIR" Value="REPLACE"/>
+    <Property Id="PROP.WORKING.DIR" Value="REPLACE" />
     <!--
     <CustomAction Id="CA.DIR.Base" Property="PROP.WORKING.DIR" Value="[DIR.Data]" />
     -->
 
-    <Property Id="PROP.SQLSERVER" Value="localhost"/>
-    <Property Id="PROP.DATABASE" Value="Turbine"/>
+    <Property Id="PROP.SQLSERVER" Value="localhost" />
+    <Property Id="PROP.DATABASE" Value="Turbine" />
     <!-- DROP DB ON UNINSTALL-->
-    <Property Id="PROP.DROPDB" Value="1"/>
+    <Property Id="PROP.DROPDB" Value="1" />
 
     <Property Id="PROP.SELECT_WINDOWS_AUTH" Value="no" />
-    <Property Id="PROP.SELECT_BASIC_AUTH" Value="yes"/>
+    <Property Id="PROP.SELECT_BASIC_AUTH" Value="yes" />
 
   </Fragment>
   
@@ -259,7 +195,7 @@
     <Binary Id="BIN.Certificate" SourceFile="$(PROP.CERTIFICATE)" />
     -->
     <ComponentGroup Id="CG.Turbine.Database">
-      <ComponentRef Id="CMP.Database.Create"/>
+      <ComponentRef Id="CMP.Database.Create" />
     </ComponentGroup>
   
   </Fragment>
@@ -272,13 +208,9 @@
         <RemoveFile Id="RF.Turbine" Name="*.*" On="uninstall" />
       </Component>
     </DirectoryRef>
-    <Condition Message="Require Windows 2008 Server or higher">
-      <![CDATA[Installed or VersionNT >= 600]]>
-    </Condition>
+    <Launch Condition="Installed or VersionNT &gt;= 600" Message="Require Windows 2008 Server or higher" />
 
-    <Condition Message="Require .NET 4.0 Full installation (Found partial .NET 4.0: [PROP.NET_FRAMEWORK_4_VERSION])">
-      Installed OR PROP.NET_FRAMEWORK_4 = "#1"
-    </Condition>
+    <Launch Condition="Installed OR PROP.NET_FRAMEWORK_4 = &quot;#1&quot;" Message="Require .NET 4.0 Full installation (Found partial .NET 4.0: [PROP.NET_FRAMEWORK_4_VERSION])" />
 
     <!--
     <Condition Message="CCSIUnits must be installed">
@@ -298,54 +230,54 @@
 
   <Fragment>
     <ComponentGroup Id="CG.Turbine.Client.Dependencies">
-      <ComponentRef Id="CMP.CommandLine.DLL"/>
-      <ComponentRef Id="CMP.Client.EntityFramework.DLL"/>
-      <ComponentRef Id="CMP.Client.EntityFramework.XML"/>
-      <ComponentRef Id="CMP.Client.EntityFramework.SqlServer.DLL"/>
-      <ComponentRef Id="CMP.Client.EntityFramework.SqlServer.XML"/>
+      <ComponentRef Id="CMP.CommandLine.DLL" />
+      <ComponentRef Id="CMP.Client.EntityFramework.DLL" />
+      <ComponentRef Id="CMP.Client.EntityFramework.XML" />
+      <ComponentRef Id="CMP.Client.EntityFramework.SqlServer.DLL" />
+      <ComponentRef Id="CMP.Client.EntityFramework.SqlServer.XML" />
 
-      <ComponentRef Id="ServiceLocationComponent"/>
-      <ComponentRef Id="UnityConfigDLLComponent"/>
-      <ComponentRef Id="UnityConfigXMLComponent"/>
-      <ComponentRef Id="UnityDLLComponent"/>
-      <ComponentRef Id="UnityXmlComponent"/>
-      <ComponentRef Id="JsonDllComponent"/>
-      <ComponentRef Id="JsonXmlComponent"/>
+      <ComponentRef Id="ServiceLocationComponent" />
+      <ComponentRef Id="UnityConfigDLLComponent" />
+      <ComponentRef Id="UnityConfigXMLComponent" />
+      <ComponentRef Id="UnityDLLComponent" />
+      <ComponentRef Id="UnityXmlComponent" />
+      <ComponentRef Id="JsonDllComponent" />
+      <ComponentRef Id="JsonXmlComponent" />
 
     </ComponentGroup>
   </Fragment>
   
   <Fragment>
     <ComponentGroup Id="CG.Turbine.Client.Core">
-      <ComponentRef Id="CMP.DIR.Turbine"/>
-      <ComponentRef Id="CMP.Logs"/>
-      <ComponentRef Id="CMP.Data"/>
-      <ComponentRef Id="CMP.Bin"/>
+      <ComponentRef Id="CMP.DIR.Turbine" />
+      <ComponentRef Id="CMP.Logs" />
+      <ComponentRef Id="CMP.Data" />
+      <ComponentRef Id="CMP.Bin" />
 
       <ComponentRef Id="CMP.Client.Turbine.Data.Entities.DLL" />
-      <ComponentRef Id="CMP.Client.Turbine.DataEF6.DLL"/>
-      <ComponentRef Id="CMP.Client.Turbine.DataEF6.Contract.DLL"/>
+      <ComponentRef Id="CMP.Client.Turbine.DataEF6.DLL" />
+      <ComponentRef Id="CMP.Client.Turbine.DataEF6.Contract.DLL" />
 
       <!-- Interfaces -->
-      <ComponentRef Id="CMP.Turbine.Consumer.Contract.Behaviors.DLL"/>
-      <ComponentRef Id="TurbineConsumerDataContractBehaviorsDllComponent"/>
-      <ComponentRef Id="TurbineDataContractBehaviorsDllComponent"/>
+      <ComponentRef Id="CMP.Turbine.Consumer.Contract.Behaviors.DLL" />
+      <ComponentRef Id="TurbineConsumerDataContractBehaviorsDllComponent" />
+      <ComponentRef Id="TurbineDataContractBehaviorsDllComponent" />
       <!-- Implementations-->
-      <ComponentRef Id="CMP.Client.Turbine.Lite.Consumer.Data.Contract.DLL"/>
-      <ComponentRef Id="CMP.Turbine.Consumer.DLL"/>
-      <ComponentRef Id="CMP.Turbine.Consumer.Console.DLL"/>
-      <ComponentRef Id="CMP.Turbine.Consumer.SimSinter.DLL"/>
+      <ComponentRef Id="CMP.Client.Turbine.Lite.Consumer.Data.Contract.DLL" />
+      <ComponentRef Id="CMP.Turbine.Consumer.DLL" />
+      <ComponentRef Id="CMP.Turbine.Consumer.Console.DLL" />
+      <ComponentRef Id="CMP.Turbine.Consumer.SimSinter.DLL" />
 
       <?ifdef Debug ?>
-      <ComponentRef Id="CMP.Client.Turbine.DataEF6.PDB"/>
-      <ComponentRef Id="CMP.Client.Turbine.Data.Entities.PDB"/>
-      <ComponentRef Id="CMP.Client.Turbine.Lite.Consumer.Data.Contract.DLL"/>
-      <ComponentRef Id="TurbineConsumerPdbComponent"/>
-      <ComponentRef Id="TurbineConsumerDataContractBehaviorsPdbComponent"/>
-      <ComponentRef Id="TurbineDataContractBehaviorsPdbComponent"/>
-      <ComponentRef Id="CMP.Client.Turbine.Lite.Consumer.Data.Contract.PDB"/>
-      <ComponentRef Id="CMP.Turbine.Consumer.Console.PDB"/>
-      <ComponentRef Id="CMP.Client.Turbine.DataEF6.Contract.PDB"/>
+      <ComponentRef Id="CMP.Client.Turbine.DataEF6.PDB" />
+      <ComponentRef Id="CMP.Client.Turbine.Data.Entities.PDB" />
+      <ComponentRef Id="CMP.Client.Turbine.Lite.Consumer.Data.Contract.DLL" />
+      <ComponentRef Id="TurbineConsumerPdbComponent" />
+      <ComponentRef Id="TurbineConsumerDataContractBehaviorsPdbComponent" />
+      <ComponentRef Id="TurbineDataContractBehaviorsPdbComponent" />
+      <ComponentRef Id="CMP.Client.Turbine.Lite.Consumer.Data.Contract.PDB" />
+      <ComponentRef Id="CMP.Turbine.Consumer.Console.PDB" />
+      <ComponentRef Id="CMP.Client.Turbine.DataEF6.Contract.PDB" />
       <?endif?>
     </ComponentGroup>
   </Fragment>
@@ -369,9 +301,9 @@
   <Fragment>
     <ComponentGroup Id="CG.Turbine.Client.DummyConsumer">
       <ComponentRef Id="CMP.DummyConsumerConsole" />
-      <ComponentRef Id="CMP.Dummy.Config"/>
+      <ComponentRef Id="CMP.Dummy.Config" />
       <?ifdef Debug?>
-      <ComponentRef Id="CMP.DummyConsumerConsolePDB"/>
+      <ComponentRef Id="CMP.DummyConsumerConsolePDB" />
       <?endif?>
     </ComponentGroup>
   </Fragment>
@@ -380,14 +312,14 @@
     <ComponentGroup Id="CG.Turbine.Client.Excel">
       <ComponentRef Id="CMP.ExcelSinterConsumerWindowsService" />
       <ComponentRef Id="CMP.ExcelSinterConsumerWindowsService.Config" />
-      <ComponentRef Id="CMP.ExcelSinterConsumerConsole.CONFIG"/>
-      <ComponentRef Id="CMP.ExcelSinterConsumerConsole.EXE"/>
-      <ComponentRef Id="CMP.Turbine.Consumer.Excel.DLL"/>
+      <ComponentRef Id="CMP.ExcelSinterConsumerConsole.CONFIG" />
+      <ComponentRef Id="CMP.ExcelSinterConsumerConsole.EXE" />
+      <ComponentRef Id="CMP.Turbine.Consumer.Excel.DLL" />
       
       <?ifdef Debug ?>
-      <ComponentRef Id="CMP.Turbine.Consumer.Excel.PDB"/>
-      <ComponentRef Id="CMP.ExcelSinterConsumerConsole.PDB"/>
-      <ComponentRef Id="CMP.Turbine.Consumer.Excel.PDB"/>
+      <ComponentRef Id="CMP.Turbine.Consumer.Excel.PDB" />
+      <ComponentRef Id="CMP.ExcelSinterConsumerConsole.PDB" />
+      <ComponentRef Id="CMP.Turbine.Consumer.Excel.PDB" />
       <?endif?>
 
     </ComponentGroup>      
@@ -396,17 +328,17 @@
   <Fragment>
     
     <ComponentGroup Id="CG.Turbine.Client.Aspen">
-      <ComponentRef Id="CMP.Turbine.Consumer.AspenTech.DLL"/>
+      <ComponentRef Id="CMP.Turbine.Consumer.AspenTech.DLL" />
       <ComponentRef Id="CMP.AspenSinterConsumerWindowsService" />
       <ComponentRef Id="CMP.AspenSinterConsumerConsole" />
       
       <ComponentRef Id="CMP.AspenSinterConsumerWindowsService.Config" />
-      <ComponentRef Id="CMP.AspenSinterConsumerConsole.CONFIG"/>
+      <ComponentRef Id="CMP.AspenSinterConsumerConsole.CONFIG" />
       
       <?ifdef Debug ?>
-      <ComponentRef Id="CMP.AspenSinterConsumerWindowsServicePDB"/>
-      <ComponentRef Id="CMP.AspenSinterConsumerConsolePDB"/>
-      <ComponentRef Id="CMP.Turbine.Consumer.AspenTech.PDB"/>
+      <ComponentRef Id="CMP.AspenSinterConsumerWindowsServicePDB" />
+      <ComponentRef Id="CMP.AspenSinterConsumerConsolePDB" />
+      <ComponentRef Id="CMP.Turbine.Consumer.AspenTech.PDB" />
       <?endif?>
     </ComponentGroup>
     
@@ -422,17 +354,17 @@
   <Fragment>
 
     <ComponentGroup Id="CG.Turbine.Client.GProms">
-      <ComponentRef Id="CMP.Turbine.Consumer.GProms.DLL"/>
+      <ComponentRef Id="CMP.Turbine.Consumer.GProms.DLL" />
       <ComponentRef Id="CMP.GPromsSinterConsumerWindowsService" />
       <ComponentRef Id="CMP.GPromsSinterConsumerConsole" />
 
       <ComponentRef Id="CMP.GPromsSinterConsumerWindowsService.Config" />
-      <ComponentRef Id="CMP.GPromsSinterConsumerConsole.CONFIG"/>
+      <ComponentRef Id="CMP.GPromsSinterConsumerConsole.CONFIG" />
 
       <?ifdef Debug ?>
-      <ComponentRef Id="CMP.GPromsSinterConsumerWindowsServicePDB"/>
-      <ComponentRef Id="CMP.GPromsSinterConsumerConsolePDB"/>
-      <ComponentRef Id="CMP.Turbine.Consumer.GProms.PDB"/>
+      <ComponentRef Id="CMP.GPromsSinterConsumerWindowsServicePDB" />
+      <ComponentRef Id="CMP.GPromsSinterConsumerConsolePDB" />
+      <ComponentRef Id="CMP.Turbine.Consumer.GProms.PDB" />
       <?endif?>
     </ComponentGroup>
 
@@ -448,54 +380,48 @@
   <Fragment>
     <DirectoryRef Id="DIR.Bin.Turbine.Admin">
       <Component Id="CMP.Bin.Turbine.Security.DLL" Guid="93028699-DF65-49CA-94A2-7E4C393F714C">
-        <File Id="FILE.Bin.Turbine.Security.DLL" Source="..\..\Master\Turbine.Security\bin\$(var.Configuration)\Turbine.Security.dll" KeyPath="yes"/>
+        <File Id="FILE.Bin.Turbine.Security.DLL" Source="..\..\Master\Turbine.Security\bin\$(var.Configuration)\Turbine.Security.dll" KeyPath="yes" />
       </Component>
       
       <Component Id="CMP.TurbineAddUser.EXE" Guid="9FC16E15-3CFD-4099-847E-830B40332AB7">
-        <File Id="FILE.TurbineAddUser.EXE" Source="..\..\Master\TurbineAddUser\bin\$(var.Configuration)\TurbineAddUser.exe" KeyPath="yes"/>
+        <File Id="FILE.TurbineAddUser.EXE" Source="..\..\Master\TurbineAddUser\bin\$(var.Configuration)\TurbineAddUser.exe" KeyPath="yes" />
       </Component>
       <Component Id="CMP.TurbineAddUser.CONFIG" Guid="CF9F6BE6-BC8E-49DD-8D32-F83A12630E2A">
-        <File Id="FILE.TurbineAddUser.CONFIG" Source="..\..\Master\TurbineAddUser\bin\$(var.Configuration)\TurbineAddUser.exe.config" KeyPath="yes"/>
-        <util:XmlFile Id="XMLFILE.TurbineAddUser.CONFIG" Action="setValue" Permanent="yes" File="[#FILE.TurbineAddUser.CONFIG]"
-             ElementPath="/configuration/connectionStrings/add[\[]@name='TurbineCompactDatabase'[\]]"
-             Name="connectionString"
-             Value=";Data Source=[PROP.SQLSERVER];Initial Catalog=[PROP.DATABASE];User ID=[PROP.SQL_LOGIN];Password=[PROP.SQL_PASSWORD];Persist Security Info=True;MultipleActiveResultSets=True;" />
+        <File Id="FILE.TurbineAddUser.CONFIG" Source="..\..\Master\TurbineAddUser\bin\$(var.Configuration)\TurbineAddUser.exe.config" KeyPath="yes" />
+        <util:XmlFile Id="XMLFILE.TurbineAddUser.CONFIG" Action="setValue" Permanent="yes" File="[#FILE.TurbineAddUser.CONFIG]" ElementPath="/configuration/connectionStrings/add[\[]@name='TurbineCompactDatabase'[\]]" Name="connectionString" Value=";Data Source=[PROP.SQLSERVER];Initial Catalog=[PROP.DATABASE];User ID=[PROP.SQL_LOGIN];Password=[PROP.SQL_PASSWORD];Persist Security Info=True;MultipleActiveResultSets=True;" />
       </Component>
 
       <Component Id="CMP.TurbineChangePassword.EXE" Guid="36F73C07-D521-4A72-A225-B8E4A295D467">
-        <File Id="FILE.TurbineChangePassword.EXE" Source="..\..\Master\TurbineChangePassword\bin\$(var.Configuration)\TurbineChangePassword.exe" KeyPath="yes"/>
+        <File Id="FILE.TurbineChangePassword.EXE" Source="..\..\Master\TurbineChangePassword\bin\$(var.Configuration)\TurbineChangePassword.exe" KeyPath="yes" />
       </Component>
       <Component Id="CMP.TurbineChangePassword.CONFIG" Guid="3DB61099-492E-4117-AB47-40C5E6B06400">
-        <File Id="FILE.TurbineChangePassword.CONFIG" Source="..\..\Master\TurbineChangePassword\bin\$(var.Configuration)\TurbineChangePassword.exe.config" KeyPath="yes"/>
-        <util:XmlFile Id="XMLFILE.TurbineChangePassword.CONFIG" Action="setValue" Permanent="yes" File="[#FILE.TurbineChangePassword.CONFIG]"
-             ElementPath="/configuration/connectionStrings/add[\[]@name='TurbineCompactDatabase'[\]]"
-             Name="connectionString"
-             Value="Data Source=[PROP.SQLSERVER];Initial Catalog=[PROP.DATABASE];User ID=[PROP.SQL_LOGIN];Password=[PROP.SQL_PASSWORD];Persist Security Info=True;MultipleActiveResultSets=True;" />
+        <File Id="FILE.TurbineChangePassword.CONFIG" Source="..\..\Master\TurbineChangePassword\bin\$(var.Configuration)\TurbineChangePassword.exe.config" KeyPath="yes" />
+        <util:XmlFile Id="XMLFILE.TurbineChangePassword.CONFIG" Action="setValue" Permanent="yes" File="[#FILE.TurbineChangePassword.CONFIG]" ElementPath="/configuration/connectionStrings/add[\[]@name='TurbineCompactDatabase'[\]]" Name="connectionString" Value="Data Source=[PROP.SQLSERVER];Initial Catalog=[PROP.DATABASE];User ID=[PROP.SQL_LOGIN];Password=[PROP.SQL_PASSWORD];Persist Security Info=True;MultipleActiveResultSets=True;" />
       </Component>
 
       <?ifdef Debug ?>
       <Component Id="CMP.Bin.Turbine.Security.PDB" Guid="8DE807BC-BC14-4287-9F7E-2038F3FD1DC0">
-        <File Id="FILE.Bin.Turbine.Security.PDB" Source="..\..\Master\Turbine.Security\bin\$(var.Configuration)\Turbine.Security.pdb" KeyPath="yes"/>
+        <File Id="FILE.Bin.Turbine.Security.PDB" Source="..\..\Master\Turbine.Security\bin\$(var.Configuration)\Turbine.Security.pdb" KeyPath="yes" />
       </Component>
       <Component Id="CMP.TurbineAddUser.PDB" Guid="C9158EED-96D2-44DF-ACA4-F81CF8D6F8EE">
-        <File Id="FILE.TurbineAddUser.PDB" Source="..\..\Master\TurbineAddUser\bin\$(var.Configuration)\TurbineAddUser.pdb" KeyPath="yes"/>
+        <File Id="FILE.TurbineAddUser.PDB" Source="..\..\Master\TurbineAddUser\bin\$(var.Configuration)\TurbineAddUser.pdb" KeyPath="yes" />
       </Component>
       <Component Id="CMP.TurbineChangePassword.PDB" Guid="A9DF63F4-55F8-4CF3-81EA-810BEB1B54A6">
-        <File Id="FILE.TurbineChangePassword.PDB" Source="..\..\Master\TurbineChangePassword\bin\$(var.Configuration)\TurbineChangePassword.pdb" KeyPath="yes"/>
+        <File Id="FILE.TurbineChangePassword.PDB" Source="..\..\Master\TurbineChangePassword\bin\$(var.Configuration)\TurbineChangePassword.pdb" KeyPath="yes" />
       </Component>
       <?endif?>
     </DirectoryRef>
 
     <ComponentGroup Id="CG.Turbine.Admin">
-      <ComponentRef Id="CMP.TurbineAddUser.EXE"/>
-      <ComponentRef Id="CMP.TurbineAddUser.CONFIG"/>
-      <ComponentRef Id="CMP.TurbineChangePassword.EXE"/>
-      <ComponentRef Id="CMP.TurbineChangePassword.CONFIG"/>
-      <ComponentRef Id="CMP.Bin.Turbine.Security.DLL"/>
+      <ComponentRef Id="CMP.TurbineAddUser.EXE" />
+      <ComponentRef Id="CMP.TurbineAddUser.CONFIG" />
+      <ComponentRef Id="CMP.TurbineChangePassword.EXE" />
+      <ComponentRef Id="CMP.TurbineChangePassword.CONFIG" />
+      <ComponentRef Id="CMP.Bin.Turbine.Security.DLL" />
       <?ifdef Debug ?>
-      <ComponentRef Id="CMP.TurbineAddUser.PDB"/>
-      <ComponentRef Id="CMP.TurbineChangePassword.PDB"/>
-      <ComponentRef Id="CMP.Bin.Turbine.Security.PDB"/>
+      <ComponentRef Id="CMP.TurbineAddUser.PDB" />
+      <ComponentRef Id="CMP.TurbineChangePassword.PDB" />
+      <ComponentRef Id="CMP.Bin.Turbine.Security.PDB" />
       <?endif?>
     </ComponentGroup>
 
@@ -505,54 +431,43 @@
     <DirectoryRef Id="DIR.Bin.Dependencies">
       
       <Component Id="CMP.CommandLine.DLL" Guid="10A78787-EE03-4B3B-B668-C9AA3DBAA1CA">
-        <File Id="FILE.CommandLine.DLL" Source="$(var.AspenSinterConsumerConsole.ProjectDir)\bin\$(var.Configuration)\CommandLine.dll" KeyPath="yes"/>
+        <File Id="FILE.CommandLine.DLL" Source="$(var.AspenSinterConsumerConsole.ProjectDir)\bin\$(var.Configuration)\CommandLine.dll" KeyPath="yes" />
       </Component>
       
       <!-- Assembly DLL's -->
       <Component Id="CMP.Client.EntityFramework.DLL" Guid="6B9A5E60-B609-4484-B964-688761C23118">
-        <File Id="FILE.Client.EntityFramework.DLL"
-              Source="$(var.Turbine.DataEF6.ProjectDir)\bin\$(var.Configuration)\EntityFramework.dll" KeyPath="yes"/>
+        <File Id="FILE.Client.EntityFramework.DLL" Source="$(var.Turbine.DataEF6.ProjectDir)\bin\$(var.Configuration)\EntityFramework.dll" KeyPath="yes" />
       </Component>
       <Component Id="CMP.Client.EntityFramework.XML" Guid="61715FB5-2F36-495B-9F56-81F503D629DE">
-        <File Id="FILE.Client.EntityFramework.XML"
-              Source="$(var.Turbine.DataEF6.ProjectDir)\bin\$(var.Configuration)\EntityFramework.xml" KeyPath="yes"/>
+        <File Id="FILE.Client.EntityFramework.XML" Source="$(var.Turbine.DataEF6.ProjectDir)\bin\$(var.Configuration)\EntityFramework.xml" KeyPath="yes" />
       </Component>
       <Component Id="CMP.Client.EntityFramework.SqlServer.DLL" Guid="3A53548F-CA79-4153-B88F-03FAD6D6FACF">
-        <File Id="FILE.Client.EntityFramework.SqlServer.DLL"
-              Source="$(var.Turbine.DataEF6.ProjectDir)\bin\$(var.Configuration)\EntityFramework.SqlServer.dll" KeyPath="yes"/>
+        <File Id="FILE.Client.EntityFramework.SqlServer.DLL" Source="$(var.Turbine.DataEF6.ProjectDir)\bin\$(var.Configuration)\EntityFramework.SqlServer.dll" KeyPath="yes" />
       </Component>
       <Component Id="CMP.Client.EntityFramework.SqlServer.XML" Guid="EA156197-773F-4A00-8BBC-57B860BD786C">
-        <File Id="FILE.Client.EntityFramework.SqlServer.XML"
-              Source="$(var.Turbine.DataEF6.ProjectDir)\bin\$(var.Configuration)\EntityFramework.SqlServer.xml" KeyPath="yes"/>
+        <File Id="FILE.Client.EntityFramework.SqlServer.XML" Source="$(var.Turbine.DataEF6.ProjectDir)\bin\$(var.Configuration)\EntityFramework.SqlServer.xml" KeyPath="yes" />
       </Component>
       
       <Component Id="ServiceLocationComponent" Guid="273A3C61-A288-4BF9-A5B4-924581131D67">
-        <File Id="ServiceLocationId" 
-              Source="$(var.AspenSinterConsumerConsole.ProjectDir)\bin\$(var.Configuration)\Microsoft.Practices.ServiceLocation.dll" KeyPath="yes"/>
+        <File Id="ServiceLocationId" Source="$(var.AspenSinterConsumerConsole.ProjectDir)\bin\$(var.Configuration)\Microsoft.Practices.ServiceLocation.dll" KeyPath="yes" />
       </Component>
       <Component Id="UnityConfigDLLComponent" Guid="971BB369-43E7-4D5D-AD95-7D1C6DD1E3C2">
-        <File Id="UnityConfigDLLId" 
-              Source="$(var.AspenSinterConsumerConsole.ProjectDir)\bin\$(var.Configuration)\Microsoft.Practices.Unity.Configuration.dll" KeyPath="yes"/>
+        <File Id="UnityConfigDLLId" Source="$(var.AspenSinterConsumerConsole.ProjectDir)\bin\$(var.Configuration)\Microsoft.Practices.Unity.Configuration.dll" KeyPath="yes" />
       </Component>
       <Component Id="UnityConfigXMLComponent" Guid="9F952BC9-B114-413A-B412-F0134BA4425B">
-        <File Id="UnityConfigXMLId" 
-              Source="$(var.AspenSinterConsumerConsole.ProjectDir)\bin\$(var.Configuration)\Microsoft.Practices.Unity.Configuration.xml" KeyPath="yes"/>
+        <File Id="UnityConfigXMLId" Source="$(var.AspenSinterConsumerConsole.ProjectDir)\bin\$(var.Configuration)\Microsoft.Practices.Unity.Configuration.xml" KeyPath="yes" />
       </Component>
       <Component Id="UnityDLLComponent" Guid="85B65556-89D1-4D27-BFA6-B6CC03EE0910">
-        <File Id="UnityDLLId" 
-              Source="$(var.AspenSinterConsumerConsole.ProjectDir)\bin\$(var.Configuration)\Microsoft.Practices.Unity.dll" KeyPath="yes"/>
+        <File Id="UnityDLLId" Source="$(var.AspenSinterConsumerConsole.ProjectDir)\bin\$(var.Configuration)\Microsoft.Practices.Unity.dll" KeyPath="yes" />
       </Component>
       <Component Id="UnityXmlComponent" Guid="65BAD4CF-CC18-43D0-A22B-8043AD1C04DD">
-        <File Id="UnityXmlId" 
-              Source="$(var.AspenSinterConsumerConsole.ProjectDir)\bin\$(var.Configuration)\Microsoft.Practices.Unity.xml" KeyPath="yes"/>
+        <File Id="UnityXmlId" Source="$(var.AspenSinterConsumerConsole.ProjectDir)\bin\$(var.Configuration)\Microsoft.Practices.Unity.xml" KeyPath="yes" />
       </Component>
       <Component Id="JsonDllComponent" Guid="F04184A2-831E-414C-935E-29AC56A0B07E">
-        <File Id="JsonDllId" 
-              Source="$(var.AspenSinterConsumerConsole.ProjectDir)\bin\$(var.Configuration)\Newtonsoft.Json.dll" KeyPath="yes"/>
+        <File Id="JsonDllId" Source="$(var.AspenSinterConsumerConsole.ProjectDir)\bin\$(var.Configuration)\Newtonsoft.Json.dll" KeyPath="yes" />
       </Component>
       <Component Id="JsonXmlComponent" Guid="BCAF363F-03B2-47F0-BA6E-E80F1D52822B">
-        <File Id="JsonXmlId" 
-              Source="$(var.AspenSinterConsumerConsole.ProjectDir)\bin\$(var.Configuration)\Newtonsoft.Json.xml" KeyPath="yes"/>
+        <File Id="JsonXmlId" Source="$(var.AspenSinterConsumerConsole.ProjectDir)\bin\$(var.Configuration)\Newtonsoft.Json.xml" KeyPath="yes" />
       </Component>
       
 
@@ -560,32 +475,32 @@
       -->
       <?ifdef Debug ?>
       <Component Id="TurbineConsumerDataContractBehaviorsPdbComponent" Guid="7DA0CF35-0C1D-4CDD-92C7-E9937117DE8B">
-        <File Id="TurbineConsumerDataContractBehaviorsPdbId" Source="..\..\Master\Turbine.Consumer.Data.Contract.Behaviors\bin\$(var.Configuration)\Turbine.Consumer.Data.Contract.Behaviors.pdb" KeyPath="yes"/>
+        <File Id="TurbineConsumerDataContractBehaviorsPdbId" Source="..\..\Master\Turbine.Consumer.Data.Contract.Behaviors\bin\$(var.Configuration)\Turbine.Consumer.Data.Contract.Behaviors.pdb" KeyPath="yes" />
       </Component>
       <Component Id="TurbineConsumerPdbComponent" Guid="7DFAC256-43A6-4A01-9751-23D7EBA009AC">
-        <File Id="TurbineConsumerPbdId" Source="..\..\Master\Turbine.Consumer\bin\$(var.Configuration)\Turbine.Consumer.pdb" KeyPath="yes"/>
+        <File Id="TurbineConsumerPbdId" Source="..\..\Master\Turbine.Consumer\bin\$(var.Configuration)\Turbine.Consumer.pdb" KeyPath="yes" />
       </Component>
       <!--Component Id="TurbineConsumerDataContractPdbComponent" Guid="">
         <File Id="TurbineConsumerDataContractPdbId" Source="..\..\Master\Turbine.Consumer.Data.Contract\bin\$(var.Configuration)\Turbine.Consumer.Data.Contract.pdb" KeyPath="yes"/>
       </Component-->
       <Component Id="TurbineDataContractBehaviorsPdbComponent" Guid="3807990B-8F09-40EA-9F8E-A0D117E4F559">
-        <File Id="TurbineDataContractBehaviorsPdbId" Source="..\..\Master\Turbine.Data.Contract.Behaviors\bin\$(var.Configuration)\Turbine.Data.Contract.Behaviors.pdb" KeyPath="yes"/>
+        <File Id="TurbineDataContractBehaviorsPdbId" Source="..\..\Master\Turbine.Data.Contract.Behaviors\bin\$(var.Configuration)\Turbine.Data.Contract.Behaviors.pdb" KeyPath="yes" />
       </Component>
       <!--Component Id="TurbineDataContractPdbComponent" Guid="">
         <File Id="TurbineDataContractPdbId" Source="..\..\Master\Turbine.Data.Contract\bin\$(var.Configuration)\Turbine.Data.Contract.pdb" KeyPath="yes"/>
       </Component-->
       <Component Id="CMP.AspenSinterConsumerWindowsServicePDB" Guid="E6F7D724-3DFD-4CF6-9614-85A483B88FC1">
-        <File Id="AspenSinterConsumerWindowsServicePDBId" Source="..\..\Master\AspenSinterConsumerWindowsService\bin\$(var.Configuration)\AspenSinterConsumerWindowsService.pdb" KeyPath="yes"/>
+        <File Id="AspenSinterConsumerWindowsServicePDBId" Source="..\..\Master\AspenSinterConsumerWindowsService\bin\$(var.Configuration)\AspenSinterConsumerWindowsService.pdb" KeyPath="yes" />
       </Component>
       <Component Id="CMP.AspenSinterConsumerConsolePDB" Guid="48FB9D46-22DB-49BC-9231-7591FFAE3311">
-        <File Id="AspenSinterConsumerConsolePDBId" Source="..\..\Master\AspenSinterConsumerConsole\bin\$(var.Configuration)\AspenSinterConsumerConsole.pdb" KeyPath="yes"/>
+        <File Id="AspenSinterConsumerConsolePDBId" Source="..\..\Master\AspenSinterConsumerConsole\bin\$(var.Configuration)\AspenSinterConsumerConsole.pdb" KeyPath="yes" />
       </Component>
       
       <Component Id="CMP.GPromsSinterConsumerWindowsServicePDB" Guid="FA01CFF1-C130-4D43-8488-7DF34AC849E8">
-        <File Id="GPromsSinterConsumerWindowsServicePDBId" Source="..\..\Master\GPromsSinterConsumerWindowsService\bin\$(var.Configuration)\GPromsSinterConsumerWindowsService.pdb" KeyPath="yes"/>
+        <File Id="GPromsSinterConsumerWindowsServicePDBId" Source="..\..\Master\GPromsSinterConsumerWindowsService\bin\$(var.Configuration)\GPromsSinterConsumerWindowsService.pdb" KeyPath="yes" />
       </Component>
       <Component Id="CMP.GPromsSinterConsumerConsolePDB" Guid="7A3D9748-9372-4080-B5A2-6370E68544A8">
-        <File Id="GPromsSinterConsumerConsolePDBId" Source="..\..\Master\GPromsSinterConsumerConsole\bin\$(var.Configuration)\GPromsSinterConsumerConsole.pdb" KeyPath="yes"/>
+        <File Id="GPromsSinterConsumerConsolePDBId" Source="..\..\Master\GPromsSinterConsumerConsole\bin\$(var.Configuration)\GPromsSinterConsumerConsole.pdb" KeyPath="yes" />
       </Component>
       <?endif?>
     </DirectoryRef>
@@ -595,60 +510,51 @@
   <Fragment>
     <DirectoryRef Id="DIR.Bin.Core">
       <Component Id="CMP.Turbine.Consumer.DLL" Guid="356A2BF7-36CB-4E56-B874-F1FEF854FA71">
-        <File Id="FILE.Turbine.Consumer.DLL"
-              Source="..\..\Master\Turbine.Consumer\bin\$(var.Configuration)\Turbine.Consumer.dll" KeyPath="yes"/>
+        <File Id="FILE.Turbine.Consumer.DLL" Source="..\..\Master\Turbine.Consumer\bin\$(var.Configuration)\Turbine.Consumer.dll" KeyPath="yes" />
       </Component>
       <Component Id="CMP.Turbine.Consumer.Console.DLL" Guid="9DF16D43-9A92-400A-B633-5D56D9EE046B">
-        <File Id="FILE.Turbine.Consumer.Console.DLL" 
-              Source="..\..\Master\Turbine.Consumer.Console\bin\$(var.Configuration)\Turbine.Consumer.Console.dll" KeyPath="yes"/>
+        <File Id="FILE.Turbine.Consumer.Console.DLL" Source="..\..\Master\Turbine.Consumer.Console\bin\$(var.Configuration)\Turbine.Consumer.Console.dll" KeyPath="yes" />
       </Component>
       <Component Id="CMP.Turbine.Consumer.SimSinter.DLL" Guid="06B5B8CD-3C1C-4CEA-93DE-1440A37A2C7F">
-        <File Id="FILE.Turbine.Consumer.SimSinter.DLL"
-              Source="..\..\Master\Turbine.Consumer.SimSinter\bin\$(var.Configuration)\Turbine.Consumer.SimSinter.dll" KeyPath="yes"/>
+        <File Id="FILE.Turbine.Consumer.SimSinter.DLL" Source="..\..\Master\Turbine.Consumer.SimSinter\bin\$(var.Configuration)\Turbine.Consumer.SimSinter.dll" KeyPath="yes" />
       </Component>
       <Component Id="CMP.Turbine.Consumer.Contract.Behaviors.DLL" Guid="62B1289E-A50A-49D0-8662-C4698AEEFB3A">
-        <File Id="FILE.Turbine.Consumer.Contract.Behaviors.DLL"
-              Source="..\..\Master\Turbine.Consumer.Contract.Behaviors\bin\$(var.Configuration)\Turbine.Consumer.Contract.Behaviors.dll" KeyPath="yes"/>
+        <File Id="FILE.Turbine.Consumer.Contract.Behaviors.DLL" Source="..\..\Master\Turbine.Consumer.Contract.Behaviors\bin\$(var.Configuration)\Turbine.Consumer.Contract.Behaviors.dll" KeyPath="yes" />
       </Component>
       <Component Id="CMP.Client.Turbine.Data.Entities.DLL" Guid="9C6E0177-ED80-4BBE-8CC6-CE680DFEF17F">
-        <File Id="FILE.Turbine.Client.Data.Entities.DLL"
-              Source="$(var.Turbine.Data.Entities.ProjectDir)\bin\$(var.Configuration)\Turbine.Data.Entities.dll" KeyPath="yes"/>
+        <File Id="FILE.Turbine.Client.Data.Entities.DLL" Source="$(var.Turbine.Data.Entities.ProjectDir)\bin\$(var.Configuration)\Turbine.Data.Entities.dll" KeyPath="yes" />
       </Component>
       <Component Id="CMP.Client.Turbine.DataEF6.DLL" Guid="7224371C-0692-4289-B880-378DAC54F013">
-        <File Id="FILE.Turbine.Client.DataEF6.DLL"
-              Source="$(var.Turbine.DataEF6.ProjectDir)\bin\$(var.Configuration)\Turbine.DataEF6.dll" KeyPath="yes"/>
+        <File Id="FILE.Turbine.Client.DataEF6.DLL" Source="$(var.Turbine.DataEF6.ProjectDir)\bin\$(var.Configuration)\Turbine.DataEF6.dll" KeyPath="yes" />
       </Component>
       <Component Id="TurbineConsumerDataContractBehaviorsDllComponent" Guid="90123451-AFCE-4AB0-8D8C-265B6507FFFD">
-        <File Id="TurbineConsumerDataContractBehaviorsDllId" Source="..\..\Master\Turbine.Consumer.Data.Contract.Behaviors\bin\$(var.Configuration)\Turbine.Consumer.Data.Contract.Behaviors.dll" KeyPath="yes"/>
+        <File Id="TurbineConsumerDataContractBehaviorsDllId" Source="..\..\Master\Turbine.Consumer.Data.Contract.Behaviors\bin\$(var.Configuration)\Turbine.Consumer.Data.Contract.Behaviors.dll" KeyPath="yes" />
       </Component>
       <Component Id="CMP.Client.Turbine.Lite.Consumer.Data.Contract.DLL" Guid="517338C8-C8A4-433D-B1AE-19E12ED337B7">
-        <File Id="File.Bin.Turbine.Lite.Consumer.Data.Contract.DLL" Source="..\..\Master\Turbine.Lite.Consumer.Data.Contract\bin\$(var.Configuration)\Turbine.Lite.Consumer.Data.Contract.dll" KeyPath="yes"/>
+        <File Id="File.Bin.Turbine.Lite.Consumer.Data.Contract.DLL" Source="..\..\Master\Turbine.Lite.Consumer.Data.Contract\bin\$(var.Configuration)\Turbine.Lite.Consumer.Data.Contract.dll" KeyPath="yes" />
       </Component>
       <Component Id="TurbineDataContractBehaviorsDllComponent" Guid="8408FCDA-3330-4BD6-9BBE-6856923C95EA">
-        <File Id="TurbineDataContractBehaviorsDllId" Source="..\..\Master\Turbine.Data.Contract.Behaviors\bin\$(var.Configuration)\Turbine.Data.Contract.Behaviors.dll" KeyPath="yes"/>
+        <File Id="TurbineDataContractBehaviorsDllId" Source="..\..\Master\Turbine.Data.Contract.Behaviors\bin\$(var.Configuration)\Turbine.Data.Contract.Behaviors.dll" KeyPath="yes" />
       </Component>
       <Component Id="CMP.Client.Turbine.DataEF6.Contract.DLL" Guid="74F8541E-08C3-4D9E-868B-6F9121A1C61E">
-        <File Id="File.Bin.Turbine.DataEF6.Contract.DLL" Source="..\..\Master\Turbine.DataEF6.Contract\bin\$(var.Configuration)\Turbine.DataEF6.Contract.dll" KeyPath="yes"/>
+        <File Id="File.Bin.Turbine.DataEF6.Contract.DLL" Source="..\..\Master\Turbine.DataEF6.Contract\bin\$(var.Configuration)\Turbine.DataEF6.Contract.dll" KeyPath="yes" />
       </Component>
       
       <?ifdef Debug ?>
       <Component Id="CMP.Client.Turbine.DataEF6.PDB" Guid="4D2AAA2C-AB02-476C-A099-7EEDBBF70489">
-        <File Id="FILE.Turbine.Client.DataEF6.PDB"
-              Source="$(var.Turbine.DataEF6.ProjectDir)\bin\$(var.Configuration)\Turbine.DataEF6.pdb" KeyPath="yes"/>
+        <File Id="FILE.Turbine.Client.DataEF6.PDB" Source="$(var.Turbine.DataEF6.ProjectDir)\bin\$(var.Configuration)\Turbine.DataEF6.pdb" KeyPath="yes" />
       </Component>
       <Component Id="CMP.Client.Turbine.Data.Entities.PDB" Guid="7F5C4BAF-C5E3-4C67-915C-746F1CE1CA12">
-        <File Id="FILE.Turbine.Client.Data.Entities.PDB"
-              Source="$(var.Turbine.Data.Entities.ProjectDir)\bin\$(var.Configuration)\Turbine.Data.Entities.pdb" KeyPath="yes"/>
+        <File Id="FILE.Turbine.Client.Data.Entities.PDB" Source="$(var.Turbine.Data.Entities.ProjectDir)\bin\$(var.Configuration)\Turbine.Data.Entities.pdb" KeyPath="yes" />
       </Component>
       <Component Id="CMP.Client.Turbine.Lite.Consumer.Data.Contract.PDB" Guid="3373AB77-E63E-4DE9-8DCA-0E3CC8BD2B9F">
-        <File Id="File.Bin.Turbine.Lite.Consumer.Data.Contract.PDB" Source="..\..\Master\Turbine.Lite.Consumer.Data.Contract\bin\$(var.Configuration)\Turbine.Lite.Consumer.Data.Contract.pdb" KeyPath="yes"/>
+        <File Id="File.Bin.Turbine.Lite.Consumer.Data.Contract.PDB" Source="..\..\Master\Turbine.Lite.Consumer.Data.Contract\bin\$(var.Configuration)\Turbine.Lite.Consumer.Data.Contract.pdb" KeyPath="yes" />
       </Component>
       <Component Id="CMP.Turbine.Consumer.Console.PDB" Guid="45CEAC0A-D472-44C1-BC93-8B6AE2BD6B09">
-        <File Id="FILE.Turbine.Consumer.Console.PDB"
-              Source="..\..\Master\Turbine.Consumer.Console\bin\$(var.Configuration)\Turbine.Consumer.Console.pdb" KeyPath="yes"/>
+        <File Id="FILE.Turbine.Consumer.Console.PDB" Source="..\..\Master\Turbine.Consumer.Console\bin\$(var.Configuration)\Turbine.Consumer.Console.pdb" KeyPath="yes" />
       </Component>
       <Component Id="CMP.Client.Turbine.DataEF6.Contract.PDB" Guid="9BDC4CCE-2BCC-46BA-93B4-A82EDBDDA4A8">
-        <File Id="File.Bin.Turbine.DataEF6.Contract.PDB" Source="..\..\Master\Turbine.DataEF6.Contract\bin\$(var.Configuration)\Turbine.DataEF6.Contract.pdb" KeyPath="yes"/>
+        <File Id="File.Bin.Turbine.DataEF6.Contract.PDB" Source="..\..\Master\Turbine.DataEF6.Contract\bin\$(var.Configuration)\Turbine.DataEF6.Contract.pdb" KeyPath="yes" />
       </Component>
       <?endif?>
 
@@ -659,22 +565,18 @@
   <Fragment>
     <DirectoryRef Id="DIR.TurbineWebAPI.Core">
       <Component Id="CMP.Web.Turbine.Data.Entities.DLL" Guid="AB1F0E0C-C1BB-4C26-9FC2-339C1D10B24A">
-        <File Id="FILE.Turbine.Data.Entities.DLL"
-              Source="$(var.Turbine.Data.Entities.ProjectDir)\bin\$(var.Configuration)\Turbine.Data.Entities.dll" KeyPath="yes"/>
+        <File Id="FILE.Turbine.Data.Entities.DLL" Source="$(var.Turbine.Data.Entities.ProjectDir)\bin\$(var.Configuration)\Turbine.Data.Entities.dll" KeyPath="yes" />
       </Component>
       <Component Id="CMP.Web.Turbine.DataEF6.DLL" Guid="0B80E9AE-F80A-4FAD-B232-DE931F7EE807">
-        <File Id="FILE.Turbine.DataEF6.DLL"
-              Source="$(var.Turbine.DataEF6.ProjectDir)\bin\$(var.Configuration)\Turbine.DataEF6.dll" KeyPath="yes"/>
+        <File Id="FILE.Turbine.DataEF6.DLL" Source="$(var.Turbine.DataEF6.ProjectDir)\bin\$(var.Configuration)\Turbine.DataEF6.dll" KeyPath="yes" />
       </Component>
 
       <?ifdef Debug ?>
       <Component Id="CMP.Web.Turbine.Data.Entities.PDB" Guid="1782FAC3-9A6A-4D7A-B53B-55B3EB002AEF">
-        <File Id="FILE.Turbine.Data.Entities.PDB"
-              Source="$(var.Turbine.Data.Entities.ProjectDir)\bin\$(var.Configuration)\Turbine.Data.Entities.pdb" KeyPath="yes"/>
+        <File Id="FILE.Turbine.Data.Entities.PDB" Source="$(var.Turbine.Data.Entities.ProjectDir)\bin\$(var.Configuration)\Turbine.Data.Entities.pdb" KeyPath="yes" />
       </Component>
       <Component Id="CMP.Web.Turbine.DataEF6.PDB" Guid="F9F43381-A0AB-43B1-8708-FF8325B088F0">
-        <File Id="FILE.Turbine.DataEF6.PDB"
-              Source="$(var.Turbine.DataEF6.ProjectDir)\bin\$(var.Configuration)\Turbine.DataEF6.pdb" KeyPath="yes"/>
+        <File Id="FILE.Turbine.DataEF6.PDB" Source="$(var.Turbine.DataEF6.ProjectDir)\bin\$(var.Configuration)\Turbine.DataEF6.pdb" KeyPath="yes" />
       </Component>
       <?endif?>
     </DirectoryRef>
@@ -682,11 +584,11 @@
   
   <Fragment>
     <ComponentGroup Id="CG.Turbine.WebAPI.Core">
-      <ComponentRef Id="CMP.Web.Turbine.Data.Entities.DLL"/>
-      <ComponentRef Id="CMP.Web.Turbine.DataEF6.DLL"/>
+      <ComponentRef Id="CMP.Web.Turbine.Data.Entities.DLL" />
+      <ComponentRef Id="CMP.Web.Turbine.DataEF6.DLL" />
       <?ifdef Debug ?>
-      <ComponentRef Id="CMP.Web.Turbine.Data.Entities.PDB"/>
-      <ComponentRef Id="CMP.Web.Turbine.DataEF6.PDB"/>
+      <ComponentRef Id="CMP.Web.Turbine.Data.Entities.PDB" />
+      <ComponentRef Id="CMP.Web.Turbine.DataEF6.PDB" />
       <?endif?>
     </ComponentGroup>
     
@@ -695,51 +597,41 @@
   <Fragment>
     <DirectoryRef Id="DIR.TurbineWebAPI.Dependencies">
       <Component Id="CMP.Web.Newtonsoft.Json.DLL" Guid="6164A09C-EB2C-4525-A869-C138C2B1201E">
-        <File Id="FILE.JsonDllId" Source="..\..\Master\Turbine.Lite.Web.Resources\bin\$(var.Configuration)\Newtonsoft.Json.dll" KeyPath="yes"/>        
+        <File Id="FILE.JsonDllId" Source="..\..\Master\Turbine.Lite.Web.Resources\bin\$(var.Configuration)\Newtonsoft.Json.dll" KeyPath="yes" />        
       </Component>
       <Component Id="CMP.Web.Newtonsoft.Json.XML" Guid="FCED92CB-0B07-47D1-9434-FF1CE5C2295F">
-        <File Id="FILE.JsonXmlId" Source="..\..\Master\Turbine.Lite.Web.Resources\bin\$(var.Configuration)\Newtonsoft.Json.xml" KeyPath="yes"/>
+        <File Id="FILE.JsonXmlId" Source="..\..\Master\Turbine.Lite.Web.Resources\bin\$(var.Configuration)\Newtonsoft.Json.xml" KeyPath="yes" />
       </Component>
       <Component Id="CMP.Web.EntityFramework.DLL" Guid="BF74B36B-FB07-43D6-AA36-CECB76A5A071">
-        <File Id="FILE.EntityFramework.DLL"
-              Source="$(var.Turbine.DataEF6.ProjectDir)\bin\$(var.Configuration)\EntityFramework.dll" KeyPath="yes"/>
+        <File Id="FILE.EntityFramework.DLL" Source="$(var.Turbine.DataEF6.ProjectDir)\bin\$(var.Configuration)\EntityFramework.dll" KeyPath="yes" />
       </Component>
       <Component Id="CMP.Web.EntityFramework.XML" Guid="801963DF-34DF-424D-AACF-6795E205FC3B">
-        <File Id="FILE.EntityFramework.XML"
-              Source="$(var.Turbine.DataEF6.ProjectDir)\bin\$(var.Configuration)\EntityFramework.xml" KeyPath="yes"/>
+        <File Id="FILE.EntityFramework.XML" Source="$(var.Turbine.DataEF6.ProjectDir)\bin\$(var.Configuration)\EntityFramework.xml" KeyPath="yes" />
       </Component>
       <Component Id="CMP.Web.EntityFramework.SqlServer.DLL" Guid="71B70895-14F6-40CD-A15D-7CE82E819F50">
-        <File Id="FILE.EntityFramework.SqlServer.DLL"
-              Source="$(var.Turbine.DataEF6.ProjectDir)\bin\$(var.Configuration)\EntityFramework.SqlServer.dll" KeyPath="yes"/>
+        <File Id="FILE.EntityFramework.SqlServer.DLL" Source="$(var.Turbine.DataEF6.ProjectDir)\bin\$(var.Configuration)\EntityFramework.SqlServer.dll" KeyPath="yes" />
       </Component>
       <Component Id="CMP.Web.EntityFramework.SqlServer.XML" Guid="C6221003-EE7C-4073-B659-F04E6237FB96">
-        <File Id="FILE.EntityFramework.SqlServer.XML"
-              Source="$(var.Turbine.DataEF6.ProjectDir)\bin\$(var.Configuration)\EntityFramework.SqlServer.xml" KeyPath="yes"/>
+        <File Id="FILE.EntityFramework.SqlServer.XML" Source="$(var.Turbine.DataEF6.ProjectDir)\bin\$(var.Configuration)\EntityFramework.SqlServer.xml" KeyPath="yes" />
       </Component>
       
       <Component Id="CMP.Web.Microsoft.Practices.ServiceLocation.DLL" Guid="72FAD09D-F864-4B13-968F-B0DE586A0FC5">
-        <File Id="FILE.Microsoft.Practices.ServiceLocation.DLL"
-              Source="$(var.AspenSinterConsumerConsole.ProjectDir)\bin\$(var.Configuration)\Microsoft.Practices.ServiceLocation.dll" KeyPath="yes"/>
+        <File Id="FILE.Microsoft.Practices.ServiceLocation.DLL" Source="$(var.AspenSinterConsumerConsole.ProjectDir)\bin\$(var.Configuration)\Microsoft.Practices.ServiceLocation.dll" KeyPath="yes" />
       </Component>
       <Component Id="CMP.Web.Microsoft.Practices.ServiceLocation.XML" Guid="23858170-591A-4A9E-976D-3C5A8A9E856C">
-        <File Id="FILE.Microsoft.Practices.ServiceLocation.XML"
-              Source="$(var.AspenSinterConsumerConsole.ProjectDir)\bin\$(var.Configuration)\Microsoft.Practices.ServiceLocation.XML" KeyPath="yes"/>
+        <File Id="FILE.Microsoft.Practices.ServiceLocation.XML" Source="$(var.AspenSinterConsumerConsole.ProjectDir)\bin\$(var.Configuration)\Microsoft.Practices.ServiceLocation.XML" KeyPath="yes" />
       </Component>
       <Component Id="CMP.Web.Microsoft.Practices.Unity.Configuration.DLL" Guid="E710A226-6382-443D-B3AC-13C30195E7DA">
-        <File Id="FILE.Microsoft.Practices.Unity.Configuration.DLL"
-              Source="$(var.AspenSinterConsumerConsole.ProjectDir)\bin\$(var.Configuration)\Microsoft.Practices.Unity.Configuration.dll" KeyPath="yes"/>
+        <File Id="FILE.Microsoft.Practices.Unity.Configuration.DLL" Source="$(var.AspenSinterConsumerConsole.ProjectDir)\bin\$(var.Configuration)\Microsoft.Practices.Unity.Configuration.dll" KeyPath="yes" />
       </Component>
       <Component Id="CMP.Web.Microsoft.Practices.Unity.Configuration.XML" Guid="50D23963-B0A4-4992-B618-86EEAEEFE2FA">
-        <File Id="FILE.Microsoft.Practices.Unity.Configuration.XML"
-              Source="$(var.AspenSinterConsumerConsole.ProjectDir)\bin\$(var.Configuration)\Microsoft.Practices.Unity.Configuration.XML" KeyPath="yes"/>
+        <File Id="FILE.Microsoft.Practices.Unity.Configuration.XML" Source="$(var.AspenSinterConsumerConsole.ProjectDir)\bin\$(var.Configuration)\Microsoft.Practices.Unity.Configuration.XML" KeyPath="yes" />
       </Component>
       <Component Id="CMP.Web.Microsoft.Practices.Unity.DLL" Guid="828C9A0A-3256-434A-AB1F-2C998C9AFBC5">
-        <File Id="FILE.Microsoft.Practices.Unity.DLL"
-              Source="$(var.AspenSinterConsumerConsole.ProjectDir)\bin\$(var.Configuration)\Microsoft.Practices.Unity.dll" KeyPath="yes"/>
+        <File Id="FILE.Microsoft.Practices.Unity.DLL" Source="$(var.AspenSinterConsumerConsole.ProjectDir)\bin\$(var.Configuration)\Microsoft.Practices.Unity.dll" KeyPath="yes" />
       </Component>
       <Component Id="CMP.Web.Microsoft.Practices.Unity.XML" Guid="1B2CACEA-62C4-4D6E-8733-50D893F6AE9E">
-        <File Id="FILE.Microsoft.Practices.Unity.XML"
-              Source="$(var.AspenSinterConsumerConsole.ProjectDir)\bin\$(var.Configuration)\Microsoft.Practices.Unity.XML" KeyPath="yes"/>
+        <File Id="FILE.Microsoft.Practices.Unity.XML" Source="$(var.AspenSinterConsumerConsole.ProjectDir)\bin\$(var.Configuration)\Microsoft.Practices.Unity.XML" KeyPath="yes" />
       </Component>
     </DirectoryRef>
   </Fragment>
@@ -773,59 +665,49 @@
     -->
     <DirectoryRef Id="DIR.Web.Bin.Core">
       <Component Id="CMP.Turbine.Data.Contract.Behaviors" Guid="66C40AE9-ECF8-43F4-A144-8F6054FCA3C8">
-        <File Id="FILE.TurbineDataContractBehaviorsDllId" Source="..\..\Master\Turbine.Data.Contract.Behaviors\bin\$(var.Configuration)\Turbine.Data.Contract.Behaviors.dll" KeyPath="yes"/>
+        <File Id="FILE.TurbineDataContractBehaviorsDllId" Source="..\..\Master\Turbine.Data.Contract.Behaviors\bin\$(var.Configuration)\Turbine.Data.Contract.Behaviors.dll" KeyPath="yes" />
       </Component>
       <Component Id="CMP.Turbine.Security" Guid="983BB224-7B54-49AA-9DF7-7E553D7EBDF5">
-        <File Id="FILE.TurbineSecurityDllId" Source="..\..\Master\Turbine.Security\bin\$(var.Configuration)\Turbine.Security.dll" KeyPath="yes"/>
+        <File Id="FILE.TurbineSecurityDllId" Source="..\..\Master\Turbine.Security\bin\$(var.Configuration)\Turbine.Security.dll" KeyPath="yes" />
       </Component>
       <Component Id="CMP.Turbine.Producer.Data.Contract.Behaviors" Guid="D50D5905-DFB3-426F-BA89-80628A901B84">
-        <File Id="FILE.Turbine.Producer.Data.Contract.Behaviors.Dll"
-              Source="..\..\Master\Turbine.Producer.Data.Contract.Behaviors\bin\$(var.Configuration)\Turbine.Producer.Data.Contract.Behaviors.dll" KeyPath="yes"/>
+        <File Id="FILE.Turbine.Producer.Data.Contract.Behaviors.Dll" Source="..\..\Master\Turbine.Producer.Data.Contract.Behaviors\bin\$(var.Configuration)\Turbine.Producer.Data.Contract.Behaviors.dll" KeyPath="yes" />
       </Component>
       <Component Id="CMP.Turbine.Data.Serialize" Guid="A34827AF-58BE-405B-B82C-45752069DBE0">
-        <File Id="FILE.Turbine.Data.Serialize.Dll"
-              Source="..\..\Master\Turbine.Data.Serialize\bin\$(var.Configuration)\Turbine.Data.Serialize.dll" KeyPath="yes"/>
+        <File Id="FILE.Turbine.Data.Serialize.Dll" Source="..\..\Master\Turbine.Data.Serialize\bin\$(var.Configuration)\Turbine.Data.Serialize.dll" KeyPath="yes" />
       </Component>
       <Component Id="CMP.Turbine.Producer" Guid="91F1405C-7638-476F-A1BC-CCDE4B08B5DD">
-        <File Id="FILE.Turbine.Producer.Dll"
-              Source="..\..\Master\Turbine.Producer\bin\$(var.Configuration)\Turbine.Producer.dll" KeyPath="yes"/>
+        <File Id="FILE.Turbine.Producer.Dll" Source="..\..\Master\Turbine.Producer\bin\$(var.Configuration)\Turbine.Producer.dll" KeyPath="yes" />
       </Component>
       <Component Id="CMP.Turbine.Web" Guid="02B70929-A1D6-469D-9383-2C4BCE6DB5AD">
-        <File Id="FILE.Turbine.Web.Dll"
-              Source="..\..\Master\Turbine.Web\bin\$(var.Configuration)\Turbine.Web.dll" KeyPath="yes"/>
+        <File Id="FILE.Turbine.Web.Dll" Source="..\..\Master\Turbine.Web\bin\$(var.Configuration)\Turbine.Web.dll" KeyPath="yes" />
       </Component>
       <Component Id="CMP.Turbine.Lite.Web.Resources.DLL" Guid="62A260BD-2843-495B-82BD-A4146661B3DA">
-        <File Id="FILE.Turbine.Lite.Web.Resources.DLL"
-              Source="..\..\Master\Turbine.Lite.Web.Resources\bin\$(var.Configuration)\Turbine.Lite.Web.Resources.dll" KeyPath="yes"/>
+        <File Id="FILE.Turbine.Lite.Web.Resources.DLL" Source="..\..\Master\Turbine.Lite.Web.Resources\bin\$(var.Configuration)\Turbine.Lite.Web.Resources.dll" KeyPath="yes" />
       </Component>
 
 
       <?ifdef Debug ?>
       <Component Id="CMP.Turbine.Producer.Data.Contract.Behaviors.Debug" Guid="5CABF973-E813-4345-A577-7F05A9E8CE2A">
-        <File Id="FILE.Turbine.Producer.Data.Contract.Behaviors.Pbd"
-              Source="..\..\Master\Turbine.Producer.Data.Contract.Behaviors\bin\$(var.Configuration)\Turbine.Producer.Data.Contract.Behaviors.pdb" KeyPath="yes"/>
+        <File Id="FILE.Turbine.Producer.Data.Contract.Behaviors.Pbd" Source="..\..\Master\Turbine.Producer.Data.Contract.Behaviors\bin\$(var.Configuration)\Turbine.Producer.Data.Contract.Behaviors.pdb" KeyPath="yes" />
       </Component>
       <Component Id="CMP.Turbine.Data.Serialize.Debug" Guid="79E57414-A6C8-4C2C-955F-5C019E0036D7">
-        <File Id="FILE.Turbine.Data.Serialize.Pbd"
-              Source="..\..\Master\Turbine.Data.Serialize\bin\$(var.Configuration)\Turbine.Data.Serialize.pdb" KeyPath="yes"/>
+        <File Id="FILE.Turbine.Data.Serialize.Pbd" Source="..\..\Master\Turbine.Data.Serialize\bin\$(var.Configuration)\Turbine.Data.Serialize.pdb" KeyPath="yes" />
       </Component>
       <Component Id="CMP.Turbine.Producer.Debug" Guid="402CA857-24FE-4289-B91E-701C5A48578D">
-        <File Id="FILE.Turbine.Producer.Pbd"
-              Source="..\..\Master\Turbine.Producer\bin\$(var.Configuration)\Turbine.Producer.pdb" KeyPath="yes"/>
+        <File Id="FILE.Turbine.Producer.Pbd" Source="..\..\Master\Turbine.Producer\bin\$(var.Configuration)\Turbine.Producer.pdb" KeyPath="yes" />
       </Component>
       <Component Id="CMP.Turbine.Web.Debug" Guid="DBBB4192-9A61-4B25-901F-8523667D0084">
-        <File Id="FILE.Turbine.Web.Pbd"
-              Source="..\..\Master\Turbine.Web\bin\$(var.Configuration)\Turbine.Web.pdb" KeyPath="yes"/>
+        <File Id="FILE.Turbine.Web.Pbd" Source="..\..\Master\Turbine.Web\bin\$(var.Configuration)\Turbine.Web.pdb" KeyPath="yes" />
       </Component>
       <Component Id="CMP.Turbine.Data.Contract.Behaviors.Debug" Guid="93DAEA1B-365E-4ABC-B216-AB8629828D25">
-        <File Id="FILE.TurbineDataContractBehaviorsPdbId" Source="..\..\Master\Turbine.Data.Contract.Behaviors\bin\$(var.Configuration)\Turbine.Data.Contract.Behaviors.pdb" KeyPath="yes"/>
+        <File Id="FILE.TurbineDataContractBehaviorsPdbId" Source="..\..\Master\Turbine.Data.Contract.Behaviors\bin\$(var.Configuration)\Turbine.Data.Contract.Behaviors.pdb" KeyPath="yes" />
       </Component>
       <Component Id="CMP.Turbine.Security.Debug" Guid="404C16AC-594E-4747-A5AC-41A7A366AB08">
-        <File Id="FILE.TurbineSecurityPdbId" Source="..\..\Master\Turbine.Security\bin\$(var.Configuration)\Turbine.Security.pdb" KeyPath="yes"/>
+        <File Id="FILE.TurbineSecurityPdbId" Source="..\..\Master\Turbine.Security\bin\$(var.Configuration)\Turbine.Security.pdb" KeyPath="yes" />
       </Component>
       <Component Id="CMP.Turbine.Lite.Web.Resources.PDB" Guid="1D804587-8031-48B9-9040-09EDF3282FC5">
-        <File Id="FILE.Turbine.Lite.Web.Resources.PDB"
-              Source="..\..\Master\Turbine.Lite.Web.Resources\bin\$(var.Configuration)\Turbine.Lite.Web.Resources.pdb" KeyPath="yes"/>
+        <File Id="FILE.Turbine.Lite.Web.Resources.PDB" Source="..\..\Master\Turbine.Lite.Web.Resources\bin\$(var.Configuration)\Turbine.Lite.Web.Resources.pdb" KeyPath="yes" />
       </Component>
       <?endif?>
     </DirectoryRef>
@@ -834,49 +716,49 @@
 
   <Fragment>
     <ComponentGroup Id="CG.Turbine.Web.App">
-      <ComponentRef Id="CMP.Web"/>
-      <ComponentRef Id="CMP.Web.Config"/>
-      <ComponentRef Id="CMP.Web.Global"/>
+      <ComponentRef Id="CMP.Web" />
+      <ComponentRef Id="CMP.Web.Config" />
+      <ComponentRef Id="CMP.Web.Global" />
 
-      <ComponentRef Id="CMP.Web.EntityFramework.DLL"/>
-      <ComponentRef Id="CMP.Web.EntityFramework.XML"/>
-      <ComponentRef Id="CMP.Web.EntityFramework.SqlServer.DLL"/>
-      <ComponentRef Id="CMP.Web.EntityFramework.SqlServer.XML"/>
-      <ComponentRef Id="CMP.Web.Microsoft.Practices.ServiceLocation.DLL"/>
-      <ComponentRef Id="CMP.Web.Microsoft.Practices.ServiceLocation.XML"/>
-      <ComponentRef Id="CMP.Web.Microsoft.Practices.Unity.Configuration.DLL"/>
-      <ComponentRef Id="CMP.Web.Microsoft.Practices.Unity.Configuration.XML"/>
-      <ComponentRef Id="CMP.Web.Microsoft.Practices.Unity.DLL"/>
-      <ComponentRef Id="CMP.Web.Microsoft.Practices.Unity.XML"/>
-      <ComponentRef Id="CMP.Web.Newtonsoft.Json.DLL"/>
-      <ComponentRef Id="CMP.Web.Newtonsoft.Json.XML"/>
+      <ComponentRef Id="CMP.Web.EntityFramework.DLL" />
+      <ComponentRef Id="CMP.Web.EntityFramework.XML" />
+      <ComponentRef Id="CMP.Web.EntityFramework.SqlServer.DLL" />
+      <ComponentRef Id="CMP.Web.EntityFramework.SqlServer.XML" />
+      <ComponentRef Id="CMP.Web.Microsoft.Practices.ServiceLocation.DLL" />
+      <ComponentRef Id="CMP.Web.Microsoft.Practices.ServiceLocation.XML" />
+      <ComponentRef Id="CMP.Web.Microsoft.Practices.Unity.Configuration.DLL" />
+      <ComponentRef Id="CMP.Web.Microsoft.Practices.Unity.Configuration.XML" />
+      <ComponentRef Id="CMP.Web.Microsoft.Practices.Unity.DLL" />
+      <ComponentRef Id="CMP.Web.Microsoft.Practices.Unity.XML" />
+      <ComponentRef Id="CMP.Web.Newtonsoft.Json.DLL" />
+      <ComponentRef Id="CMP.Web.Newtonsoft.Json.XML" />
 
-      <ComponentRef Id="CMP.Turbine.Data.Contract.Behaviors"/>
-      <ComponentRef Id="CMP.Turbine.Producer.Data.Contract.Behaviors"/>
-      <ComponentRef Id="CMP.Turbine.Data.Serialize"/>
-      <ComponentRef Id="CMP.Turbine.Producer"/>
-      <ComponentRef Id="CMP.Turbine.Web"/>
-      <ComponentRef Id="CMP.Turbine.Security"/>
-      <ComponentRef Id="CMP.Turbine.Lite.Web.Resources.DLL"/>
-      <ComponentRef Id="CMP.Web.Turbine.Data.Entities.DLL"/>
-      <ComponentRef Id="CMP.Web.Turbine.DataEF6.DLL"/>
+      <ComponentRef Id="CMP.Turbine.Data.Contract.Behaviors" />
+      <ComponentRef Id="CMP.Turbine.Producer.Data.Contract.Behaviors" />
+      <ComponentRef Id="CMP.Turbine.Data.Serialize" />
+      <ComponentRef Id="CMP.Turbine.Producer" />
+      <ComponentRef Id="CMP.Turbine.Web" />
+      <ComponentRef Id="CMP.Turbine.Security" />
+      <ComponentRef Id="CMP.Turbine.Lite.Web.Resources.DLL" />
+      <ComponentRef Id="CMP.Web.Turbine.Data.Entities.DLL" />
+      <ComponentRef Id="CMP.Web.Turbine.DataEF6.DLL" />
 
       <?ifdef Debug ?>
-      <ComponentRef Id="CMP.Turbine.Data.Contract.Behaviors.Debug"/>
+      <ComponentRef Id="CMP.Turbine.Data.Contract.Behaviors.Debug" />
       <!--ComponentRef Id="CMP.Turbine.Data.Contract.Debug"/-->
       <!--ComponentRef Id="CMP.Turbine.Data.Debug"/-->
-      <ComponentRef Id="CMP.Turbine.Producer.Data.Contract.Behaviors.Debug"/>
+      <ComponentRef Id="CMP.Turbine.Producer.Data.Contract.Behaviors.Debug" />
       <!--ComponentRef Id="CMP.Turbine.Producer.Data.Contract.Debug"/-->
-      <ComponentRef Id="CMP.Turbine.Data.Serialize.Debug"/>
+      <ComponentRef Id="CMP.Turbine.Data.Serialize.Debug" />
       <!--ComponentRef Id="CMP.Turbine.Data.Marshal.Debug"/-->
-      <ComponentRef Id="CMP.Turbine.Producer.Debug"/>
-      <ComponentRef Id="CMP.Turbine.Web.Debug"/>
+      <ComponentRef Id="CMP.Turbine.Producer.Debug" />
+      <ComponentRef Id="CMP.Turbine.Web.Debug" />
       <!--ComponentRef Id="CMP.Turbine.Web.Resources.Debug"/-->
-      <ComponentRef Id="CMP.Turbine.Security.Debug"/>
+      <ComponentRef Id="CMP.Turbine.Security.Debug" />
 
-      <ComponentRef Id="CMP.Turbine.Lite.Web.Resources.PDB"/>
-      <ComponentRef Id="CMP.Web.Turbine.Data.Entities.PDB"/>
-      <ComponentRef Id="CMP.Web.Turbine.DataEF6.PDB"/>
+      <ComponentRef Id="CMP.Turbine.Lite.Web.Resources.PDB" />
+      <ComponentRef Id="CMP.Web.Turbine.Data.Entities.PDB" />
+      <ComponentRef Id="CMP.Web.Turbine.DataEF6.PDB" />
       <?endif?>
 
     </ComponentGroup>
