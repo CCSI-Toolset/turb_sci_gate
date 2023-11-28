@@ -44,7 +44,7 @@
       <HintPath>..\..\TurbineLite\packages\Newtonsoft.Json.13.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="Sinter">
-      <HintPath>$(MSBuildProgramFiles32)\CCSI\SimSinter\Sinter.dll</HintPath>
+      <HintPath>$(ProgramFiles)\CCSI\SimSinter\Sinter.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />

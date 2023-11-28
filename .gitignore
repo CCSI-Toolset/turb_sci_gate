@@ -13,3 +13,4 @@ ipch/
 .vs/
 obj/
 packages/
+bin/
