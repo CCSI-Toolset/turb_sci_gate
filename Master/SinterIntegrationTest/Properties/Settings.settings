@@ -1,6 +1,15 @@
 ﻿<?xml version='1.0' encoding='utf-8'?>
-<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)">
-  <Profiles>
-    <Profile Name="(Default)" />
-  </Profiles>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="SinterIntegrationTest.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="DynamicVdVACMConfig" Type="System.String" Scope="User">
+      <Value Profile="(Default)">models\VdV_Reactor_Dynamic_Config.json</Value>
+    </Setting>
+    <Setting Name="DynamicVdVACMFilename" Type="System.String" Scope="User">
+      <Value Profile="(Default)">VdV_Reactor_Dynamic_Config.json</Value>
+    </Setting>
+    <Setting Name="DynamicVdVACMDir" Type="System.String" Scope="User">
+      <Value Profile="(Default)">models</Value>
+    </Setting>
+  </Settings>
 </SettingsFile>

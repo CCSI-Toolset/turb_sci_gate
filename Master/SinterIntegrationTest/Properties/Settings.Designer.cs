@@ -22,5 +22,41 @@ namespace SinterIntegrationTest.Properties {
                 return defaultInstance;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("models\\VdV_Reactor_Dynamic_Config.json")]
+        public string DynamicVdVACMConfig {
+            get {
+                return ((string)(this["DynamicVdVACMConfig"]));
+            }
+            set {
+                this["DynamicVdVACMConfig"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("VdV_Reactor_Dynamic_Config.json")]
+        public string DynamicVdVACMFilename {
+            get {
+                return ((string)(this["DynamicVdVACMFilename"]));
+            }
+            set {
+                this["DynamicVdVACMFilename"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("models")]
+        public string DynamicVdVACMDir {
+            get {
+                return ((string)(this["DynamicVdVACMDir"]));
+            }
+            set {
+                this["DynamicVdVACMDir"] = value;
+            }
+        }
     }
 }
