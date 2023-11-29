@@ -44,7 +44,7 @@
       <HintPath>..\..\TurbineLite\packages\CommonServiceLocator.2.0.7\lib\net48\CommonServiceLocator.dll</HintPath>
     </Reference>
     <Reference Include="Sinter">
-      <HintPath>$(MSBuildProgramFiles32)\CCSI\SimSinter\Sinter.dll</HintPath>
+      <HintPath>$(ProgramFiles)\CCSI\SimSinter\Sinter.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />

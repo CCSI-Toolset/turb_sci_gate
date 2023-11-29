@@ -46,5 +46,41 @@ namespace AspenSinterConsumerWindowsService.Properties {
                 this["CheckForNewJobsInterval"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("30")]
+        public int TimeOutIterations {
+            get {
+                return ((int)(this["TimeOutIterations"]));
+            }
+            set {
+                this["TimeOutIterations"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("5")]
+        public int TimeOutSetupIterations {
+            get {
+                return ((int)(this["TimeOutSetupIterations"]));
+            }
+            set {
+                this["TimeOutSetupIterations"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("8")]
+        public int TimePostInitIterations {
+            get {
+                return ((int)(this["TimePostInitIterations"]));
+            }
+            set {
+                this["TimePostInitIterations"] = value;
+            }
+        }
     }
 }
