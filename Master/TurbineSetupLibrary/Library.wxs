@@ -596,31 +596,34 @@
 
   <Fragment>
     <DirectoryRef Id="DIR.TurbineWebAPI.Dependencies">
-      <Component Id="CMP.Web.Newtonsoft.Json.DLL" Guid="6164A09C-EB2C-4525-A869-C138C2B1201E">
+      <Component Id="CMP.Web.Newtonsoft.Json.DLL" Guid="">
         <File Id="FILE.JsonDllId" Source="..\..\Master\Turbine.Lite.Web.Resources\bin\$(var.Configuration)\Newtonsoft.Json.dll" KeyPath="yes" />        
       </Component>
-      <Component Id="CMP.Web.Newtonsoft.Json.XML" Guid="FCED92CB-0B07-47D1-9434-FF1CE5C2295F">
+      <Component Id="CMP.Web.Newtonsoft.Json.XML" Guid="">
         <File Id="FILE.JsonXmlId" Source="..\..\Master\Turbine.Lite.Web.Resources\bin\$(var.Configuration)\Newtonsoft.Json.xml" KeyPath="yes" />
       </Component>
-      <Component Id="CMP.Web.EntityFramework.DLL" Guid="BF74B36B-FB07-43D6-AA36-CECB76A5A071">
+      <Component Id="CMP.Web.EntityFramework.DLL" Guid="">
         <File Id="FILE.EntityFramework.DLL" Source="$(var.Turbine.DataEF6.ProjectDir)\bin\$(var.Configuration)\EntityFramework.dll" KeyPath="yes" />
       </Component>
-      <Component Id="CMP.Web.EntityFramework.XML" Guid="801963DF-34DF-424D-AACF-6795E205FC3B">
+      <Component Id="CMP.Web.EntityFramework.XML" Guid="">
         <File Id="FILE.EntityFramework.XML" Source="$(var.Turbine.DataEF6.ProjectDir)\bin\$(var.Configuration)\EntityFramework.xml" KeyPath="yes" />
       </Component>
-      <Component Id="CMP.Web.EntityFramework.SqlServer.DLL" Guid="71B70895-14F6-40CD-A15D-7CE82E819F50">
+      <Component Id="CMP.Web.EntityFramework.SqlServer.DLL" Guid="">
         <File Id="FILE.EntityFramework.SqlServer.DLL" Source="$(var.Turbine.DataEF6.ProjectDir)\bin\$(var.Configuration)\EntityFramework.SqlServer.dll" KeyPath="yes" />
       </Component>
-      <Component Id="CMP.Web.EntityFramework.SqlServer.XML" Guid="C6221003-EE7C-4073-B659-F04E6237FB96">
+      <Component Id="CMP.Web.EntityFramework.SqlServer.XML" Guid="">
         <File Id="FILE.EntityFramework.SqlServer.XML" Source="$(var.Turbine.DataEF6.ProjectDir)\bin\$(var.Configuration)\EntityFramework.SqlServer.xml" KeyPath="yes" />
       </Component>
-      
-      <Component Id="CMP.Web.Unity.Configuration.DLL" Guid="E710A226-6382-443D-B3AC-13C30195E7DA">
+
+		<Component Id="CMP.Web.Unity.Abstractions.DLL">
+			<File Id="FILE.Unity.Abstractions.DLL" Source="$(var.AspenSinterConsumerConsole.ProjectDir)\bin\$(var.Configuration)\Unity.Abstractions.dll" KeyPath="yes" />
+		</Component>
+		<Component Id="CMP.Web.Unity.Configuration.DLL" Guid="">
         <File Id="FILE.Unity.Configuration.DLL" Source="$(var.AspenSinterConsumerConsole.ProjectDir)\bin\$(var.Configuration)\Unity.Configuration.dll" KeyPath="yes" />
       </Component>
-      <Component Id="CMP.Web.Unity.Container.DLL" Guid="828C9A0A-3256-434A-AB1F-2C998C9AFBC5">
+      <!--<Component Id="CMP.Web.Unity.Container.DLL" Guid="">
         <File Id="FILE.Unity.Container.DLL" Source="$(var.AspenSinterConsumerConsole.ProjectDir)\bin\$(var.Configuration)\Unity.Container.dll" KeyPath="yes" />
-      </Component>
+      </Component>-->
     </DirectoryRef>
   </Fragment>
 

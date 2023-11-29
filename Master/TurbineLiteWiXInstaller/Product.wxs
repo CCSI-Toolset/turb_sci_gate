@@ -4,7 +4,7 @@
     TurbineLite Wix Installer
   -->
 
-  <Package UpgradeCode="2a7184f4-0ed0-4c49-bb53-2824bf4b14e8" Name="TurbineLite" Language="1033" Version="2.3.0.1" Manufacturer="Lawrence Berkeley National Lab" InstallerVersion="200" ProductCode="26095B0F-F8C3-4D42-AC65-17013C5985A3"><Media Id="1" Cabinet="media1.cab" EmbedCab="yes" />
+  <Package UpgradeCode="2a7184f4-0ed0-4c49-bb53-2824bf4b14e8" Name="TurbineLite" Language="1033" Version="3.0.0.0" Manufacturer="Lawrence Berkeley National Lab" InstallerVersion="200" ProductCode="26095B0F-F8C3-4D42-AC65-17013C5985A3"><Media Id="1" Cabinet="media1.cab" EmbedCab="yes" />
     <!-- license -->
     <WixVariable Id="WixUILicenseRtf" Value="..\..\LICENSE.rtf" />
 
@@ -303,11 +303,14 @@
 		<Component Id="CMP.Bin.Newtonsoft.Json.XML" Guid="">
 			<File Id="File.Bin.JsonXmlId" Source="$(var.SelfHostWebApplication.ProjectDir)\bin\$(var.Configuration)\Newtonsoft.Json.xml" KeyPath="yes" />
 		</Component>
+		<Component Id="CMP.Bin.Unity.Abstractions.DLL">
+			<File Id="File.Bin.UnityAbstractionsDLLId" Source="$(var.AspenSinterConsumerConsole.ProjectDir)\bin\$(var.Configuration)\Unity.Abstractions.dll" KeyPath="yes" />
+		</Component>
 		<Component Id="CMP.Bin.Unity.Configuration.DLL" Guid="">
-			<File Id="File.Bin.UnityConfigDLLId" Source="$(var.SelfHostWebApplication.ProjectDir)\bin\$(var.Configuration)\Unity.Configuration.dll" KeyPath="yes" />
+			<File Id="File.Bin.UnityConfigDLLId" Source="$(var.AspenSinterConsumerConsole.ProjectDir)\bin\$(var.Configuration)\Unity.Configuration.dll" KeyPath="yes" />
 		</Component>
 		<Component Id="CMP.Bin.Unity.Container.DLL" Guid="">
-			<File Id="File.Bin.UnityContainerDLLId" Source="$(var.SelfHostWebApplication.ProjectDir)\bin\$(var.Configuration)\Unity.Container.dll" KeyPath="yes" />
+			<File Id="File.Bin.UnityContainerDLLId" Source="$(var.AspenSinterConsumerConsole.ProjectDir)\bin\$(var.Configuration)\Unity.Container.dll" KeyPath="yes" />
 		</Component>
 
 		<Component Id="CMP.Bin.Turbine.Consumer.Console.DLL" Guid="">
@@ -558,7 +561,7 @@
       <ComponentGroupRef Id="CG.Turbine.Bin" />
       <ComponentGroupRef Id="CG.Turbine.AspenTech" />
 
-      <Level Value="1" Condition="Installed OR ( PROP.SIM_SINTER = &quot;SimSinter&quot; AND PROP.SIM_SINTER_MAJOR = &quot;#2&quot; AND PROP.SIM_SINTER_MINOR &gt;= &quot;#1&quot;)" />
+      <Level Value="1" Condition="Installed OR ( PROP.SIM_SINTER = &quot;SimSinter&quot; AND PROP.SIM_SINTER_MAJOR &gt;= &quot;#3&quot;)" />
 
     </Feature>
 
@@ -574,7 +577,7 @@
       <ComponentGroupRef Id="CG.Turbine.Excel" />
       <ComponentGroupRef Id="CG.Turbine.AspenTech" />
 
-      <Level Value="1" Condition="Installed OR ( PROP.SIM_SINTER = &quot;SimSinter&quot; AND PROP.SIM_SINTER_MAJOR = &quot;#2&quot; AND PROP.SIM_SINTER_MINOR &gt;= &quot;#1&quot;)" />
+      <Level Value="1" Condition="Installed OR ( PROP.SIM_SINTER = &quot;SimSinter&quot; AND PROP.SIM_SINTER_MAJOR &gt;= &quot;#3&quot;)" />
 
     </Feature>
 
@@ -638,7 +641,8 @@
       <ComponentRef Id="CMP.Bin.EntityFramework.SqlServer.XML" />
       <ComponentRef Id="CMP.Bin.EntityFramework.SqlServerCompact.DLL" />
       <ComponentRef Id="CMP.Bin.EntityFramework.SqlServerCompact.XML" />
-      <ComponentRef Id="CMP.Bin.Unity.Container.DLL" />
+		<ComponentRef Id="CMP.Bin.Unity.Abstractions.DLL" />
+		<ComponentRef Id="CMP.Bin.Unity.Container.DLL" />
       <ComponentRef Id="CMP.Bin.Unity.Configuration.DLL" />
       <ComponentRef Id="CMP.Bin.Newtonsoft.Json.DLL" />
       <ComponentRef Id="CMP.Bin.Newtonsoft.Json.XML" />
@@ -750,8 +754,9 @@
       <ComponentRef Id="CMP.Web.EntityFramework.SqlServer.XML" />
       <ComponentRef Id="CMP.Web.EntityFramework.SqlServerCompact.DLL" />
       <ComponentRef Id="CMP.Web.EntityFramework.SqlServerCompact.XML" />
-      <ComponentRef Id="CMP.Web.Unity.Configuration.DLL" />
-      <ComponentRef Id="CMP.Web.Unity.Container.DLL" />
+	    <ComponentRef Id="CMP.Web.Unity.Abstractions.DLL" />
+		<ComponentRef Id="CMP.Web.Unity.Configuration.DLL" />
+      <!--<ComponentRef Id="CMP.Web.Unity.Container.DLL" />-->
 
       <ComponentRef Id="CMP.Web.Newtonsoft.Json.DLL" />
       <ComponentRef Id="CMP.Web.Newtonsoft.Json.XML" />
