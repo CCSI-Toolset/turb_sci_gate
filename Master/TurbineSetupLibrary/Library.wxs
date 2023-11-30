@@ -29,7 +29,7 @@
   </Fragment>
   
   <Fragment>
-    <Binary Id="BIN.CustomAction.DLL" src="..\TurbineCustomAction\bin\$(var.Configuration)\TurbineCustomAction.CA.dll" />
+    <Binary Id="BIN.CustomAction.DLL" SourceFile="..\TurbineCustomAction\bin\$(var.Configuration)\TurbineCustomAction.CA.dll" />
 
     <CustomAction Id="CA.SetSecurityToken.2" Return="check" Execute="immediate" HideTarget="no" DllEntry="SetSecurityToken" BinaryRef="BIN.CustomAction.DLL" />
     
@@ -615,23 +615,11 @@
         <File Id="FILE.EntityFramework.SqlServer.XML" Source="$(var.Turbine.DataEF6.ProjectDir)\bin\$(var.Configuration)\EntityFramework.SqlServer.xml" KeyPath="yes" />
       </Component>
       
-      <Component Id="CMP.Web.Microsoft.Practices.ServiceLocation.DLL" Guid="72FAD09D-F864-4B13-968F-B0DE586A0FC5">
-        <File Id="FILE.Microsoft.Practices.ServiceLocation.DLL" Source="$(var.AspenSinterConsumerConsole.ProjectDir)\bin\$(var.Configuration)\Microsoft.Practices.ServiceLocation.dll" KeyPath="yes" />
+      <Component Id="CMP.Web.Unity.Configuration.DLL" Guid="E710A226-6382-443D-B3AC-13C30195E7DA">
+        <File Id="FILE.Unity.Configuration.DLL" Source="$(var.AspenSinterConsumerConsole.ProjectDir)\bin\$(var.Configuration)\Unity.Configuration.dll" KeyPath="yes" />
       </Component>
-      <Component Id="CMP.Web.Microsoft.Practices.ServiceLocation.XML" Guid="23858170-591A-4A9E-976D-3C5A8A9E856C">
-        <File Id="FILE.Microsoft.Practices.ServiceLocation.XML" Source="$(var.AspenSinterConsumerConsole.ProjectDir)\bin\$(var.Configuration)\Microsoft.Practices.ServiceLocation.XML" KeyPath="yes" />
-      </Component>
-      <Component Id="CMP.Web.Microsoft.Practices.Unity.Configuration.DLL" Guid="E710A226-6382-443D-B3AC-13C30195E7DA">
-        <File Id="FILE.Microsoft.Practices.Unity.Configuration.DLL" Source="$(var.AspenSinterConsumerConsole.ProjectDir)\bin\$(var.Configuration)\Microsoft.Practices.Unity.Configuration.dll" KeyPath="yes" />
-      </Component>
-      <Component Id="CMP.Web.Microsoft.Practices.Unity.Configuration.XML" Guid="50D23963-B0A4-4992-B618-86EEAEEFE2FA">
-        <File Id="FILE.Microsoft.Practices.Unity.Configuration.XML" Source="$(var.AspenSinterConsumerConsole.ProjectDir)\bin\$(var.Configuration)\Microsoft.Practices.Unity.Configuration.XML" KeyPath="yes" />
-      </Component>
-      <Component Id="CMP.Web.Microsoft.Practices.Unity.DLL" Guid="828C9A0A-3256-434A-AB1F-2C998C9AFBC5">
-        <File Id="FILE.Microsoft.Practices.Unity.DLL" Source="$(var.AspenSinterConsumerConsole.ProjectDir)\bin\$(var.Configuration)\Microsoft.Practices.Unity.dll" KeyPath="yes" />
-      </Component>
-      <Component Id="CMP.Web.Microsoft.Practices.Unity.XML" Guid="1B2CACEA-62C4-4D6E-8733-50D893F6AE9E">
-        <File Id="FILE.Microsoft.Practices.Unity.XML" Source="$(var.AspenSinterConsumerConsole.ProjectDir)\bin\$(var.Configuration)\Microsoft.Practices.Unity.XML" KeyPath="yes" />
+      <Component Id="CMP.Web.Unity.Container.DLL" Guid="828C9A0A-3256-434A-AB1F-2C998C9AFBC5">
+        <File Id="FILE.Unity.Container.DLL" Source="$(var.AspenSinterConsumerConsole.ProjectDir)\bin\$(var.Configuration)\Unity.Container.dll" KeyPath="yes" />
       </Component>
     </DirectoryRef>
   </Fragment>

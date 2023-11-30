@@ -92,141 +92,6 @@
       <?endif?>
     </DirectoryRef>
 
-    <!--DirectoryRef Id="DIR.Bin.SimSinterAspen7.3">
-
-      <Component Id="CMP.Bin.Turbine.Consumer.AspenTech73.DLL" Guid="">
-        <File Id="File.Bin.FILE.Turbine.Consumer.AspenTech73.DLL"
-              Source="..\..\Master\Turbine.Consumer.AspenTech7.3\bin\$(var.Configuration)\Turbine.Consumer.AspenTech73.dll" KeyPath="yes"/>
-      </Component>
-
-      <Component Id="CMP.AspenSinter73ConsumerWindowsService" Guid="">
-        <File Id="FILE.AspenSinter73ConsumerWindowsService"
-              Source="..\..\Master\AspenSinter73ConsumerWindowsService\bin\$(var.Configuration)\AspenSinter73ConsumerWindowsService.exe" KeyPath="yes"/>
-
-        <ServiceInstall Id="SERVICEINSTALL.AspenSinter73ConsumerWindowsService"
-                        Name="Aspen73Consumer"
-                        DisplayName="Turbine Aspen73 Consumer"
-                        Start="demand"
-                        ErrorControl="normal"
-                        Interactive="yes"
-                        Type="ownProcess"
-                        Vital="yes">
-          <util:ServiceConfig
-            ServiceName="Aspen73Consumer"
-            FirstFailureActionType="restart"
-            SecondFailureActionType="restart"
-            ThirdFailureActionType="restart"
-            RestartServiceDelayInSeconds="60"
-            />
-          <ServiceDependency Id="TurbineWebAPIService"/>
-        </ServiceInstall>
-        <ServiceControl Id="SERVICECONTROL.AspenSinter73ConsumerWindowsService"
-                Name="Aspen73Consumer"
-                Remove="both"
-                Stop="both"
-                Wait="yes">
-        </ServiceControl>
-      </Component>
-
-      <Component Id="CMP.AspenSinter73ConsumerWindowsService.CONFIG"
-                 Guid="">
-        <File Id="FILE.AspenSinter73ConsumerWindowsService.Config"
-            Name="AspenSinter73ConsumerWindowsService.exe.config"
-            Source="aspen73/AspenSinter73ConsumerWindowsService.exe.config"
-            KeyPath="yes" Vital="yes"/>
-        <util:XmlFile
-            Id="AspenSinter73ConsumerWindowsServiceConfigSetBaseDir"
-            Action="setValue" Permanent="yes"
-            Sequence="1"
-            File="[#FILE.AspenSinter73ConsumerWindowsService.Config]"
-            ElementPath="/configuration/userSettings/AspenSinter73ConsumerWindowsService.Properties.Settings/setting[\[]@name='BaseDirectory'[\]]/value"
-            Value="[DIR.Data.AspenConsumer]" />
-        <util:XmlFile
-            Id="AspenSinter73ConsumerWindowsServiceConfigSetLogFile"
-            Action="setValue" Permanent="yes"
-            Sequence="2"
-            File="[#FILE.AspenSinter73ConsumerWindowsService.Config]"
-            ElementPath="/configuration/system.diagnostics/trace/listeners/add[\[]@name='Sinter73ConsumerLogListener'[\]]"
-            Name="initializeData"
-            Value="[DIR.Logs]AspenSinter73ConsumerWindowsServiceLog.txt" />
-        <util:XmlFile
-            Id="AspenSinter73ConsumerWindowsServiceConfigSetConnStr"
-            Action="setValue" Permanent="yes"
-            Sequence="3"
-            File="[#FILE.AspenSinter73ConsumerWindowsService.Config]"
-            ElementPath="/configuration/connectionStrings/add[\[]@name='TurbineCompactDatabase'[\]]"
-            Name="connectionString"
-            Value="Data Source=[DIR.Data]TurbineCompactDatabase.sdf" />
-        <util:XmlFile
-          Id="XMLFILE.Bin.AspenSinter73ConsumerWS.3"
-          Action="setValue" Permanent="yes"
-          Sequence="4"
-          File="[#FILE.AspenSinter73ConsumerWindowsService.Config]"
-          ElementPath="/configuration/runtime/assemblyBinding/dependentAssembly/codeBase[\[]@href='SINTER_HREF'[\]]"
-          Name="href"
-          Value="FILE://[ProgramFilesFolder]CCSI\SimSinter_Aspen7.3\Sinter_Aspen7.3.dll"/>
-        <util:XmlFile
-          Id="XMLFILE.Bin.AspenSinter73ConsumerWS.6"
-          Action="setValue" Permanent="yes"
-          Sequence="5"
-          File="[#FILE.AspenSinter73ConsumerWindowsService.Config]"
-          ElementPath="/configuration/runtime/assemblyBinding/dependentAssembly/codeBase[\[]@href='ACMACESS_HREF'[\]]"
-          Name="href"
-          Value="FILE://[ProgramFilesFolder]CCSI\SimSinter_Aspen7.3\ACMAccess_Aspen7.3.dll"/>
-      </Component>
-
-      <Component Id="CMP.Bin.AspenSinter73ConsumerConsole" Guid="">
-        <File Id="File.Bin.AspenSinter73ConsumerConsoleId"
-              Source="..\..\Master\AspenSinter73ConsumerConsole\bin\$(var.Configuration)\AspenSinter73ConsumerConsole.exe" KeyPath="yes"/>
-      </Component>
-
-      <Component Id="CMP.Bin.AspenSinter73ConsumerConsole.CONFIG"  Guid="">
-        <File Id="FILE.Bin.AspenSinter73ConsumerConsole.CONFIG"
-            Name="AspenSinter73ConsumerConsole.exe.config"
-            Source="aspen73/AspenSinter73ConsumerConsole.exe.config"
-            KeyPath="yes" Vital="yes"/>
-
-        <util:XmlFile
-            Id="XMLFILE.Bin.AspenSinter73ConsumerConsole.1"
-            Action="setValue" Permanent="yes"
-            Sequence="1"
-            File="[#FILE.Bin.AspenSinter73ConsumerConsole.CONFIG]"
-            ElementPath="/configuration/connectionStrings/add[\[]@name='TurbineCompactDatabase'[\]]"
-            Name="connectionString"
-            Value="Data Source=[DIR.Data]TurbineCompactDatabase.sdf" />
-
-        <util:XmlFile
-          Id="XMLFILE.Bin.AspenSinter73ConsumerConsole.3"
-          Action="setValue" Permanent="yes"
-          Sequence="2"
-          File="[#FILE.Bin.AspenSinter73ConsumerConsole.CONFIG]"
-          ElementPath="/configuration/runtime/assemblyBinding/dependentAssembly/codeBase[\[]@href='SINTER_HREF'[\]]"
-          Name="href"
-          Value="FILE://[ProgramFilesFolder]CCSI\SimSinter_Aspen7.3\Sinter_Aspen7.3.dll"/>
-        <util:XmlFile
-          Id="XMLFILE.Bin.AspenSinter73ConsumerConsole.6"
-          Action="setValue" Permanent="yes"
-          Sequence="3"
-          File="[#FILE.Bin.AspenSinter73ConsumerConsole.CONFIG]"
-          ElementPath="/configuration/runtime/assemblyBinding/dependentAssembly/codeBase[\[]@href='ACMACESS_HREF'[\]]"
-          Name="href"
-          Value="FILE://[ProgramFilesFolder]CCSI\SimSinter_Aspen7.3\ACMAccess_Aspen7.3.dll"/>
-
-      </Component>
-
-      <?ifdef Debug ?>
-      <Component Id="CMP.Bin.AspenSinter73ConsumeConsole.PDB" Guid="">
-        <File Id="File.Bin.AspenSinter73ConsumerConsoleId.PDB"
-              Source="..\..\Master\AspenSinter73ConsumerConsole\bin\$(var.Configuration)\AspenSinter73ConsumerConsole.pdb" KeyPath="yes"/>
-      </Component>
-      <Component Id="CMP.Bin.Turbine.Consumer.AspenTech73.PDB" Guid="">
-        <File Id="File.Bin.FILE.Turbine.Consumer.AspenTech73.PDB"
-              Source="..\..\Master\Turbine.Consumer.AspenTech7.3\bin\$(var.Configuration)\Turbine.Consumer.AspenTech73.pdb" KeyPath="yes"/>
-      </Component>
-      <?endif?>
-
-    </DirectoryRef-->
-
     <DirectoryRef Id="DIR.Bin.SimSinterAspen">
 
 
@@ -414,23 +279,39 @@
         <RemoveFile Id="RF.Bin" Name="*.*" On="uninstall" />
       </Component>
 
-      <Component Id="CMP.Bin.Turbine.Consumer.Console.DLL" Guid="">
+		<Component Id="CMP.Bin.EntityFramework.DLL" Guid="">
+			<File Id="FILE.Bin.EntityFramework.DLL" Source="$(var.SelfHostWebApplication.ProjectDir)\bin\$(var.Configuration)\EntityFramework.dll" KeyPath="yes" />
+		</Component>
+		<Component Id="CMP.Bin.EntityFramework.SqlServer.DLL" Guid="">
+			<File Id="FILE.Bin.EntityFramework.SqlServer.DLL" Source="$(var.SelfHostWebApplication.ProjectDir)\bin\$(var.Configuration)\EntityFramework.SqlServer.dll" KeyPath="yes" />
+		</Component>
+		<Component Id="CMP.Bin.EntityFramework.SqlServer.XML" Guid="">
+			<File Id="FILE.Bin.EntityFramework.SqlServer.XML" Source="$(var.SelfHostWebApplication.ProjectDir)\bin\$(var.Configuration)\EntityFramework.SqlServer.xml" KeyPath="yes" />
+		</Component>
+		<Component Id="CMP.Bin.EntityFramework.SqlServerCompact.DLL" Guid="">
+			<File Id="FILE.Bin.EntityFramework.SqlServerCompact.DLL" Source="$(var.SelfHostWebApplication.ProjectDir)\bin\$(var.Configuration)\EntityFramework.SqlServerCompact.dll" KeyPath="yes" />
+		</Component>
+		<Component Id="CMP.Bin.EntityFramework.SqlServerCompact.XML" Guid="">
+			<File Id="FILE.Bin.EntityFramework.SqlServerCompact.XML" Source="$(var.SelfHostWebApplication.ProjectDir)\bin\$(var.Configuration)\EntityFramework.SqlServerCompact.xml" KeyPath="yes" />
+		</Component>
+		<Component Id="CMP.Bin.EntityFramework.XML" Guid="">
+			<File Id="FILE.Bin.EntityFramework.XML" Source="$(var.SelfHostWebApplication.ProjectDir)\bin\$(var.Configuration)\EntityFramework.xml" KeyPath="yes" />
+		</Component>
+		<Component Id="CMP.Bin.Newtonsoft.Json.DLL" Guid="">
+			<File Id="File.Bin.JsonDllId" Source="$(var.SelfHostWebApplication.ProjectDir)\bin\$(var.Configuration)\Newtonsoft.Json.dll" KeyPath="yes" />
+		</Component>
+		<Component Id="CMP.Bin.Newtonsoft.Json.XML" Guid="">
+			<File Id="File.Bin.JsonXmlId" Source="$(var.SelfHostWebApplication.ProjectDir)\bin\$(var.Configuration)\Newtonsoft.Json.xml" KeyPath="yes" />
+		</Component>
+		<Component Id="CMP.Bin.Unity.Configuration.DLL" Guid="">
+			<File Id="File.Bin.UnityConfigDLLId" Source="$(var.SelfHostWebApplication.ProjectDir)\bin\$(var.Configuration)\Unity.Configuration.dll" KeyPath="yes" />
+		</Component>
+		<Component Id="CMP.Bin.Unity.Container.DLL" Guid="">
+			<File Id="File.Bin.UnityContainerDLLId" Source="$(var.SelfHostWebApplication.ProjectDir)\bin\$(var.Configuration)\Unity.Container.dll" KeyPath="yes" />
+		</Component>
+
+		<Component Id="CMP.Bin.Turbine.Consumer.Console.DLL" Guid="">
         <File Id="FILE.Turbine.Consumer.Console.DLL" Source="..\..\Master\Turbine.Consumer.Console\bin\$(var.Configuration)\Turbine.Consumer.Console.dll" KeyPath="yes" />
-      </Component>
-      <Component Id="CMP.Bin.Microsoft.Practices.ServiceLocation.DLL" Guid="">
-        <File Id="File.Bin.ServiceLocationId" Source="$(var.SelfHostWebApplication.ProjectDir)\bin\$(var.Configuration)\Microsoft.Practices.ServiceLocation.dll" KeyPath="yes" />
-      </Component>
-      <Component Id="CMP.Bin.Microsoft.Practices.Unity.Configuration.DLL" Guid="">
-        <File Id="File.Bin.UnityConfigDLLId" Source="$(var.SelfHostWebApplication.ProjectDir)\bin\$(var.Configuration)\Microsoft.Practices.Unity.Configuration.dll" KeyPath="yes" />
-      </Component>
-      <Component Id="CMP.Bin.Microsoft.Practices.Unity.Configuration.XML" Guid="">
-        <File Id="File.Bin.UnityConfigXMLId" Source="$(var.SelfHostWebApplication.ProjectDir)\bin\$(var.Configuration)\Microsoft.Practices.Unity.Configuration.xml" KeyPath="yes" />
-      </Component>
-      <Component Id="CMP.Bin.Microsoft.Practices.Unity.DLL" Guid="">
-        <File Id="File.Bin.UnityDLLId" Source="$(var.SelfHostWebApplication.ProjectDir)\bin\$(var.Configuration)\Microsoft.Practices.Unity.dll" KeyPath="yes" />
-      </Component>
-      <Component Id="CMP.Bin.Microsoft.Practices.Unity.XML" Guid="">
-        <File Id="File.Bin.UnityXmlId" Source="$(var.SelfHostWebApplication.ProjectDir)\bin\$(var.Configuration)\Microsoft.Practices.Unity.xml" KeyPath="yes" />
       </Component>
       <Component Id="CMP.Bin.Turbine.Consumer.DLL" Guid="">
         <File Id="File.Bin.FILE.Turbine.Consumer.DLL" Source="..\..\Master\Turbine.Consumer\bin\$(var.Configuration)\Turbine.Consumer.dll" KeyPath="yes" />
@@ -456,31 +337,7 @@
       <Component Id="CMP.Bin.Turbine.Data.Entities.DLL" Guid="">
         <File Id="FILE.Bin.Turbine.Data.Entities.DLL" Source="$(var.SelfHostWebApplication.ProjectDir)\bin\$(var.Configuration)\Turbine.Data.Entities.dll" KeyPath="yes" />
       </Component>
-      <Component Id="CMP.Bin.EntityFramework.DLL" Guid="">
-        <File Id="FILE.Bin.EntityFramework.DLL" Source="$(var.SelfHostWebApplication.ProjectDir)\bin\$(var.Configuration)\EntityFramework.dll" KeyPath="yes" />
-      </Component>
-      <Component Id="CMP.Bin.EntityFramework.XML" Guid="">
-        <File Id="FILE.Bin.EntityFramework.XML" Source="$(var.SelfHostWebApplication.ProjectDir)\bin\$(var.Configuration)\EntityFramework.xml" KeyPath="yes" />
-      </Component>
-      <Component Id="CMP.Bin.EntityFramework.SqlServer.DLL" Guid="">
-        <File Id="FILE.Bin.EntityFramework.SqlServer.DLL" Source="$(var.SelfHostWebApplication.ProjectDir)\bin\$(var.Configuration)\EntityFramework.SqlServer.dll" KeyPath="yes" />
-      </Component>
-      <Component Id="CMP.Bin.EntityFramework.SqlServer.XML" Guid="">
-        <File Id="FILE.Bin.EntityFramework.SqlServer.XML" Source="$(var.SelfHostWebApplication.ProjectDir)\bin\$(var.Configuration)\EntityFramework.SqlServer.xml" KeyPath="yes" />
-      </Component>
-      <Component Id="CMP.Bin.EntityFramework.SqlServerCompact.DLL" Guid="">
-        <File Id="FILE.Bin.EntityFramework.SqlServerCompact.DLL" Source="$(var.SelfHostWebApplication.ProjectDir)\bin\$(var.Configuration)\EntityFramework.SqlServerCompact.dll" KeyPath="yes" />
-      </Component>
-      <Component Id="CMP.Bin.EntityFramework.SqlServerCompact.XML" Guid="">
-        <File Id="FILE.Bin.EntityFramework.SqlServerCompact.XML" Source="$(var.SelfHostWebApplication.ProjectDir)\bin\$(var.Configuration)\EntityFramework.SqlServerCompact.xml" KeyPath="yes" />
-      </Component>
 
-      <Component Id="CMP.Bin.Newtonsoft.Json.DLL" Guid="">
-        <File Id="File.Bin.JsonDllId" Source="..\..\Master\Turbine.Consumer.Console\bin\$(var.Configuration)\Newtonsoft.Json.dll" KeyPath="yes" />
-      </Component>
-      <Component Id="CMP.Bin.Newtonsoft.Json.XML" Guid="">
-        <File Id="File.Bin.JsonXmlId" Source="..\..\Master\Turbine.Consumer.Console\bin\$(var.Configuration)\Newtonsoft.Json.xml" KeyPath="yes" />
-      </Component>
       <Component Id="CMP.CommandLineX.DLL" Guid="">
         <File Id="FILE.CommandLineX.DLL" Source="..\..\Master\AspenSinterConsumerConsole\bin\$(var.Configuration)\CommandLine.dll" KeyPath="yes" />
       </Component>
@@ -614,9 +471,6 @@
       <Component Id="CMP.Web.Turbine.Web.PDB" Guid="">
         <File Id="FILE.Turbine.Web.PDB" Source="$(var.SelfHostWebApplication.ProjectDir)\bin\$(var.Configuration)\Turbine.Web.pdb" KeyPath="yes" />
       </Component>
-      <Component Id="CMP.Web.Microsoft.Practices.ServiceLocation.PDB" Guid="">
-        <File Id="FILE.Microsoft.Practices.ServiceLocation.PDB" Source="$(var.SelfHostWebApplication.ProjectDir)\bin\$(var.Configuration)\Microsoft.Practices.ServiceLocation.PDB" KeyPath="yes" />
-      </Component>
       <Component Id="CMP.Web.SelfHostWebApplication.PDB" Guid="">
         <File Id="FILE.SelfHostWebApplication.PDB" Source="$(var.SelfHostWebApplication.ProjectDir)\bin\$(var.Configuration)\SelfHostWebApplication.pdb" KeyPath="yes" />
       </Component>
@@ -624,14 +478,14 @@
     </DirectoryRef>
 
     <Property Id="PROP.SIM_SINTER">
-      <RegistrySearch Id="RS.SIM_SINTER" Root="HKLM" Key="SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\{FE0D0DCA-BCD7-4242-8647-35D2E4779588}" Name="DisplayName" Type="raw" Bitness="always32" />
+      <RegistrySearch Id="RS.SIM_SINTER" Root="HKLM" Key="SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\{FE0D0DCA-BCD7-4242-8647-35D2E4779588}" Name="DisplayName" Type="raw" Bitness="always64" />
     </Property>
 
     <Property Id="PROP.SIM_SINTER_MAJOR">
-      <RegistrySearch Id="RS.SIM_SINTER_MAJOR" Root="HKLM" Key="SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\{FE0D0DCA-BCD7-4242-8647-35D2E4779588}" Name="VersionMajor" Type="raw" Bitness="always32" />
+      <RegistrySearch Id="RS.SIM_SINTER_MAJOR" Root="HKLM" Key="SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\{FE0D0DCA-BCD7-4242-8647-35D2E4779588}" Name="VersionMajor" Type="raw" Bitness="always64" />
     </Property>
     <Property Id="PROP.SIM_SINTER_MINOR">
-      <RegistrySearch Id="RS.SIM_SINTER_MINOR" Root="HKLM" Key="SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\{FE0D0DCA-BCD7-4242-8647-35D2E4779588}" Name="VersionMinor" Type="raw" Bitness="always32" />
+      <RegistrySearch Id="RS.SIM_SINTER_MINOR" Root="HKLM" Key="SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\{FE0D0DCA-BCD7-4242-8647-35D2E4779588}" Name="VersionMinor" Type="raw" Bitness="always64" />
     </Property>
 
     <!--
@@ -668,9 +522,9 @@
 
     <Launch Condition="Installed OR PROP.NET_FRAMEWORK_4 = &quot;#1&quot;" Message="Require .NET 4.0 Full installation (Found partial .NET 4.0: [PROP.NET_FRAMEWORK_4_VERSION])" />
 
-    <Launch Condition="Installed OR (PROP.SQL_SERVER_COMPACT.VERSION &lt;&lt; &quot;4.0&quot;ORPROP.SQL_SERVER_COMPACT64.VERSION &lt;&lt; &quot;4.0&quot;)" Message="Installation requires SQL Server Compact 4.0 ( 32bit=[PROP.SQL_SERVER_COMPACT.VERSION] OR 64bit=[PROP.SQL_SERVER_COMPACT64.VERSION] )" />
+    <Launch Condition="Installed OR (PROP.SQL_SERVER_COMPACT.VERSION &lt; &quot;4.0&quot; OR PROP.SQL_SERVER_COMPACT64.VERSION &lt; &quot;4.0&quot;)" Message="Installation requires SQL Server Compact 4.0 ( 32bit=[PROP.SQL_SERVER_COMPACT.VERSION] OR 64bit=[PROP.SQL_SERVER_COMPACT64.VERSION] )" />
 
-    <Launch Condition="Installed OR ( PROP.SIM_SINTER = &quot;SimSinter&quot; AND PROP.SIM_SINTER_MAJOR = &quot;#2&quot; AND PROP.SIM_SINTER_MINOR &gt;= &quot;#1&quot;)" Message="SimSinter Version &gt;= 2.1 must be installed ( Found MAJOR[PROP.SIM_SINTER_MAJOR].[PROP.SIM_SINTER_MINOR] ) " />
+    <Launch Condition="Installed OR ( PROP.SIM_SINTER = &quot;SimSinter&quot; AND PROP.SIM_SINTER_MAJOR &gt;= &quot;#3&quot;)" Message="SimSinter Version &gt;= 3.0 or higher must be installed ( Found MAJOR[PROP.SIM_SINTER_MAJOR].[PROP.SIM_SINTER_MINOR] ) " />
 
     <!--
     <Condition Message="Installation requires AspenTech Engineering ( AspenPlus=[PROP.ASPENTECH_ASPENPLUS] and ACM=[PROP.ASPENTECH_ACM] )">
@@ -784,11 +638,8 @@
       <ComponentRef Id="CMP.Bin.EntityFramework.SqlServer.XML" />
       <ComponentRef Id="CMP.Bin.EntityFramework.SqlServerCompact.DLL" />
       <ComponentRef Id="CMP.Bin.EntityFramework.SqlServerCompact.XML" />
-      <ComponentRef Id="CMP.Bin.Microsoft.Practices.ServiceLocation.DLL" />
-      <ComponentRef Id="CMP.Bin.Microsoft.Practices.Unity.DLL" />
-      <ComponentRef Id="CMP.Bin.Microsoft.Practices.Unity.XML" />
-      <ComponentRef Id="CMP.Bin.Microsoft.Practices.Unity.Configuration.DLL" />
-      <ComponentRef Id="CMP.Bin.Microsoft.Practices.Unity.Configuration.XML" />
+      <ComponentRef Id="CMP.Bin.Unity.Container.DLL" />
+      <ComponentRef Id="CMP.Bin.Unity.Configuration.DLL" />
       <ComponentRef Id="CMP.Bin.Newtonsoft.Json.DLL" />
       <ComponentRef Id="CMP.Bin.Newtonsoft.Json.XML" />
 
@@ -899,12 +750,8 @@
       <ComponentRef Id="CMP.Web.EntityFramework.SqlServer.XML" />
       <ComponentRef Id="CMP.Web.EntityFramework.SqlServerCompact.DLL" />
       <ComponentRef Id="CMP.Web.EntityFramework.SqlServerCompact.XML" />
-      <ComponentRef Id="CMP.Web.Microsoft.Practices.ServiceLocation.DLL" />
-      <ComponentRef Id="CMP.Web.Microsoft.Practices.ServiceLocation.XML" />
-      <ComponentRef Id="CMP.Web.Microsoft.Practices.Unity.Configuration.DLL" />
-      <ComponentRef Id="CMP.Web.Microsoft.Practices.Unity.Configuration.XML" />
-      <ComponentRef Id="CMP.Web.Microsoft.Practices.Unity.DLL" />
-      <ComponentRef Id="CMP.Web.Microsoft.Practices.Unity.XML" />
+      <ComponentRef Id="CMP.Web.Unity.Configuration.DLL" />
+      <ComponentRef Id="CMP.Web.Unity.Container.DLL" />
 
       <ComponentRef Id="CMP.Web.Newtonsoft.Json.DLL" />
       <ComponentRef Id="CMP.Web.Newtonsoft.Json.XML" />
@@ -929,7 +776,6 @@
       <ComponentRef Id="CMP.Web.Turbine.Producer.Data.Contract.Behaviors.PDB" />
       <ComponentRef Id="CMP.Web.Turbine.Producer.PDB" />
       <ComponentRef Id="CMP.Web.Turbine.Web.PDB" />
-      <ComponentRef Id="CMP.Web.Microsoft.Practices.ServiceLocation.PDB" />
       <ComponentRef Id="CMP.Web.SelfHostWebApplication.PDB" />
       <ComponentRef Id="CMP.Web.Turbine.DataEF6.PDB" />
       <ComponentRef Id="CMP.Web.Turbine.Data.Entities.PDB" />
