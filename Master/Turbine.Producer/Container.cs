@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Unity;
-using Unity.Configuration;
 using System.Diagnostics;
 using Turbine.Producer.Contracts;
 using Microsoft.Practices.Unity.Configuration;

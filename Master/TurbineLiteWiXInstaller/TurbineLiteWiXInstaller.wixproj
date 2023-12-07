@@ -42,6 +42,7 @@
       <RefProjectOutputGroups>Binaries;Content;Satellites</RefProjectOutputGroups>
       <RefTargetDir>INSTALLFOLDER</RefTargetDir>
     </ProjectReference>
+    <ProjectReference Include="..\Turbine.Lite.Consumer.Data.Contract\Turbine.Lite.Consumer.Data.Contract.csproj" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="AspenSinterConsumerConsole.exe.config" />

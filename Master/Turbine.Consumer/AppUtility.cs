@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Unity;
-using Unity.Configuration;
 using Turbine.Data.Contract.Behaviors;
 using Turbine.Consumer.Data.Contract.Behaviors;
 using Turbine.Consumer.Contract.Behaviors;
