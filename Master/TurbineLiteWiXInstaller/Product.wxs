@@ -111,9 +111,9 @@
 		  <Component Id="CMP.Bin.Unity.Container.DLL" Guid="">
 			  <File Id="File.Bin.Unity.ContainerDllId" Source="$(var.AspenSinterConsumerConsole.ProjectDir)\bin\$(var.Configuration)\Unity.Container.dll" KeyPath="yes" />
 		  </Component>
-		  <Component Id="CMP.Bin.Unity.Interception.DLL" Guid="">
+		  <!--<Component Id="CMP.Bin.Unity.Interception.DLL" Guid="">
 			  <File Id="File.Bin.Unity.InterceptionDllId" Source="$(var.AspenSinterConsumerConsole.ProjectDir)\bin\$(var.Configuration)\Unity.Interception.dll" KeyPath="yes" />
-		  </Component>
+		  </Component>-->
 
 
 		  <Component Id="CMP.Bin.Turbine.Consumer.Console.DLL" Guid="">
@@ -175,8 +175,6 @@
 			  <util:XmlFile Id="XMLFILE.Bin.ExcelSinterWindowsService.BaseDir" Action="setValue" Permanent="yes" Sequence="1" File="[#FILE.Bin.ExcelSinterWindowsService.CONFIG]" ElementPath="/configuration/userSettings/ExcelSinterConsumerWindowsService.Properties.Settings/setting[\[]@name='BaseDirectory'[\]]/value" Value="[DIR.Data.Excel]" />
 			  <util:XmlFile Id="XMLFILE.Bin.ExcelSinterWindowsService.LOG" Action="setValue" Permanent="yes" Sequence="2" File="[#FILE.Bin.ExcelSinterWindowsService.CONFIG]" ElementPath="/configuration/system.diagnostics/trace/listeners/add[\[]@name='SinterConsumerLogListener'[\]]" Name="initializeData" Value="[DIR.Logs]ExcelSinterConsumerWindowsServiceLog.txt" />
 			  <util:XmlFile Id="XMLFILE.Bin.ExcelSinterWindowsService.DB" Action="setValue" Permanent="yes" Sequence="3" File="[#FILE.Bin.ExcelSinterWindowsService.CONFIG]" ElementPath="/configuration/connectionStrings/add[\[]@name='TurbineCompactDatabase'[\]]" Name="connectionString" Value="Data Source=[DIR.Data]TurbineCompactDatabase.sdf" />
-			  <util:XmlFile Id="XMLFILE.Bin.ExcelSinterWindowsService.4" Action="setValue" Permanent="yes" Sequence="4" File="[#FILE.Bin.ExcelSinterWindowsService.CONFIG]" ElementPath="/configuration/runtime/assemblyBinding/dependentAssembly/codeBase[\[]@href='SINTER_HREF'[\]]" Name="href" Value="FILE://[ProgramFilesFolder]CCSI\SimSinter\Sinter.dll" />
-			  <util:XmlFile Id="XMLFILE.Bin.ExcelSinterWindowsService.5" Action="setValue" Permanent="yes" Sequence="5" File="[#FILE.Bin.ExcelSinterWindowsService.CONFIG]" ElementPath="/configuration/runtime/assemblyBinding/dependentAssembly/codeBase[\[]@href='VARIABLETREE_HREF'[\]]" Name="href" Value="FILE://[ProgramFilesFolder]CCSI\SimSinter\VariableTree.dll" />
 		  </Component>
 
 		  <Component Id="CMP.Consumer.Excel.DLL" Guid="88A59131-C42D-4E4F-BBA4-3706450227D8">
@@ -190,8 +188,6 @@
 		  <Component Id="CMP.ExcelConsole.CONFIG" Guid="8F280030-9BC5-4EAF-A946-D359935ECA8F">
 			  <File Id="FILE.Bin.ExcelSinterConsumerConsole.CONFIG" Name="ExcelSinterConsumerConsole.exe.config" Source="ExcelSinterConsumerConsole.exe.config" KeyPath="yes" Vital="yes" />
 			  <util:XmlFile Id="XMLFILE.Bin.ExcelSinterConsumerConsole.CONFIG" Action="setValue" Permanent="yes" Sequence="1" File="[#FILE.Bin.ExcelSinterConsumerConsole.CONFIG]" ElementPath="/configuration/connectionStrings/add[\[]@name='TurbineCompactDatabase'[\]]" Name="connectionString" Value="Data Source=[DIR.Data]TurbineCompactDatabase.sdf" />
-			  <util:XmlFile Id="XMLFILE.Bin.ExcelSinterConsumerConsole.2" Action="setValue" Permanent="yes" Sequence="2" File="[#FILE.Bin.ExcelSinterConsumerConsole.CONFIG]" ElementPath="/configuration/runtime/assemblyBinding/dependentAssembly/codeBase[\[]@href='SINTER_HREF'[\]]" Name="href" Value="FILE://[ProgramFilesFolder]CCSI\SimSinter\Sinter.dll" />
-			  <util:XmlFile Id="XMLFILE.Bin.ExcelSinterConsumerConsole.3" Action="setValue" Permanent="yes" Sequence="3" File="[#FILE.Bin.ExcelSinterConsumerConsole.CONFIG]" ElementPath="/configuration/runtime/assemblyBinding/dependentAssembly/codeBase[\[]@href='VARIABLETREE_HREF'[\]]" Name="href" Value="FILE://[ProgramFilesFolder]CCSI\SimSinter\VariableTree.dll" />
 		  </Component>
 
 		  <?ifdef Debug ?>
@@ -344,8 +340,6 @@
 			  <util:XmlFile Id="AspenSinterConsumerWindowsServiceConfigSetBaseDir" Action="setValue" Permanent="yes" Sequence="1" File="[#FILE.AspenSinterConsumerWindowsService.Config]" ElementPath="/configuration/userSettings/AspenSinterConsumerWindowsService.Properties.Settings/setting[\[]@name='BaseDirectory'[\]]/value" Value="[DIR.Data.AspenConsumer]" />
 			  <util:XmlFile Id="AspenSinterConsumerWindowsServiceConfigSetLogFile" Action="setValue" Permanent="yes" Sequence="2" File="[#FILE.AspenSinterConsumerWindowsService.Config]" ElementPath="/configuration/system.diagnostics/trace/listeners/add[\[]@name='SinterConsumerLogListener'[\]]" Name="initializeData" Value="[DIR.Logs]AspenSinterConsumerWindowsServiceLog.txt" />
 			  <util:XmlFile Id="AspenSinterConsumerWindowsServiceConfigSetConnStr" Action="setValue" Permanent="yes" Sequence="3" File="[#FILE.AspenSinterConsumerWindowsService.Config]" ElementPath="/configuration/connectionStrings/add[\[]@name='TurbineCompactDatabase'[\]]" Name="connectionString" Value="Data Source=[DIR.Data]TurbineCompactDatabase.sdf" />
-			  <util:XmlFile Id="XMLFILE.Bin.AspenSinterConsumerWS.3" Action="setValue" Permanent="yes" Sequence="4" File="[#FILE.AspenSinterConsumerWindowsService.Config]" ElementPath="/configuration/runtime/assemblyBinding/dependentAssembly/codeBase[\[]@href='SINTER_HREF'[\]]" Name="href" Value="FILE://[ProgramFilesFolder]CCSI\SimSinter\Sinter.dll" />
-			  <util:XmlFile Id="XMLFILE.Bin.AspenSinterConsumerWS.4" Action="setValue" Permanent="yes" Sequence="5" File="[#FILE.AspenSinterConsumerWindowsService.Config]" ElementPath="/configuration/runtime/assemblyBinding/dependentAssembly/codeBase[\[]@href='VARIABLETREE_HREF'[\]]" Name="href" Value="FILE://[ProgramFilesFolder]CCSI\SimSinter\VariableTree.dll" />
 		  </Component>
 
 		  <Component Id="CMP.Bin.Turbine.Consumer.AspenTech.DLL" Guid="">
@@ -361,9 +355,6 @@
 			  <File Id="FILE.Bin.AspenSinterConsumerConsole.CONFIG" Name="AspenSinterConsumerConsole.exe.config" Source="AspenSinterConsumerConsole.exe.config" KeyPath="yes" Vital="yes" />
 
 			  <util:XmlFile Id="XMLFILE.Bin.AspenSinterConsumerConsole.1" Action="setValue" Permanent="yes" Sequence="1" File="[#FILE.Bin.AspenSinterConsumerConsole.CONFIG]" ElementPath="/configuration/connectionStrings/add[\[]@name='TurbineCompactDatabase'[\]]" Name="connectionString" Value="Data Source=[DIR.Data]TurbineCompactDatabase.sdf" />
-
-			  <util:XmlFile Id="XMLFILE.Bin.AspenSinterConsumerConsole.3" Action="setValue" Permanent="yes" Sequence="2" File="[#FILE.Bin.AspenSinterConsumerConsole.CONFIG]" ElementPath="/configuration/runtime/assemblyBinding/dependentAssembly/codeBase[\[]@href='SINTER_HREF'[\]]" Name="href" Value="FILE://[ProgramFilesFolder]CCSI\SimSinter\Sinter.dll" />
-			  <util:XmlFile Id="XMLFILE.Bin.AspenSinterConsumerConsole.4" Action="setValue" Permanent="yes" Sequence="3" File="[#FILE.Bin.AspenSinterConsumerConsole.CONFIG]" ElementPath="/configuration/runtime/assemblyBinding/dependentAssembly/codeBase[\[]@href='VARIABLETREE_HREF'[\]]" Name="href" Value="FILE://[ProgramFilesFolder]CCSI\SimSinter\VariableTree.dll" />
 		  </Component>
 
 		  <!-- DEBUG SECTION 
@@ -739,7 +730,7 @@
 			<ComponentRef Id="CMP.Bin.Unity.Abstractions.DLL" />
 			<ComponentRef Id="CMP.Bin.Unity.Configuration.DLL" />
 			<ComponentRef Id="CMP.Bin.Unity.Container.DLL" />
-			<ComponentRef Id="CMP.Bin.Unity.Interception.DLL" />
+			<!--<ComponentRef Id="CMP.Bin.Unity.Interception.DLL" />-->
 
 			<ComponentRef Id="CMP.Bin.Turbine.Consumer.Console.DLL" />
 			<ComponentRef Id="CMP.Bin.Turbine.Consumer.Contract.Behaviors.DLL" />
