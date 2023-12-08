@@ -84,6 +84,18 @@
 		  <Component Id="CMP.Bin.EntityFramework.XML" Guid="4aed45bb-8309-4cf4-a039-3154c5b4e6e8">
 			  <File Id="File.Bin.EntityFrameworkXmlId" Source="$(var.AspenSinterConsumerConsole.ProjectDir)\$(var.OutDir)\EntityFramework.xml" KeyPath="yes" />
 		  </Component>
+		  <Component Id="CMP.Bin.EntityFramework.SqlServer.DLL" Guid="37e60efd-f5ee-4bc9-94e5-6b79938931fb">
+			  <File Id="File.Bin.EntityFramework.SqlServer.DLL" Source="$(var.Turbine.DataEF6.ProjectDir)\$(var.OutDir)\EntityFramework.SqlServer.dll" KeyPath="yes" />
+		  </Component>
+		  <Component Id="CMP.Bin.EntityFramework.SqlServer.XML" Guid="971912fb-bf7d-4f3a-9d75-a716fdb8ef99">
+			  <File Id="File.Bin.EntityFramework.SqlServer.XML" Source="$(var.Turbine.DataEF6.ProjectDir)\$(var.OutDir)\EntityFramework.SqlServer.xml" KeyPath="yes" />
+		  </Component>
+		  <Component Id="CMP.Bin.EntityFramework.SqlServerCompact.DLL" Guid="f447ffe4-5d35-4ad7-8a5d-da123a4f7444">
+			  <File Id="File.Bin.EntityFramework.SqlServerCompact.DLL" Source="$(var.Turbine.DataEF6.ProjectDir)\$(var.OutDir)\EntityFramework.SqlServerCompact.dll" KeyPath="yes" />
+		  </Component>
+		  <Component Id="CMP.Bin.EntityFramework.SqlServerCompact.XML" Guid="4c19a4b2-f4e0-4a8a-a1cc-08c9d4ee9c92">
+			  <File Id="File.Bin.EntityFramework.SqlServerCompact.XML" Source="$(var.Turbine.DataEF6.ProjectDir)\$(var.OutDir)\EntityFramework.SqlServerCompact.xml" KeyPath="yes" />
+		  </Component>
 		  <Component Id="CMP.Bin.Newtonsoft.Json.DLL" Guid="ca3eb127-60ea-4a77-b2a7-20c83a792054">
 			  <File Id="File.Bin.Newtonsoft.JsonDllId" Source="$(var.AspenSinterConsumerConsole.ProjectDir)\$(var.OutDir)\Newtonsoft.Json.dll" KeyPath="yes" />
 		  </Component>
@@ -137,6 +149,19 @@
 		  <Component Id="CMP.Bin.Turbine.Lite.Consumer.Data.Contract.DLL" Guid="132637eb-ad05-4020-84ce-936a3756fa1c">
 			  <File Id="File.Bin.FILE.Turbine.Lite.Consumer.Data.Contract.DLL" Source="$(var.Turbine.Lite.Consumer.Data.Contract.ProjectDir)\$(var.OutDir)\Turbine.Lite.Consumer.Data.Contract.dll" KeyPath="yes" />
 		  </Component>
+		  <Component Id="CMP.Bin.Turbine.DataEF6.DLL" Guid="d88aa47f-789a-4286-bb3a-6794d87dcd52">
+			  <File Id="File.Bin.FILE.Turbine.DataEF6.DLL" Source="$(var.Turbine.DataEF6.ProjectDir)\$(var.OutDir)\Turbine.DataEF6.dll" KeyPath="yes" />
+		  </Component>
+		  <Component Id="CMP.Bin.Turbine.Data.Entities.DLL" Guid="d7da120d-13f9-4a16-a145-681ede8d6806">
+			  <File Id="File.Bin.FILE.Turbine.Data.Entities.DLL" Source="$(var.Turbine.Data.Entities.ProjectDir)\$(var.OutDir)\Turbine.Data.Entities.dll" KeyPath="yes" />
+		  </Component>
+
+  		  <Component Id="CMP.Bin.Sinter.DLL" Guid="2570b457-70d8-46c4-a7c5-b44113aca7ac">
+			  <File Id="File.Bin.FILE.Sinter.DLL" Source="$(var.AspenSinterConsumerConsole.ProjectDir)\$(var.OutDir)\Sinter.dll" KeyPath="yes" />
+		  </Component>
+  		  <Component Id="CMP.Bin.VariableTree.DLL" Guid="220ddeb2-ae38-4e72-bb7f-b0da2812a818">
+			  <File Id="File.Bin.FILE.VariableTree.DLL" Source="$(var.AspenSinterConsumerConsole.ProjectDir)\$(var.OutDir)\VariableTree.dll" KeyPath="yes" />
+		  </Component>
 
 		  <?ifdef Debug ?>
 		  <Component Id="CMP.Bin.Turbine.Consumer.Console.PDB" Guid="d1edd9ac-154b-4559-ba1c-e8a425471ad9">
@@ -159,6 +184,12 @@
 		  </Component>
 		  <Component Id="CMP.Bin.Turbine.Lite.Consumer.Data.Contract.PDB" Guid="de8f001a-379e-4d14-a017-59a1d4cb064f">
 			  <File Id="File.Bin.FILE.Turbine.Lite.Consumer.Data.Contract.PDB" Source="$(var.Turbine.Lite.Consumer.Data.Contract.ProjectDir)\$(var.OutDir)\Turbine.Lite.Consumer.Data.Contract.pdb" KeyPath="yes" />
+		  </Component>
+		  <Component Id="CMP.Bin.Turbine.DataEF6.PDB" Guid="0a91d70f-4d29-4961-8386-1667764fc799">
+			  <File Id="File.Bin.FILE.Turbine.DataEF6.PDB" Source="$(var.Turbine.DataEF6.ProjectDir)\$(var.OutDir)\Turbine.DataEF6.pdb" KeyPath="yes" />
+		  </Component>
+		  <Component Id="CMP.Bin.Turbine.Data.Entities.PDB" Guid="15d7541e-8b5c-4524-ba47-fc17d95205ef">
+			  <File Id="File.Bin.FILE.Turbine.Data.Entities.PDB" Source="$(var.Turbine.Data.Entities.ProjectDir)\$(var.OutDir)\Turbine.Data.Entities.pdb" KeyPath="yes" />
 		  </Component>
 		  <?endif?>
 	  </DirectoryRef>
@@ -361,8 +392,6 @@
 			  <File Id="FILE.Bin.AspenSinterConsumerConsole.CONFIG" Name="AspenSinterConsumerConsole.exe.config" Source="AspenSinterConsumerConsole.exe.config" KeyPath="yes" Vital="yes" />
 
 			  <util:XmlFile Id="XMLFILE.Bin.AspenSinterConsumerConsole.1" Action="setValue" Permanent="yes" Sequence="1" File="[#FILE.Bin.AspenSinterConsumerConsole.CONFIG]" ElementPath="/configuration/connectionStrings/add[\[]@name='TurbineCompactDatabase'[\]]" Name="connectionString" Value="Data Source=[DIR.Data]TurbineCompactDatabase.sdf" />
-			  <util:XmlFile Id="XMLFILE.Bin.AspenSinterConsumerConsole.3" Action="setValue" Permanent="yes" Sequence="2" File="[#FILE.Bin.AspenSinterConsumerConsole.CONFIG]" ElementPath="/configuration/runtime/assemblyBinding/dependentAssembly/codeBase[\[]@href='SINTER_HREF'[\]]" Name="href" Value="FILE://[ProgramFiles64Folder]CCSI\SimSinter\Sinter.dll" />
-			  <util:XmlFile Id="XMLFILE.Bin.AspenSinterConsumerConsole.4" Action="setValue" Permanent="yes" Sequence="3" File="[#FILE.Bin.AspenSinterConsumerConsole.CONFIG]" ElementPath="/configuration/runtime/assemblyBinding/dependentAssembly/codeBase[\[]@href='VARIABLETREE_HREF'[\]]" Name="href" Value="FILE://[ProgramFiles64Folder]CCSI\SimSinter\VariableTree.dll" />
 		  </Component>
 
 		  <!-- DEBUG SECTION 
@@ -583,7 +612,7 @@
 
 	  <Launch Condition="Installed OR PROP.NET_FRAMEWORK_4 = &quot;#1&quot;" Message="Require .NET 4.0 Full installation (Found partial .NET 4.0: [PROP.NET_FRAMEWORK_4_VERSION])" />
 
-	  <Launch Condition="Installed OR (PROP.SQL_SERVER_COMPACT.VERSION &lt; &quot;4.0&quot; OR PROP.SQL_SERVER_COMPACT64.VERSION &lt; &quot;4.0&quot;)" Message="Installation requires SQL Server Compact 4.0 ( 32bit=[PROP.SQL_SERVER_COMPACT.VERSION] OR 64bit=[PROP.SQL_SERVER_COMPACT64.VERSION] )" />
+	  <Launch Condition="Installed OR ((PROP.SQL_SERVER_COMPACT.VERSION AND PROP.SQL_SERVER_COMPACT.VERSION &gt;= &quot;4.0&quot;) OR (PROP.SQL_SERVER_COMPACT64.VERSION AND PROP.SQL_SERVER_COMPACT64.VERSION &gt;= &quot;4.0&quot;))" Message="Installation requires SQL Server Compact 4.0 ( 32bit=[PROP.SQL_SERVER_COMPACT.VERSION] OR 64bit=[PROP.SQL_SERVER_COMPACT64.VERSION] )" />
 
 	  <Launch Condition="Installed OR ( PROP.SIM_SINTER = &quot;SimSinter&quot; AND PROP.SIM_SINTER_MAJOR &gt;= &quot;#3&quot;)" Message="SimSinter Version &gt;= 3.0 or higher must be installed ( Found MAJOR[PROP.SIM_SINTER_MAJOR].[PROP.SIM_SINTER_MINOR] ) " />
 
@@ -729,6 +758,10 @@
 			<ComponentRef Id="CMP.Bin.CommonServiceLocator.DLL" />
 			<ComponentRef Id="CMP.Bin.EntityFramework.DLL" />
 			<ComponentRef Id="CMP.Bin.EntityFramework.XML" />
+			<ComponentRef Id="CMP.Bin.EntityFramework.SqlServer.DLL" />
+			<ComponentRef Id="CMP.Bin.EntityFramework.SqlServer.XML" />
+			<ComponentRef Id="CMP.Bin.EntityFramework.SqlServerCompact.DLL" />
+			<ComponentRef Id="CMP.Bin.EntityFramework.SqlServerCompact.XML" />
 			<ComponentRef Id="CMP.Bin.Newtonsoft.Json.DLL" />
 			<ComponentRef Id="CMP.Bin.Newtonsoft.Json.XML" />
 			<ComponentRef Id="CMP.Bin.System.Runtime.CompilerServices.Unsafe.DLL" />
@@ -747,6 +780,10 @@
 			<ComponentRef Id="CMP.Bin.Turbine.Consumer.DLL" />
 			<ComponentRef Id="CMP.Bin.Turbine.Data.Contract.Behaviors.DLL" />
 			<ComponentRef Id="CMP.Bin.Turbine.Lite.Consumer.Data.Contract.DLL" />
+			<ComponentRef Id="CMP.Bin.Turbine.DataEF6.DLL" />
+			<ComponentRef Id="CMP.Bin.Turbine.Data.Entities.DLL" />
+			<ComponentRef Id="CMP.Bin.Sinter.DLL" />
+			<ComponentRef Id="CMP.Bin.VariableTree.DLL" />
 
 			<?ifdef Debug ?>
 			<ComponentRef Id="CMP.Bin.Turbine.Consumer.Console.PDB" />
@@ -756,10 +793,12 @@
 			<ComponentRef Id="CMP.Bin.Turbine.Consumer.PDB" />
 			<ComponentRef Id="CMP.Bin.Turbine.Data.Contract.Behaviors.PDB" />
 			<ComponentRef Id="CMP.Bin.Turbine.Lite.Consumer.Data.Contract.PDB" />
+			<ComponentRef Id="CMP.Bin.Turbine.DataEF6.PDB" />
+			<ComponentRef Id="CMP.Bin.Turbine.Data.Entities.PDB" />
 			<?endif?>
 		</ComponentGroup>
 	</Fragment>
-
+	
 	<Fragment>
 		<ComponentGroup Id="CG.Turbine.AspenTech.WindowsService">
 			<ComponentRef Id="CMP.AspenSinterConsumerWindowsService" />
