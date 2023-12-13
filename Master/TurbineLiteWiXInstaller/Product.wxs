@@ -152,6 +152,9 @@
 		  <Component Id="CMP.Bin.Turbine.DataEF6.DLL" Guid="d88aa47f-789a-4286-bb3a-6794d87dcd52">
 			  <File Id="File.Bin.FILE.Turbine.DataEF6.DLL" Source="$(var.Turbine.DataEF6.ProjectDir)\$(var.OutDir)\Turbine.DataEF6.dll" KeyPath="yes" />
 		  </Component>
+		  <Component Id="CMP.Bin.Turbine.DataEF6.Contract.DLL" Guid="6d06401f-c1b5-44dc-a5dc-695fe823e0c8">
+			  <File Id="File.Bin.FILE.Turbine.DataEF6.Contract.DLL" Source="$(var.Turbine.DataEF6.Contract.ProjectDir)\$(var.OutDir)\Turbine.DataEF6.Contract.dll" KeyPath="yes" />
+		  </Component>
 		  <Component Id="CMP.Bin.Turbine.Data.Entities.DLL" Guid="d7da120d-13f9-4a16-a145-681ede8d6806">
 			  <File Id="File.Bin.FILE.Turbine.Data.Entities.DLL" Source="$(var.Turbine.Data.Entities.ProjectDir)\$(var.OutDir)\Turbine.Data.Entities.dll" KeyPath="yes" />
 		  </Component>
@@ -187,6 +190,9 @@
 		  </Component>
 		  <Component Id="CMP.Bin.Turbine.DataEF6.PDB" Guid="0a91d70f-4d29-4961-8386-1667764fc799">
 			  <File Id="File.Bin.FILE.Turbine.DataEF6.PDB" Source="$(var.Turbine.DataEF6.ProjectDir)\$(var.OutDir)\Turbine.DataEF6.pdb" KeyPath="yes" />
+		  </Component>
+		  <Component Id="CMP.Bin.Turbine.DataEF6.Contract.PDB" Guid="6d9ba964-ef1f-4584-a924-8402b63debd1">
+			  <File Id="File.Bin.FILE.Turbine.DataEF6.Contract.PDB" Source="$(var.Turbine.DataEF6.Contract.ProjectDir)\$(var.OutDir)\Turbine.DataEF6.Contract.pdb" KeyPath="yes" />
 		  </Component>
 		  <Component Id="CMP.Bin.Turbine.Data.Entities.PDB" Guid="15d7541e-8b5c-4524-ba47-fc17d95205ef">
 			  <File Id="File.Bin.FILE.Turbine.Data.Entities.PDB" Source="$(var.Turbine.Data.Entities.ProjectDir)\$(var.OutDir)\Turbine.Data.Entities.pdb" KeyPath="yes" />
@@ -781,6 +787,7 @@
 			<ComponentRef Id="CMP.Bin.Turbine.Data.Contract.Behaviors.DLL" />
 			<ComponentRef Id="CMP.Bin.Turbine.Lite.Consumer.Data.Contract.DLL" />
 			<ComponentRef Id="CMP.Bin.Turbine.DataEF6.DLL" />
+			<ComponentRef Id="CMP.Bin.Turbine.DataEF6.Contract.DLL" />
 			<ComponentRef Id="CMP.Bin.Turbine.Data.Entities.DLL" />
 			<ComponentRef Id="CMP.Bin.Sinter.DLL" />
 			<ComponentRef Id="CMP.Bin.VariableTree.DLL" />
@@ -794,6 +801,7 @@
 			<ComponentRef Id="CMP.Bin.Turbine.Data.Contract.Behaviors.PDB" />
 			<ComponentRef Id="CMP.Bin.Turbine.Lite.Consumer.Data.Contract.PDB" />
 			<ComponentRef Id="CMP.Bin.Turbine.DataEF6.PDB" />
+			<ComponentRef Id="CMP.Bin.Turbine.DataEF6.Contract.PDB" />
 			<ComponentRef Id="CMP.Bin.Turbine.Data.Entities.PDB" />
 			<?endif?>
 		</ComponentGroup>

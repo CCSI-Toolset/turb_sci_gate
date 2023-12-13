@@ -34,6 +34,7 @@
     <ProjectReference Include="..\Turbine.Consumer.AspenTech\Turbine.Consumer.AspenTech.csproj" />
     <ProjectReference Include="..\Turbine.Consumer.Excel\Turbine.Consumer.Excel.csproj" />
     <ProjectReference Include="..\Turbine.Data.Entities\Turbine.Data.Entities.csproj" />
+    <ProjectReference Include="..\Turbine.DataEF6.Contract\Turbine.DataEF6.Contract.csproj" />
     <ProjectReference Include="..\Turbine.DataEF6\Turbine.DataEF6.csproj">
       <Name>Turbine.DataEF6</Name>
       <Project>{7c0fa46a-937d-44e0-ad71-d96f383fa4ca}</Project>
