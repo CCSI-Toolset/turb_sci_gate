@@ -16,7 +16,7 @@ using System.Data.Entity.Core;
 using Turbine.Lite.Web.Resources.Contracts;
 using Turbine.Data.Contract.Behaviors;
 using Turbine.Consumer.Contract.Behaviors;
-using Microsoft.Practices.Unity;
+using Unity;
 
 
 namespace TurbineLiteConsumerIntegrationTest
@@ -128,7 +128,7 @@ namespace TurbineLiteConsumerIntegrationTest
              */
             var _a = typeof(System.Data.Entity.SqlServer.SqlProviderServices);
             var _b = typeof(System.Data.Entity.SqlServerCompact.SqlCeProviderServices);
-            var _c = typeof(Microsoft.Practices.ServiceLocation.ServiceLocator);
+            var _c = typeof(CommonServiceLocator.ServiceLocator);
             var _d = typeof(Turbine.Lite.Consumer.Data.Contract.ConsumerRegistrationContract);
             CleanUpDatabase();
 

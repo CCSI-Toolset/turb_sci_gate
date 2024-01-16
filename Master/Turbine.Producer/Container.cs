@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Microsoft.Practices.Unity;
-using Microsoft.Practices.Unity.Configuration;
+using Unity;
 using System.Diagnostics;
 using Turbine.Producer.Contracts;
+using Microsoft.Practices.Unity.Configuration;
+using System.Configuration;
 
 
 namespace Turbine.Producer
@@ -17,7 +18,8 @@ namespace Turbine.Producer
         {
             try
             {
-                container.LoadConfiguration("producerX");
+                var section = (UnityConfigurationSection)ConfigurationManager.GetSection("unity");
+                section.Configure(container, "producerX");
             }
             catch (Exception ex)
             {

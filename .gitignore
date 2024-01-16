@@ -10,3 +10,7 @@ CodeAnalyst/
 Debug/
 Release/
 ipch/
+.vs/
+obj/
+packages/
+bin/

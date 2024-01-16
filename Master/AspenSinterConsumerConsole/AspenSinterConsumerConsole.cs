@@ -5,7 +5,7 @@ using System.Text;
 using System.Configuration;
 using System.Diagnostics;
 using System.IO;
-using Microsoft.Practices.Unity;
+using Unity;
 using Turbine.Data.Contract.Behaviors;
 using sinter;
 using System.Threading;
@@ -19,6 +19,7 @@ using Turbine.Consumer.Contract.Behaviors;
 using CommandLine;
 using CommandLine.Text;
 using Sinter;
+using System.Data.Common.EntitySql;
 
 namespace Turbine.Console
 {
@@ -48,37 +49,33 @@ namespace Turbine.Console
             [Option('s', "simulation", Required = false,
               HelpText = "Bind to Simulation")]
             public string Simulation { get; set; }
-
-            [ParserState]
-            public IParserState LastParserState { get; set; }
-
-            [HelpOption]
-            public string GetUsage()
-            {
-                return HelpText.AutoBuild(this,
-                  (HelpText current) => HelpText.DefaultParsingErrorsHandler(this, current));
-            }
         }
 
         static void Main(string[] args)
         {
-            var options = new Options();
             string dir = Properties.Settings.Default.BaseDirectory;
             IUnityContainer container = Turbine.Consumer.AppUtility.container;
             IConsumerContext consumerCtx = Turbine.Consumer.AppUtility.GetConsumerContext();
             container.RegisterInstance<IConsumerContext>(consumerCtx);
 
-            if (CommandLine.Parser.Default.ParseArguments(args, options))
+            var parserResult = Parser.Default.ParseArguments<Options>(args);
+
+            parserResult.WithParsed<Options>(options => RunOptions(options, consumerCtx));
+            parserResult.WithNotParsed<Options>(errs =>
             {
-                // TODO: HACK TO BIND SIMULATION NAME
-                consumerCtx.BindSimulationName = options.Simulation;
-            }
+                var helpText = HelpText.AutoBuild(parserResult,
+                  (HelpText current) => HelpText.DefaultParsingErrorsHandler(parserResult, current));
+            });
+        }
+        static void RunOptions(Options opts, IConsumerContext consumerCtx)
+        {
+            consumerCtx.BindSimulationName = opts.Simulation;
 
             int iterations = Properties.Settings.Default.TimeOutIterations;
             int setupIterations = Properties.Settings.Default.TimeOutSetupIterations;
             int postInitIterations = Properties.Settings.Default.TimePostInitIterations;
 
-            Turbine.Consumer.Console.SinterConsumerConsole.setTimeOutParams(iterations, 
+            Turbine.Consumer.Console.SinterConsumerConsole.setTimeOutParams(iterations,
                 setupIterations, postInitIterations);
             Turbine.Consumer.Console.SinterConsumerConsole.Run();
         }

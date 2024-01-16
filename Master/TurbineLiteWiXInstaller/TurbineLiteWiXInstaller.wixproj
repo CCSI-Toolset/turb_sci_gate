@@ -1,39 +1,20 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project Sdk="WixToolset.Sdk/4.0.3">
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
     <ProductVersion>3.7</ProductVersion>
-    <ProjectGuid>a5cbda7e-0ab4-4c24-bd4c-ff8d6b24e5c7</ProjectGuid>
-    <SchemaVersion>2.0</SchemaVersion>
     <OutputName>TurbineLite</OutputName>
-    <OutputType>Package</OutputType>
-    <WixTargetsPath Condition=" '$(WixTargetsPath)' == '' AND '$(MSBuildExtensionsPath32)' != '' ">$(MSBuildExtensionsPath32)\Microsoft\WiX\v3.x\Wix.targets</WixTargetsPath>
-    <WixTargetsPath Condition=" '$(WixTargetsPath)' == '' ">$(MSBuildExtensionsPath)\Microsoft\WiX\v3.x\Wix.targets</WixTargetsPath>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
-    <OutputPath>bin\$(Configuration)\</OutputPath>
-    <IntermediateOutputPath>obj\$(Configuration)\</IntermediateOutputPath>
     <DefineConstants>Debug</DefineConstants>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
-    <OutputPath>bin\$(Configuration)\</OutputPath>
-    <IntermediateOutputPath>obj\$(Configuration)\</IntermediateOutputPath>
-  </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Product.wxs" />
+    <PackageReference Include="WixToolset.Util.wixext" Version="4.0.3" />
+    <PackageReference Include="WixToolset.UI.wixext" Version="4.0.3" />
   </ItemGroup>
   <ItemGroup>
-    <WixExtension Include="WixUtilExtension">
-      <HintPath>$(WixExtDir)\WixUtilExtension.dll</HintPath>
-      <Name>WixUtilExtension</Name>
-    </WixExtension>
-    <WixExtension Include="WixUIExtension">
-      <HintPath>$(WixExtDir)\WixUIExtension.dll</HintPath>
-      <Name>WixUIExtension</Name>
-    </WixExtension>
-  </ItemGroup>
-  <ItemGroup>
+    <ProjectReference Include="..\AspenSinterConsumerConsole\AspenSinterConsumerConsole.csproj" />
+    <ProjectReference Include="..\AspenSinterConsumerWindowsService\AspenSinterConsumerWindowsService.csproj" />
+    <ProjectReference Include="..\ExcelSinterConsumerConsole\ExcelSinterConsumerConsole.csproj" />
+    <ProjectReference Include="..\ExcelSinterConsumerWindowsService\ExcelSinterConsumerWindowsService.csproj" />
     <ProjectReference Include="..\SelfHostWebApplication\SelfHostWebApplication.csproj">
       <Name>SelfHostWebApplication</Name>
       <Project>{3e1b9548-a8bc-43d4-9ecb-37d4de916f43}</Project>
@@ -50,6 +31,10 @@
       <RefProjectOutputGroups>Binaries;Content;Satellites</RefProjectOutputGroups>
       <RefTargetDir>INSTALLFOLDER</RefTargetDir>
     </ProjectReference>
+    <ProjectReference Include="..\Turbine.Consumer.AspenTech\Turbine.Consumer.AspenTech.csproj" />
+    <ProjectReference Include="..\Turbine.Consumer.Excel\Turbine.Consumer.Excel.csproj" />
+    <ProjectReference Include="..\Turbine.Data.Entities\Turbine.Data.Entities.csproj" />
+    <ProjectReference Include="..\Turbine.DataEF6.Contract\Turbine.DataEF6.Contract.csproj" />
     <ProjectReference Include="..\Turbine.DataEF6\Turbine.DataEF6.csproj">
       <Name>Turbine.DataEF6</Name>
       <Project>{7c0fa46a-937d-44e0-ad71-d96f383fa4ca}</Project>
@@ -58,14 +43,7 @@
       <RefProjectOutputGroups>Binaries;Content;Satellites</RefProjectOutputGroups>
       <RefTargetDir>INSTALLFOLDER</RefTargetDir>
     </ProjectReference>
-    <ProjectReference Include="..\TurbineSetupLibrary\TurbineSetupLibrary.wixproj">
-      <Name>TurbineSetupLibrary</Name>
-      <Project>{1b88c188-9959-4c0c-943e-a16de4278b3d}</Project>
-      <Private>True</Private>
-      <DoNotHarvest>True</DoNotHarvest>
-      <RefProjectOutputGroups>Binaries;Content;Satellites</RefProjectOutputGroups>
-      <RefTargetDir>INSTALLFOLDER</RefTargetDir>
-    </ProjectReference>
+    <ProjectReference Include="..\Turbine.Lite.Consumer.Data.Contract\Turbine.Lite.Consumer.Data.Contract.csproj" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="AspenSinterConsumerConsole.exe.config" />
@@ -75,13 +53,4 @@
     <Content Include="ExcelSinterConsumerWindowsService.exe.config" />
     <Content Include="ExcelSinterConsumerConsole.exe.config" />
   </ItemGroup>
-  <Import Project="$(WixTargetsPath)" />
-  <!--
-	To modify your build process, add your task inside one of the targets below and uncomment it.
-	Other similar extension points exist, see Wix.targets.
-	<Target Name="BeforeBuild">
-	</Target>
-	<Target Name="AfterBuild">
-	</Target>
-	-->
 </Project>
