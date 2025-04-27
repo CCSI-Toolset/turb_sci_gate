@@ -4,7 +4,7 @@
     TurbineLite Wix Installer
   -->
 
-  <Package UpgradeCode="2a7184f4-0ed0-4c49-bb53-2824bf4b14e8" Name="TurbineLite" Language="1033" Version="3.0.0.0" Manufacturer="Lawrence Berkeley National Lab" InstallerVersion="200" ProductCode="26095B0F-F8C3-4D42-AC65-17013C5985A3"><Media Id="1" Cabinet="media1.cab" EmbedCab="yes" />
+  <Package UpgradeCode="2a7184f4-0ed0-4c49-bb53-2824bf4b14e8" Name="TurbineLite" Language="1033" Version="3.2.0.0" Manufacturer="Lawrence Berkeley National Lab" InstallerVersion="200" ProductCode="26095B0F-F8C3-4D42-AC65-17013C5985A3"><Media Id="1" Cabinet="media1.cab" EmbedCab="yes" />
     <!-- license -->
     <WixVariable Id="WixUILicenseRtf" Value="..\..\LICENSE.rtf" />
 
@@ -564,15 +564,12 @@
 	  </DirectoryRef>
 
 
-	  <Property Id="PROP.SIM_SINTER">
-		  <RegistrySearch Id="RS.SIM_SINTER" Root="HKLM" Key="SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\{FE0D0DCA-BCD7-4242-8647-35D2E4779588}" Name="DisplayName" Type="raw" Bitness="always64" />
+	  <Property Id="PROP.SIM_SINTER64.VERSION">
+		  <RegistrySearch Id="RS.SIM_SINTER64" Root="HKLM" Key="SOFTWARE\CCSI\SimSinter" Name="Version" Type="raw" Bitness="always64" />
 	  </Property>
 
-	  <Property Id="PROP.SIM_SINTER_MAJOR">
-		  <RegistrySearch Id="RS.SIM_SINTER_MAJOR" Root="HKLM" Key="SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\{FE0D0DCA-BCD7-4242-8647-35D2E4779588}" Name="VersionMajor" Type="raw" Bitness="always64" />
-	  </Property>
-	  <Property Id="PROP.SIM_SINTER_MINOR">
-		  <RegistrySearch Id="RS.SIM_SINTER_MINOR" Root="HKLM" Key="SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\{FE0D0DCA-BCD7-4242-8647-35D2E4779588}" Name="VersionMinor" Type="raw" Bitness="always64" />
+	  <Property Id="PROP.SIM_SINTER.VERSION">
+		  <RegistrySearch Id="RS.SIM_SINTER" Root="HKLM" Key="SOFTWARE\CCSI\SimSinter" Name="Version" Type="raw" Bitness="always32" />
 	  </Property>
 
 	  <!--
@@ -620,7 +617,7 @@
 
 	  <Launch Condition="Installed OR ((PROP.SQL_SERVER_COMPACT.VERSION AND PROP.SQL_SERVER_COMPACT.VERSION &gt;= &quot;4.0&quot;) OR (PROP.SQL_SERVER_COMPACT64.VERSION AND PROP.SQL_SERVER_COMPACT64.VERSION &gt;= &quot;4.0&quot;))" Message="Installation requires SQL Server Compact 4.0 ( 32bit=[PROP.SQL_SERVER_COMPACT.VERSION] OR 64bit=[PROP.SQL_SERVER_COMPACT64.VERSION] )" />
 
-	  <Launch Condition="Installed OR ( PROP.SIM_SINTER = &quot;SimSinter&quot; AND PROP.SIM_SINTER_MAJOR &gt;= &quot;#3&quot;)" Message="SimSinter Version &gt;= 3.0 or higher must be installed ( Found MAJOR[PROP.SIM_SINTER_MAJOR].[PROP.SIM_SINTER_MINOR] ) " />
+	  <Launch Condition="Installed OR ((PROP.SIM_SINTER.VERSION AND PROP.SIM_SINTER.VERSION &gt;= &quot;3.2&quot;) OR (PROP.SIM_SINTER64.VERSION AND PROP.SIM_SINTER64.VERSION &gt;= &quot;3.2&quot;))" Message="Installation requires SimSinter Version &gt;= 3.2 or higher ( 32bit=[PROP.SIM_SINTER.VERSION] OR 64bit=[PROP.SIM_SINTER64.VERSION] )" />
 
 	  <!--
     <Condition Message="Installation requires AspenTech Engineering ( AspenPlus=[PROP.ASPENTECH_ASPENPLUS] and ACM=[PROP.ASPENTECH_ACM] )">
