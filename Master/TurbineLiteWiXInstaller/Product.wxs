@@ -620,7 +620,7 @@
 
 	  <Launch Condition="Installed OR ((PROP.SQL_SERVER_COMPACT.VERSION AND PROP.SQL_SERVER_COMPACT.VERSION &gt;= &quot;4.0&quot;) OR (PROP.SQL_SERVER_COMPACT64.VERSION AND PROP.SQL_SERVER_COMPACT64.VERSION &gt;= &quot;4.0&quot;))" Message="Installation requires SQL Server Compact 4.0 ( 32bit=[PROP.SQL_SERVER_COMPACT.VERSION] OR 64bit=[PROP.SQL_SERVER_COMPACT64.VERSION] )" />
 
-	  <Launch Condition="Installed OR ( PROP.SIM_SINTER = &quot;SimSinter&quot; AND PROP.SIM_SINTER_MAJOR &gt;= &quot;#3&quot;)" Message="SimSinter Version &gt;= 3.0 or higher must be installed ( Found MAJOR[PROP.SIM_SINTER_MAJOR].[PROP.SIM_SINTER_MINOR] ) " />
+	  <Launch Condition="Installed OR ( PROP.SIM_SINTER = &quot;SimSinter&quot; AND PROP.SIM_SINTER_MAJOR &gt;= &quot;#3&quot; AND PROP.SIM_SINTER_MAJOR &gt;= &quot;#2&quot;)" Message="SimSinter Version &gt;= 3.2 or higher must be installed ( Found MAJOR[PROP.SIM_SINTER_MAJOR].[PROP.SIM_SINTER_MINOR] ) " />
 
 	  <!--
     <Condition Message="Installation requires AspenTech Engineering ( AspenPlus=[PROP.ASPENTECH_ASPENPLUS] and ACM=[PROP.ASPENTECH_ACM] )">
