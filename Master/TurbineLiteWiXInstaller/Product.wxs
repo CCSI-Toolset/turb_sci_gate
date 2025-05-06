@@ -565,14 +565,14 @@
 
 
 	  <Property Id="PROP.SIM_SINTER">
-		  <RegistrySearch Id="RS.SIM_SINTER" Root="HKLM" Key="SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\{FE0D0DCA-BCD7-4242-8647-35D2E4779588}" Name="DisplayName" Type="raw" Bitness="always64" />
+		  <RegistrySearch Id="RS.SIM_SINTER" Root="HKLM" Key="SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\{B784E5A1-964D-46B1-B458-77F1C14496E6}" Name="DisplayName" Type="raw" Bitness="always64" />
 	  </Property>
 
 	  <Property Id="PROP.SIM_SINTER_MAJOR">
-		  <RegistrySearch Id="RS.SIM_SINTER_MAJOR" Root="HKLM" Key="SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\{FE0D0DCA-BCD7-4242-8647-35D2E4779588}" Name="VersionMajor" Type="raw" Bitness="always64" />
+		  <RegistrySearch Id="RS.SIM_SINTER_MAJOR" Root="HKLM" Key="SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\{B784E5A1-964D-46B1-B458-77F1C14496E6}" Name="VersionMajor" Type="raw" Bitness="always64" />
 	  </Property>
 	  <Property Id="PROP.SIM_SINTER_MINOR">
-		  <RegistrySearch Id="RS.SIM_SINTER_MINOR" Root="HKLM" Key="SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\{FE0D0DCA-BCD7-4242-8647-35D2E4779588}" Name="VersionMinor" Type="raw" Bitness="always64" />
+		  <RegistrySearch Id="RS.SIM_SINTER_MINOR" Root="HKLM" Key="SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\{B784E5A1-964D-46B1-B458-77F1C14496E6}" Name="VersionMinor" Type="raw" Bitness="always64" />
 	  </Property>
 
 	  <!--
