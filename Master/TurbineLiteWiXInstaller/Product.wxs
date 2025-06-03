@@ -4,7 +4,7 @@
     TurbineLite Wix Installer
   -->
 
-  <Package UpgradeCode="2a7184f4-0ed0-4c49-bb53-2824bf4b14e8" Name="TurbineLite" Language="1033" Version="3.0.0.0" Manufacturer="Lawrence Berkeley National Lab" InstallerVersion="200" ProductCode="26095B0F-F8C3-4D42-AC65-17013C5985A3"><Media Id="1" Cabinet="media1.cab" EmbedCab="yes" />
+  <Package UpgradeCode="2a7184f4-0ed0-4c49-bb53-2824bf4b14e8" Name="TurbineLite" Language="1033" Version="3.2.0.0" Manufacturer="Lawrence Berkeley National Lab" InstallerVersion="200" ProductCode="26095B0F-F8C3-4D42-AC65-17013C5985A3"><Media Id="1" Cabinet="media1.cab" EmbedCab="yes" />
     <!-- license -->
     <WixVariable Id="WixUILicenseRtf" Value="..\..\LICENSE.rtf" />
 
@@ -562,7 +562,6 @@
 		  </Component>
 		  <?endif?>
 	  </DirectoryRef>
-
 
 	  <Property Id="PROP.SIM_SINTER">
 		  <RegistrySearch Id="RS.SIM_SINTER" Root="HKLM" Key="SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\{B784E5A1-964D-46B1-B458-77F1C14496E6}" Name="DisplayName" Type="raw" Bitness="always64" />
