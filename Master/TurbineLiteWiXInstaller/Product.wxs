@@ -563,13 +563,15 @@
 		  <?endif?>
 	  </DirectoryRef>
 
-
-	  <Property Id="PROP.SIM_SINTER64.VERSION">
-		  <RegistrySearch Id="RS.SIM_SINTER64" Root="HKLM" Key="SOFTWARE\CCSI\SimSinter" Name="Version" Type="raw" Bitness="always64" />
+	  <Property Id="PROP.SIM_SINTER">
+		  <RegistrySearch Id="RS.SIM_SINTER" Root="HKLM" Key="SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\{B784E5A1-964D-46B1-B458-77F1C14496E6}" Name="DisplayName" Type="raw" Bitness="always64" />
 	  </Property>
 
-	  <Property Id="PROP.SIM_SINTER.VERSION">
-		  <RegistrySearch Id="RS.SIM_SINTER" Root="HKLM" Key="SOFTWARE\CCSI\SimSinter" Name="Version" Type="raw" Bitness="always32" />
+	  <Property Id="PROP.SIM_SINTER_MAJOR">
+		  <RegistrySearch Id="RS.SIM_SINTER_MAJOR" Root="HKLM" Key="SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\{B784E5A1-964D-46B1-B458-77F1C14496E6}" Name="VersionMajor" Type="raw" Bitness="always64" />
+	  </Property>
+	  <Property Id="PROP.SIM_SINTER_MINOR">
+		  <RegistrySearch Id="RS.SIM_SINTER_MINOR" Root="HKLM" Key="SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\{B784E5A1-964D-46B1-B458-77F1C14496E6}" Name="VersionMinor" Type="raw" Bitness="always64" />
 	  </Property>
 
 	  <!--
@@ -617,7 +619,7 @@
 
 	  <Launch Condition="Installed OR ((PROP.SQL_SERVER_COMPACT.VERSION AND PROP.SQL_SERVER_COMPACT.VERSION &gt;= &quot;4.0&quot;) OR (PROP.SQL_SERVER_COMPACT64.VERSION AND PROP.SQL_SERVER_COMPACT64.VERSION &gt;= &quot;4.0&quot;))" Message="Installation requires SQL Server Compact 4.0 ( 32bit=[PROP.SQL_SERVER_COMPACT.VERSION] OR 64bit=[PROP.SQL_SERVER_COMPACT64.VERSION] )" />
 
-	  <Launch Condition="Installed OR ((PROP.SIM_SINTER.VERSION AND PROP.SIM_SINTER.VERSION &gt;= &quot;3.2&quot;) OR (PROP.SIM_SINTER64.VERSION AND PROP.SIM_SINTER64.VERSION &gt;= &quot;3.2&quot;))" Message="Installation requires SimSinter Version &gt;= 3.2 or higher ( 32bit=[PROP.SIM_SINTER.VERSION] OR 64bit=[PROP.SIM_SINTER64.VERSION] )" />
+	  <Launch Condition="Installed OR ( PROP.SIM_SINTER = &quot;SimSinter&quot; AND PROP.SIM_SINTER_MAJOR &gt;= &quot;#3&quot; AND PROP.SIM_SINTER_MAJOR &gt;= &quot;#2&quot;)" Message="SimSinter Version &gt;= 3.2 or higher must be installed ( Found MAJOR[PROP.SIM_SINTER_MAJOR].[PROP.SIM_SINTER_MINOR] ) " />
 
 	  <!--
     <Condition Message="Installation requires AspenTech Engineering ( AspenPlus=[PROP.ASPENTECH_ASPENPLUS] and ACM=[PROP.ASPENTECH_ACM] )">

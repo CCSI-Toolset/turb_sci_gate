@@ -806,7 +806,8 @@ namespace Turbine.Consumer.SimSinter
             try
             {
                 if (stest.runStatus == sinter.sinter_AppError.si_OKAY || 
-                    stest.runStatus == sinter.sinter_AppError.si_SIMULATION_WARNING)
+                    stest.runStatus == sinter.sinter_AppError.si_SIMULATION_WARNING ||
+                    stest.runStatus == sinter.sinter_AppError.si_NONCONVERGENCE_ERROR)
                 {
                     var superDict = stest.getOutputs();
                     outputDict = (JObject)superDict["outputs"];
