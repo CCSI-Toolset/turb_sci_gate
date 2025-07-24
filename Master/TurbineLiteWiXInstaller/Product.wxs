@@ -72,9 +72,9 @@
 		  <Component Id="CMP.Bin.CommandLine.DLL" Guid="50df683a-a4f7-41a2-b532-2df4f4e7ed51">
 			  <File Id="File.Bin.CommandLineDllId" Source="$(var.AspenSinterConsumerConsole.ProjectDir)\$(var.OutDir)\CommandLine.dll" KeyPath="yes" />
 		  </Component>
-		  <Component Id="CMP.Bin.CommandLine.XML" Guid="9d7bff22-60d7-4408-9a51-2311c44eccbf">
+		  <!--Component Id="CMP.Bin.CommandLine.XML" Guid="9d7bff22-60d7-4408-9a51-2311c44eccbf">
 			  <File Id="File.Bin.CommandLineXmlId" Source="$(var.AspenSinterConsumerConsole.ProjectDir)\$(var.OutDir)\CommandLine.xml" KeyPath="yes" />
-		  </Component>
+		  </Component-->
 		  <Component Id="CMP.Bin.CommonServiceLocator.DLL" Guid="720edb1a-4bbd-43cc-99c9-7a2460c57905">
 			  <File Id="File.Bin.CommonServiceLocatorDllId" Source="$(var.AspenSinterConsumerConsole.ProjectDir)\$(var.OutDir)\CommonServiceLocator.dll" KeyPath="yes" />
 		  </Component>
@@ -99,21 +99,21 @@
 		  <Component Id="CMP.Bin.Newtonsoft.Json.DLL" Guid="ca3eb127-60ea-4a77-b2a7-20c83a792054">
 			  <File Id="File.Bin.Newtonsoft.JsonDllId" Source="$(var.AspenSinterConsumerConsole.ProjectDir)\$(var.OutDir)\Newtonsoft.Json.dll" KeyPath="yes" />
 		  </Component>
-		  <Component Id="CMP.Bin.Newtonsoft.Json.XML" Guid="a75444a5-baab-4c65-bc55-86c2c56f7f0d">
+		  <!--Component Id="CMP.Bin.Newtonsoft.Json.XML" Guid="a75444a5-baab-4c65-bc55-86c2c56f7f0d">
 			  <File Id="File.Bin.Newtonsoft.JsonXmlId" Source="$(var.AspenSinterConsumerConsole.ProjectDir)\$(var.OutDir)\Newtonsoft.Json.xml" KeyPath="yes" />
-		  </Component>
+		  </Component-->
 		  <Component Id="CMP.Bin.System.Runtime.CompilerServices.Unsafe.DLL" Guid="13931b83-d213-4052-90e6-d4f49d5b063d">
 			  <File Id="File.Bin.System.Runtime.CompilerServices.UnsafeDllId" Source="$(var.AspenSinterConsumerConsole.ProjectDir)\$(var.OutDir)\System.Runtime.CompilerServices.Unsafe.dll" KeyPath="yes" />
 		  </Component>
-		  <Component Id="CMP.Bin.System.Runtime.CompilerServices.Unsafe.XML" Guid="8ad59309-2b38-46fe-8c0e-ff41b5bf8591">
+		  <!--Component Id="CMP.Bin.System.Runtime.CompilerServices.Unsafe.XML" Guid="8ad59309-2b38-46fe-8c0e-ff41b5bf8591">
 			  <File Id="File.Bin.System.Runtime.CompilerServices.UnsafeXmlId" Source="$(var.AspenSinterConsumerConsole.ProjectDir)\$(var.OutDir)\System.Runtime.CompilerServices.Unsafe.xml" KeyPath="yes" />
-		  </Component>
+		  </Component-->
 		  <Component Id="CMP.Bin.System.Threading.Tasks.Extensions.DLL" Guid="13258987-d812-4b2d-9802-284d314b10c2">
 			  <File Id="File.Bin.System.Threading.Tasks.ExtensionsDllId" Source="$(var.AspenSinterConsumerConsole.ProjectDir)\$(var.OutDir)\System.Threading.Tasks.Extensions.dll" KeyPath="yes" />
 		  </Component>
-		  <Component Id="CMP.Bin.System.Threading.Tasks.Extensions.XML" Guid="5906a378-6529-4abc-b375-d6e70fe311a7">
+		  <!--Component Id="CMP.Bin.System.Threading.Tasks.Extensions.XML" Guid="5906a378-6529-4abc-b375-d6e70fe311a7">
 			  <File Id="File.Bin.System.Threading.Tasks.ExtensionsXmlId" Source="$(var.AspenSinterConsumerConsole.ProjectDir)\$(var.OutDir)\System.Threading.Tasks.Extensions.xml" KeyPath="yes" />
-		  </Component>
+		  </Component-->
 		  <Component Id="CMP.Bin.Unity.Abstractions.DLL" Guid="94537526-10d1-4b94-a28b-a9950c47cba1">
 			  <File Id="File.Bin.Unity.AbstractionsDllId" Source="$(var.AspenSinterConsumerConsole.ProjectDir)\$(var.OutDir)\Unity.Abstractions.dll" KeyPath="yes" />
 		  </Component>
@@ -243,127 +243,6 @@
 		  <?endif?>
 	  </DirectoryRef>
 
-
-	  <!--<DirectoryRef Id="DIR.Bin.SimSinterGProms">
-
-		  <Component Id="CMP.Bin.Turbine.Consumer.GProms.DLL" Guid="">
-			  <File Id="File.Bin.FILE.Turbine.Consumer.GProms.DLL"
-					Source="..\..\Master\Turbine.Consumer.GProms\$(var.OutDir)\Turbine.Consumer.GProms.dll" KeyPath="yes"/>
-		  </Component>
-
-		  <Component Id="CMP.GPromsSinterConsumerWindowsService" Guid="944AED84-66E9-455E-894E-26A69EA5929E">
-			  <File Id="FILE.GPromsSinterConsumerWindowsService"
-					Source="..\..\Master\GPromsSinterConsumerWindowsService\$(var.OutDir)\GPromsSinterConsumerWindowsService.exe" KeyPath="yes"/>
-
-			  <ServiceInstall Id="SERVICEINSTALL.GPromsSinterConsumerWindowsService"
-							  Name="GPromsConsumer"
-							  DisplayName="Turbine GProms Consumer"
-							  Start="demand"
-							  ErrorControl="normal"
-							  Interactive="yes"
-							  Type="ownProcess"
-							  Vital="yes">
-				  <util:ServiceConfig
-					ServiceName="GPromsConsumer"
-					FirstFailureActionType="restart"
-					SecondFailureActionType="restart"
-					ThirdFailureActionType="restart"
-					RestartServiceDelayInSeconds="60"
-            />
-				  <ServiceDependency Id="TurbineWebAPIService"/>
-			  </ServiceInstall>
-			  <ServiceControl Id="SERVICECONTROL.GPromsSinterConsumerWindowsService"
-					  Name="GPromsConsumer"
-					  Remove="both"
-					  Stop="both"
-					  Wait="yes">
-			  </ServiceControl>
-		  </Component>
-
-		  <Component Id="CMP.GPromsSinterConsumerWindowsService.CONFIG"
-					 Guid="61AF6998-2D66-449F-B0C2-7BF14D0740B9">
-			  <File Id="FILE.GPromsSinterConsumerWindowsService.Config"
-				  Name="GPromsSinterConsumerWindowsService.exe.config"
-				  Source="GPromsSinterConsumerWindowsService.exe.config"
-				  KeyPath="yes" Vital="yes"/>
-			  <util:XmlFile
-				  Id="GPromsSinterConsumerWindowsServiceConfigSetBaseDir"
-				  Action="setValue" Permanent="yes"
-				  Sequence="1"
-				  File="[#FILE.GPromsSinterConsumerWindowsService.Config]"
-				  ElementPath="/configuration/userSettings/GPromsSinterConsumerWindowsService.Properties.Settings/setting[\[]@name='BaseDirectory'[\]]/value"
-				  Value="[DIR.Data.GPromsConsumer]" />
-			  <util:XmlFile
-				  Id="GPromsSinterConsumerWindowsServiceConfigSetLogFile"
-				  Action="setValue" Permanent="yes"
-				  Sequence="2"
-				  File="[#FILE.GPromsSinterConsumerWindowsService.Config]"
-				  ElementPath="/configuration/system.diagnostics/trace/listeners/add[\[]@name='SinterConsumerLogListener'[\]]"
-				  Name="initializeData"
-				  Value="[DIR.Logs]GPromsSinterConsumerWindowsServiceLog.txt" />
-			  <util:XmlFile
-				  Id="GPromsSinterConsumerWindowsServiceConfigSetConnStr"
-				  Action="setValue" Permanent="yes"
-				  Sequence="3"
-				  File="[#FILE.GPromsSinterConsumerWindowsService.Config]"
-				  ElementPath="/configuration/connectionStrings/add[\[]@name='TurbineCompactDatabase'[\]]"
-				  Name="connectionString"
-				  Value="Data Source=[DIR.Data]TurbineCompactDatabase.sdf" />
-			  <util:XmlFile
-				Id="XMLFILE.Bin.GPromsSinterConsumerWS.3"
-				Action="setValue" Permanent="yes"
-				Sequence="4"
-				File="[#FILE.GPromsSinterConsumerWindowsService.Config]"
-				ElementPath="/configuration/runtime/assemblyBinding/dependentAssembly/codeBase[\[]@href='SINTER_HREF'[\]]"
-				Name="href"
-				Value="FILE://[ProgramFilesFolder]CCSI\SimSinter\Sinter.dll"/>
-		  </Component>
-
-		  <Component Id="CMP.Bin.GPromsSinterConsumerConsole" Guid="DA055E3D-499F-4381-9363-AF090141426D">
-			  <File Id="File.Bin.GPromsSinterConsumerConsoleId"
-					Source="..\..\Master\GPromsSinterConsumerConsole\$(var.OutDir)\GPromsSinterConsumerConsole.exe" KeyPath="yes"/>
-		  </Component>
-
-		  <Component Id="CMP.Bin.GPromsSinterConsumerConsole.CONFIG"  Guid="3FF47947-2E9C-401A-8FA5-1D07873FB932">
-			  <File Id="FILE.Bin.GPromsSinterConsumerConsole.CONFIG"
-				  Name="GPromsSinterConsumerConsole.exe.config"
-				  Source="GPromsSinterConsumerConsole.exe.config"
-				  KeyPath="yes" Vital="yes"/>
-
-			  <util:XmlFile
-				  Id="XMLFILE.Bin.GPromsSinterConsumerConsole.1"
-				  Action="setValue" Permanent="yes"
-				  Sequence="1"
-				  File="[#FILE.Bin.GPromsSinterConsumerConsole.CONFIG]"
-				  ElementPath="/configuration/connectionStrings/add[\[]@name='TurbineCompactDatabase'[\]]"
-				  Name="connectionString"
-				  Value="Data Source=[DIR.Data]TurbineCompactDatabase.sdf" />
-
-			  <util:XmlFile
-				Id="XMLFILE.Bin.GPromsSinterConsumerConsole.3"
-				Action="setValue" Permanent="yes"
-				Sequence="2"
-				File="[#FILE.Bin.GPromsSinterConsumerConsole.CONFIG]"
-				ElementPath="/configuration/runtime/assemblyBinding/dependentAssembly/codeBase[\[]@href='SINTER_HREF'[\]]"
-				Name="href"
-				Value="FILE://[ProgramFilesFolder]CCSI\SimSinter\Sinter.dll"/>
-		  </Component>
-
-		  <?ifdef Debug ?>
-		  <Component Id="CMP.Bin.GPromsSinterConsumerConsole.PDB" Guid="">
-			  <File Id="File.Bin.GPromsSinterConsumerConsoleId.PDB"
-					Source="..\..\Master\GPromsSinterConsumerConsole\$(var.OutDir)\GPromsSinterConsumerConsole.pdb" KeyPath="yes"/>
-		  </Component>
-		  <Component Id="CMP.Bin.Turbine.Consumer.GProms.PDB" Guid="">
-			  <File Id="File.Bin.FILE.Turbine.Consumer.GProms.PDB"
-					Source="..\..\Master\Turbine.Consumer.GProms\$(var.OutDir)\Turbine.Consumer.GProms.pdb" KeyPath="yes"/>
-		  </Component>
-		  <Component Id="CMP.GPromsSinterConsumerWindowsService.PDB" Guid="">
-			  <File Id="File.GPromsSinterConsumerWindowsService.PDB"
-					Source="..\..\Master\GPromsSinterConsumerWindowsService\$(var.OutDir)\GPromsSinterConsumerWindowsService.pdb" KeyPath="yes"/>
-		  </Component>
-		  <?endif?>
-	  </DirectoryRef>-->
 
 	  <DirectoryRef Id="DIR.Bin.SimSinterAspen">
 
@@ -759,7 +638,7 @@
 			<ComponentRef Id="CMP.Bin" />
 
 			<ComponentRef Id="CMP.Bin.CommandLine.DLL" />
-			<ComponentRef Id="CMP.Bin.CommandLine.XML" />
+			<!--ComponentRef Id="CMP.Bin.CommandLine.XML" /-->
 			<ComponentRef Id="CMP.Bin.CommonServiceLocator.DLL" />
 			<ComponentRef Id="CMP.Bin.EntityFramework.DLL" />
 			<ComponentRef Id="CMP.Bin.EntityFramework.XML" />
@@ -768,11 +647,11 @@
 			<ComponentRef Id="CMP.Bin.EntityFramework.SqlServerCompact.DLL" />
 			<ComponentRef Id="CMP.Bin.EntityFramework.SqlServerCompact.XML" />
 			<ComponentRef Id="CMP.Bin.Newtonsoft.Json.DLL" />
-			<ComponentRef Id="CMP.Bin.Newtonsoft.Json.XML" />
+			<!--ComponentRef Id="CMP.Bin.Newtonsoft.Json.XML" /-->
 			<ComponentRef Id="CMP.Bin.System.Runtime.CompilerServices.Unsafe.DLL" />
-			<ComponentRef Id="CMP.Bin.System.Runtime.CompilerServices.Unsafe.XML" />
+			<!--ComponentRef Id="CMP.Bin.System.Runtime.CompilerServices.Unsafe.XML" /-->
 			<ComponentRef Id="CMP.Bin.System.Threading.Tasks.Extensions.DLL" />
-			<ComponentRef Id="CMP.Bin.System.Threading.Tasks.Extensions.XML" />
+			<!--ComponentRef Id="CMP.Bin.System.Threading.Tasks.Extensions.XML" /-->
 			<ComponentRef Id="CMP.Bin.Unity.Abstractions.DLL" />
 			<ComponentRef Id="CMP.Bin.Unity.Configuration.DLL" />
 			<ComponentRef Id="CMP.Bin.Unity.Container.DLL" />
