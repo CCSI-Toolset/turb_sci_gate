@@ -20,6 +20,8 @@ using CommandLine;
 using CommandLine.Text;
 using Sinter;
 using System.Data.Common.EntitySql;
+using Serilog.Extensions.Logging;
+using Serilog;
 
 namespace Turbine.Console
 {
@@ -66,6 +68,11 @@ namespace Turbine.Console
                 var helpText = HelpText.AutoBuild(parserResult,
                   (HelpText current) => HelpText.DefaultParsingErrorsHandler(parserResult, current));
             });
+
+            // Bridge Serilog to Microsoft.Extensions.Logging ILogger
+            var loggerFactory = new SerilogLoggerFactory(Log.Logger, dispose: false);
+            Sinter.SinterLogger.Logger = loggerFactory.CreateLogger("SinterLogger");
+            Log.Information("ConsoleSinter:  Starting");
         }
         static void RunOptions(Options opts, IConsumerContext consumerCtx)
         {

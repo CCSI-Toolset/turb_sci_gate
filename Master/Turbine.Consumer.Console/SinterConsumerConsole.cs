@@ -16,6 +16,9 @@ using Turbine.Consumer.Data.Contract;
 using Turbine.Consumer;
 using Turbine.Consumer.SimSinter;
 using Turbine.Consumer.Contract.Behaviors;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Configuration.Json;
+using Serilog;
 
 
 namespace Turbine.Consumer.Console
@@ -102,6 +105,60 @@ namespace Turbine.Consumer.Console
             int timeSleepInterval = 1000;
             bool finish = false;
             String dir = AppUtility.GetAppContext().BaseWorkingDirectory;
+
+
+            // Build the configuration from appsettings.json
+            var path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData), "CCSI", "SimSinter", "appsettings.json");
+            ConfigurationBuilder configuration = new ConfigurationBuilder();
+            configuration.SetBasePath(Directory.GetCurrentDirectory());  // Set base path for config files
+            configuration.AddJsonFile(path, optional: false, reloadOnChange: true);  // Read appsettings.json
+            IConfigurationRoot confRoot;
+
+            try
+            {
+                confRoot = configuration.Build();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("Logger confRoot failed!");
+                Debug.WriteLine(ex.GetType().FullName);
+                Debug.WriteLine(ex.Message);
+                Debug.WriteLine(ex.StackTrace);
+                if (ex.InnerException != null)
+                {
+                    Debug.WriteLine("Inner:");
+                    Debug.WriteLine(ex.InnerException.GetType().FullName);
+                    Debug.WriteLine(ex.InnerException.Message);
+                    Debug.WriteLine(ex.InnerException.StackTrace);
+                }
+                throw;
+            }
+            Debug.WriteLine("SinterConsumerConsole LoggerConfiguration: " + confRoot);
+            try
+            {
+                Log.Logger = new LoggerConfiguration()
+                    .ReadFrom.Configuration(confRoot)
+                    .CreateLogger();
+                Debug.WriteLine("Logger setup success");
+                Log.Information("SinterConsumerConsole:  Starting");
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("Logger setup failed!");
+                Debug.WriteLine(ex.GetType().FullName);
+                Debug.WriteLine(ex.Message);
+                Debug.WriteLine(ex.StackTrace);
+                if (ex.InnerException != null)
+                {
+                    Debug.WriteLine("Inner:");
+                    Debug.WriteLine(ex.InnerException.GetType().FullName);
+                    Debug.WriteLine(ex.InnerException.Message);
+                    Debug.WriteLine(ex.InnerException.StackTrace);
+                }
+                throw;
+            }
+
+
             IConsumerContext consumerCtx = AppUtility.GetConsumerContext();
 
             // Register as a consumer, else can't use JobContract
