@@ -102,63 +102,55 @@ namespace Turbine.Consumer.Console
         public static void Run()
         {
             Debug.WriteLine("SinterCosnumerConsole : Running");
+            var frame = new StackTrace().GetFrame(1);
+            string callerClassName = frame?.GetMethod()?.DeclaringType?.Name ?? "SinterCosnumerConsole";
             int timeSleepInterval = 1000;
             bool finish = false;
             String dir = AppUtility.GetAppContext().BaseWorkingDirectory;
+            var configPath = Path.Combine(
+                Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData),
+                "Turbine", "Config", "appsettings.json");
 
-
-            // Build the configuration from appsettings.json
-            var path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData), "CCSI", "SimSinter", "appsettings.json");
-            ConfigurationBuilder configuration = new ConfigurationBuilder();
-            configuration.SetBasePath(Directory.GetCurrentDirectory());  // Set base path for config files
-            configuration.AddJsonFile(path, optional: false, reloadOnChange: true);  // Read appsettings.json
-            IConfigurationRoot confRoot;
+            IConfigurationRoot confRoot = null;
 
             try
             {
-                confRoot = configuration.Build();
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine("Logger confRoot failed!");
-                Debug.WriteLine(ex.GetType().FullName);
-                Debug.WriteLine(ex.Message);
-                Debug.WriteLine(ex.StackTrace);
-                if (ex.InnerException != null)
-                {
-                    Debug.WriteLine("Inner:");
-                    Debug.WriteLine(ex.InnerException.GetType().FullName);
-                    Debug.WriteLine(ex.InnerException.Message);
-                    Debug.WriteLine(ex.InnerException.StackTrace);
-                }
-                throw;
-            }
-            Debug.WriteLine("SinterConsumerConsole LoggerConfiguration: " + confRoot);
-            try
-            {
+                var configuration = new ConfigurationBuilder()
+                    .SetBasePath(Directory.GetCurrentDirectory())
+                    .AddJsonFile(configPath, optional: true, reloadOnChange: true) // allow missing file
+                    .Build();
+
+                // Resolve per-user writable folder
+                string logDir = Path.Combine(
+                    Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
+                    "Turbine", "Logs");
+                Directory.CreateDirectory(logDir);
+
+                string logFile = Path.Combine(logDir, callerClassName + "Log.txt"); // rolling log
+
+                confRoot = configuration;
+                Debug.WriteLine("Logger configuration loaded: " + configPath);
+
                 Log.Logger = new LoggerConfiguration()
-                    .ReadFrom.Configuration(confRoot)
+                    .ReadFrom.Configuration(confRoot)   // may throw if malformed
+                    .WriteTo.File(
+                        logFile,
+                        rollingInterval: RollingInterval.Day,
+                        outputTemplate: "[{Timestamp:yyyy-MM-dd HH:mm:ss} {Level:u3}] {Message:lj}{NewLine}{Exception}")
                     .CreateLogger();
-                Debug.WriteLine("Logger setup success");
-                Log.Information("SinterConsumerConsole:  Starting");
             }
             catch (Exception ex)
             {
-                Debug.WriteLine("Logger setup failed!");
-                Debug.WriteLine(ex.GetType().FullName);
-                Debug.WriteLine(ex.Message);
-                Debug.WriteLine(ex.StackTrace);
-                if (ex.InnerException != null)
-                {
-                    Debug.WriteLine("Inner:");
-                    Debug.WriteLine(ex.InnerException.GetType().FullName);
-                    Debug.WriteLine(ex.InnerException.Message);
-                    Debug.WriteLine(ex.InnerException.StackTrace);
-                }
-                throw;
+                Debug.WriteLine("Falling back to console logger!");
+                Debug.WriteLine(ex.ToString());
+
+                // fallback logger
+                Log.Logger = new LoggerConfiguration()
+                    .WriteTo.Console()
+                    .CreateLogger();
             }
 
-
+            Log.Information("SinterConsumerConsole: Starting");
             IConsumerContext consumerCtx = AppUtility.GetConsumerContext();
 
             // Register as a consumer, else can't use JobContract
