@@ -2,17 +2,17 @@
 <SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="Turbine.Console.Properties" GeneratedClassName="Settings">
   <Profiles />
   <Settings>
-    <Setting Name="BaseDirectory" Type="System.String" Scope="User">
-      <Value Profile="(Default)">REPLACE</Value>
-    </Setting>
     <Setting Name="TimeOutIterations" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">30</Value>
     </Setting>
+    <Setting Name="BaseDirectory" Type="System.String" Scope="User">
+      <Value Profile="(Default)">test</Value>
+    </Setting>
     <Setting Name="TimeOutSetupIterations" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">5</Value>
+      <Value Profile="(Default)">10</Value>
     </Setting>
     <Setting Name="TimePostInitIterations" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">8</Value>
+      <Value Profile="(Default)">11</Value>
     </Setting>
   </Settings>
 </SettingsFile>

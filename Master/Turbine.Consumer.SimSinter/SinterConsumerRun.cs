@@ -12,6 +12,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Turbine.Consumer.Contract.Behaviors;
 using System.Management;
+using Serilog;
 
 
 namespace Turbine.Consumer.SimSinter
@@ -351,6 +352,7 @@ namespace Turbine.Consumer.SimSinter
         private IProcess DoSetup(IJobConsumerContract job)
         {
             Debug.WriteLine("DoSetup Called on " + job.Id, "SinterConsumer");
+            Log.Information("SinterConsumerRun: DoSetup Called on {JobId}", job.Id);
             // NOTE: expect OptimisticConcurrencyException
             // to occur ONLY here when running multiple consumers
             IProcess process = null;
@@ -429,6 +431,7 @@ namespace Turbine.Consumer.SimSinter
             int attempts = 1;
             int timeout = 1000;
             string setupString = null;
+            Log.Information("SinterConsumerRun: DoConfigure Called on {JobId}", job.Id);
 
             var configFilePath = Path.Combine(process.WorkingDirectory, configFileName);
             while (true)
@@ -588,6 +591,9 @@ namespace Turbine.Consumer.SimSinter
 
             Debug.WriteLine(String.Format("Start warm-up run on job {0}", job.Id),
                 "SinterConsumerRun.DoInitialize");
+
+            Log.Information("SinterConsumerRun: DoInitialize Called on {JobId}", job.Id);
+
             try
             {
                 stest.sendInputs(defaultsDict);
@@ -672,6 +678,7 @@ namespace Turbine.Consumer.SimSinter
         {
             Debug.WriteLine(String.Format("Send Inputs to Job {0}", job.Id),
                 "SinterConsumer.DoRun");
+            Log.Information("SinterConsumerRun: DoRun Called on {JobId}", job.Id);
 
             try
             {
@@ -803,10 +810,12 @@ namespace Turbine.Consumer.SimSinter
             process.SetStatus(runStatus);
             IDictionary<string, Object> myDict = null;
             JObject outputDict;
+            Log.Information("SinterConsumerRun: DoFinalize Called on {JobId}", job.Id);
             try
             {
                 if (stest.runStatus == sinter.sinter_AppError.si_OKAY || 
-                    stest.runStatus == sinter.sinter_AppError.si_SIMULATION_WARNING)
+                    stest.runStatus == sinter.sinter_AppError.si_SIMULATION_WARNING ||
+                    stest.runStatus == sinter.sinter_AppError.si_NONCONVERGENCE_ERROR)
                 {
                     var superDict = stest.getOutputs();
                     outputDict = (JObject)superDict["outputs"];
@@ -897,6 +906,7 @@ namespace Turbine.Consumer.SimSinter
         public bool Run()
         {
             Debug.WriteLine("Starting", "SinterConsumerRun.Run");
+            Log.Information("SinterConsumerRun: Run Called");
             // RESET ALL instance variables except sim
             bool prevJobIsTerminated = isTerminated;
             isTerminated = false;
