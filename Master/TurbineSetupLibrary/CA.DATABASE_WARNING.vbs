@@ -1,1 +1,0 @@
-msgbox "WARNING: Installing the Database Feature will change SQL Server default instance to Mixed mode authentication"
